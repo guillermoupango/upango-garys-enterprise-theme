@@ -1,0 +1,362 @@
+{%- comment %}theme-check-disable NestedSnippet{%- endcomment -%}
+{%- unless request.page_type == 'cart' or settings.cart_type == 'page' -%}
+  {%- render 'cart-drawer' -%}
+{%- endunless -%}
+
+{%- if section.settings.cart_terms_page != blank and section.settings.show_checkout_button -%}
+  <script src="{{ 'cart-terms.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "class": "cc-cart-drawer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cart header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_page_link",
+      "label": "Show link to cart page",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cart items"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_backorder_text",
+      "label": "Show backorder text",
+      "default": true,
+      "info": "Only shows for products which use Shopify inventory tracking and can be purchased when out of stock."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cart summary"
+    },
+    {
+      "type": "select",
+      "id": "position_cart_summary",
+      "label": "Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "stick_footer",
+      "label": "Stick cart summary on scroll",
+      "info": "To show more cart items, consider turning this off or use the \"Top\" position (above).",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_order_note",
+      "label": "Show order note",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_text_notice",
+      "label": "Show shipping/tax notice",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_additional_checkout_buttons",
+      "label": "Show additional checkout options",
+      "default": false,
+      "info": "Display other gateways and quick checkout buttons. [Learn more](https://help.shopify.com/en/manual/payments/accelerated-checkouts)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_checkout_button",
+      "label": "Show checkout button",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "cart_terms_page",
+      "label": "Terms and conditions link",
+      "info": "Only shows when the checkout button is shown. Additional checkout options will be hidden when cart terms are shown."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_calculator",
+      "label": "Show shipping calculator",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "shipping_calculator_default_country",
+      "label": "Shipping calculator default country",
+      "info": "If the customer is logged-in, their default shipping address details will be selected.",
+      "default": "United States"
+    },
+    {
+      "type": "header",
+      "content": "Promoted products"
+    },
+    {
+      "type": "select",
+      "id": "promoted_products_visibility",
+      "label": "Visibility",
+      "options": [
+        {
+          "value": "always",
+          "label": "Always"
+        },
+        {
+          "value": "empty-cart",
+          "label": "Empty cart"
+        },
+        {
+          "value": "non-empty-cart",
+          "label": "Cart with items"
+        }
+      ],
+      "default": "always"
+    },
+    {
+      "type": "text",
+      "id": "promoted_products_heading",
+      "label": "Heading",
+      "default": "Promoted products"
+    },
+    {
+      "type": "product_list",
+      "id": "promoted_products_list",
+      "label": "Products",
+      "info": "A product won't show if it's already in the cart or if it's unavailable.",
+      "limit": 12
+    },
+    {
+      "type": "select",
+      "id": "promoted_products_layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        },
+        {
+          "value": "list",
+          "label": "List"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "header",
+      "content": "Media promotion"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_promotion",
+      "label": "Show media promotion",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "media_promotion_visibility",
+      "label": "Visibility",
+      "options": [
+        {
+          "value": "always",
+          "label": "Always"
+        },
+        {
+          "value": "empty-cart",
+          "label": "Empty cart"
+        },
+        {
+          "value": "non-empty-cart",
+          "label": "Cart with items"
+        }
+      ],
+      "default": "always"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_shopify",
+      "label": "Video upload",
+      "info": "Hosted by Shopify. Video will autoplay and be muted. [Read more](https://cleancanvas.co.uk/support/enterprise/using-videos)"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "range",
+      "id": "media_promotion_min_height",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum height",
+      "info": "Applies when the promo has text or a button, otherwise the image height is used.",
+      "default": 150
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "default": "<p>Promotion text</p>",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_type_scale",
+      "label": "Text size",
+      "info": "This is calculated from the Heading font size.",
+      "options": [
+        {
+          "value": "1em",
+          "label": "Body font size"
+        },
+        {
+          "value": "--h6-font-size",
+          "label": "Extra small"
+        },
+        {
+          "value": "--h5-font-size",
+          "label": "Small"
+        },
+        {
+          "value": "--h4-font-size",
+          "label": "Medium"
+        },
+        {
+          "value": "--h3-font-size",
+          "label": "Large"
+        }
+      ],
+      "default": "1em"
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 100,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum text width",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "justify-center items-center text-center",
+      "options": [
+        {
+          "value": "justify-start items-start",
+          "label": "Top left"
+        },
+        {
+          "value": "justify-center items-start text-center",
+          "label": "Top center"
+        },
+        {
+          "value": "justify-end items-start text-right",
+          "label": "Top right"
+        },
+        {
+          "value": "justify-start items-center",
+          "label": "Middle left"
+        },
+        {
+          "value": "justify-center items-center text-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "justify-end items-center text-right",
+          "label": "Middle right"
+        },
+        {
+          "value": "justify-start items-end",
+          "label": "Bottom left"
+        },
+        {
+          "value": "justify-center items-end text-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "justify-end items-end text-right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Links to the URL specified in the \"Link URL\" setting."
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "link",
+          "label": "Link"
+        },
+        {
+          "value": "btn btn--primary",
+          "label": "Primary button"
+        },
+        {
+          "value": "btn btn--secondary",
+          "label": "Secondary button"
+        }
+      ],
+      "default": "btn btn--secondary"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tint_color",
+      "label": "Tint color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "tint_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Tint opacity",
+      "default": 20
+    }
+  ]
+}
+{% endschema %}

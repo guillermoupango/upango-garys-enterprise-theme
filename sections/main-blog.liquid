@@ -1,0 +1,368 @@
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if section.settings.image_ratio == 'shortest'
+    assign image_ratio = 0
+    for article in blog.articles
+      if article.image.aspect_ratio > image_ratio
+        assign image_ratio = article.image.aspect_ratio
+      endif
+    endfor
+  elsif section.settings.image_ratio == 'tallest'
+    assign image_ratio = 99
+    for article in blog.articles
+      if article.image.aspect_ratio < image_ratio
+        assign image_ratio = article.image.aspect_ratio
+      endif
+    endfor
+  else
+    assign image_ratio = section.settings.image_ratio
+  endif
+-%}
+
+<div class="container">
+  {% if section.settings.show_blog_title or section.settings.description != blank or section.settings.show_share_links %}
+    <div class="gap-x-theme flex flex-col {{ section.settings.text_align }}{% unless section.settings.description == blank and section.settings.show_share_links == false %} mb-16{% endunless %}">
+      {%- if section.settings.show_blog_title -%}
+        <h1 class="last:mb-0">{{ blog.title | escape }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="rte reading-width--inline mb-8 last:mb-0">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_share_links -%}
+        <div class="social-share flex items-center">
+          <p class="social-share__heading mb-0 font-bold">{{ 'general.social.share_heading' | t }}:</p>
+          {% render 'social-share', share_title: blog.title, share_url: blog.url %}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_tag_filter and blog.all_tags.size > 0 -%}
+    <script src="{{ 'blog-filter.js' | asset_url }}" defer="defer"></script>
+    <blog-filter>
+      {%- liquid
+        assign filter_label = 'blogs.filtering.filter_by' | t
+        assign filter_all = 'blogs.filtering.all' | t | append: ','
+        assign tag_values = blog.all_tags | join: ',' | prepend: "-," | split: ','
+        assign tag_names = blog.all_tags | join: ',' | prepend: filter_all | split: ','
+
+        if current_tags
+          assign selected_Value = current_tags | join
+        endif
+      -%}
+      <div class="md:hidden">
+        <div id="blog-filter-dropdown">
+          {% render 'custom-select',
+            id: "blog_tags",
+            label: filter_label,
+            default_option: filter_label,
+            hide_label: true,
+            option_values: tag_values,
+            option_names: tag_names,
+            selected_value: selected_Value
+          %}
+          <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
+        </div>
+        <hr class="md-down:-mx-gutter w-auto">
+      </div>
+
+      <div class="border-top border-bottom hidden md:block no-js-visible">
+        <ul class="list-none flex flex-wrap pt-3 pb-3 -blog-mx-2 lg:blog-text-lg" id="blog-filter-links">
+          <li>
+            <a href="{{ blog.url }}" class="pt-2 pb-2 pl-4 pr-4 text-theme-text block{% unless current_tags %} font-bold underline{% endunless %}" data-tag="-">
+              {{- 'blogs.filtering.all' | t -}}
+            </a>
+          </li>
+          {% for tag in blog.all_tags %}
+            <li>
+              <a href="{{ tag | link_to_tag: tag | split: 'href="' | last | split: '"' | first }}" data-tag="{{ tag | escape }}"
+                 class="pt-2 pb-2 pl-4 pr-4 text-theme-text block{% if current_tags contains tag %} font-bold underline{% endif %}">
+                {{- tag -}}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </blog-filter>
+  {%- endif -%}
+
+  {%- if section.settings.show_featured_post and current_tags == blank -%}
+    {%- for article in blog.articles -%}
+      <div class="mt-6 mb-6 lg:blog-mb-16 lg:blog-mt-16 md-down:-mx-gutter featured-card">
+        {% render 'article-card',
+          article: article,
+          blog_url: blog.url,
+          featured: true,
+          large_image: true,
+          color_scheme: section.settings.color_scheme,
+          show_image: section.settings.show_featured_image,
+          image_ratio: image_ratio,
+          show_author: section.settings.show_author,
+          show_date: section.settings.show_date,
+          show_tags: section.settings.show_tags,
+          show_excerpt: section.settings.show_excerpt,
+          show_button: section.settings.show_featured_button,
+          button_style: section.settings.featured_button_style
+        %}
+      </div>
+      {%- break -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if settings.pagination_style == "modern" or settings.pagination_infinite -%}
+    <script src="{{ 'custom-pagination.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- paginate blog.articles by section.settings.posts_per_page -%}
+    <custom-pagination class="block mt-8 lg:blog-mt-16" data-infinite-scroll="{{ settings.pagination_infinite }}" data-pause-infinite-scroll="false">
+      <ul class="grid grid-cols-1 gap-theme blog-gap-y-12 lg:blog-gap-y-16 sm:grid-cols-2 md:grid-cols-3{% unless section.settings.three_columns %} lg:grid-cols-4{% endunless %}" role="list">
+        {%- for article in blog.articles -%}
+          {%- unless section.settings.show_featured_post and forloop.first and paginate.current_page == 1 and current_tags == blank -%}
+            <li class="js-pagination-result">
+              {% render 'article-card',
+                article: article,
+                blog_url: blog.url,
+                show_image: section.settings.show_featured_image,
+                image_ratio: image_ratio,
+                show_author: section.settings.show_author,
+                show_date: section.settings.show_date,
+                show_tags: section.settings.show_tags,
+                show_excerpt: section.settings.show_excerpt,
+                show_button: section.settings.show_button,
+                button_style: section.settings.button_style
+              %}
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+        </ul>
+
+      {%- if paginate.pages > 1 -%}
+        <hr class="mt-section js-when-paginated-only"/>
+        {% render 'pagination', paginate: paginate, style: settings.pagination_style %}
+      {%- endif -%}
+    </custom-pagination>
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog page",
+  "class": "cc-main-blog section section--template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_blog_title",
+      "label": "Show the default blog title",
+      "info": "If hidden, you should provide a primary page heading (h1 tag) in another section with h1 option (rich text, image banner, slideshow, video) for SEO purposes.",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_links",
+      "label": "Show social share links",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "text-start",
+          "label": "Left"
+        },
+        {
+          "value": "items-center text-center",
+          "label": "Center"
+        },
+        {
+          "value": "items-end text-end",
+          "label": "Right"
+        }
+      ],
+      "default": "text-start"
+    },
+    {
+      "type": "header",
+      "content": "Results layout"
+    },
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "label": "Posts per page",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "checkbox",
+      "id": "three_columns",
+      "label": "Limit to 3 columns",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag_filter",
+      "label": "Show tag filter",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_image",
+      "label": "Show featured image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "shortest",
+          "label": "Height of shortest image"
+        },
+        {
+          "value": "tallest",
+          "label": "Height of tallest image"
+        },
+        {
+          "value": "1.77",
+          "label": "Landscape"
+        },
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait"
+        }
+      ],
+      "default": "shortest"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show published date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "btn btn--primary",
+          "label": "Primary button"
+        },
+        {
+          "value": "btn btn--secondary",
+          "label": "Secondary button"
+        }
+      ],
+      "default": "btn btn--secondary"
+    },
+    {
+      "type": "header",
+      "content": "Featured card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_post",
+      "label": "Feature latest post",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "featured_button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "btn btn--primary",
+          "label": "Primary button"
+        },
+        {
+          "value": "btn btn--secondary",
+          "label": "Secondary button"
+        }
+      ],
+      "default": "btn btn--secondary"
+    }
+  ]
+}
+{% endschema %}

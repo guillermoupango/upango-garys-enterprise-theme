@@ -1,0 +1,722 @@
+{%- comment -%}
+  Build: lg:col-span-1 lg:col-span-2 lg:col-span-3 lg:col-span-4 row-span-2 row-span-3
+{%- endcomment -%}
+
+{%- if section.index > 2 -%}
+  <link rel="stylesheet" href="{{ 'gallery.css' | asset_url }}" media="print" onload="this.media='all'">
+
+  {%- if section.settings.mobile_carousel -%}
+    <link rel="stylesheet" href="{{ 'gallery-mobile-carousel.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+{%- else -%}
+  {{ 'gallery.css' | asset_url | stylesheet_tag }}
+
+  {%- if section.settings.mobile_carousel -%}
+    {{ 'gallery-mobile-carousel.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+{%- endif -%}
+
+{%- for block in section.blocks -%}
+  {%- if block.settings.video_shopify != blank -%}
+    {%- if section.index > 2 -%}
+      <link rel="stylesheet" href="{{ 'video.css' | asset_url }}" media="print" onload="this.media='all'">
+    {%- else -%}
+      {{ 'video.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+    <script src="{{ 'video.js' | asset_url }}" defer="defer"></script>
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- liquid
+  # constants
+  assign breakpoint_md = 769
+
+  if section.settings.gallery_cols_min == '1'
+    assign grid_classes = 'sm:grid-cols-2'
+  else
+    assign grid_classes = 'grid-cols-2'
+  endif
+
+  if section.settings.gallery_cols_max == 4
+    assign grid_classes = grid_classes | append: ' lg:grid-cols-4'
+  elsif section.settings.gallery_cols_max == 3
+    assign grid_classes = grid_classes | append: ' lg:grid-cols-3'
+  endif
+
+  assign color_scheme = section.settings.color_scheme
+  assign bg_color = false
+
+  if color_scheme == 'default'
+    assign bg_color = settings.bg_color
+  elsif color_scheme == '1'
+    assign bg_color = settings.color_scheme_1_bg_grad | default: settings.color_scheme_1_bg
+  elsif color_scheme == '2'
+    assign bg_color = settings.color_scheme_2_bg_grad | default: settings.color_scheme_2_bg
+  elsif color_scheme == '3'
+    assign bg_color = settings.color_scheme_3_bg_grad | default: settings.color_scheme_3_bg
+  endif
+
+  if bg_color == 'rgba(0,0,0,0)' or bg_color == settings.bg_color
+    assign bg_color = false
+  endif
+-%}
+
+{%- style -%}
+  {% for block in section.blocks %}
+    {%- if block.settings.tint_opacity > 0 -%}
+      .block-{{ block.id }} .media::after {
+        background-color: rgba({{ block.settings.tint_color.red }}, {{ block.settings.tint_color.green }}, {{ block.settings.tint_color.blue }}, {{ block.settings.tint_opacity | divided_by: 100.0 }});
+      }
+    {%- endif -%}
+  {% endfor %}
+
+  #{{ section.id }} .gallery-block { min-height: {{ section.settings.fixed_height_mobile }}px; }
+  {% unless section.settings.mobile_carousel %}#{{ section.id }} .gallery-block.row-span-2, #{{ section.id }} .gallery-block.row-span-3 { min-height: {{ section.settings.fixed_height_mobile | times: 1.75 }}px; }{% endunless %}
+
+  @media (min-width: {{ breakpoint_md }}px) {
+    #{{ section.id }} .gallery-block { min-height: calc({{ section.settings.fixed_height_desktop }}px + 8vw); }
+    #{{ section.id }} .gallery-block.row-span-2 { min-height: calc(calc({{ section.settings.fixed_height_desktop }}px + 8vw) * 2); }
+    #{{ section.id }} .gallery-block.row-span-3 { min-height: calc(calc({{ section.settings.fixed_height_desktop }}px + 8vw) * 3); }
+  }
+{%- endstyle -%}
+
+<div class="section">
+  {%- if section.settings.title != blank or section.settings.button_label != blank -%}
+    <div class="container">
+      <div class="section__header items-center flex{% if section.settings.heading_align == 'text-center' %} flex-col text-center{% elsif section.settings.heading_align == 'text-end' %} flex-row-reverse flex-wrap{% else %} flex-row flex-wrap{% endif %} gap-x-theme"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
+        {%- if section.settings.title != blank -%}
+          <h2 class="h4 mb-0 flex-auto {{ section.settings.heading_align }}">
+            {{- section.settings.title | escape -}}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="link">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {% if section.settings.mobile_carousel %}<div class="gallery-mobile-carousel">{% endif %}
+
+  <div class="container" id="{{ section.id }}">
+    <div class="gallery grid {{ grid_classes }}{% if section.settings.mobile_carousel %} slider--mobile{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign img = block.settings.image
+          assign overlay_position = block.settings.overlay_position | split: ' '
+          assign is_link = true
+          if block.settings.link_url == blank
+            assign is_link = false
+          endif
+        -%}
+        {% if is_link %}<a href="{{ block.settings.link_url }}" {% else %}<div {% endif %}class="block-{{ block.id }} block relative flex flex-col gallery-block{% unless section.settings.mobile_carousel %} gallery-block--stacked{% endunless %}{% if section.settings.gallery_cols_min == '2' and block.settings.columns >= 2 %} md-down:col-span-2{% endif %} row-span-{{ block.settings.rows }} lg:col-span-{{ block.settings.columns }} {% if is_link %} hover:grow-media{% endif %}" {%- unless forloop.first %}tabindex="-1"{% endunless %} {{ block.shopify_attributes }}>
+
+            <div class="gallery-block__image{% if block.settings.video_shopify != blank %} video-section{% endif %} overflow-hidden flex relative w-full h-full {{ overlay_position | first }} {{ overlay_position | last }}{% if is_link %} card__media{% endif %}">
+              <div class="media media--has-overlay flex absolute top-0 left-0 w-full h-full has-motion">
+                {%- if img != blank -%}
+                  {%- assign cols = 4 | minus: block.settings.columns | at_least: 1 %}
+                  {%- capture sizes %}{% render 'sizes-attribute', grid: true, min: section.settings.gallery_cols_min, sm: cols %}{% endcapture -%}
+                  {% render 'image',
+                    image: img,
+                    widths: '480, 800, 980, 1200, 1440',
+                    src_width: 800,
+                    sizes: sizes,
+                    quality: 1,
+                    section_index: section.index,
+                    class: 'img-fit'
+                  %}
+                {%- else -%}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'media__placeholder img-fit' }}
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.video_shopify != blank -%}
+                <deferred-media class="video-section__media media media--has-overlay overflow-hidden absolute top-0 left-0 w-full h-full">
+                  <template>
+                    <video-component class="has-iframe absolute top-0 left-0 w-full h-full no-js-hidden"
+                                    data-autoplay="true"
+                                    data-background="true">
+                      {{ block.settings.video_shopify | video_tag: class: 'img-fit pointer-events-none', playsinline: true, autoplay: true, muted: true, loop: true, controls: false, poster: '' | replace: '<img ', '<img loading="lazy" hidden ' }}
+                    </video-component>
+                  </template>
+                </deferred-media>
+              {%- endif -%}
+
+              {%- if block.settings.line1_text != blank or block.settings.line2_text != blank or block.settings.line3_text != blank -%}
+                <div class="gallery-block__promo-text{% if block.settings.promo_circle %} gallery-block__promo-text--rounded{% endif %}{% if block.settings.background_color == "rgba(0,0,0,0)" %} gallery-block__image-text--transparent{% else %} gallery-block__promo-text--opaque{% endif %} {{ block.settings.text_alignment }}" style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
+                  {%- if block.settings.line1_text != blank -%}
+                    <p class="relative text-current leading-none mb-2 last:mb-0 {{ block.settings.line1_text_type_scale }}{% if section.settings.text_overlay_font == 'heading' %} font-heading{% else %} font-bold{% endif %}">
+                      {{- block.settings.line1_text | newline_to_br -}}
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.line2_text != blank -%}
+                    <p class="relative text-current leading-none mb-2 last:mb-0 {{ block.settings.line2_text_type_scale }}{% if section.settings.text_overlay_font == 'heading' %} font-heading{% else %} font-bold{% endif %}">
+                      {{- block.settings.line2_text | newline_to_br -}}
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.line3_text != blank -%}
+                    <p class="relative text-current leading-none {{ block.settings.line3_text_type_scale }}{% if section.settings.text_overlay_font == 'heading' %} font-heading{% else %} font-bold{% endif %}">
+                      {{- block.settings.line3_text | newline_to_br -}}
+                    </p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.subheading != blank or block.settings.link_text != blank -%}
+              <div class="gallery-block__text text-start{% if bg_color %} gallery-block__text--with-bg{% endif %}{% if color_scheme == 'default' %} {% unless section.settings.mobile_carousel %}mb-3 md:mb-0{% endunless %}{% else %} color-scheme color-scheme--{{ color_scheme }}{% endif %}"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
+                {%- if block.settings.subheading != blank -%}
+                  <h3 class="gallery_block__heading subheading-case mt-2 mb-0 {{ block.settings.text_type_scale }}">
+                    {{- block.settings.subheading | newline_to_br -}}
+                  </h3>
+                {%- endif -%}
+                {%- if block.settings.link_text != blank -%}
+                  <p class="link gallery_block__link-text block mb-5 last:mb-0 md:mb-0">
+                    {{- block.settings.link_text | escape -}}
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {% if is_link %}</a>{% else %}</div>{% endif %}
+
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {% if section.settings.mobile_carousel %}</div>{% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Promo grid",
+  "tag": "section",
+  "class": "cc-gallery cc-promo-gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Promo grid"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "text-start",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-end",
+          "label": "Right"
+        }
+      ],
+      "default": "text-start"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "View more label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "View more link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "gallery_cols_max",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Maximum columns on large screens",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_carousel",
+      "label": "Show as a carousel on mobile",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "gallery_cols_min",
+      "label": "Minimum columns on mobile",
+      "info": "Only applies when a carousel is not used on mobile.",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_desktop",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum row height on large screens",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_mobile",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum row height on mobile",
+      "default": 280
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "text_overlay_font",
+      "label": "Text overlay font",
+      "options": [
+        {
+          "label": "Body font",
+          "value": "body"
+        },
+        {
+          "label": "Heading font",
+          "value": "heading"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3"
+        }
+      ],
+      "default": "default"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Media",
+      "limit": 16,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video_shopify",
+          "label": "Video upload (optional)",
+          "info": "Hosted by Shopify. Video will autoplay and be muted. [Read more](https://cleancanvas.co.uk/support/enterprise/using-videos)"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "paragraph",
+          "content": "Check out our user guides for more information on creating grid layouts. [Read more](https://cleancanvas.co.uk/support/enterprise/sections/promo-grid)"
+        },
+        {
+          "type": "range",
+          "id": "columns",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "label": "Number of columns wide",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "rows",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "label": "Number of rows tall",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Text overlay - Content"
+        },
+        {
+          "type": "paragraph",
+          "content": "Enter <br> for a line-break."
+        },
+        {
+          "type": "text",
+          "id": "line1_text",
+          "label": "Line 1 text",
+          "default": "Save up to"
+        },
+        {
+          "type": "select",
+          "id": "line1_text_type_scale",
+          "label": "Line 1 text size",
+          "options": [
+            {
+              "value": "text-h6",
+              "label": "Extra extra small"
+            },
+            {
+              "value": "text-h5",
+              "label": "Extra small"
+            },
+            {
+              "value": "text-h4",
+              "label": "Small"
+            },
+            {
+              "value": "text-h3",
+              "label": "Medium"
+            },
+            {
+              "value": "text-h2",
+              "label": "Large"
+            },
+            {
+              "value": "text-h1",
+              "label": "Extra large"
+            },
+            {
+              "value": "text-h0",
+              "label": "Extra extra large"
+            }
+          ],
+          "default": "text-h6"
+        },
+        {
+          "type": "text",
+          "id": "line2_text",
+          "label": "Line 2 text",
+          "default": "50%"
+        },
+        {
+          "type": "select",
+          "id": "line2_text_type_scale",
+          "label": "Line 2 text size",
+          "options": [
+            {
+              "value": "text-h6",
+              "label": "Extra extra small"
+            },
+            {
+              "value": "text-h5",
+              "label": "Extra small"
+            },
+            {
+              "value": "text-h4",
+              "label": "Small"
+            },
+            {
+              "value": "text-h3",
+              "label": "Medium"
+            },
+            {
+              "value": "text-h2",
+              "label": "Large"
+            },
+            {
+              "value": "text-h1",
+              "label": "Extra large"
+            },
+            {
+              "value": "text-h0",
+              "label": "Extra extra large"
+            }
+          ],
+          "default": "text-h0"
+        },
+        {
+          "type": "text",
+          "id": "line3_text",
+          "label": "Line 3 text"
+        },
+        {
+          "type": "select",
+          "id": "line3_text_type_scale",
+          "label": "Line 3 text size",
+          "options": [
+            {
+              "value": "text-h6",
+              "label": "Extra extra small"
+            },
+            {
+              "value": "text-h5",
+              "label": "Extra small"
+            },
+            {
+              "value": "text-h4",
+              "label": "Small"
+            },
+            {
+              "value": "text-h3",
+              "label": "Medium"
+            },
+            {
+              "value": "text-h2",
+              "label": "Large"
+            },
+            {
+              "value": "text-h1",
+              "label": "Extra large"
+            },
+            {
+              "value": "text-h0",
+              "label": "Extra extra large"
+            }
+          ],
+          "default": "text-h6"
+        },
+        {
+          "type": "header",
+          "content": "Text overlay - Style"
+        },
+        {
+          "type": "select",
+          "id": "overlay_position",
+          "label": "Text position",
+          "options": [
+            {
+              "value": "justify-start items-start",
+              "label": "Top left"
+            },
+            {
+              "value": "justify-center items-start",
+              "label": "Top center"
+            },
+            {
+              "value": "justify-end items-start",
+              "label": "Top right"
+            },
+            {
+              "value": "justify-start items-center",
+              "label": "Middle left"
+            },
+            {
+              "value": "justify-center items-center",
+              "label": "Middle center"
+            },
+            {
+              "value": "justify-end items-center",
+              "label": "Middle right"
+            },
+            {
+              "value": "justify-start items-end",
+              "label": "Bottom left"
+            },
+            {
+              "value": "justify-center items-end",
+              "label": "Bottom center"
+            },
+            {
+              "value": "justify-end items-end",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "justify-start items-start"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "text-start",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            },
+            {
+              "value": "text-end",
+              "label": "Right"
+            }
+          ],
+          "default": "text-center"
+        },
+        {
+          "type": "checkbox",
+          "id": "promo_circle",
+          "label": "Show as circle",
+          "info": "Ensure circles only have two lines of text to stop them growing too large.",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#e32b2b"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "header",
+          "content": "Text below media"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "info": "A link can be specified in the \"Link\" setting above."
+        },
+        {
+          "type": "select",
+          "id": "text_type_scale",
+          "label": "Text size",
+          "options": [
+            {
+              "value": "h6",
+              "label": "Extra small"
+            },
+            {
+              "value": "h5",
+              "label": "Small"
+            },
+            {
+              "value": "h4",
+              "label": "Medium"
+            },
+            {
+              "value": "h3",
+              "label": "Large"
+            }
+          ],
+          "default": "h6"
+        },
+        {
+          "type": "header",
+          "content": "Style"
+        },
+        {
+          "type": "color",
+          "id": "tint_color",
+          "label": "Media tint color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "tint_opacity",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "unit": "%",
+          "label": "Media tint opacity",
+          "default": 30
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo grid",
+      "blocks": [
+        {
+          "type": "media",
+          "settings": {
+            "columns": 2,
+            "rows": 2,
+            "line1_text_type_scale": "h6",
+            "line2_text_type_scale": "h3"
+          }
+        },
+        {
+          "type": "media",
+          "settings": {
+            "line1_text": "",
+            "line2_text": "25%",
+            "line3_text": "off",
+            "line2_text_type_scale": "h4",
+            "line3_text_type_scale": "h4"
+          }
+        },
+        {
+          "type": "media",
+          "settings": {
+            "line1_text": "Now only",
+            "line2_text": "$999",
+            "line1_text_type_scale": "h6"
+          }
+        },
+        {
+          "type": "media",
+          "settings": {
+            "columns": 2,
+            "line1_text": "Save up to",
+            "line2_text": "1/3",
+            "line1_text_type_scale": "h6",
+            "line2_text_type_scale": "h4"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  }
+}
+{% endschema %}

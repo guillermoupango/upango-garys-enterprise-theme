@@ -1,0 +1,86 @@
+{%- if predictive_search.performed -%}
+  <div class="predictive-search absolute bg-theme-bg text-theme-text text-start">
+    <div class="predictive-search__scroller{% if predictive_search.resources.queries.size > 0 %}{% if predictive_search.resources.products.size > 0 or predictive_search.resources.collections.size > 0 or predictive_search.resources.pages.size > 0 or predictive_search.resources.articles.size > 0 %} predictive-search__scroller--suggestions{% else %} predictive-search__scroller--suggestions-only{% endif %}{% endif %} overflow-auto">
+      <div class="predictive-search__results flex flex-col">
+        {%- if predictive_search.resources.queries.size > 0 -%}
+          <div class="predictive-search__suggestions relative pt-2 md:pt-0">
+            <ul class="predictive-search__list predictive-result__list-suggestions" role="list">
+              <h3 class="predictive-result__title h6 tablist__scroller font-body regular-text font-bold mt-3">{{ 'general.search.queries' | t }}</h3>
+              {%- for suggestion in predictive_search.resources.queries -%}
+                <li class="predictive-search__item" role="option">
+                  <a class="predictive-result predictive-result--suggestion block focus-inset" href="{{ suggestion.url }}"{% if settings.preload_links %} data-instant{% endif %}>
+                    {{ suggestion.styled_text }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+        {%- if predictive_search.resources.products.size > 0 or predictive_search.resources.collections.size > 0 or predictive_search.resources.pages.size > 0 or predictive_search.resources.articles.size > 0 -%}
+          <tabbed-content class="grow">
+            <div class="tablist relative overflow-hidden bg-theme-bg mb-2">
+              <div class="tablist__scroller flex" role="tablist">
+                {%- liquid
+                  if predictive_search.resources.products.size > 0
+                    render 'predictive-search-tab-button', type: 'products'
+                  endif
+
+                  if predictive_search.resources.collections.size > 0
+                    render 'predictive-search-tab-button', type: 'collections'
+                  endif
+
+                  if predictive_search.resources.pages.size > 0 and predictive_search.resources.articles.size > 0
+                    render 'predictive-search-tab-button', type: 'articles_and_pages'
+                  else
+                    if predictive_search.resources.pages.size > 0
+                      render 'predictive-search-tab-button', type: 'pages'
+                    endif
+
+                    if predictive_search.resources.articles.size > 0
+                      render 'predictive-search-tab-button', type: 'articles'
+                    endif
+                  endif
+                -%}
+              </div>
+            </div>
+
+            {%- liquid
+              # Render the tab panels
+
+              if predictive_search.resources.products.size > 0
+                render 'predictive-search-tab-panel', type: 'products', items: predictive_search.resources.products
+              endif
+
+              if predictive_search.resources.collections.size > 0
+                render 'predictive-search-tab-panel', type: 'collections', items: predictive_search.resources.collections
+              endif
+
+              if predictive_search.resources.pages.size > 0 and predictive_search.resources.articles.size > 0
+                assign items = predictive_search.resources["articles"] | concat: predictive_search.resources["pages"]
+                render 'predictive-search-tab-panel', type: 'articles_and_pages', items: items, group_articles_pages: true
+              else
+                if predictive_search.resources.pages.size > 0
+                  render 'predictive-search-tab-panel', type: 'pages', items: predictive_search.resources.pages
+                endif
+
+                if predictive_search.resources.articles.size > 0
+                  render 'predictive-search-tab-panel', type: 'articles', items: predictive_search.resources.articles
+                endif
+              endif
+            -%}
+          </tabbed-content>
+        {%- elsif predictive_search.resources.queries == blank or predictive_search.resources.queries.size == 0 -%}
+          <div class="predictive-search__no-results">
+            {%- liquid
+              assign search_terms = predictive_search.terms
+              if search_terms contains "product_type:"
+                assign search_terms = search_terms | split: " AND " | last | lstrip
+              endif
+            -%}
+            {{ 'general.search.no_results' | t: terms: search_terms }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

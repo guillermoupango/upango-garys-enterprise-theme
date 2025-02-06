@@ -1,0 +1,26 @@
+{%- comment -%}
+  Parameters:
+  - product {Object} - Product object.
+  - empty_text {String} - Text to display if all variants dont have the same weight.
+
+  Usage:
+  {% render 'products-weight', product: item.product %}
+{%- endcomment -%}
+
+{%- if product.variants.first.weight > 0 -%}
+  {%- liquid
+    assign a_weight = product.variants.first.weight
+    for variant in product.variants
+      if variant.weight != a_weight
+        assign a_weight = false
+      endif
+    endfor
+  -%}
+  {%- if a_weight -%}
+    {{ product.variants.first.weight | weight_with_unit: product.variants.first.weight_unit }}
+  {%- elsif empty_text -%}
+    {{ empty_text }}
+  {%- endif -%}
+{%- elsif empty_text -%}
+  {{ empty_text }}
+{%- endif -%}

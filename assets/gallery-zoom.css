@@ -1,0 +1,123 @@
+.gallery-zoom-modal {
+  --media-gap: calc(2 * var(--space-unit));
+  --media-gutter: calc(6 * var(--space-unit));
+}
+.gallery-zoom-modal.modal {
+  z-index: 10000;
+}
+.gallery-zoom-modal .modal__window {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  overflow: hidden;
+}
+.gallery-zoom-modal .modal__content {
+  padding: 0;
+}
+.gallery-zoom-modal .modal__close-btn {
+  z-index: 3;
+}
+
+.gallery-zoom__zoom-container {
+  z-index: 1;
+  cursor: zoom-in;
+}
+
+.gallery-zoom__zoom-container--loading::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 20px / 2);
+  left: calc(50% - 20px / 2);
+  width: 20px;
+  height: 20px;
+  animation: galleryViewerSpinner 1s linear infinite;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  border-left-color: currentColor;
+  opacity: 0.75;
+}
+
+@keyframes galleryViewerSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.gallery-zoom__zoom-image {
+  position: absolute;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.gallery-zoom__thumbs {
+  z-index: 2;
+  gap: var(--media-gap);
+}
+carousel-slider[inactive] .gallery-zoom__thumbs {
+  justify-content: center;
+}
+
+.gallery-zoom__thumb {
+  position: relative;
+  flex: 0 0 80px;
+}
+.gallery-zoom__thumb::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s;
+  background: currentColor;
+}
+.gallery-zoom__thumb[hidden] {
+  display: none;
+}
+@media (max-width: 640px) {
+  .gallery-zoom__thumb {
+    width: 60px;
+  }
+}
+
+.gallery-zoom__thumb--active::after {
+  width: 100%;
+}
+
+.gallery-zoom__controls {
+  z-index: 3;
+}
+
+.gallery-zoom__thumb-slider .slider-nav {
+  pointer-events: none;
+}
+.gallery-zoom__thumb-slider .slider-nav .slider-nav__btn {
+  pointer-events: auto;
+}
+
+@media (max-width: 768.98px) {
+  .gallery-zoom-modal .modal__window {
+    border-radius: 0;
+  }
+}
+@media (min-width: 769px) {
+  .gallery-zoom-modal .modal__window {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .gallery-zoom-modal .slider[data-overlayscrollbars-viewport] {
+    padding-bottom: calc(5 * var(--space-unit)) !important;
+  }
+}

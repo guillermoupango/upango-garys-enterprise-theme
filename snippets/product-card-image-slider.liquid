@@ -1,0 +1,73 @@
+{% comment %}
+  Parameters:
+  - product {Object} - Product object.
+  - product_url {Number} - The URL to the product (optional, defaults to product.url)
+  - attrs {String} - Additional attributes to place on the product-card-image-slider element
+  - image_ratio {Number} - Represents the aspect ratio of the image, e.g. 1.77 (optional)
+  - image_blend {Boolean} - Whether the image-blend class should be added or not
+  - image_sizes {String} - Content for the image 'sizes' attribute (optional).
+  - image_class {String} - Class name(s) for the image 'class' attribute (optional).
+  - image_quality {Number} - The relative quality of the of the image to load as a decimal (optional, defaults to 0.75).
+                      The higher the number, the sharper (but larger) the image will be.
+
+  Usage:
+  {%- render 'product-card-image-slider',
+    product: product,
+    image_ratio: image_ratio,
+    image_blend: settings.blend_product_images,
+    image_sizes: sizes,
+    image_class: class,
+    image_quality: image_quality
+  -%}
+{% endcomment %}
+
+{%- liquid
+  assign image_media = product.media | where: 'media_type', 'image'
+  if image_media.first != blank
+    assign product_media = image_media
+  else
+    assign product_media = product.media
+  endif
+-%}
+
+<product-card-image-slider class="carousel relative block" inactive{% if attrs != blank %} {{ attrs }}{% endif %}>
+  <div class="carousel__controls absolute w-full">
+    <div class="slider-nav slide-nav--inline flex items-center justify-between no-js-hidden">
+      <button type="button" class="slider-nav__btn tap-target btn has-ltr-icon tap-target" name="prev" aria-controls="slider-{{ product.id }}">
+        <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+        {% render 'icon-chevron-left' %}
+      </button>
+      <button type="button" class="slider-nav__btn tap-target btn has-ltr-icon tap-target" name="next" aria-controls="slider-{{ product.id }}">
+        <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+        {% render 'icon-chevron-right' %}
+      </button>
+    </div>
+  </div>
+
+  <div class="relative">
+    <div class="slider slider--no-scrollbar" id="slider-{{ product.id }}">
+      <ul class="slider__grid grid grid-flow-col auto-cols-1 small__grid" role="list">
+        {%- for media in product_media -%}
+          <li class="slider__item"{% if product.featured_media.id == media.id %} aria-current="true"{% endif %} data-media-id="{{ media.id }}">
+            <a href="{{ product_url | default: product.url }}" aria-label="{{ product.title | escape }}" class="media block relative{% if image_blend %} image-blend{% endif %} js-prod-link"{% if image_ratio %} style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;"{% endif %} tabindex="-1">
+              {%- capture attributes %}data-media-id="{{ media.id }}"{% endcapture -%}
+              {% render 'image',
+                image: media.preview_image,
+                widths: '320, 460, 600, 700, 800, 900, 1200',
+                src_width: 460,
+                src_placeholder: true,
+                lazy_load: true,
+                lazy_load_is_native: true,
+                sizes: image_sizes,
+                class: image_class,
+                attributes: attributes,
+                disable_focal_point: true,
+                quality: image_quality
+              %}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</product-card-image-slider>

@@ -1,0 +1,22 @@
+<button type="button"
+        class="tablist__tab font-bold"
+        id="psearch-{{ type }}-tab"
+        role="tab"
+        {%- unless forloop.first %}tabindex="-1"{% endunless %}
+        aria-controls="psearch-{{ type }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+  {%- liquid
+    if type == 'products'
+      echo 'general.search.products' | t
+    elsif type == 'collections'
+      echo 'general.search.collections' | t
+    elsif type == 'pages'
+      echo 'general.search.pages' | t
+    elsif type == 'articles'
+      echo 'general.search.articles' | t
+    endif
+  -%}
+  {%- if type == 'articles_and_pages' -%}
+    {{ 'general.search.articles' | t }} &amp; {{ 'general.search.pages' | t }}
+  {%- endif -%}
+</button>

@@ -1,0 +1,202 @@
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+{{ 'article.css' | asset_url | stylesheet_tag }}
+
+<article class="article js-article">
+  <div class="container">
+    {%- if section.settings.show_tags -%}
+      {%- capture tag_markup -%}
+        <div class="article__tags mb-4 lg:blog-mb-6 last:mb-0 reading-width mx-auto uppercase {{ section.settings.heading_align }}">
+          {%- for tag in article.tags -%}
+            <a href="{{ tag | link_to_tag: tag | split: 'href="' | last | split: '"' | first }}" class="text-theme-light text-sm">
+              {{ tag }}{% unless forloop.last %}, {% endunless %}
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endcapture -%}
+      {% if tag_markup contains '</a>' %}{{ tag_markup }}{% endif %}
+    {%- endif -%}
+
+    <div class="article__title rte mb-6 md:mb-8 last:mb-0 reading-width mx-auto {{ section.settings.heading_align }}">
+      <h1 class="mb-0">{{ article.title | escape }}</h1>
+    </div>
+
+    {%- if article.image and section.settings.featured_image_width != "none" -%}
+      <div class="article__image article__image--{{ section.settings.featured_image_width }} mb-5 md:blog-mb-6 text-center last:mb-0 mx-auto{% if section.settings.featured_image_width == "page" %} md-down:-mx-gutter{% else %} reading-width article-width{% endif %}">
+        <div class="media relative text-center w-full">
+          {%- capture sizes -%}
+            {%- render 'sizes-attribute', min: 'page', sm: 'page', md: '800px', lg: false, xl: false, max: false -%}
+          {%- endcapture -%}
+          {% render 'image',
+            image: article.image,
+            widths: '800, 1200, 1600',
+            src_width: 1600,
+            lazy_load: false,
+            sizes: sizes
+          %}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_author or section.settings.show_date -%}
+      <p class="text-theme-light reading-width mx-auto {{ section.settings.heading_align }}">
+        {%- if section.settings.show_author -%}
+          {{ article.author }}{% if section.settings.show_date %} | {% endif %}
+        {%- endif -%}
+        {%- if section.settings.show_date -%}
+          {{ article.published_at | time_tag: format: 'date' }}
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+
+    <div class="article__content reading-width rte article-content mt-12 mx-auto">
+      {{ article.content }}
+    </div>
+
+    {%- if section.settings.show_share_buttons -%}
+      <div class="social-share reading-width article-width mx-auto flex items-center mt-12 lg:blog-mt-16">
+        <p class="social-share__heading mb-0 font-bold">{{ 'general.social.share_heading' | t }}:</p>
+        {% render 'social-share', share_title: article.title, share_url: article.url, share_image: article.image %}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.pagination != "none" -%}
+      {%- if section.settings.pagination != "standard" -%}
+        {{ 'article-pagination.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'article-pagination.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      <article-pagination class="article__pagination pagination__bar flex justify-between font-bold border-top{% if section.settings.pagination == "standard" %} border-bottom reading-width article-width mx-auto mt-12 lg:blog-mt-16{% else %} fixed bottom-0 left-0 w-full pl-4 pr-4{% endif %}">
+        <a class="pt-4 pb-4 shrink-0 js-pagination-link has-ltr-icon"{% if blog.previous_article %} href="{{ blog.previous_article }}" title="{{ blog.previous_article.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %}>
+          {% render 'icon-chevron-left' %}<span{% if section.settings.pagination == "bar-reading" %} class="hidden md:inline"{% endif %}>{{ 'blogs.article.previous_post' | t }}</span>
+        </a>
+        {% if section.settings.pagination != "standard" %}
+          <span class="article__pagination--text js-pagination-text no-js-hidden p-4 text-theme-text overflow-hidden"{% if section.settings.pagination == "bar-reading" %} data-show-reading-time="true"{% endif %}></span>
+        {% endif %}
+        <a class="pt-4 pb-4 shrink-0 js-pagination-link has-ltr-icon"{% if blog.next_article %} href="{{ blog.next_article }}" title="{{ blog.next_article.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %}>
+          <span{% if section.settings.pagination == "bar-reading" %} class="hidden md:inline"{% endif %}>{{ 'blogs.article.next_post' | t }}</span>{% render 'icon-chevron-right' %}
+        </a>
+      </article-pagination>
+    {%- endif -%}
+  </div>
+</article>
+
+<script>
+  document.querySelectorAll('.article__content table').forEach((table) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'scrollable-table';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+</script>
+
+{% render 'structured-data-article', article: article %}
+
+{% schema %}
+{
+  "name": "Article",
+  "class": "cc-main-article section section--template",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Article header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show tags",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show published date",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "featured_image_width",
+      "label": "Featured image",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "content",
+          "label": "Content width"
+        },
+        {
+          "value": "wider",
+          "label": "Content width - wider"
+        },
+        {
+          "value": "page",
+          "label": "Page width"
+        }
+      ],
+      "default": "page",
+      "info": "We recommend using a landscape shaped image for your featured image. [Learn more](https://cleancanvas.co.uk/support/enterprise/templates/articles)"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "text-start",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-end",
+          "label": "Right"
+        }
+      ],
+      "default": "text-center"
+    },
+    {
+      "type": "header",
+      "content": "Article footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show social share links",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "pagination",
+      "label": "Next/previous links",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "bar",
+          "label": "Fixed bar"
+        },
+        {
+          "value": "bar-reading",
+          "label": "Fixed bar with reading estimate"
+        }
+      ],
+      "default": "standard"
+    }
+  ]
+}
+{% endschema %}

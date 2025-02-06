@@ -1,0 +1,89 @@
+{%- comment -%}
+  Parameters:
+  - products_list {Array} - Array of products to show.
+  - heading {String} - Heading for the promoted products (optional).
+  - layout {String} - Layout for the cards - 'carousel' or 'grid' (optional, default is 'carousel').
+  - grid_classes {String} - Classes for the products grid
+
+  Usage:
+  {% render 'promoted-products',
+    products_list: section.settings.promoted_products_list,
+    heading: 'Promoted products',
+    layout: 'carousel',
+    grid_classes: 'grid grid-flow-col auto-cols-1 gap-x-theme'
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  if layout == 'carousel' or layout == nil
+    assign carousel = true
+  else
+    assign carousel = false
+  endif
+
+  assign show_promoted_products = false
+  for product in products_list
+    assign cart_matches = cart.items | where: 'product_id', product.id
+    if cart_matches.size == 0 and product.available
+      assign show_promoted_products = true
+    endif
+  endfor
+-%}
+
+{%- if show_promoted_products -%}
+  <promoted-products class="cart-drawer__promoted-products layout-{{layout}} block w-full">
+    {%- if products_list.count > 0 -%}
+      {%- if heading != blank and carousel == false -%}
+        <h2 class="h6">{{ heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if carousel -%}
+        <carousel-slider class="carousel block" inactive>
+
+          <div class="mb-2 flex items-center justify-between">
+            {%- if heading != blank -%}
+              <h2 class="flex-auto mb-0 h6 max-w-full">{{- heading | escape -}}</h2>
+            {%- endif -%}
+
+            <div class="slider-nav slide-nav--inline flex no-js-hidden">
+              <button type="button" class="slider-nav__btn tap-target btn has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
+                <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+                {% render 'icon-chevron-left' %}
+              </button>
+              <button type="button" class="slider-nav__btn slider-nav__btn--offset tap-target btn has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
+                <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+                {% render 'icon-chevron-right' %}
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="slider slider--no-scrollbar" id="slider-{{ section.id }}">
+      {%- endif -%}
+
+      <ul class="{% if carousel %}slider__grid {{ grid_classes }}{% endif %}{% if settings.card_contain %} small__grid{% endif %}" role="list">
+        {%- assign promoted_products_count = 0 -%}
+        {%- for product in products_list -%}
+          {%- liquid
+            if promoted_products_count == products_list.size
+              break
+            endif
+            assign cart_matches = cart.items | where: 'product_id', product.id
+          -%}
+          {%- if cart_matches.size == 0 and product.available -%}
+            {%- assign promoted_products_count = promoted_products_count | plus: 1 -%}
+            <li{% if carousel %} class="slider__item"{% endif %}>
+              {%- render 'product-card-mini', product: product, always_open_quickbuy: always_open_quickbuy -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      {%- if carousel -%}
+            </div>
+          </div>
+        </carousel-slider>
+      {%- endif -%}
+    {%- endif -%}
+  </promoted-products>
+{%- endif -%}

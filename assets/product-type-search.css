@@ -1,0 +1,89 @@
+.search--product-types {
+  --product-types-width: 100px;
+  --product-types-padding: 14px;
+}
+.search--product-types .search__input {
+  padding-left: calc(var(--product-types-width) + var(--product-types-padding));
+}
+.search--product-types .search__submit {
+  right: var(--end-gutter, 0);
+  left: auto;
+  padding-inline-end: 24px;
+}
+
+.search__product-types {
+  width: var(--product-types-width);
+}
+.search__product-types .custom-select {
+  height: 100%;
+}
+.search__product-types .custom-select__btn {
+  height: 100%;
+  padding-top: 0;
+  padding-right: var(--product-types-padding);
+  padding-bottom: 0;
+  border: 0;
+  border-right: 1px solid rgba(var(--bg-color));
+  border-radius: var(--input-border-radius, 0) 0 0 var(--input-border-radius, 0);
+  background-color: var(--search-bg-color, rgba(var(--text-color)/0.08));
+  color: currentColor;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1em;
+}
+body:not(.tab-used) .search__product-types .custom-select__btn:focus {
+  box-shadow: none;
+}
+predictive-search:not([open]) .search__input:focus + .search__product-types .custom-select__btn {
+  border-color: rgba(var(--text-color)/0.6);
+}
+predictive-search[open] .search__product-types .custom-select__btn {
+  border-color: rgb(var(--text-color));
+}
+.search__product-types .custom-select__btn > span {
+  overflow: hidden;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.search__product-types .custom-select__btn > .icon {
+  width: 20px;
+  padding-inline-start: 0;
+}
+
+@media (max-width: 599.98px) {
+  .search--product-types .search__submit {
+    padding-inline-end: 20px;
+  }
+}
+@media (min-width: 600px) {
+  .header__grid--centered-logo .search--product-types {
+    --product-types-width: 130px;
+  }
+}
+@media (min-width: 769px) {
+  .search--product-types {
+    --product-types-width: 130px;
+    --product-types-padding: 17px;
+  }
+  .header__grid--centered-logo .search--product-types {
+    --product-types-width: 100px;
+  }
+}
+@media (min-width: 1024px) {
+  .search--product-types {
+    --product-types-width: 170px;
+    --product-types-padding: 20px;
+  }
+  .header__grid--centered-logo .search--product-types {
+    --product-types-width: 130px;
+  }
+}
+@media (min-width: 1280px) {
+  .search--product-types {
+    --product-types-width: 210px;
+  }
+  .header__grid--centered-logo .search--product-types {
+    --product-types-width: 140px;
+  }
+}

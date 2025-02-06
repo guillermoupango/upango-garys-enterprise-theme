@@ -1,0 +1,106 @@
+{%- comment -%}
+  Parameters:
+  - product {Product}: Current product.
+  - zoom_size {String}: The largest image size to load when zoomed in.
+  - thumb_crop {String} - If the thumbnail image should crop to fill available spacfe (Options: none, top, center)
+  - thumb_ratio {String} - Desired aspect ratio of the thumbnails
+
+  Usage:
+  {%- render 'gallery-zoom', product: product, zoom_size: zoom_size, thumb_ratio: thumb_ratio, thumb_crop: thumb_crop -%}
+{%- endcomment -%}
+
+{%- liquid
+  assign image_media = product.media | where: 'media_type', 'image'
+-%}
+<link rel="stylesheet" href="{{ 'gallery-zoom.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'modal.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'gallery-zoom.js' | asset_url }}" defer="defer"></script>
+
+<template class="js-media-zoom-template">
+  <modal-dialog class="modal gallery-zoom-modal invisible fixed top-0 left-0 w-full h-full flex items-center justify-center" role="dialog" aria-label="{{ 'products.product.media.gallery_viewer' | t }}" aria-modal="true" tabindex="-1">
+    <div class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion">
+      <div class="modal__content flex-auto h-full">
+        <gallery-zoom class="gallery-zoom{% if image_media.size == 1 %} gallery-zoom--single-image{% endif %} block relative h-full" tabindex="-1" style="--gallery-bg-color:{{ section.settings.bg_color }};--gallery-border-color:{{ section.settings.border_color }};">
+          <div class="gallery-zoom__zoom-container absolute w-full h-full{% if settings.blend_product_images %} image-blend{% endif %}"></div>
+
+          <carousel-slider class="carousel gallery-zoom__carousel block absolute z-10 left-0 w-full p-5 bottom-0 whitespace-nowrap text-center{% unless section.settings.lightbox_thumbnails %} visually-hidden{% endunless %}" inactive>
+            <div class="container relative">
+              <div class="gallery-zoom__thumb-slider slider slider--contained slider--no-scrollbar " id="slider-zoom-{{ section.id }}">
+                <ul class="gallery-zoom__thumbs flex slider__grid"{% if image_media.size == 1 %} hidden{% endif %}>
+                  {%- for media in image_media -%}
+                    <li class="gallery-zoom__thumb slider__item flex" data-zoom-url="{{ media.preview_image | image_url: width: zoom_size }}" data-media-id="{{ media.id }}">
+                      <button class="media-thumbs__btn media w-full relative{% if settings.blend_product_images %} image-blend{% endif %}"{% if section.settings.thumb_ratio != 'natural' %}  style="padding-top: {{ 1 | divided_by: thumb_ratio | times: 100 }}%;"{% endif %}>
+                        {%- liquid
+                          assign src_width = 80
+                          if section.settings.thumb_ratio != 'natural'
+                            if thumb_crop == 'top'
+                              assign img_class = 'gallery-zoom__thumb-img img-fit object-top w-full'
+                              assign src_width = 150
+                            elsif thumb_crop == 'center'
+                              assign img_class = 'gallery-zoom__thumb-img img-fit w-full'
+                              assign src_width = 150
+                            else
+                              assign img_class = 'gallery-zoom__thumb-img img-fit img-fit--contain w-full'
+                            endif
+                          endif
+                        -%}
+
+                        {% render 'image',
+                          image: media,
+                          src_width: src_width,
+                          srcset_2x: true,
+                          lazy_load: false,
+                          class: img_class,
+                          disable_focal_point: true
+                        %}
+                      </button>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+
+                {%- if settings.slider_show_arrows != 'never' -%}
+                  <div class="slider-nav slide-nav--inline justify-between absolute top-0 left-0 h-full w-full hidden md:flex{% if settings.slider_show_arrows == 'hover' %} slider-nav--show-on-hover no-hover-hidden{% endif %} no-js-hidden">
+                    <button type="button" class="slider-nav__btn tap-target tap-target--left btn text-current has-ltr-icon" name="prev" aria-controls="slider-zoom-{{ section.id }}">
+                      <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+                      {% render 'icon-chevron-left' %}
+                    </button>
+                    <button type="button" class="slider-nav__btn tap-target tap-target--right btn text-current has-ltr-icon" name="next" aria-controls="slider-zoom-{{ section.id }}">
+                      <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+                      {% render 'icon-chevron-right' %}
+                    </button>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </carousel-slider>
+
+          <div class="gallery-zoom__controls pointer-events-none relative h-full flex items-center justify-between">
+            <button class="gallery-zoom__prev pointer-events-auto has-ltr-icon btn media-ctrl__btn tap-target"{% if image_media.size == 1 %} hidden{% endif %} name="prev">
+              <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+              {% render 'icon-chevron-left' %}
+            </button>
+
+            {% if section.settings.show_slide_count and section.settings.lightbox_thumbnails == false %}
+            <div class="media-ctrl__counter text-sm">
+              <span class="media-ctrl__current-item">1</span>
+              <span aria-hidden="true"> / </span>
+              <span class="visually-hidden">{{ 'products.product.media.of' | t }}</span>
+              <span class="media-ctrl__total-items">{{ image_media.size }}</span>
+            </div>
+            {% endif %}
+
+            <button class="gallery-zoom__next pointer-events-auto has-ltr-icon btn media-ctrl__btn tap-target"{% if image_media.size == 1 %} hidden{% endif %} name="next">
+              <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+              {% render 'icon-chevron-right' %}
+            </button>
+
+            <button type="button" class="media-ctrl__btn gallery-zoom__close pointer-events-auto absolute top-0 right-0 js-close-modal" name="close">
+              {% render 'icon-close' %}
+              <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
+            </button>
+          </div>
+        </gallery-zoom>
+      </div>
+    </div>
+  </modal-dialog>
+</template>

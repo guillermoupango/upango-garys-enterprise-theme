@@ -1,0 +1,37 @@
+.search__speech {
+  position: absolute;
+  top: calc(50% - 22px);
+  min-height: 44px;
+  margin-inline-end: 2px;
+  padding: 10px calc(5 * var(--space-unit));
+  border-radius: var(--input-border-radius, 0);
+  color: currentColor;
+  cursor: pointer;
+}
+.search__speech.search__speech-listening {
+  animation: colorPulse 2s infinite;
+  opacity: 1;
+}
+.search__speech svg {
+  width: 24px;
+  transition: color 0.3s;
+}
+
+.speech-search--failed .search__input, .header__grid--centered-logo .speech-search--failed .search__input:not(.search__input--dirty) {
+  padding-inline-end: 14px;
+}
+.speech-search--failed .search__input--dirty {
+  padding-inline-end: 56px;
+}
+.speech-search--failed .search__reset {
+  right: 13px;
+}
+.speech-search--failed .search__reset::after {
+  display: none;
+}
+
+@media (max-width: 768.98px) {
+  .search__speech {
+    padding-inline-end: 15px;
+  }
+}

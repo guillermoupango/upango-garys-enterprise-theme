@@ -1,0 +1,58 @@
+{%- comment -%}
+  Parameters:
+  - desktop_image {Image}: Image to show on desktop screens.
+  - mobile_image {Image}: Image to show on mobile screens.
+  - class {String}: Passed through to 'image' snippet and set on the picture element.
+  - lazy_load {Boolean}: Passed through to 'image' snippet.
+  - sizes {String}: Passed through to 'image' snippet.
+  - fetchpriority {String}: Passed through to 'image' snippet.
+  - src_width_mobile {Number}:  Passed through to 'image' snippet.
+  - widths_mobile {String}:  Passed through to 'image' snippet.
+  - src_width_desktop {Number}:  Passed through to 'image' snippet.
+  - widths_desktop {String}:  Passed through to 'image' snippet.
+  - block {Block} [optional]: Used to generate a unique ID for assigning styles to this image. If not provided, section ID is used.
+
+  Usage:
+   {%- render 'image-desktop-and-mobile',
+      class: 'img-fit',
+      desktop_image: desktop_image,
+      mobile_image: mobile_image,
+      src_width_mobile: 980,
+      widths_mobile: '480, 980, 1200, 1400',
+      src_width_desktop: 1400,
+      widths_desktop: '480, 980, 1200, 1400, 1600, 1920, 2560, 3200',
+      lazy_load: lazy_load,
+      fetchpriority: fetchpriority,
+      sizes: sizes,
+      block: block
+  -%}
+{%- endcomment -%}
+
+{%- liquid
+  if block
+    assign picture_id = 'picture-' | append: block.id
+  elsif section
+    assign picture_id = 'picture-' | append: section.id
+  else
+    assign picture_id = nil
+  endif
+-%}
+{%- if mobile_image -%}
+  {%- if picture_id -%}
+  <style>
+    @media (max-width: 767px) {
+      #{{ picture_id }} img {
+        object-position: {{ mobile_image.presentation.focal_point }} !important;
+      }
+    }
+  </style>
+  {%- endif -%}
+  <picture{% if picture_id %} id="{{ picture_id }}"{% endif %}{% if class %} class="{{ class }}"{% endif %}>
+    {%- liquid
+      render 'image', image: mobile_image, src_width: src_width_mobile, widths: widths_mobile, class: class, lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes, as_mobile_source: true
+      render 'image', image: desktop_image, src_width: src_width_desktop, widths: widths_desktop, class: class, lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes
+    -%}
+  </picture>
+{%- else -%}
+  {%- render 'image', image: desktop_image, src_width: src_width_desktop, widths: widths_desktop, class: class, lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes -%}
+{%- endif -%}

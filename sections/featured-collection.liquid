@@ -1,0 +1,545 @@
+{%- if section.index > 2 -%}
+  <link rel="stylesheet" href="{{ 'featured-collection.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'product.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- else -%}
+  {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
+  {{ 'product.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- if settings.card_hover_action == 'slideshow' -%}
+  <script src="{{ 'product-card-image-slider.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- if settings.enable_quick_add -%}
+  <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- liquid
+  assign collection = section.settings.collection
+
+  assign carousel_desktop_small_promo = ' sm:auto-cols-3 md:auto-cols-2 lg:auto-cols-3 xl:auto-cols-4 small-cards-desktop'
+  assign carousel_desktop_medium_promo = ' sm:auto-cols-2 lg:auto-cols-3'
+  assign carousel_desktop_large_promo = ' sm:auto-cols-2'
+  assign carousel_desktop_small = ' md:auto-cols-3 lg:auto-cols-4 xl:auto-cols-5 small-cards-desktop'
+  assign carousel_desktop_medium = ' sm:auto-cols-3 xl:auto-cols-4'
+  assign carousel_desktop_large = ' sm:auto-cols-2 lg:auto-cols-3'
+
+  assign grid_desktop_small_promo = ' sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 small-cards-desktop'
+  assign grid_desktop_medium_promo = ' md:grid-cols-2 lg:grid-cols-3'
+  assign grid_desktop_large_promo = ' sm:grid-cols-2'
+  assign grid_desktop_small = ' md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 small-cards-desktop'
+  assign grid_desktop_medium = ' sm:grid-cols-3 xl:grid-cols-4'
+  assign grid_desktop_large = ' sm:grid-cols-2 lg:grid-cols-3'
+
+  if section.settings.card_size_mobile == 'small'
+    assign carousel_mobile_cols = 'grid-flow-col auto-cols-2 small-cards-mobile'
+    assign grid_mobile_cols = 'grid-cols-2 small-cards-mobile'
+    if section.settings.layout == 'carousel_on_mobile'
+      assign carousel_mobile_cols = carousel_mobile_cols | append: ' sm:grid-cols-2'
+    endif
+  else
+    assign carousel_mobile_cols = 'grid-flow-col auto-cols-1'
+    assign grid_mobile_cols = 'grid-cols-1'
+  endif
+
+  if section.settings.layout == 'carousel'
+    assign carousel = true
+
+    if section.settings.show_promo_info
+      if section.settings.card_size == 'small'
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_small_promo
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_medium_promo
+      else
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_large_promo
+      endif
+    else
+      if section.settings.card_size == 'small'
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_small
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_medium
+      else
+        assign grid_classes = carousel_mobile_cols | append: carousel_desktop_large
+      endif
+    endif
+  elsif section.settings.layout == 'carousel_on_mobile'
+    assign carousel = true
+
+    if section.settings.show_promo_info
+      if section.settings.card_size == 'small'
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_small_promo
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_medium_promo
+      else
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_large_promo
+      endif
+    else
+      if section.settings.card_size == 'small'
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_small
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_medium
+      else
+        assign grid_classes = carousel_mobile_cols | append: grid_desktop_large
+      endif
+    endif
+  elsif section.settings.layout == 'grid'
+    assign carousel = false
+
+    if section.settings.show_promo_info
+      if section.settings.card_size == 'small'
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_small_promo
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_medium_promo
+      else
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_large_promo
+      endif
+    else
+      if section.settings.card_size == 'small'
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_small
+      elsif section.settings.card_size == 'medium'
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_medium
+      else
+        assign grid_classes = grid_mobile_cols | append: grid_desktop_large
+      endif
+    endif
+  endif
+
+  if settings.prod_card_image_ratio == 'shortest'
+    assign image_ratio = 0
+    for product in collection.products limit: section.settings.products_to_show
+      if product.featured_media.preview_image.aspect_ratio > image_ratio
+        assign image_ratio = product.featured_media.preview_image.aspect_ratio
+      endif
+    endfor
+  elsif settings.prod_card_image_ratio == 'tallest'
+    assign image_ratio = 99
+    for product in collection.products limit: section.settings.products_to_show
+      if product.featured_media.preview_image.aspect_ratio < image_ratio
+        assign image_ratio = product.featured_media.preview_image.aspect_ratio
+      endif
+    endfor
+  else
+    assign image_ratio = settings.prod_card_image_ratio
+  endif
+
+  assign color_scheme = section.settings.color_scheme
+  assign bg_color = false
+
+  if color_scheme == 'default'
+    assign bg_color = settings.bg_color
+  elsif color_scheme == '1'
+    assign bg_color = settings.color_scheme_1_bg_grad | default: settings.color_scheme_1_bg
+  elsif color_scheme == '2'
+    assign bg_color = settings.color_scheme_2_bg_grad | default: settings.color_scheme_2_bg
+  elsif color_scheme == '3'
+    assign bg_color = settings.color_scheme_3_bg_grad | default: settings.color_scheme_3_bg
+  endif
+
+  if bg_color == settings.bg_color or bg_color == 'rgba(0,0,0,0)'
+    assign bg_color = false
+  endif
+-%}
+
+{%- capture slider_arrows -%}
+  <div class="slider-nav absolute top-middle end {% if settings.slider_show_arrows == 'hover' %}slider-nav--show-on-hover no-hover-hidden {% endif %}hidden md:block no-js-hidden">
+    <button type="button" class="slider-nav__btn tap-target btn {{ settings.slider_button_style }} has-ltr-icon" name="next" aria-controls="slider-{{ section.id }}">
+      <span class="visually-hidden">{{ 'general.slider.next' | t }}</span>
+      {% render 'icon-chevron-right' %}
+    </button>
+    <button type="button" class="slider-nav__btn tap-target btn {{ settings.slider_button_style }} has-ltr-icon" name="prev" aria-controls="slider-{{ section.id }}">
+      <span class="visually-hidden">{{ 'general.slider.previous' | t }}</span>
+      {% render 'icon-chevron-left' %}
+    </button>
+  </div>
+{%- endcapture -%}
+
+<div class="section">
+  {%- if section.settings.title != blank or section.settings.show_view_all -%}
+    <div class="container">
+      <div class="section__header items-center flex{% if section.settings.heading_align == 'text-center' %} flex-col text-center{% elsif section.settings.heading_align == 'text-end' %} flex-row-reverse flex-wrap{% else %} flex-row flex-wrap{% endif %} gap-x-theme"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
+        {%- if section.settings.title != blank -%}
+          <h2 class="h4 mb-0 flex-auto section__heading {{ section.settings.heading_align }}">
+            {{- section.settings.title | escape -}}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.show_view_all -%}
+          <a href="{{ collection.url }}" class="link">{{ 'sections.featured_collection.view_all' | t }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_promo_info -%}
+    <div class="featured-collection-container relative w-full mx-auto"{% if section.settings.image_ratio == 'fill' and section.settings.layout != 'carousel' and section.settings.image %} data-css-var-height=".card--product"{% endif %}>
+      <div class="flex flex-col md:flex-row">
+
+        <div class="featured-collection-info mb-6 md:mb-0 flex shrink-0 flex-col{% if section.settings.layout == 'carousel' %} featured-collection-info--carousel items-stretch{% endif %}"{% if settings.animations_enabled != "disabled" %}data-cc-animate{% endif %}>
+          {%- if section.settings.layout == 'grid' or section.settings.layout == 'carousel_on_mobile' -%}
+            <div class="featured-collection--sticky{% if section.settings.image_ratio == 'fill' and section.settings.layout != 'carousel' and section.settings.image %} featured-collection--sticky-fill flex flex-col{% endif %}">
+          {% endif %}
+
+            {% if section.settings.image %}
+              {%- liquid
+              assign image_ratio_int = section.settings.image_ratio
+              if image_ratio_int == "natural" or image_ratio_int == "fill"
+                assign image_ratio_int = section.settings.image.aspect_ratio
+              endif
+
+              assign image_fill = false
+              if section.settings.image_ratio == "fill"
+                assign image_fill = true
+              endif
+            -%}
+
+            <div class="featured-collection-image{% if image_fill %} h-full{% endif %}">
+              {% if section.settings.link_url %}
+                <a href="{{ section.settings.link_url }}" aria-label="{{ section.settings.promo_title | escape }}" class="media block relative w-full{% if image_fill %} h-full md:pt-0{% endif %}" style="padding-top: {{ 1 | divided_by: image_ratio_int | times: 100 }}%;">
+              {%- else -%}
+                <div class="media relative w-full{% if image_fill %} h-full{% if carousel %} md:pt-0{% endif %}{% endif %}" style="padding-top: {{ 1 | divided_by: image_ratio_int | times: 100 }}%;">
+              {%- endif -%}
+
+                  {% render 'image',
+                    image: section.settings.image,
+                    widths: '320, 460, 600, 700, 800, 900, 1200',
+                    src_width: 460,
+                    sizes: false,
+                    class: 'img-fit img-fit--cover' %}
+
+              {%- if section.settings.link_url -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {% endif %}
+
+            {%- if section.settings.promo_title != blank or section.settings.content != blank or section.settings.button_label != blank -%}
+              <div class="featured-collection-text{% unless section.settings.image.aspect_ratio == "fill" %} flex flex-col grow{% endunless %}{% if bg_color %} p-6{% else %} mt-6{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}">
+                {%- unless section.settings.promo_title == blank -%}
+                  <h2 class="h4 section__heading">{{ section.settings.promo_title }}</h2>
+                {%- endunless -%}
+
+                <div class="grow">
+                  {%- if section.settings.content != blank -%}
+                    <div class="rte">{{ section.settings.content }}</div>
+                  {%- endif -%}
+                </div>
+
+                {%- if section.settings.button_label != blank -%}
+                  <a class="{{ section.settings.button_style }} block mt-8 w-full" {% if section.settings.link_url != blank %}href="{{ section.settings.link_url }}"{% else %}role="link"aria-disabled="true"{% endif %}>
+                    {{- section.settings.button_label | escape -}}
+                  </a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          {%- if section.settings.layout == 'grid' or section.settings.layout == 'carousel_on_mobile' -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if carousel -%}
+        <carousel-slider class="carousel block{% if section.settings.show_promo_info %} grow{% endif %}" inactive{% if section.settings.layout == 'carousel_on_mobile' %} disable-desktop="true"{% endif %}>
+          <div class="{% unless section.settings.show_promo_info %}container relative{% endunless %} featured-collection-products">
+            <div class="slider" id="slider-{{ section.id }}">
+            {%- endif -%}
+
+            <div class="container products-grid-container shrink-0">
+              <ul class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}" role="list">
+                {%- if collection != blank -%}
+                  {%- for product in collection.products limit: section.settings.products_to_show -%}
+                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                      {% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..section.settings.products_to_show) -%}
+                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                      {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                    </li>
+                  {%- endfor -%}
+                {%- endif -%}
+              </ul>
+            </div>
+
+            {%- if carousel -%}
+            </div>
+
+            {%- if settings.slider_show_arrows != 'never' and section.settings.show_promo_info == false -%}
+              {{ slider_arrows }}
+            {%- endif -%}
+          </div>
+
+          {%- if settings.slider_show_arrows != 'never' and section.settings.show_promo_info -%}
+            {{ slider_arrows }}
+          {%- endif -%}
+        </carousel-slider>
+      {%- endif -%}
+      {%- if section.settings.show_promo_info -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "cc-featured-collection cc-product-card-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "text-start",
+          "label": "Left"
+        },
+        {
+          "value": "text-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-end",
+          "label": "Right"
+        }
+      ],
+      "default": "text-start"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show \"View all\" link",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        },
+        {
+          "value": "carousel_on_mobile",
+          "label": "Carousel on mobile"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "select",
+      "id": "card_size_mobile",
+      "label": "Product card size on mobile",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "select",
+      "id": "card_size",
+      "label": "Product card size on large screens",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum products to show",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_highlight_products",
+      "label": "Show highlight products",
+      "info": "To highlight a particular product card, add a \"True or false\" product metafield with the namespace and key \"theme.highlight\". See more settings in Theme Settings > Product cards > Highlighted cards.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Promotion card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_promo_info",
+      "label": "Show promotion",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "1.77",
+          "label": "Landscape"
+        },
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "text",
+      "id": "promo_title",
+      "label": "Title",
+      "default": "A headline to grab attention"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "default": "<p>Use this card with an image to highlight your collections or introduce a promotion.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "URL"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Button",
+      "info": "The button will link to the URL specified above."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Promotion card color scheme",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Promotion card button",
+      "options": [
+        {
+          "value": "link",
+          "label": "Link"
+        },
+        {
+          "value": "btn btn--primary",
+          "label": "Primary button"
+        },
+        {
+          "value": "btn btn--secondary",
+          "label": "Secondary button"
+        }
+      ],
+      "default": "btn btn--primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ],
+  "disabled_on": {
+    "templates": [
+      "password"
+    ],
+    "groups": [
+      "header",
+      "footer",
+      "aside"
+    ]
+  }
+}
+{% endschema %}

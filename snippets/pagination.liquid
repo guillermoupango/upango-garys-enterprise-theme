@@ -1,0 +1,96 @@
+{%- comment -%}
+  Parameters:
+  - paginate {Object} - Pagination object.
+  - style - {String} - "traditional" or "modern" (optional, default is "traditional").
+  - class {String} - Custom css class to add
+  - pagination_suffix {String} - Anything to append to the end of the pagination urls, e.g. anchors
+  - prev_text {String} - Screen reader text for the previous button (optional, default is "Previous").
+  - next_text {String} - Screen reader text for the next button (optional, default is "Next").
+  - prev_icon {String} - Markup to use for the previous arrow button (optional, default is icon-chevron-left).
+  - next_icon {String} - Markup to use for the next arrow button (optional, default is icon-chevron-right).
+
+  Usage:
+  {%- assign newer_articles = 'blogs.pagination.newer_articles' | t -%}
+  {%- assign older_articles = 'blogs.pagination.older_articles' | t -%}
+  {%- capture prev_icon -%}{% render 'icon-arrow-left' %}{%- endcapture -%}
+  {%- capture next_icon -%}{% render 'icon-arrow-right' %}{%- endcapture -%}
+
+  {% render 'pagination',
+    paginate: paginate,
+    class: 'custom-class',
+    pagination_suffix: '#comments'
+    prev_text: newer_articles,
+    prev_icon: prev_icon,
+    next_text: older_articles,
+    next_icon: next_icon
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  unless prev_icon
+    capture prev_icon
+      render 'icon-chevron-left'
+    endcapture
+  endunless
+
+  unless next_icon
+    capture next_icon
+      render 'icon-chevron-right'
+    endcapture
+  endunless
+
+  assign style = style | default: "traditional"
+-%}
+
+{%- if paginate.pages > 1 -%}
+  {%- liquid
+    assign default_prev_text = 'general.pagination.previous' | t
+    assign default_next_text = 'general.pagination.next' | t
+  -%}
+
+  <nav aria-label="{{ 'general.pagination.label' | t }}">
+    {% if style == "traditional" %}
+      <ul class="pagination relative flex flex-wrap justify-center items-center justify-between w-full mx-auto{% if class %} {{ class }}{% endif %} js-pagination" data-is-more-results="{{ paginate.next.is_link }}" data-pagination-style="{{ style }}">
+        <li class="pagination__item pagination__item--arrow">
+          <a class="pagination__arrow pagination__arrow--prev hover:lighten flex text-current items-center has-ltr-icon" {% if paginate.previous.is_link %}href="{{ paginate.previous.url }}{{ pagination_suffix }}"{% else %}role="link" aria-disabled="true"{% endif %}{% if settings.preload_links %} data-instant{% endif %}>
+            <span class="pagination__arrow-icon" aria-hidden="true">{{ prev_icon }}</span>
+            <span class="pagination__prev-label mis-2">{{ prev_text | default: default_prev_text }}</span>
+          </a>
+        </li>
+        <li class="pagination__item text-center md:hidden font-bold">
+          {{ 'general.pagination.position' | t: current_page: paginate.current_page, total_pages: paginate.pages }}
+        </li>
+        {%- for part in paginate.parts -%}
+          <li class="hidden md:block">
+            {%- if part.is_link -%}
+              <a class="pagination__page-link text-current block leading-none" href="{{ part.url }}{{ pagination_suffix }}"{% if settings.preload_links %} data-instant{% endif %}>{{ part.title }}</a>
+            {%- elsif part.title == paginate.current_page -%}
+              <span class="pagination__page-current font-bold block leading-none">{{ part.title }}</span>
+            {%- else -%}
+              <span class="block leading-none ml-2 mr-2">{{ part.title }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+        <li class="pagination__item pagination__item--arrow">
+          <a class="pagination__arrow pagination__arrow--next hover:lighten flex justify-end text-current items-center has-ltr-icon js-pagination-load-more" {% if paginate.next.is_link %}href="{{ paginate.next.url }}{{ pagination_suffix }}"{% else %}role="link" aria-disabled="true"{% endif %}{% if settings.preload_links %} data-instant{% endif %}>
+            <span class="pagination__next-label text-end">{{ next_text | default: default_next_text }}</span>
+            <span class="pagination__arrow-icon" aria-hidden="true">{{ next_icon }}</span>
+          </a>
+        </li>
+      </ul>
+    {% elsif style == "modern" %}
+      <div class="pagination--modern ml-auto mr-auto w-full text-center{% unless paginate.next.is_link %} hidden{% endunless %}{% if class %} {{ class }}{% endif %} js-pagination" data-is-more-results="{{ paginate.next.is_link }}" data-pagination-style="{{ style }}">
+        {%- liquid
+          assign visible_results = paginate.current_page | times: paginate.page_size | at_most: paginate.items
+          assign total_items_float = paginate.items | plus: 0.0
+          assign pagination_percent = 100 | divided_by: total_items_float | times: visible_results | round: 1
+        -%}
+        <span class="js-pagination-message">{{ 'general.pagination.position_results' | t: visible_results: visible_results, total_results: paginate.items }}</span>
+        <div class="pagination__bar relative mt-4 js-pagination-bar" style="--pagination-percent: {{ pagination_percent }}%;"></div>
+        <a href="{{ paginate.next.url }}" class="btn btn--secondary mt-8 js-pagination-load-more">
+          {{ 'general.pagination.show_more' | t }}
+        </a>
+      </div>
+    {% endif %}
+  </nav>
+{%- endif -%}

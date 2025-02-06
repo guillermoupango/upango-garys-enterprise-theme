@@ -1,0 +1,48 @@
+.countdown__grid {
+  grid-template-columns: repeat(4, auto);
+  font-size: calc(24 * var(--fluid-1-4));
+  gap: var(--countdown-gap, 1em);
+}
+
+.countdown__item:not(:last-child) .countdown__number::after {
+  content: ":";
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--countdown-gap, 1em) / 2);
+  padding-top: 0.45em;
+  transform: translateX(-50%);
+  color: currentColor;
+}
+[dir=rtl] .countdown__item:not(:last-child) .countdown__number::after {
+  right: calc(100% + var(--countdown-gap, 1em) / 2);
+  left: auto;
+  transform: translateX(50%);
+}
+
+.countdown__number {
+  box-sizing: content-box;
+  min-width: 2ch;
+  margin-bottom: 6px;
+  padding: 0.45em;
+  border: 1px solid;
+  border-radius: 0;
+  background-color: transparent;
+  color: currentColor;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.countdown__unit {
+  font-size: 14px;
+}
+
+.countdown__grid + .countdown__text {
+  margin-top: calc(24 * var(--fluid-1-4) / 2);
+}
+
+@media (max-width: 599.98px) {
+  .countdown__grid {
+    --countdown-gap: 14px;
+    font-size: 24px;
+  }
+}
