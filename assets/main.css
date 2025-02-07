@@ -4020,9 +4020,9 @@ body:not(.tab-used) .search__input {
 }
 
 .os-scrollbar.os-theme-dark {
-  --os-size: 14px;
+  --os-size: 16px;
   --os-padding-perpendicular: 6px;
-  --os-handle-bg: rgb(var(--scrollbar-color, 60 60 60));
+  --os-handle-bg: rgb(var(--btn-bg-color, 60 60 60));
   --os-handle-bg-hover: rgb(var(--scrollbar-color, 60 60 60));
   --os-handle-bg-active: rgb(var(--scrollbar-color, 60 60 60));
   --os-track-bg: rgba(var(--scrollbar-color, 60 60 60) / 0.3);

@@ -94,6 +94,8 @@
   "products": {
     "product": {
       "add_to_cart": "Añadir al carrito",
+      "download_sheet": "Descargar Ficha",
+      "download_gallery": "Descargar Galería HD",
       "added_to_cart": "Se ha añadido el artículo al carrito",
       "awaiting_sale": "Este producto no está disponible para comprar todavía.",
       "backorder": "está agotado y se enviará tan pronto como vuelva a estar disponible.",

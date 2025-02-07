@@ -9,17 +9,94 @@
  */
 {
   "sections": {
-    "collection-banner": {
-      "type": "main-collection-banner",
-      "settings": {}
+    "media_with_text_WWcwJU": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_xRpTJP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Comercio",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "text_ffwzej": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_qNiKrx": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Optional button",
+            "button_link": "",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_xRpTJP",
+        "text_ffwzej",
+        "button_qNiKrx"
+      ],
+      "custom_css": [
+        "{padding: 0 var(--gutter);}",
+        ".section--padded {padding: 0;}",
+        ".container {background-color: #f2f2f2; padding: 0;}",
+        ".media-with-text{margin-right: 0;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2025-02-07_080810.png",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "contain",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "none",
+        "only_content_color_scheme": false
+      }
     },
     "collection-products": {
       "type": "main-collection-products",
-      "settings": {}
+      "settings": {
+        "products_per_page": 16,
+        "card_size_mobile": "small",
+        "card_size": "medium",
+        "show_layout_toggle": true,
+        "enable_filtering": true,
+        "filters_open_lg": false,
+        "stick_on_scroll": true,
+        "show_filter_counts": true,
+        "expand_filters": true,
+        "max_filter_options": 7,
+        "enable_sorting": true,
+        "show_feat_sort_opt": true,
+        "sort_first": true
+      }
+    },
+    "collection-banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_title": false,
+        "show_product_count": false,
+        "show_collection_description": true,
+        "text_align": "items-center text-center",
+        "collection_image": "natural",
+        "use_product_image": false,
+        "text_width": "standard",
+        "color_scheme": "default"
+      }
     }
   },
   "order": [
-    "collection-banner",
-    "collection-products"
+    "media_with_text_WWcwJU",
+    "collection-products",
+    "collection-banner"
   ]
 }

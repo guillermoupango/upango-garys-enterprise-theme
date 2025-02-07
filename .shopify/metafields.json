@@ -1,0 +1,86 @@
+{
+  "article": [],
+  "blog": [],
+  "brand": [],
+  "collection": [],
+  "company": [],
+  "company_location": [],
+  "location": [],
+  "market": [],
+  "order": [],
+  "page": [],
+  "product": [
+    {
+      "key": "composicion",
+      "namespace": "upng",
+      "name": "Composición",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "tabla_de_medidas",
+      "namespace": "upng",
+      "name": "Tabla de medidas",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "privado",
+      "namespace": "upng",
+      "name": "Privado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "esquema",
+      "namespace": "upng",
+      "name": "Esquema",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "volumen",
+      "namespace": "upng",
+      "name": "Volumen",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "packaging",
+      "namespace": "upng",
+      "name": "Packaging",
+      "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "color-pattern",
+      "namespace": "shopify",
+      "name": "Color",
+      "description": "Defines the primary color or pattern, such as blue or striped",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
+  "variant": [],
+  "shop": []
+}

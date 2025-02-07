@@ -31,55 +31,53 @@
         "announcement-1",
         "announcement-2"
       ],
-      "settings": {}
+      "settings": {
+        "link1": "",
+        "link1_label": "",
+        "link2": "",
+        "link2_label": "",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "text_type_scale": "small",
+        "read_time": 7
+      }
     },
     "header": {
       "type": "header",
       "settings": {
         "enable_sticky": true,
-        "logo": "{{ shop.brand.logo }}"
-      }
-    },
-    "promo-strip": {
-      "type": "promo-strip",
-      "blocks": {
-        "heading-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Announce a promotion",
-            "heading_size": "h6"
-          }
-        },
-        "text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share something special with your customers.</p>",
-            "enlarge_text": false
-          }
-        },
-        "discount-2": {
-          "type": "discount",
-          "settings": {
-            "discount_code": "DISCOUNTCODE"
-          }
-        }
-      },
-      "block_order": [
-        "heading-0",
-        "text-1",
-        "discount-2"
-      ],
-      "settings": {
-        "section_height": "xsmall",
-        "color_scheme": "1",
-        "full_width": true,
-        "dividers": "border-top"
+        "mobile_menu_position": "burger-right",
+        "logo_text": "",
+        "logo_type_scale": "2",
+        "logo": "{{ shop.brand.logo }}",
+        "logo_width": 150,
+        "logo_h1": false,
+        "logo_center": true,
+        "enable_search": true,
+        "minimise_search_mobile": false,
+        "minimise_search_desktop": false,
+        "menu": "main-menu",
+        "menu_center": true,
+        "repeat_links": false,
+        "menu_featured_link": "Outlet",
+        "quicklinks_menu": "",
+        "cta_show": false,
+        "cta_icon": "phone",
+        "cta_label": "Call us",
+        "cta_link": "",
+        "cta_border_color": "#ffffff",
+        "cta_bg_color": "#333333",
+        "cta_text_color": "#ffffff",
+        "bg_color": "#ffffff",
+        "text_color": "#070707",
+        "accent_color": "#b40c1c"
       }
     }
   },
   "order": [
     "announcement",
-    "header",
-    "promo-strip"
+    "header"
   ]
 }
