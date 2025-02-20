@@ -1,0 +1,130 @@
+{% comment %} sections/collection-tabs.liquid {% endcomment %}
+
+<div class="collection-tabs" data-section-id="{{ section.id }}">
+    {% if section.settings.title != blank %}
+      <h2 class="collection-tabs__title">{{ section.settings.title }}</h2>
+    {% endif %}
+  
+    {%- if section.settings.collection_list != blank -%}
+      <div class="collection-tabs__nav">
+        {%- for collection in section.settings.collection_list -%}
+          {%- assign collection_object = collections[collection] -%}
+          <button 
+            class="collection-tab__button {% if forloop.first %}is-active{% endif %}"
+            data-collection-handle="{{ collection_object.handle }}"
+            data-collection-id="{{ collection_object.id }}"
+          >
+            {{ collection_object.title }}
+          </button>
+        {%- endfor -%}
+      </div>
+  
+      <div class="collection-tabs__content">
+        {%- assign first_collection = collections[section.settings.collection_list.first] -%}
+        <div class="collection-tabs__products">
+          {%- for product in first_collection.products limit: section.settings.products_limit -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+  
+  {% schema %}
+  {
+    "name": "Collection Tabs",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Featured Collections"
+      },
+      {
+        "type": "collection_list",
+        "id": "collection_list",
+        "label": "Collections",
+        "limit": 10
+      },
+      {
+        "type": "range",
+        "id": "products_limit",
+        "min": 4,
+        "max": 12,
+        "step": 1,
+        "default": 8,
+        "label": "Products to show"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection Tabs",
+      }
+    ]
+  }
+  {% endschema %}
+  
+  <script>
+    class CollectionTabs extends HTMLElement {
+      constructor() {
+        super();
+        this.buttons = this.querySelectorAll('.collection-tab__button');
+        this.productsContainer = this.querySelector('.collection-tabs__products');
+        this.init();
+      }
+  
+      init() {
+        this.buttons.forEach(button => {
+          button.addEventListener('click', this.handleTabClick.bind(this));
+        });
+      }
+  
+      async handleTabClick(event) {
+        const button = event.target;
+        const collectionHandle = button.dataset.collectionHandle;
+        
+        // Update active state
+        this.buttons.forEach(btn => btn.classList.remove('is-active'));
+        button.classList.add('is-active');
+  
+        // Fetch products
+        try {
+          const response = await fetch(`/collections/${collectionHandle}?view=ajax`);
+          const html = await response.text();
+          this.productsContainer.innerHTML = html;
+        } catch (error) {
+          console.error('Error loading products:', error);
+        }
+      }
+    }
+  
+    customElements.define('collection-tabs', CollectionTabs);
+  </script>
+  
+  <style>
+    .collection-tabs__nav {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+  
+    .collection-tab__button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      background: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  
+    .collection-tab__button.is-active {
+      background: #000;
+      color: #fff;
+    }
+  
+    .collection-tabs__products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+  </style>
