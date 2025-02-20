@@ -12,6 +12,12 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_weight": false
+          }
+        },
         "vendor-sku": {
           "type": "vendor-sku",
           "settings": {
@@ -22,17 +28,15 @@
         },
         "product-labels": {
           "type": "product-labels",
-          "settings": {}
-        },
-        "title": {
-          "type": "title",
           "settings": {
-            "show_weight": false
+            "show_variant_icon": true
           }
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_tax_and_shipping": true
+          }
         },
         "divider-0": {
           "type": "divider",
@@ -62,30 +66,11 @@
         },
         "buy-buttons": {
           "type": "buy-buttons",
-          "settings": {}
-        },
-        "message-1": {
-          "type": "message",
           "settings": {
-            "icon": "clock",
-            "title": "<p><strong>Popular right now<br/></strong>Lots of people have looked at this recently</p>",
-            "close": "once",
-            "show_over_media": true,
-            "visibility_duration": 4,
-            "bg_color": "#e4edfa",
-            "text_color": "#1a66d2"
-          }
-        },
-        "message-2": {
-          "type": "message",
-          "settings": {
-            "icon": "price_tag",
-            "title": "<p><strong>Selling fast!<br/></strong>Grab yours while you can</p>",
-            "close": "once",
-            "show_over_media": true,
-            "visibility_duration": 5,
-            "bg_color": "#e4edfa",
-            "text_color": "#1a66d2"
+            "show_qty_selector": true,
+            "enable_dynamic_checkout": false,
+            "show_pickup_availability": true,
+            "show_gift_card_recipient": false
           }
         },
         "collapsible-content-1": {
@@ -108,12 +93,9 @@
             "open": false
           }
         },
-        "share": {
-          "type": "share",
-          "settings": {}
-        },
         "message-3": {
           "type": "message",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "title": "<p>Add a stand out message for your customers</p>",
@@ -134,23 +116,22 @@
         }
       },
       "block_order": [
+        "title",
         "vendor-sku",
         "product-labels",
-        "title",
         "price",
         "divider-0",
         "variant-picker",
         "divider-1",
         "buy-buttons",
-        "message-1",
-        "message-2",
         "collapsible-content-1",
         "collapsible-content-2",
-        "share",
         "message-3",
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm"
       ],
       "settings": {
+        "stick_on_scroll": true,
+        "select_first_variant": true,
         "sticky_atc_panel": true,
         "sticky_atc_position": "end",
         "sticky_atc_mobile": true,
@@ -179,304 +160,76 @@
     },
     "details": {
       "type": "product-details",
-      "blocks": {
-        "highlight-text": {
-          "type": "highlight-text",
-          "settings": {
-            "title": "Highlight title",
-            "text": "<p>Text to highlight a key feature of your product</p>"
-          }
-        },
-        "tabs": {
-          "type": "tabs",
-          "settings": {
-            "style": "collapsible",
-            "open_first": false,
-            "show_description": true,
-            "show_reviews": false,
-            "custom_reviews": "",
-            "show_specification": false,
-            "spec_metafields": "",
-            "spec_right_align": false,
-            "spec_show_empty_metafields": true,
-            "spec_empty_field_text": "-",
-            "tab_1_title": "",
-            "tab_1_text": "",
-            "tab_1_page": "",
-            "tab_2_title": "",
-            "tab_2_text": "",
-            "tab_2_page": "",
-            "tab_3_title": "",
-            "tab_3_text": "",
-            "tab_3_page": ""
-          }
-        },
-        "payment-methods": {
-          "type": "payment-methods",
-          "settings": {
-            "title": "Payment & Security",
-            "title1": "Payment methods",
-            "show_payment_icons": true,
-            "text1": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p>",
-            "title2": "",
-            "text2": ""
-          }
-        }
-      },
-      "block_order": [
-        "highlight-text",
-        "tabs",
-        "payment-methods"
-      ],
       "settings": {}
-    },
-    "product-features": {
-      "type": "product-features",
-      "blocks": {
-        "product-features-feature-0": {
-          "type": "feature",
-          "settings": {
-            "heading": "Feature name",
-            "text": "<p>Add some text describing the product feature.</p>",
-            "content_align": "text-start",
-            "hotspot_x": 28,
-            "hotspot_y": 38
-          }
-        },
-        "product-features-feature-1": {
-          "type": "feature",
-          "settings": {
-            "heading": "Feature name",
-            "text": "<p>Add some text describing the product feature.</p>",
-            "content_align": "text-start",
-            "hotspot_x": 60,
-            "hotspot_y": 29
-          }
-        },
-        "product-features-feature-2": {
-          "type": "feature",
-          "settings": {
-            "heading": "Feature name",
-            "text": "<p>Add some text describing the product feature.</p>",
-            "content_align": "text-start",
-            "hotspot_x": 73,
-            "hotspot_y": 54
-          }
-        },
-        "product-features-feature-3": {
-          "type": "feature",
-          "settings": {
-            "heading": "Feature name",
-            "text": "<p>Add some text describing the product feature.</p>",
-            "content_align": "text-start",
-            "hotspot_x": 50,
-            "hotspot_y": 66
-          }
-        }
-      },
-      "block_order": [
-        "product-features-feature-0",
-        "product-features-feature-1",
-        "product-features-feature-2",
-        "product-features-feature-3"
-      ],
-      "settings": {
-        "product": "",
-        "show_content": true,
-        "layout": "text_first",
-        "text_align": "text-center",
-        "mob_center_text": false,
-        "heading_size": "h1",
-        "enlarge_text": false,
-        "title": "Product features",
-        "description": "<p>Use this section to highlight specific product features to your customers.</p>",
-        "button_label": "",
-        "button_link": "",
-        "hotspot_color": "#070707",
-        "color_scheme": "none",
-        "button_style": "btn btn--primary"
-      }
-    },
-    "product-comparison-grid": {
-      "type": "product-comparison-grid",
-      "blocks": {
-        "comparison-product-1": {
-          "type": "product",
-          "settings": {
-            "show_image": true,
-            "show_title": true,
-            "show_button": true
-          }
-        },
-        "comparison-vendor-2": {
-          "type": "vendor",
-          "settings": {}
-        },
-        "comparison-price-3": {
-          "type": "price",
-          "settings": {}
-        },
-        "comparison-description-4": {
-          "type": "description",
-          "settings": {
-            "truncate_description": false,
-            "words_to_show": 20
-          }
-        }
-      },
-      "block_order": [
-        "comparison-product-1",
-        "comparison-vendor-2",
-        "comparison-price-3",
-        "comparison-description-4"
-      ],
-      "settings": {
-        "heading": "Product comparison grid",
-        "text": "<p>Add content here to explain a bit about the range of products on offer and which ones may be most suitable for your customers.</p>",
-        "heading_align": "text-center",
-        "view_more_label": "View more",
-        "view_more_link": "",
-        "product_list": [],
-        "empty_field_text": "-",
-        "image_ratio": "shortest",
-        "image_crop": "center",
-        "num_rows": 0,
-        "color_scheme": "none",
-        "highlight_row": false
-      }
-    },
-    "collection-list": {
-      "type": "collection-list",
-      "blocks": {
-        "collection-list-collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-2": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-3": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-4": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-5": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-6": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-list-collection-1",
-        "collection-list-collection-2",
-        "collection-list-collection-3",
-        "collection-list-collection-4",
-        "collection-list-collection-5",
-        "collection-list-collection-6"
-      ],
-      "settings": {
-        "title": "Our Collections",
-        "heading_align": "text-start",
-        "button_label": "",
-        "button_link": "",
-        "layout": "carousel",
-        "card_size": "medium",
-        "use_product_image": false,
-        "circle_image": true,
-        "show_border": true,
-        "color_scheme": "none",
-        "full_width": true
-      }
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "blocks": {
-        "image-banner-heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        },
-        "image-banner-text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "enlarge_text": true
-          }
-        },
-        "image-banner-button": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Optional button",
-            "button_1_link": "",
-            "button_1_style": "btn btn--primary",
-            "button_2_label": "Optional button",
-            "button_2_link": "",
-            "button_2_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "image-banner-heading",
-        "image-banner-text",
-        "image-banner-button"
-      ],
-      "settings": {
-        "url": "",
-        "height_mode": "fixed",
-        "fixed_height_desktop": 640,
-        "fixed_height_mobile": 480,
-        "overlay_position": "justify-center items-center",
-        "overlay_text_align": "text-center",
-        "mob_center_text": false,
-        "mobile_stacked": false,
-        "color_scheme": "white",
-        "full_width": false,
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_opacity": 40,
-        "prevent_animation": false
-      }
     },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
+        "heading": "You may also like",
         "heading_align": "text-start",
         "layout": "carousel",
         "card_size_mobile": "small",
         "card_size": "small",
         "products_to_show": 8
       }
+    },
+    "media_with_text_AV36i6": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_e4RWNM": {
+          "type": "heading",
+          "settings": {
+            "heading": "Calidad en tu uniforme,<br>calidad en tu trabajo.",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "text_KD6ynB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_e4RWNM",
+        "text_KD6ynB"
+      ],
+      "custom_css": [
+        ".section--padded {padding: 0;}",
+        ".media-with-text {--media-width: 60%; margin: 0; max-width: 100%;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_8_c08fb2c9-64b7-4d23-967e-2098827764ed.jpg",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "cover",
+        "media_width": 55,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "1",
+        "only_content_color_scheme": true
+      }
+    },
+    "custom_liquid_ximcwY": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<button class=\"btn btn--secondary\">Por profesión/Comercio</button>",
+        "section_height": "default",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
     }
   },
   "order": [
     "main",
     "details",
-    "product-features",
-    "product-comparison-grid",
-    "collection-list",
-    "image-banner",
-    "recommendations"
+    "recommendations",
+    "media_with_text_AV36i6",
+    "custom_liquid_ximcwY"
   ]
 }
