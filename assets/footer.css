@@ -32,6 +32,7 @@
 }
 .footer .social {
   display: inline-flex;
+  gap: 1rem;
 }
 
 .footer__main > .footer-col:first-child .disclosure {
@@ -284,4 +285,17 @@
   .footer-col {
     padding: 0 32px;
   }
+}
+
+/* BOTONES REDES SOCIALES FOOTER */
+
+.footer .social {
+  margin-left: 0 !important;
+}
+.footer .social li {
+  background-color: rgb(var(--btn-bg-color));
+  border-radius: 50%;
+}
+.footer .social li a {
+  color: black;
 }
