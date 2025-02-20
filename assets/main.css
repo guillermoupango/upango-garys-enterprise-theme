@@ -5564,8 +5564,8 @@ body > .os-scrollbar {
 /* ESTILOS PERSONALIZADOS */
 
 .products-toolbar .label, .products-toolbar .products-toolbar__filter span{
-  font-weight: 500;
-  color: var(--text-color);
+  font-weight: 400;
+  color: #868686;
 }
 
 .products-toolbar .products-toolbar__filter svg, .products-toolbar .products-toolbar__sort svg{
@@ -5580,8 +5580,3 @@ body > .os-scrollbar {
   color: rgb(var(--btn-bg-color)) !important;
   stroke: rgb(var(--btn-bg-color)) !important;
 }
-
-/* .products-toolbar__layout .tap-target svg {
-  color: rgb(var(--btn-bg-color));
-  stroke: rgb(var(--btn-bg-color));
-} */
