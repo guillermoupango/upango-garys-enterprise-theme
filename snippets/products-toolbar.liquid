@@ -19,7 +19,7 @@
 <products-toolbar class="products-toolbar flex items-center mb-8{% if settings.enable_compare and settings.compare_toggle != "none" %} products-toolbar--compare{% if section.settings.show_layout_toggle and sort_or_filters_visible %} products-toolbar--compare-shift-xs mt-16{% endif %}{% endif %} no-js-hidden" id="products-toolbar">
   {%- if filters_enabled -%}
     <div class="products-toolbar__filter">
-      <button type="button" class="products-toolbar__filter-btn flex justify-between items-center text-current font-bold {% if section.settings.filters_open_lg %}is-active {% endif %}js-toggle-filters" aria-controls="facet-filters" aria-expanded="false">
+      <button type="button" class="products-toolbar__filter-btn flex justify-between items-center text-current {% if section.settings.filters_open_lg %}is-active {% endif %}js-toggle-filters" aria-controls="facet-filters" aria-expanded="false">
         <span class="hidden md:block">{{ 'products.filtering.filter' | t }}</span>
         {%- if section.settings.enable_sorting -%}
           <span class="md:hidden">{{ 'products.filtering.filter_sort' | t }}</span>

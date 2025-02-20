@@ -5560,3 +5560,28 @@ body > .os-scrollbar {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 }
+
+/* ESTILOS PERSONALIZADOS */
+
+.products-toolbar .label, .products-toolbar .products-toolbar__filter span{
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.products-toolbar .products-toolbar__filter svg, .products-toolbar .products-toolbar__sort svg{
+  color: rgb(var(--btn-bg-color));
+  stroke: rgb(var(--btn-bg-color));
+}
+.products-toolbar .products-toolbar__filter span, .products-toolbar .text-start{
+  color: rgb(var(--btn-bg-color));
+}
+
+.products-toolbar__layout input:checked + label{
+  color: rgb(var(--btn-bg-color)) !important;
+  stroke: rgb(var(--btn-bg-color)) !important;
+}
+
+/* .products-toolbar__layout .tap-target svg {
+  color: rgb(var(--btn-bg-color));
+  stroke: rgb(var(--btn-bg-color));
+} */
