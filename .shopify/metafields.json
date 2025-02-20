@@ -2,13 +2,116 @@
   "article": [],
   "blog": [],
   "brand": [],
-  "collection": [],
-  "company": [],
+  "collection": [
+    {
+      "key": "hidden",
+      "namespace": "seo",
+      "name": "SEO Hidden",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    }
+  ],
+  "company": [
+    {
+      "key": "tarifa",
+      "namespace": "upng",
+      "name": "Tarifa",
+      "description": "Identificador de la tarifa que aplica al cliente. Se usa siempre en nuestro conector",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "zona_fiscal",
+      "namespace": "upng",
+      "name": "Zona Fiscal",
+      "description": "Zona fiscal de cliente. Se utiliza para identificar las empresas a las que hay que aplicar recargo de equivalencia, pero podría utilizarse para más cosas en el futuro.",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "puede_escoger_pago",
+      "namespace": "upng",
+      "name": "Puede escoger pago",
+      "description": "Muestra en el carrito el selector entre pagar y usar el término de pago para permitir hacer el pedido sin pagar",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "company-discount",
+      "namespace": "upng",
+      "name": "Descuento Cliente",
+      "description": "Porcentaje de descuento que se aplicará en los pedidos de la empresa",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "codigo_agente_asignado",
+      "namespace": "upng",
+      "name": "Código Agente Asignado",
+      "description": "Grupo del agente asignado",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "codigo_agente_asignado2",
+      "namespace": "upng",
+      "name": "Agente 2",
+      "description": "Código del segundo agente",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "agents_carts",
+      "namespace": "upng",
+      "name": "Carrito del agente",
+      "description": "Carrito de agentes",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    }
+  ],
   "company_location": [],
   "location": [],
   "market": [],
   "order": [],
-  "page": [],
+  "page": [
+    {
+      "key": "icono",
+      "namespace": "upng",
+      "name": "Icono",
+      "description": "Icono de la página",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "grupo_clientes",
+      "namespace": "upng",
+      "name": "Grupo Clientes",
+      "description": "Para indicar el grupo de clientes que queremos que tenga acceso a la página",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
   "product": [
     {
       "key": "composicion",
@@ -129,8 +232,220 @@
         "name": "single_line_text_field",
         "category": "TEXT"
       }
+    },
+    {
+      "key": "hidden",
+      "namespace": "seo",
+      "name": "SEO Hidden",
+      "description": "Si a este metafield le ponemos un valor 1, el producto no aparece en los resultados de búsqueda.",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "tax-class",
+      "namespace": "upng",
+      "name": "Tax Class",
+      "description": "Normalmente tendrá alguno de los siguientes valores: \"normal\", \"reducido\", \"superreducido\"",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "gamas",
+      "namespace": "upng",
+      "name": "Gamas colores",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "estilo_forma",
+      "namespace": "upng",
+      "name": "Estilo/Forma",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "caracteristicas",
+      "namespace": "upng",
+      "name": "Características",
+      "description": "",
+      "type": {
+        "name": "rich_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "tipo_cierre",
+      "namespace": "upng",
+      "name": "Tipo de cierre",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "bolsillo",
+      "namespace": "upng",
+      "name": "Bolsillo",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "longitud_prenda",
+      "namespace": "upng",
+      "name": "Longitud prenda",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "genero",
+      "namespace": "upng",
+      "name": "Género",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "tejido",
+      "namespace": "upng",
+      "name": "Tejido",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "codigo_modelo",
+      "namespace": "upng",
+      "name": "Código de modelo",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "croquis",
+      "namespace": "upng",
+      "name": "Croquis",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "nuevo",
+      "namespace": "upng",
+      "name": "Nuevo",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "descatalogado",
+      "namespace": "upng",
+      "name": "Descatalogado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "pvp",
+      "namespace": "upng",
+      "name": "PVP",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "certificados",
+      "namespace": "upng",
+      "name": "Certificados",
+      "description": "",
+      "type": {
+        "name": "list.file_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
-  "variant": [],
-  "shop": []
+  "variant": [
+    {
+      "key": "icono_color",
+      "namespace": "upng",
+      "name": "Icono color",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "tratamiento",
+      "namespace": "upng",
+      "name": "Tratamiento",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "id_erp",
+      "namespace": "upng",
+      "name": "Id ERP",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "volumen",
+      "namespace": "upng",
+      "name": "Volumen",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    }
+  ],
+  "shop": [
+    {
+      "key": "recargo_id",
+      "namespace": "upng",
+      "name": "Recargo Equivalencia",
+      "description": "ID de la variante de Producto del Recargo de Equivalencia",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ]
 }
