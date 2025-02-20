@@ -36,7 +36,7 @@
         "link1_label": "",
         "link2": "",
         "link2_label": "",
-        "enable_country_selector": true,
+        "enable_country_selector": false,
         "enable_language_selector": true,
         "bg_color": "#ffffff",
         "text_color": "#000000",

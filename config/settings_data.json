@@ -382,6 +382,7 @@
     "card_bg_color": "#ffffff",
     "card_text_color": "#26262b",
     "card_border_color": "#f2f2f2",
+    "enable_compare": false,
     "compare_empty_field_text": "N/A",
     "inventory_threshold_low": 20,
     "inventory_threshold_very_low": 8,

@@ -651,6 +651,10 @@
         "media_JMjGLq",
         "media_JVFLUf"
       ],
+      "custom_css": [
+        "p {font-family: var(--body-font-family); font-weight: 400;}",
+        "@media screen and (min-width: 769px) {p {font-size: 20px}}"
+      ],
       "settings": {
         "title": "Destacados",
         "heading_align": "text-center",
