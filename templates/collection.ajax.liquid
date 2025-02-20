@@ -1,5 +1,5 @@
 {% layout none %}
 
-{%- for product in collection.products limit: section.settings.products_limit -%}
+{%- for product in collection.products -%}
     {% render 'product-card', product: product, collection: collection %}
   {%- endfor -%}

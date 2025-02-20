@@ -16,19 +16,8 @@
         "heading_align": "text-center"
       }
     },
-    "173945015288d94788": {
+    "17398785123f559b0a": {
       "type": "apps",
-      "blocks": {
-        "upango_b2b_garys_upng_mis_direcciones_EKfKUN": {
-          "type": "shopify://apps/upango-b2b-garys/blocks/upng-mis-direcciones/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
-          "settings": {
-            "div_classes": ""
-          }
-        }
-      },
-      "block_order": [
-        "upango_b2b_garys_upng_mis_direcciones_EKfKUN"
-      ],
       "settings": {
         "full_width": false
       }
@@ -36,6 +25,6 @@
   },
   "order": [
     "main",
-    "173945015288d94788"
+    "17398785123f559b0a"
   ]
 }
