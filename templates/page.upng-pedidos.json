@@ -9,17 +9,12 @@
  */
 {
   "sections": {
-    "collection-banner": {
-      "type": "main-collection-banner",
-      "settings": {}
-    },
-    "collection-products": {
-      "type": "main-collection-products",
+    "main": {
+      "type": "main-page",
       "settings": {}
     }
   },
   "order": [
-    "collection-banner",
-    "collection-products"
+    "main"
   ]
 }

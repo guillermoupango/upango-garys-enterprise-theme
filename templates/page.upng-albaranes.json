@@ -8,9 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "product.json",
-  "context": {
-    "market": "international"
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    }
   },
-  "sections": {}
+  "order": [
+    "main"
+  ]
 }

@@ -8,17 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "header-group.json",
-  "context": {
-    "market": "international"
-  },
   "sections": {
-    "announcement": {
-      "settings": {},
-      "blocks": {},
-      "block_order": [
-        "announcement-1"
-      ]
+    "main": {
+      "type": "main-page",
+      "settings": {}
     }
-  }
+  },
+  "order": [
+    "main"
+  ]
 }

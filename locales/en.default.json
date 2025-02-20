@@ -94,8 +94,6 @@
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
-      "download_sheet": "Download spec sheet",
-      "download_gallery": "Download HD Gallery",
       "added_to_cart": "Item added to your cart.",
       "awaiting_sale": "This product is not for sale yet.",
       "backorder": "is backordered and will ship as soon as it is back in stock.",
