@@ -30,7 +30,7 @@
 .footer .media {
   display: inline-block;
 }
-.footer .social {
+.footer .social, .footer-block__certificates {
   display: inline-flex;
   gap: 1rem;
 }
