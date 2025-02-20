@@ -15,22 +15,84 @@
         "slide-1": {
           "type": "slide",
           "settings": {
+            "image_desktop": "shopify://shop_images/Uniformes-Medicos.jpg",
+            "url": "",
+            "overlay_position": "justify-start items-center",
+            "overlay_text_align": "text-start",
+            "mob_center_text": false,
+            "subheading": "",
+            "heading": "Uniformes médicos",
+            "heading_size": "h0",
+            "heading_h1": false,
+            "text": "<p>Share announcements and information with your customers and welcome them to your store.</p>",
+            "enlarge_text": false,
+            "button_1_label": "Ver colección",
             "button_1_link": "/",
-            "button_2_link": "/"
+            "button_1_style": "link",
+            "button_2_label": "",
+            "button_2_link": "/",
+            "button_2_style": "btn btn--primary",
+            "transparent_content_color": "#000000",
+            "countdown_show": false,
+            "countdown_end_date": "",
+            "countdown_end_time": "",
+            "countdown_end_text": "",
+            "enlarge_end_text": false,
+            "countdown_hide_on_end": false,
+            "use_custom_colors": false,
+            "count_color": "#ffffff",
+            "bg_color": "#070707",
+            "bg_grad": ""
           }
-        },
-        "slide-2": {
-          "type": "slide",
-          "settings": {}
         }
       },
       "block_order": [
-        "slide-1",
-        "slide-2"
+        "slide-1"
       ],
       "settings": {
-        "slider_pause": true,
-        "autoplay_speed": 3
+        "height_mode": "fixed",
+        "fixed_height_desktop": 590,
+        "fixed_height_mobile": 350,
+        "mobile_stacked": true,
+        "nav_style": "arrows",
+        "pagination_color": "#ffffff",
+        "nav_position": "justify-center",
+        "transition": "slide",
+        "autoplay": true,
+        "slider_pause": false,
+        "autoplay_speed": 7,
+        "color_scheme": "white",
+        "full_width": true,
+        "tint_color": "#000000",
+        "tint_opacity": 0,
+        "accessibility_info": "",
+        "prevent_animation": true
+      }
+    },
+    "upng_collections_tabs_iKg7H4": {
+      "type": "UPNG-collections-tabs",
+      "settings": {
+        "title": "Novedades",
+        "heading_align": "text-center",
+        "show_view_all": true,
+        "collection_list": [
+          "comercio-1",
+          "doctores-1",
+          "bar-restauracion"
+        ],
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 8,
+        "show_highlight_products": true,
+        "show_promo_info": false,
+        "image_ratio": "fill",
+        "promo_title": "A headline to grab attention",
+        "content": "<p>Use this card with an image to highlight your collections or introduce a promotion.</p>",
+        "link_url": "",
+        "button_label": "Button",
+        "color_scheme": "2",
+        "button_style": "btn btn--primary"
       }
     },
     "collection-list": {
@@ -39,43 +101,43 @@
         "collection-0": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "barberia"
           }
         },
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "chefs"
           }
         },
         "collection-2": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "dentistas"
+          }
+        },
+        "collection_t8DM7U": {
+          "type": "collection",
+          "settings": {
+            "collection": "limpieza"
           }
         },
         "collection-3": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "comercio-1"
           }
         },
         "collection-4": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "doctores-1"
           }
         },
         "collection-5": {
           "type": "collection",
           "settings": {
-            "collection": ""
-          }
-        },
-        "collection-6": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "collection": "jardineria"
           }
         }
       },
@@ -83,532 +145,535 @@
         "collection-0",
         "collection-1",
         "collection-2",
+        "collection_t8DM7U",
         "collection-3",
         "collection-4",
-        "collection-5",
-        "collection-6"
+        "collection-5"
       ],
       "settings": {
-        "button_label": "View all"
+        "title": "Por profesión",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "carousel",
+        "card_size": "small",
+        "use_product_image": false,
+        "circle_image": false,
+        "show_border": true,
+        "color_scheme": "none",
+        "full_width": true
       }
-    },
-    "scrolling-banner": {
-      "type": "scrolling-banner",
-      "blocks": {
-        "scrolling-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "Scrolling Banner"
-          }
-        },
-        "scrolling-icon-2": {
-          "type": "icon",
-          "settings": {
-            "icon": "star"
-          }
-        },
-        "scrolling-text-3": {
-          "type": "text",
-          "settings": {
-            "text": "Grab customers' attention",
-            "font": "body"
-          }
-        },
-        "scrolling-button-4": {
-          "type": "button",
-          "settings": {
-            "button_label": "Optional Button",
-            "button_link": "/"
-          }
-        }
-      },
-      "block_order": [
-        "scrolling-text-1",
-        "scrolling-icon-2",
-        "scrolling-text-3",
-        "scrolling-button-4"
-      ],
-      "settings": {}
-    },
-    "countdown-timer": {
-      "type": "countdown-timer",
-      "blocks": {
-        "countdown-heading-0": {
-          "type": "heading",
-          "settings": {}
-        },
-        "countdown-text-1": {
-          "type": "text",
-          "settings": {}
-        },
-        "countdown-countdown-2": {
-          "type": "countdown",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "countdown-heading-0",
-        "countdown-text-1",
-        "countdown-countdown-2"
-      ],
-      "settings": {}
-    },
-    "promo-grid": {
-      "type": "promo-grid",
-      "blocks": {
-        "promo-media-0": {
-          "type": "media",
-          "settings": {
-            "columns": 2,
-            "rows": 2,
-            "promo_circle": true,
-            "subheading": "Subheading with more info",
-            "link_text": "Add link text here"
-          }
-        },
-        "promo-media-1": {
-          "type": "media",
-          "settings": {
-            "line1_text": "Save",
-            "line2_text_type_scale": "text-h2",
-            "link_text": "Add link text here"
-          }
-        },
-        "promo-media-2": {
-          "type": "media",
-          "settings": {
-            "line1_text": "Now",
-            "line2_text": "$50",
-            "line2_text_type_scale": "text-h2",
-            "link_text": "Add link text here"
-          }
-        },
-        "promo-media-3": {
-          "type": "media",
-          "settings": {
-            "columns": 2,
-            "line1_text": "Save",
-            "line2_text": "1/3",
-            "line2_text_type_scale": "text-h1",
-            "subheading": "Subheading with more info",
-            "link_text": "Add link text here"
-          }
-        }
-      },
-      "block_order": [
-        "promo-media-0",
-        "promo-media-1",
-        "promo-media-2",
-        "promo-media-3"
-      ],
-      "settings": {
-        "button_label": "View All"
-      }
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "blocks": {
-        "banner-heading": {
-          "type": "heading",
-          "settings": {}
-        },
-        "banner-text": {
-          "type": "text",
-          "settings": {}
-        },
-        "banner-button": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Optional Button",
-            "button_1_link": "/",
-            "button_2_label": "Optional Button",
-            "button_2_link": "/"
-          }
-        }
-      },
-      "block_order": [
-        "banner-heading",
-        "banner-text",
-        "banner-button"
-      ],
-      "settings": {
-        "height_mode": "auto"
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "show_promo_info": true,
-        "link_url": "/",
-        "button_label": "Optional Button"
-      }
-    },
-    "product-features": {
-      "type": "product-features",
-      "blocks": {
-        "feature-0": {
-          "type": "feature",
-          "settings": {
-            "hotspot_x": 28,
-            "hotspot_y": 38
-          }
-        },
-        "feature-1": {
-          "type": "feature",
-          "settings": {
-            "hotspot_x": 60,
-            "hotspot_y": 23
-          }
-        },
-        "feature-2": {
-          "type": "feature",
-          "settings": {
-            "hotspot_x": 73,
-            "hotspot_y": 54
-          }
-        }
-      },
-      "block_order": [
-        "feature-0",
-        "feature-1",
-        "feature-2"
-      ],
-      "settings": {
-        "title": "Product features",
-        "description": "<p>Use this section to highlight specific product features to your customers.</p>"
-      }
-    },
-    "media-with-text": {
-      "type": "media-with-text",
-      "blocks": {
-        "media-with-text-heading-0": {
-          "type": "heading",
-          "settings": {}
-        },
-        "media-with-text-text-1": {
-          "type": "text",
-          "settings": {}
-        },
-        "media-with-text-button-2": {
-          "type": "button",
-          "settings": {
-            "button_link": "/"
-          }
-        }
-      },
-      "block_order": [
-        "media-with-text-heading-0",
-        "media-with-text-text-1",
-        "media-with-text-button-2"
-      ],
-      "settings": {}
     },
     "shoppable-image": {
       "type": "shoppable-image",
       "blocks": {
-        "hotspot-0": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 28,
-            "hotspot_y": 38
-          }
-        },
         "hotspot-1": {
           "type": "hotspot",
           "settings": {
-            "hotspot_x": 60,
+            "product": "",
+            "hotspot_x": 80,
             "hotspot_y": 23
           }
         },
         "hotspot-2": {
           "type": "hotspot",
           "settings": {
-            "hotspot_x": 73,
-            "hotspot_y": 54
+            "product": "",
+            "hotspot_x": 51,
+            "hotspot_y": 74
           }
         }
       },
       "block_order": [
-        "hotspot-0",
         "hotspot-1",
         "hotspot-2"
       ],
       "settings": {
-        "heading": "Shoppable image",
-        "button_label": "Optional button",
-        "button_link": "/"
+        "image": "shopify://shop_images/055c7e8e35f163d346120f78508e1cfb.jpg",
+        "layout": "image_last",
+        "show_vendor": true,
+        "show_content": true,
+        "mob_center_text": false,
+        "heading": "Calidad en tu uniforme, calidad en tu trabajo.",
+        "text": "<p>Create a Shop the Look section to assist with upselling or helping customers with purchasing complementary products.</p>",
+        "button_label": "Ver colección",
+        "button_link": "/",
+        "hotspot_color": "#ffffff",
+        "color_scheme": "2",
+        "button_style": "link"
       }
-    },
-    "link-lists": {
-      "type": "link-lists",
-      "blocks": {
-        "links-column-0": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 1",
-            "button_link": "/"
-          }
-        },
-        "links-column-1": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 2",
-            "heading_bg_color": "#484848",
-            "button_link": "/"
-          }
-        },
-        "links-column-2": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 3",
-            "heading_bg_color": "#6e6e6e",
-            "button_link": "/"
-          }
-        },
-        "links-column-3": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 4",
-            "heading_bg_color": "#7c7c7c",
-            "button_link": "/"
-          }
-        },
-        "links-column-4": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 5",
-            "heading_bg_color": "#9f9f9f",
-            "button_link": "/"
-          }
-        }
-      },
-      "block_order": [
-        "links-column-0",
-        "links-column-1",
-        "links-column-2",
-        "links-column-3",
-        "links-column-4"
-      ],
-      "settings": {}
-    },
-    "featured-product": {
-      "type": "featured-product",
-      "blocks": {
-        "product-labels-1": {
-          "type": "product-labels",
-          "settings": {}
-        },
-        "title-2": {
-          "type": "title",
-          "settings": {}
-        },
-        "rating-3": {
-          "type": "rating",
-          "settings": {}
-        },
-        "price-4": {
-          "type": "price",
-          "settings": {}
-        },
-        "description-5": {
-          "type": "description",
-          "settings": {}
-        },
-        "divider-6": {
-          "type": "divider",
-          "settings": {}
-        },
-        "variant-picker-7": {
-          "type": "variant-picker",
-          "settings": {}
-        },
-        "buy-buttons-8": {
-          "type": "buy-buttons",
-          "settings": {}
-        },
-        "divider-9": {
-          "type": "divider",
-          "settings": {}
-        },
-        "view-more-button-11": {
-          "type": "view-more-button",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "product-labels-1",
-        "title-2",
-        "rating-3",
-        "price-4",
-        "description-5",
-        "divider-6",
-        "variant-picker-7",
-        "buy-buttons-8",
-        "divider-9"
-      ],
-      "settings": {}
-    },
-    "product-comparison-grid": {
-      "type": "product-comparison-grid",
-      "blocks": {
-        "comparison-product-1": {
-          "type": "product",
-          "settings": {}
-        },
-        "comparison-vendor-2": {
-          "type": "vendor",
-          "settings": {}
-        },
-        "comparison-price-3": {
-          "type": "price",
-          "settings": {}
-        },
-        "comparison-description-4": {
-          "type": "description",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "comparison-product-1",
-        "comparison-vendor-2",
-        "comparison-price-3",
-        "comparison-description-4"
-      ],
-      "settings": {}
-    },
-    "multi-column": {
-      "type": "multi-column",
-      "blocks": {
-        "multi-column-0": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 1"
-          }
-        },
-        "multi-column-1": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 2"
-          }
-        },
-        "multi-column-2": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 3"
-          }
-        },
-        "multi-column-3": {
-          "type": "column",
-          "settings": {
-            "heading": "Column 4"
-          }
-        }
-      },
-      "block_order": [
-        "multi-column-0",
-        "multi-column-1",
-        "multi-column-2",
-        "multi-column-3"
-      ],
-      "settings": {
-        "button_label": "View All"
-      }
-    },
-    "video": {
-      "type": "video",
-      "blocks": {
-        "video-heading-1": {
-          "type": "heading",
-          "settings": {}
-        },
-        "video-text-2": {
-          "type": "text",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "video-heading-1",
-        "video-text-2"
-      ],
-      "settings": {}
     },
     "media-grid": {
       "type": "media-grid",
       "blocks": {
-        "media-0": {
-          "type": "media",
-          "settings": {
-            "columns": 2,
-            "rows": 2,
-            "button_label": "Optional Button",
-            "button_link": "/"
-          }
-        },
         "media-1": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Group_5.jpg",
+            "link_url": "",
             "columns": 1,
             "rows": 1,
+            "subheading": "",
+            "title": "",
             "heading_size": "h5",
-            "button_label": "Optional Button",
-            "button_link": "/"
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
           }
         },
         "media-2": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Group_4.jpg",
+            "link_url": "",
             "columns": 1,
             "rows": 1,
             "subheading": "",
+            "title": "",
             "heading_size": "h5",
-            "button_label": "Optional Button",
-            "button_link": "/"
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_aqqach": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_22.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h3>Industria</h3>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-center items-start",
+            "text_alignment": "text-center",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
           }
         },
         "media-3": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_166.jpg",
+            "link_url": "",
             "columns": 2,
             "rows": 1,
+            "subheading": "",
+            "title": "<h3>Tejidos orgánicos<br/> y reciclados</h3>",
             "heading_size": "h5",
-            "button_label": "Optional Button",
-            "button_link": "/"
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-center",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_4QdLTT": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_160.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h3>Sastreria</h3>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-center items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_pLnheQ": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_161.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h4>Hosteleria<br/>Restauracion<br/>Cocina</h4>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_T3G6b4": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_162.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h3>Red Line</h3>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_EKRnAC": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_163.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>Sanidad<br/>Limpieza<br/>Alimentación</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-center items-end",
+            "text_alignment": "text-center",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
           }
         }
       },
       "block_order": [
-        "media-0",
         "media-1",
         "media-2",
-        "media-3"
+        "media_aqqach",
+        "media-3",
+        "media_4QdLTT",
+        "media_pLnheQ",
+        "media_T3G6b4",
+        "media_EKRnAC"
       ],
       "settings": {
-        "button_label": "View All",
+        "title": "Nuestras colecciones",
+        "heading_align": "text-center",
+        "button_label": "",
         "button_link": "/",
-        "gallery_cols_max": 4,
+        "gallery_cols_max": 3,
+        "mobile_carousel": false,
         "gallery_cols_min": "1",
-        "fixed_height_desktop": 180,
-        "fixed_height_mobile": 300,
-        "color_scheme": "white"
+        "fixed_height_desktop": 400,
+        "fixed_height_mobile": 280,
+        "section_color_scheme": "none",
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff"
+      }
+    },
+    "media_grid_jtjwh8": {
+      "type": "media-grid",
+      "blocks": {
+        "media_iq7UQK": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_184.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>#happierworkplaces</p>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_RqemUN": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_185.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>#camisa</p>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 10
+          }
+        },
+        "media_fGGWKk": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_187.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>#healthcare</p>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_8aUngy": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_186.jpg",
+            "link_url": "",
+            "columns": 2,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>#chefdelmes</p>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 10
+          }
+        }
+      },
+      "block_order": [
+        "media_iq7UQK",
+        "media_RqemUN",
+        "media_fGGWKk",
+        "media_8aUngy"
+      ],
+      "settings": {
+        "title": "Síguenos en @garys_workwear",
+        "heading_align": "text-start",
+        "button_label": "Visita nuestro IG",
+        "button_link": "#",
+        "gallery_cols_max": 3,
+        "mobile_carousel": false,
+        "gallery_cols_min": "2",
+        "fixed_height_desktop": 270,
+        "fixed_height_mobile": 200,
+        "section_color_scheme": "none",
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff"
+      }
+    },
+    "media_grid_yjyC3x": {
+      "type": "media-grid",
+      "blocks": {
+        "media_Jx4dwx": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_167.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Producto",
+            "title": "<h4>Gorros de rejilla</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_xqPEay": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_169.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Producto",
+            "title": "<h4>Batas para farmacia</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_qQYN96": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_171.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Producto",
+            "title": "<h4>Delantal para hosteleria</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_Q4gKWT": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_168.jpg",
+            "link_url": "",
+            "columns": 2,
+            "rows": 1,
+            "subheading": "Producto",
+            "title": "<h4>Abrigos</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_NWX38W": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_173.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Producto",
+            "title": "<h4>Delantal para chef</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_HetPe6": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_174.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Artículo",
+            "title": "<h4>Un banquete de talento en alimentaria</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_JMjGLq": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_175.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Artículo",
+            "title": "<h4>Cuida tu equipamiento igual que tu jardín</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_JVFLUf": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_176.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "Artículo",
+            "title": "<h4>Agatha Ruiz de la Prada para Uniformes Gary’s</h4>",
+            "heading_size": "h5",
+            "button_label": "",
+            "button_link": "/",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "media_Jx4dwx",
+        "media_xqPEay",
+        "media_qQYN96",
+        "media_Q4gKWT",
+        "media_NWX38W",
+        "media_HetPe6",
+        "media_JMjGLq",
+        "media_JVFLUf"
+      ],
+      "settings": {
+        "title": "Destacados",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "/",
+        "gallery_cols_max": 3,
+        "mobile_carousel": false,
+        "gallery_cols_min": "2",
+        "fixed_height_desktop": 350,
+        "fixed_height_mobile": 180,
+        "section_color_scheme": "none",
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff"
       }
     }
   },
   "order": [
     "slideshow",
+    "upng_collections_tabs_iKg7H4",
     "collection-list",
-    "scrolling-banner",
-    "countdown-timer",
-    "promo-grid",
-    "image-banner",
-    "featured-collection",
-    "product-features",
-    "media-with-text",
     "shoppable-image",
-    "link-lists",
-    "featured-product",
-    "product-comparison-grid",
-    "multi-column",
-    "video",
-    "media-grid"
+    "media-grid",
+    "media_grid_jtjwh8",
+    "media_grid_yjyC3x"
   ]
 }

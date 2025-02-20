@@ -16,19 +16,39 @@
       "blocks": {
         "text": {
           "type": "text",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/Garys-Inv.png",
+            "image_width": 150,
+            "heading": "",
+            "text": "<p>Share store details, promotions, or brand content with your customers.</p>",
+            "button_label": "",
+            "button_link": "",
+            "enable_follow_on_shop": false,
+            "show_social": true,
+            "text_align": "text-start"
+          }
         },
         "link-list-1": {
           "type": "link_list",
-          "settings": {}
+          "settings": {
+            "heading": "Empresa",
+            "menu": "empresa-footer"
+          }
         },
         "link-list-2": {
           "type": "link_list",
-          "settings": {}
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "ayuda-footer"
+          }
         },
         "newsletter": {
           "type": "newsletter",
-          "settings": {}
+          "settings": {
+            "heading": "Newsletter",
+            "text": "<p>Únete para estar al tanto de nuestras ofertas y novedades.</p>",
+            "collapse_mobile": true
+          }
         }
       },
       "block_order": [
@@ -37,59 +57,19 @@
         "link-list-2",
         "newsletter"
       ],
-      "settings": {}
-    },
-    "icons-with-text": {
-      "type": "icons-with-text",
-      "blocks": {
-        "icons-with-text-1": {
-          "type": "item",
-          "settings": {
-            "icon": "chat_bubble",
-            "heading": "Visit our support center",
-            "text": "<p>Expert help & advice</p>"
-          }
-        },
-        "icons-with-text-2": {
-          "type": "item",
-          "settings": {
-            "icon": "box",
-            "heading": "Check your order status",
-            "text": "<p>Updates & tracking</p>"
-          }
-        },
-        "icons-with-text-3": {
-          "type": "item",
-          "settings": {
-            "icon": "return",
-            "heading": "Returns & exchanges",
-            "text": "<p>All you need to know</p>"
-          }
-        },
-        "icons-with-text-4": {
-          "type": "item",
-          "settings": {
-            "icon": "dollar_sign",
-            "heading": "Price-match guarantee",
-            "text": "<p>Our promise to you</p>"
-          }
-        }
-      },
-      "block_order": [
-        "icons-with-text-1",
-        "icons-with-text-2",
-        "icons-with-text-3",
-        "icons-with-text-4"
-      ],
       "settings": {
-        "icon_size": 36,
-        "section_height": "small",
-        "dividers": "border-top"
+        "show_back_to_top": false,
+        "show_payment_icons": false,
+        "show_powered_by": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "secondary_menu": "",
+        "bg_color": "#000000",
+        "text_color": "#ffffff"
       }
     }
   },
   "order": [
-    "icons-with-text",
     "footer"
   ]
 }

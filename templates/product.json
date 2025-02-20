@@ -462,7 +462,6 @@
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "title": "Our Collections",
         "heading_align": "text-start",
         "layout": "carousel",
         "card_size_mobile": "small",
