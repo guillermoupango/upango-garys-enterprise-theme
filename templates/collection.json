@@ -16,7 +16,7 @@
         "show_product_count": false,
         "show_collection_description": true,
         "text_align": "items-center text-center",
-        "collection_image": "natural",
+        "collection_image": "none",
         "use_product_image": false,
         "text_width": "wide",
         "color_scheme": "default"

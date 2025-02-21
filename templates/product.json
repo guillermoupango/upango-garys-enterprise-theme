@@ -51,7 +51,7 @@
             "selector_style": "buttons",
             "enable_dynamic_availability": true,
             "dynamic_availability_downwards": false,
-            "show_backorder_text": true,
+            "show_backorder_text": false,
             "enable_size_chart": false,
             "size_chart_variant": "Size",
             "size_chart_page": ""
@@ -93,6 +93,12 @@
             "open": false
           }
         },
+        "custom_liquid_976PwX": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<>"
+          }
+        },
         "message-3": {
           "type": "message",
           "disabled": true,
@@ -108,6 +114,7 @@
         },
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm": {
           "type": "shopify://apps/upango-exportador-garys/blocks/upng-exportador-ficha-producto/28298ecf-a279-40fd-9bfe-16b5b6f7f4a8",
+          "disabled": true,
           "settings": {
             "upng_exportador_ficha_target": ".price__default",
             "upng_exportador_label_button": "Descargar ficha producto",
@@ -126,6 +133,7 @@
         "buy-buttons",
         "collapsible-content-1",
         "collapsible-content-2",
+        "custom_liquid_976PwX",
         "message-3",
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm"
       ],

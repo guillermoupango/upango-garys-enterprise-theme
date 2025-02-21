@@ -210,14 +210,14 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/Group_5.jpg",
-            "link_url": "",
+            "link_url": "shopify://products/pantalon-unisex-goma-cordon-exterior-microfibra",
             "columns": 1,
             "rows": 1,
             "subheading": "",
             "title": "",
             "heading_size": "h5",
             "button_label": "",
-            "button_link": "/",
+            "button_link": "",
             "overlay_position": "justify-start items-end",
             "text_alignment": "text-start",
             "button_style": "btn btn--primary",
@@ -391,7 +391,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/Rectangle_184.jpg",
-            "link_url": "",
+            "link_url": "shopify://products/pantalon-unisex-goma-cordon-exterior-microfibra",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -568,14 +568,14 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/Rectangle_173.jpg",
-            "link_url": "",
+            "link_url": "shopify://products/pantalon-unisex-goma-cordon-exterior-microfibra",
             "columns": 1,
             "rows": 1,
             "subheading": "Producto",
             "title": "<h4>Delantal para chef</h4>",
             "heading_size": "h5",
             "button_label": "",
-            "button_link": "/",
+            "button_link": "",
             "overlay_position": "justify-start items-end",
             "text_alignment": "text-start",
             "button_style": "btn btn--primary",
@@ -653,7 +653,7 @@
       ],
       "custom_css": [
         "p {font-family: var(--body-font-family); font-weight: 400;}",
-        "@media screen and (min-width: 769px) {p {font-size: 20px}}"
+        "@media screen and (min-width: 769px) {p {font-size: 20px; }}"
       ],
       "settings": {
         "title": "Destacados",
