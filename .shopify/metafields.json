@@ -87,7 +87,18 @@
     }
   ],
   "company_location": [],
-  "location": [],
+  "location": [
+    {
+      "key": "forma_entrega_habitual",
+      "namespace": "upng",
+      "name": "Forma entrega habitual",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
   "market": [],
   "order": [],
   "page": [

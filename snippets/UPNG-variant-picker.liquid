@@ -5,11 +5,13 @@
   VARIANT PICKER BASADO EN ORIGINAL DE TEMA ENTERPRISE:
   - Integra una tabla de variantes con imágenes en la que cada fila será una variante option1-option2 (Ejemplo Color - Talla)
   - Esta tabla Funcionará como ** Listado de Pedidos Rápidos **
+  - Opcion de Custom Swatch para mostrar 'Icono personalizado' para cada variante desde Metacampo
   
   INTEGRA LAS FUNCIONES DE:
   - Refrescar Product Media al cambiar option1 de Variante (Color)
   - Mostrar / Ocultar filas de la tabla, dependiendo del option1 de Variante (Color) seleccionado
   - Sincronizacion con el carrito en el Input Quantity
+  - Activar 'Custom Swatch' desde Settings de Tema
 
 ***** UPANGO *****
 
@@ -58,9 +60,16 @@
       assign is_variant_image_style = false
       assign show_size_chart = false
 
+      # Nueva Opccion para Variantes con Imagenes Custom
+
       if settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'variant-images'
         assign is_color_selector = true
         assign is_variant_image_style = true
+        assign option_index0 = forloop.index0
+      elsif settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'upng-variant-images'
+        assign is_color_selector = true
+        assign is_variant_image_style = true
+        assign is_upng_variant_image_style = true
         assign option_index0 = forloop.index0
       elsif settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'swatches'
         assign is_color_selector = true
@@ -142,24 +151,37 @@
               {%- for variant in product.variants -%}
                 {%- if variant.options[option_index0] == value -%}
                   <label class="opt-label opt-label--swatch opt-label--image relative swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.variant_picker_color_style == 'variant-images' and variant.featured_media %} swatch--variant-image{% endif %}"{% if variant.featured_media == blank %} data-swatch="{{ value | replace: '"', '' | downcase }}"{% endif %} for="{{ option_id }}-opt-{{ value_index0 }}">
-                    <span class="visually-hidden js-value">{{- value | escape -}}</span>
+    <span class="visually-hidden js-value">{{- value | escape -}}</span>
                     <div class="opt-label__media media h-full w-full{% if settings.variant_picker_color_style == 'variant-images' and variant.featured_media == blank %} absolute top-0 left-0{% else %} relative{% endif %}">
-                      {%- liquid
-                        if settings.variant_picker_swatch_shape == "natural"
-                          assign class = 'bg-theme-bg'
-                        elsif swatch_crop == 'top'
-                          assign class = 'img-fit object-top bg-theme-bg'
-                        else
-                          assign class = 'img-fit bg-theme-bg'
-                        endif
-
-                        assign swatch_size = settings.variant_picker_swatch_size | times: 1.5
-                      -%}
-                      {% render 'image', image: variant.featured_media, src_width: swatch_size, lazy_load: false, class: class, disable_focal_point: true %}
-                    </div>
-                  </label>
-                  {%- break -%}
-                {%- endif -%}
+      {%- liquid
+        if settings.variant_picker_swatch_shape == "natural"
+          assign class = 'bg-theme-bg'
+        elsif swatch_crop == 'top'
+          assign class = 'img-fit object-top bg-theme-bg'
+        else
+          assign class = 'img-fit bg-theme-bg'
+        endif
+         
+        assign swatch_size = settings.variant_picker_swatch_size | times: 1.5
+      -%}
+      {%- liquid
+        # Renderizado condicional de la Imagen de la Variante Custom / o por Defecto del Tema (featured_media) 
+        assign image_to_render = variant.featured_media
+        if settings.variant_picker_color_style == 'upng-variant-images' and variant.metafields.upng.icono_color != blank
+          assign image_to_render = variant.metafields.upng.icono_color
+        endif
+      -%}
+      {% render 'image',
+        image: image_to_render,
+        src_width: swatch_size,
+        lazy_load: false,
+        class: class,
+        disable_focal_point: true
+      %}
+    </div>
+  </label>
+  {%- break -%}
+{%- endif -%}
               {%- endfor -%}
 
             {%- elsif settings.variant_picker_color_style == 'native' and value.swatch.image -%}

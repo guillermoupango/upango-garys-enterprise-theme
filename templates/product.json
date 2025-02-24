@@ -49,7 +49,7 @@
           "type": "variant-picker",
           "settings": {
             "selector_style": "buttons",
-            "enable_dynamic_availability": true,
+            "enable_dynamic_availability": false,
             "dynamic_availability_downwards": false,
             "show_backorder_text": false,
             "enable_size_chart": false,

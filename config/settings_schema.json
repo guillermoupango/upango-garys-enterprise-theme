@@ -2229,6 +2229,11 @@
           {
             "value": "variant-images",
             "label": "Variant images"
+          },
+          {
+            "value": "upng-variant-images",
+            "label": "UNPG Custom Variant images",
+            
           }
         ],
         "default": "native"
