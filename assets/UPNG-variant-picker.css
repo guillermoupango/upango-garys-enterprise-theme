@@ -1,0 +1,59 @@
+/* OCULTAR SELECTOR DE VARIANTES option2 (de Color) */
+upng-variant-picker fieldset.option-selector:nth-of-type(2) {
+    display: none !important;
+  }
+  
+
+/* Reset general de la tabla */
+.variant-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Reset de celdas y encabezados */
+  .variant-table th,
+  .variant-table td {
+    padding: 0;
+    text-align: left;
+    border: none;
+    vertical-align: middle;
+  }
+  
+  /* Reset de las filas */
+  .variant-table__row {
+    background: none;
+  }
+  
+  /* Reset de las celdas */
+  .variant-table__cell {
+    margin: 0;
+  }
+  
+  /* Reset de las imágenes */
+  .variant-table__image {
+    display: block;
+  }
+  
+  /* Reset de los inputs */
+  .variant-table__quantity {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  /* Reset del contenedor */
+  .variant-table-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Reset de iconos */
+  .variant-table .icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
