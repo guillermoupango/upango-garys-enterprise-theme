@@ -16,18 +16,16 @@
       <tr class="variant-table__row" data-variant-row="{{ variant.id }}">
         <td class="variant-table__cell">
           {% if variant.featured_image %}
-            {{ variant | image_url: width: 20 | image_tag: 
-              class: 'variant-table__image',
-              height: nil,
-              loading: 'lazy',
-              alt: variant.title
+            {{
+              variant
+              | image_url: width: 20
+              | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: variant.title
             }}
           {% else %}
-            {{ product.featured_image | image_url: width: 20 | image_tag: 
-              class: 'variant-table__image',
-              height: nil,
-              loading: 'lazy',
-              alt: product.title
+            {{
+              product.featured_image
+              | image_url: width: 20
+              | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: product.title
             }}
           {% endif %}
         </td>
@@ -35,19 +33,16 @@
         <td class="variant-table__cell">{{ variant.option2 }}</td>
         <td class="variant-table__cell variant-table__cell--status">
           {% if variant.available %}
-            {% render 'icon', 
-              icon: 'question_mark', 
-              height: 24, 
-              width: 24,
-              class: 'variant-table__icon variant-table__icon--available'
-            %}
+
           {% else %}
-            {% render 'icon', 
-              icon: 'truck', 
-              height: 24, 
+            <button>
+            {% render 'icon',
+              icon: 'truck',
+              height: 24,
               width: 24,
               class: 'variant-table__icon variant-table__icon--unavailable'
             %}
+            </button>
           {% endif %}
         </td>
         <td class="variant-table__cell variant-table__cell--stock">
@@ -60,21 +55,34 @@
           </span>
         </td>
         <td class="variant-table__cell">
-          <input type="number" 
-            class="quantity-input variant-table__quantity"
-            min="0"
-            value="0"
-            data-variant-id="{{ variant.id }}"
-            data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
-            data-variant-title="{{ variant.title }}"
-            {% unless variant.available %}disabled{% endunless %}
-            aria-label="Cantidad para {{ variant.title }}"
-          >
+          <div class="qty-input qty-input--combined inline-flex items-center">
+            <button type="button" class="qty-input__btn btn btn--minus no-js-hidden" name="minus">
+              <span class="visually-hidden">-</span>
+            </button>
+            <input
+              type="number"
+              class="quantity-input variant-table__quantity"
+              min="0"
+              value="0"
+              data-variant-id="{{ variant.id }}"
+              data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
+              data-variant-title="{{ variant.title }}"
+              {% unless variant.available %}
+                disabled
+              {% endunless %}
+              aria-label="Cantidad para {{ variant.title }}"
+            >
+            <button type="button" class="qty-input__btn btn btn--plus no-js-hidden" name="plus">
+              <span class="visually-hidden">+</span>
+            </button>
+          </div>
         </td>
         <td class="variant-table__cell variant-table__cell--price">
           <span class="variant-table__price">{{ variant.price | money }}</span>
           {% if variant.compare_at_price > variant.price %}
-            <span class="variant-table__price variant-table__price--compare">{{ variant.compare_at_price | money }}</span>
+            <span class="variant-table__price variant-table__price--compare">
+              {{- variant.compare_at_price | money -}}
+            </span>
           {% endif %}
         </td>
       </tr>

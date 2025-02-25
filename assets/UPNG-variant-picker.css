@@ -39,10 +39,11 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   
   /* Reset de los inputs */
   .variant-table__quantity {
-    width: auto;
+    width: 100%;
     margin: 0;
     padding: 0;
     border: none;
+    text-align: center;
   }
   
   /* Reset del contenedor */
@@ -56,4 +57,15 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   .variant-table .icon {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  .variant-table__cell .qty-input{
+    width: 100px;
+  }
+
+  .variant-table__cell .qty-input{
+    width: 100px;
+  }
+  .variant-table__cell .qty-input__btn{
+    width: 48px;
   }

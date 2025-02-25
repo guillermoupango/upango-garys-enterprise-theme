@@ -12,7 +12,6 @@
  */
 
 if (!customElements.get('upng-variant-picker')) {
-  
   // COSNTRUCTOR ACTUALIZADO PARA INCLUIR NUEVAS FUNCIONALIDADES
   class VariantPicker extends HTMLElement {
     constructor() {
@@ -42,6 +41,11 @@ if (!customElements.get('upng-variant-picker')) {
       // Event listener original del tema
       this.addEventListener('change', this.handleVariantChange.bind(this));
 
+      // Bind de eventos de INPUT Quantity
+      this.boundHandleQuantityButtonClick = this.handleQuantityButtonClick.bind(this);
+      this.boundHandleInputFocus = this.handleInputFocus.bind(this);
+      this.boundHandleInputKeydown = this.handleInputKeydown.bind(this);
+
       // Mantener el setTimeout original del tema
       setTimeout(() => {
         this.updateAvailability();
@@ -66,17 +70,16 @@ if (!customElements.get('upng-variant-picker')) {
         // Si viene de un input de cantidad, no procesamos como cambio de variante
         return;
       }
-      
+
       this.selectedOptions = this.getSelectedOptions();
       this.variant = this.getSelectedVariant();
       this.preSelection = !this.variant && this.selectedOptions.find((o) => o === null) === null;
-    
+
       if (this.variant) {
         this.updateMedia();
         this.updateUrl(evt);
         this.updateVariantInput();
       }
-    
       this.updateAddToCartButton();
       this.updateAvailability();
       this.updatePrice();
@@ -86,17 +89,14 @@ if (!customElements.get('upng-variant-picker')) {
       this.updatePickupAvailability();
       this.updateSku();
       this.updateMetafieldVisibility();
-      
       // Solo llamamos a updateLabelText si el evento proviene de un selector de opciones
       if (evt.target.closest('.option-selector')) {
         VariantPicker.updateLabelText(evt);
       }
-    
       // Añadir nuestra actualización de tabla si está cargada
       if (this._state.isTableLoaded) {
         this.updateTableVisibility();
       }
-    
       if (!this.preSelection) {
         this.dispatchEvent(new CustomEvent('on:variant:change', {
           bubbles: true,
@@ -500,35 +500,37 @@ if (!customElements.get('upng-variant-picker')) {
 
     async loadVariantTable() {
       if (this._state.isTableLoaded) return;
-    
+
       try {
         const productUrl = this.dataset.url;
         const tableViewUrl = `${productUrl}?view=variant-table`;
-    
+
         const response = await fetch(tableViewUrl);
         if (!response.ok) throw new Error('Failed to load variant table');
-    
+
         const html = await response.text();
-    
+
         // Crear contenedor 
         const tableContainer = document.createElement('div');
         tableContainer.className = 'variant-table-container mt-4';
         tableContainer.innerHTML = html;
-    
+
         this.appendChild(tableContainer);
-    
+
         // Guardar referencias 
         this.tableContainer = tableContainer;
         this.variantTable = tableContainer.querySelector('.variant-table');
         this.variantRows = this.querySelectorAll('.variant-table__row');
         this.quantityInputs = this.querySelectorAll('.variant-table__quantity');
-    
+        // Botones de Inputs
+        this.qtyButtons = this.querySelectorAll('.qty-input__btn');
+
         // Marcar como cargada
         this._state.isTableLoaded = true;
-        
+
         // Aplicar filtrado inmediatamente usando la lógica existente
         this.filterTableBySelectedVariant();
-        
+
       } catch (error) {
         console.error('Error loading variant table:', error);
         throw error;
@@ -541,7 +543,6 @@ if (!customElements.get('upng-variant-picker')) {
 
       // Usar la variante actualmente seleccionada (ya sea por URL o por defecto)
       let selectedColor;
-      
       // Si hay una variante seleccionada (esto incluye variantes de URL gracias a getSelectedVariant)
       if (this.variant) {
         selectedColor = this.variant.option1;
@@ -553,15 +554,14 @@ if (!customElements.get('upng-variant-picker')) {
       else {
         return; // No hay variantes para filtrar
       }
-      
+
       // Asegurarnos de que selectedColor es string y aplicar trim
       selectedColor = String(selectedColor).trim();
-      
+
       // Filtrar filas
       this.variantRows.forEach(row => {
         const rowColor = row.querySelector('td:nth-child(2)').textContent.trim();
         const shouldShow = rowColor === selectedColor;
-        
         row.style.display = shouldShow ? '' : 'none';
       });
     }
@@ -569,15 +569,15 @@ if (!customElements.get('upng-variant-picker')) {
     async initCartSync() {
       // Validar que la tabla esté cargada y que no esté ya sincronizado
       if (!this._state.isTableLoaded || this._state.isCartSynced) return;
-    
+
       try {
         // Primero cargar el estado inicial del carrito
         await this.updateFromCart();
-    
+
         // Inicializar event listeners del carrito
         document.addEventListener('on:cart:add', this.boundHandleCartAdd);
         document.addEventListener('on:line-item:change', this.boundHandleLineItemChange);
-    
+
         // Inicializar event listeners de los inputs
         if (this.quantityInputs && this.quantityInputs.length > 0) {
           this.quantityInputs.forEach(input => {
@@ -585,27 +585,45 @@ if (!customElements.get('upng-variant-picker')) {
             if (input.hasAttribute('data-variant-id')) {
               input.addEventListener('change', this.boundDebouncedQuantityChange);
             }
+            // Evento focus
+            input.addEventListener('focus', this.boundHandleInputFocus);
+
+            // Evento keydown
+            input.addEventListener('keydown', this.boundHandleInputKeydown);
           });
         }
-    
+
+        // Agrega listeners para los botones de cantidad
+        if (this.qtyButtons && this.qtyButtons.length > 0) {
+          this.qtyButtons.forEach(button => {
+            button.addEventListener('click', this.boundHandleQuantityButtonClick);
+          });
+        }
+
         // Sólo marcar como sincronizado si todo se inicializó correctamente
         this._state.isCartSynced = true;
-    
+
       } catch (error) {
         console.error('Error initializing cart sync:', error);
         // En caso de error, asegurarse de limpiar cualquier listener que se haya agregado
         this.cleanupCartListeners();
       }
     }
-    
     // Método auxiliar para limpiar listeners (reutilizable en disconnectedCallback)
     cleanupCartListeners() {
       document.removeEventListener('on:cart:add', this.boundHandleCartAdd);
       document.removeEventListener('on:line-item:change', this.boundHandleLineItemChange);
-      
+
       if (this.quantityInputs) {
         this.quantityInputs.forEach(input => {
           input.removeEventListener('change', this.boundDebouncedQuantityChange);
+          input.removeEventListener('focus', this.boundHandleInputFocus);
+          input.removeEventListener('keydown', this.boundHandleInputKeydown);
+        });
+      }
+      if (this.qtyButtons) {
+        this.qtyButtons.forEach(button => {
+          button.removeEventListener('click', this.boundHandleQuantityButtonClick);
         });
       }
     }
@@ -621,34 +639,33 @@ if (!customElements.get('upng-variant-picker')) {
 
     async handleQuantityChange(event) {
       if (this._state.isUpdating) return;
-    
+
       const input = event.target;
       const variantId = input.getAttribute('data-variant-id');
       const newQuantity = parseInt(input.value);
-      
+
       // Validamos que tengamos un variantId válido
       if (!variantId) {
         console.error('Error: No variant ID found on input');
         return;
       }
-    
       // Si la cantidad es 0, simplemente eliminamos del carrito
       if (newQuantity === 0) {
         await this.updateCartItem(variantId, 0);
         return;
       }
-    
+
       try {
         this._state.isUpdating = true;
-    
+
         // Verificamos si el producto ya existe en el carrito
         const cartResponse = await fetch('/cart.js');
         const cart = await cartResponse.json();
-        
+
         const existingItem = cart.items.find(item => item.variant_id === parseInt(variantId));
-        
+
         let response;
-        
+
         // Si el producto ya existe en el carrito, actualizamos su cantidad
         if (existingItem) {
           response = await fetch('/cart/change.js', {
@@ -661,7 +678,7 @@ if (!customElements.get('upng-variant-picker')) {
               quantity: newQuantity
             })
           });
-        } 
+        }
         // Si el producto no existe en el carrito, lo agregamos
         else {
           response = await fetch('/cart/add.js', {
@@ -675,26 +692,26 @@ if (!customElements.get('upng-variant-picker')) {
             })
           });
         }
-    
+
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-    
+
         const updatedCart = await fetch('/cart.js').then(res => res.json());
-        
+
         // Verificamos que cart.items exista antes de usarlo
         if (updatedCart && updatedCart.items) {
           this.updateQuantityInputs(updatedCart.items);
-          
+
           // Refrescar drawer del carrito usando el sistema de eventos del tema
           document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
             bubbles: true
           }));
-          
+
           // Disparar evento de adición al carrito según la documentación
           if (!existingItem) {
             document.dispatchEvent(new CustomEvent('on:cart:add', {
-              detail: { 
+              detail: {
                 cart: updatedCart,
                 variantId: parseInt(variantId)
               },
@@ -702,7 +719,7 @@ if (!customElements.get('upng-variant-picker')) {
             }));
           } else {
             document.dispatchEvent(new CustomEvent('on:line-item:change', {
-              detail: { 
+              detail: {
                 cart: updatedCart,
                 variantId: parseInt(variantId),
                 newQuantity: newQuantity,
@@ -714,18 +731,18 @@ if (!customElements.get('upng-variant-picker')) {
         } else {
           throw new Error('Invalid cart response');
         }
-    
+
       } catch (error) {
         console.error('Error updating cart:', error);
-        
+
         // Disparar evento de error del carrito según la documentación
         document.dispatchEvent(new CustomEvent('on:cart:error', {
-          detail: { 
-            error: error.message 
+          detail: {
+            error: error.message
           },
           bubbles: true
         }));
-        
+
         // Recuperar estado inicial
         this.updateFromCart();
       } finally {
@@ -734,67 +751,65 @@ if (!customElements.get('upng-variant-picker')) {
     }
 
     // Método auxiliar para actualizar un elemento del carrito
-async updateCartItem(variantId, quantity) {
-  try {
-    this._state.isUpdating = true;
-    
-    const response = await fetch('/cart/change.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: variantId,
-        quantity: quantity
-      })
-    });
+    async updateCartItem(variantId, quantity) {
+      try {
+        this._state.isUpdating = true;
 
-    if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
-    }
+        const response = await fetch('/cart/change.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: quantity
+          })
+        });
 
-    const cart = await response.json();
-    
-    if (cart && cart.items) {
-      this.updateQuantityInputs(cart.items);
-      
-      // Refrescar drawer del carrito
-      document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
-        bubbles: true
-      }));
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        const cart = await response.json();
+
+        if (cart && cart.items) {
+          this.updateQuantityInputs(cart.items);
+
+          // Refrescar drawer del carrito
+          document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
+            bubbles: true
+          }));
+        }
+      } catch (error) {
+        console.error('Error updating cart:', error);
+        document.dispatchEvent(new CustomEvent('on:cart:error', {
+          detail: { error: error.message },
+          bubbles: true
+        }));
+      } finally {
+        this._state.isUpdating = false;
+      }
     }
-  } catch (error) {
-    console.error('Error updating cart:', error);
-    document.dispatchEvent(new CustomEvent('on:cart:error', {
-      detail: { error: error.message },
-      bubbles: true
-    }));
-  } finally {
-    this._state.isUpdating = false;
-  }
-}
 
     updateTableVisibility() {
       if (!this._state.isTableLoaded || !this.variantRows || !this.variantRows.length) return;
-    
+
       // Determinar qué color mostrar
       let selectedColor;
-      
+
       // Si hay una variante seleccionada, usar su color
       if (this.variant) {
         selectedColor = this.variant.option1;
-      } 
+      }
       // Si no hay variante seleccionada aún, usar el color de la primera variante
       else {
         // Obtener el color de la primera variante del producto
         selectedColor = this.data.product.variants[0].option1;
       }
-      
       // Filtrar las filas basado en el color seleccionado
       this.variantRows.forEach(row => {
         // El color está en la segunda celda (índice 1)
         const rowColor = row.querySelector('td:nth-child(2)').textContent.trim();
-        
         // Mostrar solo filas que coincidan con el color seleccionado
         row.style.display = (rowColor === selectedColor) ? '' : 'none';
       });
@@ -814,7 +829,6 @@ async updateCartItem(variantId, quantity) {
 
     updateQuantityInputs(cartItems) {
       if (!this.quantityInputs) return;
-      
       this.quantityInputs.forEach(input => {
         const variantId = input.getAttribute('data-variant-id');
         const cartItem = cartItems.find(item => item.variant_id === parseInt(variantId));
@@ -825,13 +839,13 @@ async updateCartItem(variantId, quantity) {
     async updateFromCart() {
       try {
         const response = await fetch('/cart.js');
-        
+
         if (!response.ok) {
           throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
-        
+
         const cart = await response.json();
-        
+
         if (cart && cart.items) {
           this.updateQuantityInputs(cart.items);
         } else {
@@ -847,12 +861,69 @@ async updateCartItem(variantId, quantity) {
       // Limpiar event listeners
       document.removeEventListener('on:cart:add', this.boundHandleCartAdd);
       document.removeEventListener('on:line-item:change', this.boundHandleLineItemChange);
-      
+
       if (this.quantityInputs) {
         this.quantityInputs.forEach(input => {
           input.removeEventListener('change', this.boundDebouncedQuantityChange);
+          input.removeEventListener('focus', this.boundHandleInputFocus);
+          input.removeEventListener('keydown', this.boundHandleInputKeydown);
         });
       }
+
+      if (this.qtyButtons) {
+        this.qtyButtons.forEach(button => {
+          button.removeEventListener('click', this.boundHandleQuantityButtonClick);
+        });
+      }
+    }
+
+    /**
+   * Maneja los clics en los botones de incremento/decremento de cantidad
+   * @param {Event} event - Evento de clic
+   */
+    handleQuantityButtonClick(event) {
+      if (!event.target.matches('.qty-input__btn')) return;
+      event.preventDefault();
+
+      // Encontrar el input asociado al botón
+      const qtyContainer = event.target.closest('.qty-input');
+      const input = qtyContainer.querySelector('.variant-table__quantity');
+      const currentQty = input.value;
+
+      // Incrementar o decrementar según el botón
+      if (event.target.name === 'plus') {
+        input.stepUp();
+      } else {
+        input.stepDown();
+      }
+
+      // Solo disparar el evento change si la cantidad cambió
+      if (input.value !== currentQty) {
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+
+    /**
+     * Selecciona todo el texto cuando el input recibe el foco
+     * @param {Event} event - Evento de focus
+     */
+    handleInputFocus(event) {
+      if (window.matchMedia('(pointer: fine)').matches) {
+        event.target.select();
+      }
+    }
+
+    /**
+     * Maneja las pulsaciones de tecla en el input
+     * @param {Event} event - Evento de keydown
+     */
+    handleInputKeydown(event) {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+
+      // Simular un ciclo de blur/focus para aplicar el cambio
+      event.target.blur();
+      event.target.focus();
     }
 
   }

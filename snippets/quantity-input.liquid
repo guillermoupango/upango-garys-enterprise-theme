@@ -5,7 +5,7 @@
   - item {Object} - Cart line item (optional).
   - variant_id {String} - The variant id that the quantity related to (optional).
   - hide_label {Boolean} - Visually hide the label (optional, default is true).
-  - layout_style {String} - Layout style. Default is 'joined' (optional).
+  - layout_style {String} - Layout style. Default is 'combined' (optional). *Enterprise Bug*
 
   Usage:
   {% render 'quantity-input',
@@ -30,7 +30,7 @@
   endunless
 
   if layout_style == blank
-    assign layout_style = 'joined'
+    assign layout_style = 'combined'
   endif
 
   if item.variant.inventory_management != blank and item.variant.inventory_policy == 'deny' and item.variant.inventory_quantity <= item.quantity
