@@ -21,9 +21,10 @@
         "vendor-sku": {
           "type": "vendor-sku",
           "settings": {
-            "show_vendor": true,
-            "show_sku": true,
-            "show_barcode": false
+            "show_vendor": false,
+            "show_sku": false,
+            "show_barcode": false,
+            "show_ref": true
           }
         },
         "product-labels": {
@@ -32,17 +33,16 @@
             "show_variant_icon": true
           }
         },
+        "custom_liquid_JUfhaV": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "{% render 'upng-product-bar-info' %}"
+          }
+        },
         "price": {
           "type": "price",
           "settings": {
-            "show_tax_and_shipping": true
-          }
-        },
-        "divider-0": {
-          "type": "divider",
-          "settings": {
-            "show_line": true,
-            "spacing": "mt-8 mb-8"
+            "show_tax_and_shipping": false
           }
         },
         "variant-picker": {
@@ -53,63 +53,18 @@
             "dynamic_availability_downwards": false,
             "show_backorder_text": false,
             "enable_size_chart": false,
-            "size_chart_variant": "Size",
+            "size_chart_variant": "",
             "size_chart_page": ""
-          }
-        },
-        "divider-1": {
-          "type": "divider",
-          "settings": {
-            "show_line": true,
-            "spacing": "mt-8 mb-8"
           }
         },
         "buy-buttons": {
           "type": "buy-buttons",
+          "disabled": true,
           "settings": {
             "show_qty_selector": true,
             "enable_dynamic_checkout": false,
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
-          }
-        },
-        "collapsible-content-1": {
-          "type": "collapsible-content",
-          "settings": {
-            "heading": "Care information",
-            "icon": "heart",
-            "text": "<p>Display general product information or specific product information using metafields.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "collapsible-content-2": {
-          "type": "collapsible-content",
-          "settings": {
-            "heading": "Delivery and Shipping",
-            "icon": "truck",
-            "text": "<p>Add some general information about your delivery and shipping policies.</p>",
-            "page": "",
-            "open": false
-          }
-        },
-        "custom_liquid_976PwX": {
-          "type": "custom-liquid",
-          "settings": {
-            "custom_liquid": "<>"
-          }
-        },
-        "message-3": {
-          "type": "message",
-          "disabled": true,
-          "settings": {
-            "icon": "none",
-            "title": "<p>Add a stand out message for your customers</p>",
-            "close": "once",
-            "show_over_media": false,
-            "visibility_duration": 7,
-            "bg_color": "#e4edfa",
-            "text_color": "#1a66d2"
           }
         },
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm": {
@@ -120,23 +75,31 @@
             "upng_exportador_label_button": "Descargar ficha producto",
             "is_b2b": false
           }
+        },
+        "collapsible_content_UaCy3P": {
+          "type": "collapsible-content",
+          "disabled": true,
+          "settings": {
+            "heading": "Collapsible content",
+            "icon": "none",
+            "text": "<p>Add your content here</p>",
+            "page": "",
+            "open": false
+          }
         }
       },
       "block_order": [
         "title",
         "vendor-sku",
         "product-labels",
+        "custom_liquid_JUfhaV",
         "price",
-        "divider-0",
         "variant-picker",
-        "divider-1",
         "buy-buttons",
-        "collapsible-content-1",
-        "collapsible-content-2",
-        "custom_liquid_976PwX",
-        "message-3",
-        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm"
+        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm",
+        "collapsible_content_UaCy3P"
       ],
+      "custom_css": [],
       "settings": {
         "stick_on_scroll": true,
         "select_first_variant": true,
@@ -168,13 +131,68 @@
     },
     "details": {
       "type": "product-details",
+      "disabled": true,
+      "custom_css": [],
       "settings": {}
+    },
+    "faq_NkeEWL": {
+      "type": "faq",
+      "blocks": {
+        "question_6keJgU": {
+          "type": "question",
+          "settings": {
+            "icon": "question_mark",
+            "heading": "Descripción y cuidados",
+            "text": "<p>&lt;img&gt; &lt;img  &lt;img&gt;<br/><br/>{{ product.metafields.upng.composicion.value }}</p>{{ product.description }}"
+          }
+        },
+        "question_jy4cYr": {
+          "type": "question",
+          "settings": {
+            "icon": "star",
+            "heading": "Croquis y Características",
+            "text": "{{ product.metafields.upng.caracteristicas | metafield_tag }}<p></p>"
+          }
+        },
+        "question_mePKgB": {
+          "type": "question",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Guía de tallas",
+            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_6keJgU",
+        "question_jy4cYr",
+        "question_mePKgB"
+      ],
+      "settings": {
+        "heading": "Detalles",
+        "heading_align": "text-center",
+        "color_scheme": "none",
+        "full_width": true
+      }
+    },
+    "custom_liquid_JhdRKK": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "div {display: flex; justify-content: center; gap: 2rem;}"
+      ],
+      "settings": {
+        "custom_liquid": "<button class=\"btn btn--secondary\">\n<span>Descargar ficha</span>{% render 'icon-chevron-down' %}\n</button>\n\n<button class=\"btn btn--secondary\">\n<span>Descargar galería HD</span>{% render 'icon-chevron-down' %}</button>",
+        "section_height": "tight",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
     },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "heading": "You may also like",
-        "heading_align": "text-start",
+        "heading": "Artículos Relacionados",
+        "heading_align": "text-center",
         "layout": "carousel",
         "card_size_mobile": "small",
         "card_size": "small",
@@ -224,8 +242,11 @@
     },
     "custom_liquid_ximcwY": {
       "type": "custom-liquid",
+      "custom_css": [
+        ".product-tags {display: flex; flex-wrap: wrap; gap: 1rem;}"
+      ],
       "settings": {
-        "custom_liquid": "<button class=\"btn btn--secondary\">Por profesión/Comercio</button>",
+        "custom_liquid": "{% if product.tags.size > 0 %}\n  <div class=\"product-tags\">\n    {% for tag in product.tags %}\n      <button class=\"btn btn--secondary\">{{ tag }}</button>\n    {% endfor %}\n  </div>\n{% endif %}",
         "section_height": "default",
         "full_width": false,
         "dividers": "none",
@@ -236,6 +257,8 @@
   "order": [
     "main",
     "details",
+    "faq_NkeEWL",
+    "custom_liquid_JhdRKK",
     "recommendations",
     "media_with_text_AV36i6",
     "custom_liquid_ximcwY"
