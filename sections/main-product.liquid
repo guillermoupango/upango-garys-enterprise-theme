@@ -140,7 +140,7 @@
             </div>
 
           {%- when 'vendor-sku' -%}
-            {%- if block.settings.show_vendor or block.settings.show_sku or block.settings.show_barcode -%}
+            {%- if block.settings.show_vendor or block.settings.show_sku or block.settings.show_barcode or block.settings.show_ref -%}
               <div class="product-info__block product-info__block--sm product-vendor-sku text-sm" {{ block.shopify_attributes }}>
                 {%- if block.settings.show_vendor and product.vendor != blank -%}
                   {%- liquid
@@ -167,6 +167,12 @@
                     {%- if block.settings.show_vendor or block.settings.show_sku %} &nbsp;|&nbsp; {% endif -%}
                     <span>{{ 'products.product.barcode' | t }}</span>
                     <span class="product-info__barcode-value">{% if current_variant.barcode %}{{ current_variant.barcode }}{% endif %}</span>
+                  </span>
+                {%- endif -%}
+                {%- if block.settings.show_ref -%}
+                  <span class="product-info__ref">
+                    <span>Ref.:</span>
+                    <span>{{ product.metafields.upng.codigo_modelo }}</span>
                   </span>
                 {%- endif -%}
               </div>
@@ -1835,20 +1841,20 @@
     },
     {
       "type": "vendor-sku",
-      "name": "Vendor / SKU / Barcode",
+      "name": "Vendor / SKU / Barcode / REF",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_vendor",
           "label": "Show vendor",
-          "default": true
+          "default": false
         },
         {
           "type": "checkbox",
           "id": "show_sku",
           "label": "Show SKU",
-          "default": true
+          "default": false
         },
         {
           "type": "checkbox",
@@ -1856,6 +1862,13 @@
           "label": "Show barcode",
           "info": " ISBN, UPC, etc",
           "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_ref",
+          "label": "Show REF",
+          "info": "From product Metafiled",
+          "default": true
         }
       ]
     },

@@ -1,0 +1,23 @@
+{% comment %}
+  PENDIENTE:
+
+  - Referenciar 'Tratamiento' desde el metacampo
+{% endcomment %}
+
+{% liquid
+  assign iconos = 'https://cdn.shopify.com/s/files/1/0641/7229/4300/files/secado.png?v=1739955421,https://cdn.shopify.com/s/files/1/0641/7229/4300/files/planchado.png?v=1739955355,https://cdn.shopify.com/s/files/1/0641/7229/4300/files/hidrocarburos.png?v=1739955312,https://cdn.shopify.com/s/files/1/0641/7229/4300/files/NoBlanqueante.png?v=1739955267,https://cdn.shopify.com/s/files/1/0641/7229/4300/files/90max.png?v=1739955096' | split: ','
+%}
+
+<div class="product-info__product-bar flex gap-3 justify-between">
+  <div>
+    {% for icono in iconos %}
+      <img src="{{ icono }}" alt="Icono de tratamiento" loading="lazy" height="20" width="20">
+    {% endfor %}
+  </div>
+  <div>
+    <span>{{ product.metafields.upng.composicion.value }}</span>
+  </div>
+  <div>
+    <a class="link" href="#">Ver Detalles</a>
+  </div>
+</div>

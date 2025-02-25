@@ -426,3 +426,22 @@ quantity-input + .product-info__add-button {
     padding-bottom: calc(8 * var(--space-unit));
   }
 }
+
+/* Estilos Custom Ficha Producto */
+
+.product-info__sticky .product-info__block{
+  margin: 1rem 0;
+}
+.product-info__sticky .product-info__block .product-title{
+  font-family: var(--navigation-font-family);
+  font-style: var(--navigation-font-style);
+  font-weight: var(--navigation-font-weight);
+  margin: 0;
+}
+.product-info__sticky .product-info__ref{
+  color: #868686;
+}
+
+.product-info__sticky .product-info__product-bar{
+  margin-bottom: 2rem;
+}
