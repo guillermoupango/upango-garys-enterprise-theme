@@ -2,13 +2,14 @@
 <table class="variant-table">
   <thead>
     <tr>
-      <th scope="col" class="variant-table__header">Imagen</th>
-      <th scope="col" class="variant-table__header">{{ product.options[0].name }}</th>
-      <th scope="col" class="variant-table__header">{{ product.options[1].name }}</th>
-      <th scope="col" class="variant-table__header">Estado</th>
+      <th scope="col" class="variant-table__header">Color</th>
+      <th scope="col" class="variant-table__header visually-hidden">Nombre variante</th>
+      <th scope="col" class="variant-table__header">Talla</th>
       <th scope="col" class="variant-table__header">Stock</th>
+      <th scope="col" class="variant-table__header">Prox. llegada</th>
+      <th scope="col" class="variant-table__header">Avísame</th>
+      <th scope="col" class="variant-table__header">Precio con DTO.</th>
       <th scope="col" class="variant-table__header">Cantidad</th>
-      <th scope="col" class="variant-table__header">Precio</th>
     </tr>
   </thead>
   <tbody>
@@ -18,43 +19,48 @@
           {% if variant.featured_image %}
             {{
               variant
-              | image_url: width: 20
+              | image_url: width: 50
               | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: variant.title
             }}
           {% else %}
             {{
               product.featured_image
-              | image_url: width: 20
+              | image_url: width: 50
               | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: product.title
             }}
           {% endif %}
         </td>
-        <td class="variant-table__cell">{{ variant.option1 }}</td>
+        <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
+        <!-- Oculto -->
         <td class="variant-table__cell">{{ variant.option2 }}</td>
-        <td class="variant-table__cell variant-table__cell--status">
-          {% if variant.available %}
-
-          {% else %}
-            <button>
-            {% render 'icon',
-              icon: 'truck',
-              height: 24,
-              width: 24,
-              class: 'variant-table__icon variant-table__icon--unavailable'
-            %}
-            </button>
-          {% endif %}
-        </td>
         <td class="variant-table__cell variant-table__cell--stock">
-          <span class="variant-table__stock-quantity">
+          <div class="text-xs product-inventory__status" data-inventory-level="normal">
             {% if variant.inventory_management == 'shopify' %}
               {{ variant.inventory_quantity }}
             {% else %}
               ∞
             {% endif %}
-          </span>
+          </div>
         </td>
-        <td class="variant-table__cell">
+        {% comment %} PENDIENTE / DATO DE FECHA {% endcomment %}
+        <td class="variant-table__cell variant-table__cell--date">31/12/2026</td>
+        <td class="variant-table__cell variant-table__cell--status">
+          {% if variant.available %}
+          {% else %}
+            <button>
+              {% render 'icon',
+                icon: 'truck',
+                height: 24,
+                width: 24,
+                class: 'variant-table__icon variant-table__icon--unavailable'
+              %}
+            </button>
+          {% endif %}
+        </td>
+        <td class="variant-table__cell variant-table__cell--price">
+          {% render 'price', product: product, use_variant: true %}
+        </td>
+        <td class="variant-table__cell variant-table__cell--quantity">
           <div class="qty-input qty-input--combined inline-flex items-center">
             <button type="button" class="qty-input__btn btn btn--minus no-js-hidden" name="minus">
               <span class="visually-hidden">-</span>
@@ -76,16 +82,34 @@
               <span class="visually-hidden">+</span>
             </button>
           </div>
-        </td>
-        <td class="variant-table__cell variant-table__cell--price">
-          <span class="variant-table__price">{{ variant.price | money }}</span>
-          {% if variant.compare_at_price > variant.price %}
-            <span class="variant-table__price variant-table__price--compare">
-              {{- variant.compare_at_price | money -}}
-            </span>
-          {% endif %}
+          {% comment %} PENDIENTE LOGICA DE ELIMINAR LINEA CARRITO {% endcomment %}
+          <a
+            class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
+            href="#item.url_to_remove"
+            data-index="item.index | plus: 1 "
+            aria-label="{{- 'cart.items.remove' | t -}}"
+          >
+            {% render 'icon-trash' %}
+          </a>
         </td>
       </tr>
     {% endfor %}
+    {% comment %} PENDIENTE LOGICA TOTALES TABLA {% endcomment %}
+    <tr>
+      <td colspan="3">
+        <a
+          class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
+          href="#item.url_to_remove"
+          data-index="item.index | plus: 1 "
+          aria-label="{{- 'cart.items.remove' | t -}}"
+        >
+          {% render 'icon-trash' %}
+          Borrar Todo
+        </a>
+      </td>
+      <td colspan="2"><button class="btn btn-lg btn--secondary">Ver Cesta</button></td>
+      <td colspan="2">Subtotal: <b>$$$$</b></td>
+      <td colspan="1">Total Items: <b>29</b></td>
+    </tr>
   </tbody>
 </table>
