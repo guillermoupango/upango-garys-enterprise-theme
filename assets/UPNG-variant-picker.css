@@ -104,3 +104,11 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 .variant-table__cell .qty-input__btn {
   width: 48px;
 }
+.icon--upng-avisame {
+  color: #868686;
+}
+
+.variant-table__button:hover .icon--upng-avisame {
+  color: rgb(var(--btn-alt-text-color));
+}
+
