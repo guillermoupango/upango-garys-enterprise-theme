@@ -52,8 +52,14 @@
     width: calc(100% - var(--product-info-width));
     float: left;
     clear: left;
-    border-inline-end: 1px solid rgba(var(--text-color)/0.15);
   }
+/*   .product-main .product-media,
+.product-main + .product-details > .container {
+    width: calc(100% - var(--product-info-width));
+    float: left;
+    clear: left;
+    border-inline-end: 1px solid rgba(var(--text-color)/0.15);
+  } */
   .product-main .product-media {
     margin-top: 0;
     margin-bottom: 0;
@@ -65,11 +71,18 @@
     position: relative;
     width: var(--product-info-width);
     padding: calc(10 * var(--space-unit)) 0;
-    padding-inline-start: var(--product-column-padding);
     float: right;
     background-color: rgba(var(--bg-color));
   }
-  .product-main .product-info::before, .product-main .product-info::after {
+/*   .product-main .product-info {
+    position: relative;
+    width: var(--product-info-width);
+    padding: calc(10 * var(--space-unit)) 0;
+    padding-inline-start: var(--product-column-padding);
+    float: right;
+    background-color: rgba(var(--bg-color));
+  } */
+/*   .product-main .product-info::before, .product-main .product-info::after {
     content: "";
     position: absolute;
     top: 0;
@@ -77,7 +90,7 @@
     left: -1px;
     width: 1px;
     background-color: rgba(var(--bg-color));
-  }
+  } */
   .product-main .product-info::after {
     background-color: rgba(var(--text-color)/0.15);
   }
