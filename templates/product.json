@@ -27,12 +27,6 @@
             "show_ref": true
           }
         },
-        "product-labels": {
-          "type": "product-labels",
-          "settings": {
-            "show_variant_icon": true
-          }
-        },
         "custom_liquid_JUfhaV": {
           "type": "custom-liquid",
           "settings": {
@@ -91,21 +85,19 @@
       "block_order": [
         "title",
         "vendor-sku",
-        "product-labels",
         "custom_liquid_JUfhaV",
         "price",
         "variant-picker",
         "buy-buttons",
-        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm",
-        "collapsible_content_UaCy3P"
+        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm"
       ],
       "custom_css": [],
       "settings": {
         "stick_on_scroll": true,
         "select_first_variant": true,
-        "sticky_atc_panel": true,
+        "sticky_atc_panel": false,
         "sticky_atc_position": "end",
-        "sticky_atc_mobile": true,
+        "sticky_atc_mobile": false,
         "media_layout": "slider",
         "media_size": "default",
         "media_ratio": "1",

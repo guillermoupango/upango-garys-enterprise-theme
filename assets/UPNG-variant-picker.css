@@ -3,10 +3,10 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   display: none !important;
 }
 
-
 /* Reset general de la tabla */
 .variant-table {
   width: 100%;
+  min-height: 500px;
   border-collapse: collapse;
   border-spacing: 0;
   margin: 0;
@@ -17,7 +17,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 /* Reset de celdas y encabezados */
 .variant-table th,
 .variant-table td {
-  padding: 0;
+  padding: 0 2px;
   text-align: center;
   border: none;
   vertical-align: middle;
@@ -67,10 +67,17 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   white-space: nowrap;
   letter-spacing: -0.01em;
   text-align: center;
-  padding-bottom:  3rem !important;;
+  padding-bottom: 3rem !important;
+  opacity: 0.7;
 }
 
- .variant-table thead tr::after {
+.table-header-left {
+  text-align: left !important;
+  padding-left: 5px !important;
+  width: 50px;
+}
+
+.variant-table thead tr::after {
   content: "";
   display: block;
   width: 100%;
@@ -82,7 +89,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .variant-table__cell {
-  padding: 0.3rem 0 !important;
+  padding: 0.3rem 0.3rem 0.3rem 0 !important;
 }
 
 .variant-table__cell--date {
@@ -90,11 +97,32 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   letter-spacing: -0.01em;
 }
 
-.variant-table__cell--quantity{
+.variant-table__cell--quantity {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   margin-top: 5px;
+  gap: 6px;
+  width: 130px;
+}
+
+.variant-table__cell--quantity a {
+  opacity: 0.7;
+  padding: 7px;
+}
+
+.variant-table__cell--quantity a::after {
+  height: 35px;
+  width: 35px;
+}
+
+.variant-table__cell--quantity a:hover {
+  opacity: 1;
+}
+
+.variant-table__cell--quantity a svg {
+  height: 18px;
+  width: 18px;
 }
 
 .variant-table__cell .qty-input {
@@ -112,3 +140,47 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   color: rgb(var(--btn-alt-text-color));
 }
 
+.variant-table .variant-table__last-row {
+  border-bottom: 1px solid rgba(var(--text-color)/0.15);
+  position: relative;
+}
+
+.variant-table .variant-table__last-row::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(var(--text-color)/0.15);
+  position: absolute;
+  bottom: 64px;
+  left: 0;
+}
+
+.variant-table .variant-table__last-row td {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.variant-table__total {
+  font-size: 13px;
+  font-weight: 300;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  opacity: 0.7;
+}
+
+.variant-table__total-items-value {
+  width: 100%;
+  text-align: center;
+}
+
+.variant-table__loader {
+  background-color: rgba(255,255,255,0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}

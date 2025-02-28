@@ -45,6 +45,7 @@ if (!customElements.get('upng-variant-picker')) {
       this.boundHandleQuantityButtonClick = this.handleQuantityButtonClick.bind(this);
       this.boundHandleInputFocus = this.handleInputFocus.bind(this);
       this.boundHandleInputKeydown = this.handleInputKeydown.bind(this);
+      this.boundHandleRemoveButtonClick = this.handleRemoveButtonClick.bind(this);
 
       // Mantener el setTimeout original del tema
       setTimeout(() => {
@@ -503,7 +504,7 @@ if (!customElements.get('upng-variant-picker')) {
 
       try {
         const productUrl = this.dataset.url;
-        const tableViewUrl = `${productUrl}?view=variant-table`;
+        const tableViewUrl = `${productUrl}?view=upng-variant-table`;
 
         const response = await fetch(tableViewUrl);
         if (!response.ok) throw new Error('Failed to load variant table');
@@ -522,8 +523,30 @@ if (!customElements.get('upng-variant-picker')) {
         this.variantTable = tableContainer.querySelector('.variant-table');
         this.variantRows = this.querySelectorAll('.variant-table__row');
         this.quantityInputs = this.querySelectorAll('.variant-table__quantity');
-        // Botones de Inputs
         this.qtyButtons = this.querySelectorAll('.qty-input__btn');
+        this.removeContainers = this.querySelectorAll('.variant-table__remove-container');
+        this.removeButtons = this.querySelectorAll('.js-remove-item');
+        this.subtotalValueEl = tableContainer.querySelector('.variant-table__subtotal-value');
+        this.totalItemsValueEl = tableContainer.querySelector('.variant-table__total-items-value');
+        this.clearAllButton = tableContainer.querySelector('.variant-table__clear-button');
+        this.viewCartButton = tableContainer.querySelector('.variant-table__view-cart-button');
+        this.totalsLoader = tableContainer.querySelector('.variant-table__loader');
+
+        // Inicializar eventos para los botones de eliminar Linea
+        if (this.removeButtons && this.removeButtons.length > 0) {
+          this.removeButtons.forEach(button => {
+            button.addEventListener('click', this.boundHandleRemoveButtonClick);
+          });
+        }
+
+        // Inicializar eventos para los botones en Totales
+        if (this.clearAllButton) {
+          this.clearAllButton.addEventListener('click', this.handleClearAll.bind(this));
+        }
+
+        if (this.viewCartButton) {
+          this.viewCartButton.addEventListener('click', this.handleViewCart.bind(this));
+        }
 
         // Marcar como cargada
         this._state.isTableLoaded = true;
@@ -640,6 +663,8 @@ if (!customElements.get('upng-variant-picker')) {
     async handleQuantityChange(event) {
       if (this._state.isUpdating) return;
 
+      this.enableLoader();
+
       const input = event.target;
       const variantId = input.getAttribute('data-variant-id');
       const newQuantity = parseInt(input.value);
@@ -747,6 +772,8 @@ if (!customElements.get('upng-variant-picker')) {
         this.updateFromCart();
       } finally {
         this._state.isUpdating = false;
+        // Ocultar loaders y restaurar interactividad
+        this.disableAllLoaders();
       }
     }
 
@@ -788,6 +815,8 @@ if (!customElements.get('upng-variant-picker')) {
         }));
       } finally {
         this._state.isUpdating = false;
+        // Ocultar loaders y restaurar interactividad
+        this.disableAllLoaders();
       }
     }
 
@@ -815,6 +844,11 @@ if (!customElements.get('upng-variant-picker')) {
       });
 
       this.filterTableBySelectedVariant();
+
+      // Actualizar totales cuando cambia la variante seleccionada
+      if (this._state.isCartSynced) {
+        this.updateFromCart();
+      }
     }
 
     handleCartAdd(event) {
@@ -834,6 +868,12 @@ if (!customElements.get('upng-variant-picker')) {
         const cartItem = cartItems.find(item => item.variant_id === parseInt(variantId));
         input.value = cartItem ? cartItem.quantity : 0;
       });
+
+      // Actualizar visibilidad de botones de eliminar
+      this.updateRemoveButtonsVisibility(cartItems);
+
+      // Actualizar los totales de la tabla
+      this.updateTableTotals(cartItems);
     }
 
     async updateFromCart() {
@@ -856,9 +896,8 @@ if (!customElements.get('upng-variant-picker')) {
       }
     }
 
-    // 3. Añadir manejo de desconexión
     disconnectedCallback() {
-      // Limpiar event listeners
+      // Mantener los listeners existentes
       document.removeEventListener('on:cart:add', this.boundHandleCartAdd);
       document.removeEventListener('on:line-item:change', this.boundHandleLineItemChange);
 
@@ -874,6 +913,20 @@ if (!customElements.get('upng-variant-picker')) {
         this.qtyButtons.forEach(button => {
           button.removeEventListener('click', this.boundHandleQuantityButtonClick);
         });
+      }
+
+      if (this.removeButtons) {
+        this.removeButtons.forEach(button => {
+          button.removeEventListener('click', this.boundHandleRemoveButtonClick);
+        });
+      }
+
+      if (this.clearAllButton) {
+        this.clearAllButton.removeEventListener('click', this.handleClearAll);
+      }
+
+      if (this.viewCartButton) {
+        this.viewCartButton.removeEventListener('click', this.handleViewCart);
       }
     }
 
@@ -924,6 +977,222 @@ if (!customElements.get('upng-variant-picker')) {
       // Simular un ciclo de blur/focus para aplicar el cambio
       event.target.blur();
       event.target.focus();
+    }
+
+    updateRemoveButtonsVisibility(cartItems) {
+      if (!this.removeButtons || !this.removeButtons.length) return;
+
+      this.removeButtons.forEach(button => {
+        // Encontrar el row que contiene este botón
+        const row = button.closest('.variant-table__row');
+        if (!row) return;
+
+        // Obtener el contenedor del botón
+        const container = button.closest('.variant-table__remove-container');
+        if (!container) return;
+
+        // Extraer el ID de variante de data-variant-row
+        const variantId = parseInt(row.getAttribute('data-variant-row'));
+        if (!variantId) return;
+
+        // Verificar si esta variante está en el carrito
+        const variantInCart = cartItems.some(item => item.variant_id === variantId && item.quantity > 0);
+
+        // Mostrar/ocultar el contenedor basado en si la variante está en el carrito
+        container.classList.toggle('hidden', !variantInCart);
+
+        // Guardar el variantId en el botón para accederlo cuando se haga clic
+        button.setAttribute('data-variant-id', variantId);
+      });
+    }
+
+    // Manejar clics en botones de eliminar
+    async handleRemoveButtonClick(event) {
+      event.preventDefault();
+
+      if (this._state.isUpdating) return;
+
+      this.enableLoader();
+
+      const button = event.currentTarget;
+      const variantId = button.getAttribute('data-variant-id');
+
+      if (!variantId) {
+        console.error('Error: No variant ID found on remove button');
+        return;
+      }
+
+      // Usar el método existente updateCartItem para establecer la cantidad a 0
+      await this.updateCartItem(variantId, 0);
+
+      // Ocultar el contenedor después de eliminar
+      const container = button.closest('.variant-table__remove-container');
+      if (container) {
+        container.classList.add('hidden');
+      }
+
+      // También actualizar el input correspondiente a 0
+      const row = button.closest('.variant-table__row');
+      if (row) {
+        const input = row.querySelector('.variant-table__quantity');
+        if (input) {
+          input.value = 0;
+        }
+      }
+    }
+
+    updateTableTotals(cartItems) {
+      if (!this.subtotalValueEl || !this.totalItemsValueEl || !this._state.isTableLoaded) return;
+
+      // Obtener el ID del producto actual
+      const currentProductId = this.data.product.id;
+
+      let totalItems = 0;
+      let subtotal = 0;
+
+      // Obtener todas las variantes de este producto
+      const productVariantIds = this.data.product.variants.map(variant => variant.id);
+
+      // Calcular totales para todas las variantes de este producto
+      cartItems.forEach(item => {
+        // Verificar si este item del carrito es una variante de nuestro producto actual
+        if (productVariantIds.includes(item.variant_id)) {
+          totalItems += item.quantity;
+          subtotal += item.final_line_price; // Usar final_line_price para incluir descuentos
+        }
+      });
+
+      // Actualizar los elementos en el DOM
+      this.totalItemsValueEl.innerHTML = `<strong>${totalItems}</strong>`;
+      this.subtotalValueEl.innerHTML = `<strong>${this.formatMoney(subtotal)} €</strong>`;
+    }
+
+    formatMoney(cents) {
+      if (typeof window.theme === 'undefined' || !window.theme.moneyFormat) {
+        // Si no hay formato definido, usamos formato español por defecto
+        return `${(cents / 100).toFixed(2).replace('.', ',')}`;
+      }
+
+      // Convertir de centavos a unidades con 2 decimales
+      let amount = (cents / 100).toFixed(2);
+
+      // Para el formato español, reemplazamos el punto por coma
+      amount = amount.replace('.', ',');
+
+      return window.theme.moneyFormat.replace(/{{amount}}/g, amount).replace(' €', '');
+    }
+
+    // Manejo para el botón "Borrar Todo" (quita todas las variantes del producto)
+    async handleClearAll(event) {
+      event.preventDefault();
+
+      if (this._state.isUpdating) return;
+
+      try {
+        this._state.isUpdating = true;
+
+        // Obtener todas las variantes de este producto
+        const productVariantIds = this.data.product.variants.map(variant => variant.id);
+
+        if (productVariantIds.length === 0) return;
+
+        // Obtener el carrito actual
+        const cartResponse = await fetch('/cart.js');
+        const cart = await cartResponse.json();
+
+        // Crear actualizaciones para eliminar todas las variantes del producto
+        const updates = {};
+
+        // Verificar cada item del carrito
+        cart.items.forEach(item => {
+          // Si el item es una variante de este producto, establecer cantidad a 0
+          if (productVariantIds.includes(item.variant_id)) {
+            updates[item.id] = 0;
+          }
+        });
+
+        // Si no hay nada que actualizar, salir
+        if (Object.keys(updates).length === 0) return;
+
+        // Actualizar el carrito
+        const response = await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ updates })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        const updatedCart = await response.json();
+
+        // Actualizar la interfaz
+        this.updateQuantityInputs(updatedCart.items);
+
+        // Refrescar drawer del carrito
+        document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
+          bubbles: true
+        }));
+
+      } catch (error) {
+        console.error('Error clearing items:', error);
+        document.dispatchEvent(new CustomEvent('on:cart:error', {
+          detail: { error: error.message },
+          bubbles: true
+        }));
+      } finally {
+        this._state.isUpdating = false;
+        // Ocultar loaders y restaurar interactividad
+        this.disableAllLoaders();
+      }
+    }
+
+    // Manejo para el botón "Ver Cesta"
+    handleViewCart(event) {
+      event.preventDefault();
+
+      // Abrir el drawer del carrito utilizando el evento del tema
+      document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:open', {
+        bubbles: true
+      }));
+    }
+
+    // Activar los loaders
+    enableLoader() {
+      if (!this._state.isTableLoaded) return;
+
+      // Mostrar loader de totales
+      if (this.totalsLoader) {
+        this.totalsLoader.classList.remove('hidden');
+      }
+
+      // Bloquear interactividad de la tabla
+      if (this.variantTable) {
+        this.variantTable.classList.add('pointer-events-none');
+      }
+
+      // Quitar foco del elemento activo
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    }
+
+    // Ocultar todos los loaders
+    disableAllLoaders() {
+      if (!this._state.isTableLoaded) return;
+
+      // Ocultar loader de totales
+      if (this.totalsLoader) {
+        this.totalsLoader.classList.add('hidden');
+      }
+
+      // Restaurar interactividad de la tabla
+      if (this.variantTable) {
+        this.variantTable.classList.remove('pointer-events-none');
+      }
     }
 
   }
