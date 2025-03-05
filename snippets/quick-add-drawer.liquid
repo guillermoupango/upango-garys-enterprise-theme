@@ -1,5 +1,5 @@
 <quick-add-drawer class="drawer quick-add-drawer{% if settings.quick_add_sticky_buttons %} overflow-hidden{% endif %} fixed top-0 right-0 flex flex-col w-full has-motion js-product" data-name="quickbuy" role="dialog" tabindex="-1" aria-labelledby="quick-add-heading" aria-modal="true" aria-hidden="true">
-  <header class="drawer__header quick-add__header hidden md:flex justify-between items-center relative">
+  <header class="drawer__header quick-add__header hidden md:flex justify-between items-center relative" style="display: none;">
     <button type="button" class="drawer__back-btn js-open-cart-drawer has-ltr-icon" hidden>
       <span class="visually-hidden">{{ 'general.navigation.back' | t }}</span>
       {% render 'icon-arrow-left' %}
@@ -14,6 +14,10 @@
       {% render 'icon-close' %}
     </button>
   </header>
+  <button type="button" class="drawer__close-btn js-close-drawer">
+    <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
+    {% render 'icon-close' %}
+  </button>
   <div class="drawer__content quick-add__content flex-auto{% if settings.quick_add_sticky_buttons == false %} shrink-0{% endif %} relative">
     <button type="button" class="drawer__close-btn quick-add__close-btn--mob js-close-drawer md:hidden">
       <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>

@@ -132,6 +132,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 .variant-table__cell .qty-input__btn {
   width: 48px;
 }
+
 .icon--upng-avisame {
   color: #868686;
 }
@@ -176,11 +177,76 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .variant-table__loader {
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 100%;
   position: absolute;
   z-index: 1;
   top: 0;
   left: 0;
+}
+
+/* ESTILOS VISTA TABLA COMPACTA EN DRAER / MODAL */
+
+.quick-add-drawer .drawer__content {
+  overflow-y: hidden;
+}
+
+.quick-add__product-details .variant-table-container {
+  height: 460px;
+}
+
+.quick-add__product-details .variant-table {
+  min-height: auto;
+}
+
+.quick-add__product-details .variant-table tbody {
+  height: 327px;
+  min-height: auto;
+  display: block;
+  overflow-y: auto;
+}
+
+.quick-add__product-details .variant-table tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.quick-add__product-details .variant-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.quick-add__product-details .variant-table tfoot {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.quick-add__product-details .variant-table tbody tr:nth-child(even) {
+  background-color: rgb(245, 245, 245);
+}
+
+.quick-add__product-details .variant-table__cell--quantity {
+  display: table-cell;
+  width: auto;
+  padding-top: 6px !important;
+}
+
+.quick-add__product-details .variant-table__cell--quantity .qty-input {
+  height: 34px;
+}
+
+.quick-add__product-details .variant-table__cell--quantity .price {
+  margin-top: -8px;
+}
+
+.quick-add__product-details .variant-table__cell--quantity .price__default {
+  height: 20px;
+}
+
+.quick-add__product-details .variant-table__cell--quantity .price__current {
+  font-size: 14px;
 }

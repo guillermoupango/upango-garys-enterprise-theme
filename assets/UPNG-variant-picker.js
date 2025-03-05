@@ -17,11 +17,13 @@ if (!customElements.get('upng-variant-picker')) {
     constructor() {
       super();
 
-      // Estado interno para nuestras nuevas funcionalidades
+      // Estado interno para funcionalidades.
+      // El contexto es quick-add-drawer hasta que se indique lo contrario
       this._state = {
         isTableLoaded: false,
         isCartSynced: false,
-        isUpdating: false
+        isUpdating: false,
+        isQuickAddContext: this.dataset.context === 'quick-add-drawer'
       };
 
       // Bind de métodos de clase
@@ -94,8 +96,8 @@ if (!customElements.get('upng-variant-picker')) {
       if (evt.target.closest('.option-selector')) {
         VariantPicker.updateLabelText(evt);
       }
-      // Añadir nuestra actualización de tabla si está cargada
-      if (this._state.isTableLoaded) {
+      // Añadir nuestra actualización de tabla si está cargada y si NO estamos en contexto compact
+      if (this._state.isTableLoaded && !this._state.isQuickAddContext) {
         this.updateTableVisibility();
       }
       if (!this.preSelection) {
@@ -504,7 +506,13 @@ if (!customElements.get('upng-variant-picker')) {
 
       try {
         const productUrl = this.dataset.url;
-        const tableViewUrl = `${productUrl}?view=upng-variant-table`;
+    
+        // Usar data-context si está disponible
+        const isQuickAddContext = this._state.isQuickAddContext;
+        
+        // Seleccionar la plantilla adecuada según el contexto
+        const viewTemplate = isQuickAddContext ? 'upng-variant-table-compact' : 'upng-variant-table';
+        const tableViewUrl = `${productUrl}?view=${viewTemplate}`;
 
         const response = await fetch(tableViewUrl);
         if (!response.ok) throw new Error('Failed to load variant table');
@@ -551,8 +559,10 @@ if (!customElements.get('upng-variant-picker')) {
         // Marcar como cargada
         this._state.isTableLoaded = true;
 
-        // Aplicar filtrado inmediatamente usando la lógica existente
-        this.filterTableBySelectedVariant();
+        // Solo aplicar filtrado si NO estamos en contexto compact
+        if (!this._state.isQuickAddContext) {
+          this.filterTableBySelectedVariant();
+        }
 
       } catch (error) {
         console.error('Error loading variant table:', error);
@@ -562,7 +572,10 @@ if (!customElements.get('upng-variant-picker')) {
 
     // Nuevo método para filtrar tabla
     filterTableBySelectedVariant() {
-      if (!this._state.isTableLoaded || !this.variantRows || !this.variantRows.length) return;
+
+      // No hacer nada si la tabla no está cargada o estamos en vista compacta
+      if (!this._state.isTableLoaded || this._state.isQuickAddContext) return;
+      if (!this.variantRows || !this.variantRows.length) return;
 
       // Usar la variante actualmente seleccionada (ya sea por URL o por defecto)
       let selectedColor;

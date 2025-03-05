@@ -216,6 +216,14 @@ if (!customElements.get('quick-add-drawer')) {
         this.selectFirstVariant = variantPicker.dataset.selectFirstVariant === 'true';
       }
 
+      // UPANGO
+      // Buscar y configurar el selector de variantes con atributo de contexto
+      const upngVariantPicker = this.productEl.querySelector('upng-variant-picker');
+      if (upngVariantPicker) {
+        upngVariantPicker.dataset.context = 'quick-add-drawer';
+        console.log('UPNG Variant Picker context set to quick-add-drawer');
+      }
+
       // Remove size chart modal and link (if they exist).
       const sizeChartModal = this.productEl.querySelector('[data-modal="size-chart"]');
       if (sizeChartModal) {
@@ -339,7 +347,8 @@ if (!customElements.get('quick-add-drawer')) {
           this.form.innerHTML = signUpForm.innerHTML;
         } else {
           this.footer.classList.add('quick-add__footer-message');
-          this.form.innerHTML = `
+          this.form.innerHTML = ``;
+/*           this.form.innerHTML = `
             <div class="alert quick-add__alert bg-info-bg text-info-text">
               <div class="flex">
                 <div>
@@ -353,7 +362,7 @@ if (!customElements.get('quick-add-drawer')) {
                   <a class="link js-prod-link" href="${this.productUrl}">${theme.strings.viewDetails}</a>
                 </div>
               </div>
-            </div>`;
+            </div>`; */
         }
       }
 

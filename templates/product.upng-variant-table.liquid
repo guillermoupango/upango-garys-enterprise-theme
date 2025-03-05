@@ -33,6 +33,7 @@
         <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
         <!-- Oculto -->
         <td class="variant-table__cell">{{ variant.option2 }}</td>
+        {% comment %} PENDIENTE LOGICA DE STOCK {% endcomment %}
         <td class="variant-table__cell variant-table__cell--stock">
           <div class="text-xs product-inventory__status" data-inventory-level="normal">
             {% if variant.inventory_management == 'shopify' %}

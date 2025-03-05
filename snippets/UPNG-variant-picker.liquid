@@ -50,6 +50,7 @@
 {%- assign update_url = update_url | default: false, allow_false: true -%}
 
 <upng-variant-picker
+  {% if context %}data-context="{{ context }}"{% endif %}
   class="no-js-hidden"
   data-url="{{ product.url }}"
   data-update-url="{{ update_url }}"

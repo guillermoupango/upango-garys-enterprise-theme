@@ -432,7 +432,8 @@ quantity-input + .product-info__add-button {
 .product-info__sticky .product-info__block{
   margin: 1rem 0;
 }
-.product-info__sticky .product-info__block .product-title{
+.product-info__sticky .product-info__block .product-title,
+.quick-add__product-details .quick-add-info .product-title a{
   font-family: var(--navigation-font-family);
   font-style: var(--navigation-font-style);
   font-weight: var(--navigation-font-weight);
