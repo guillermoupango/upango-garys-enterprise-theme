@@ -106,8 +106,14 @@
           if forloop.index == 1
             assign lazy_load = false
           endif
+          # REFACTOR PARA ASIGNAR NOMBRE DE IMAGEN ASOCIADA A MEDIA
+          assign image_filename = media.src | split: '/' | last
         -%}
-        <li class="media-viewer__item{% if media.id == featured_media.id or select_first_image %} is-current-variant{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} media-viewer__item--variant{% endif %}{% if section.settings.media_layout == 'stacked' and media.id == featured_media.id %}{% if underline_active and section.settings.enable_media_grouping == false %} is-active{% endif %}{% endif %}{% if media_count == 1 %} media-viewer__item--single{% endif %}" data-media-id="{{ media.id }}" data-media-type="{{ media.media_type }}">
+        <li class="media-viewer__item{% if media.id == featured_media.id or select_first_image %} is-current-variant{% endif %}
+          {% if section.settings.hide_variants and variant_images contains media.src %} media-viewer__item--variant{% endif %}
+           {% if section.settings.media_layout == 'stacked' and media.id == featured_media.id %}{% if underline_active and section.settings.enable_media_grouping == false %} is-active{% endif %}{% endif %}
+            {% if media_count == 1 %} media-viewer__item--single{% endif %}"
+             data-media-id="{{ media.id }}" data-media-type="{{ media.media_type }}" data-image-name="{{ image_filename }}">
           {%- if enable_zoom and lightbox_enabled and media.media_type == 'image' -%}
             <gallery-zoom-open class="gallery-zoom-open cursor-pointer w-full">
           {%- endif -%}
@@ -238,8 +244,14 @@
               if media == current_variant.featured_media or current_variant.featured_media == null and forloop.index == 1
                 assign active = true
               endif
+
+              # REFACTOR PARA ENCONTRAR NOMBRE DE IMAGEN ASOCIADA A MEDIA
+              assign image_filename = media.src | split: '/' | last
             -%}
-            <li class="media-thumbs__item{% if section.settings.hide_variants and variant_images contains media.src %} media-thumbs__item--variant{% endif %}" data-media-id="{{ media.id }}">
+            <li class="media-thumbs__item
+              {% if section.settings.hide_variants and variant_images contains media.src %}media-thumbs__item--variant{% endif %}
+               " data-media-id="{{ media.id }}"
+               data-image-name="{{ image_filename }}">
               <button class="media-thumbs__btn media relative w-full{% if settings.blend_product_images %} image-blend{% endif %}{% if active and section.settings.enable_media_grouping == false %} is-active{% endif %}"{% if active %} aria-current="true"{% endif %} aria-controls="gallery-viewer"{% if section.settings.thumb_ratio != 'natural' %} style="padding-top: {{ 1 | divided_by: thumb_ratio | times: 100 }}%;"{% endif %}>
                 <span class="visually-hidden">
                   {%- if media.media_type == 'image' -%}

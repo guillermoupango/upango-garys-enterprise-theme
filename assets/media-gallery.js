@@ -90,10 +90,111 @@ if (!customElements.get('media-gallery')) {
     }
 
     /**
+     * Extrae el código de color de un nombre de imagen.
+     * @param {string} imageName - Nombre de la imagen (ej: 700600-142, 700600-142_2, 700600-142-3)
+     * @returns {string|null} - El código de color o null si no se encuentra
+     */
+    extractColorCode(imageName) {
+      const matches = imageName.match(/-(\d+)/);
+      return matches ? matches[1] : null;
+    }
+
+    /**
      * Handle a change in variant on the page.
      * @param {Event} evt - variant change event dispatched by variant-picker
      */
     onVariantChange(evt) {
+      // Si no hay detalles de variante, no hacer nada
+      if (!evt.detail.variant) return;
+
+      // Si la agrupación de medios está habilitada con el método original,
+      // mantenerla por compatibilidad
+      if (this.mediaGroupingEnabled) {
+        this.setActiveMediaGroup(this.getMediaGroupFromOptionSelectors());
+      }
+
+      // Intentar obtener el código de color de la variante seleccionada
+      let colorCode = this.getColorCodeFromVariant(evt.detail.variant);
+      console.log(colorCode);
+      
+
+      // Si encontramos un código de color...
+      if (colorCode) {
+        // Establecer el grupo de medios activo basado en el código de color
+        this.setActiveMediaGroup(colorCode);
+
+        // Buscar el primer elemento multimedia con este código de color
+        const mediaWithColor = Array.from(this.viewer.querySelectorAll('[data-image-name]'))
+          .filter(el => {
+            const elColorCode = this.extractColorCode(el.dataset.imageName);
+            return elColorCode === colorCode;
+          });
+
+        // Si encontramos al menos un elemento con este código de color
+        if (mediaWithColor.length > 0) {
+          // Establecer el primer elemento como activo
+          this.customSetActiveMedia(mediaWithColor[0], true);
+          return;
+        }
+      }
+
+      // Si no pudimos usar el código de color o no hay elementos multimedia con ese código,
+      // volver al comportamiento predeterminado usando featured_media
+      if (evt.detail.variant && evt.detail.variant.featured_media) {
+        const variantMedia = this.viewer.querySelector(
+          `[data-media-id="${evt.detail.variant.featured_media.id}"]`
+        );
+
+        if (variantMedia) {
+          this.customSetActiveMedia(variantMedia, true);
+        }
+      }
+    }
+
+    /**
+     * Obtiene el código de color de la variante seleccionada.
+     * @param {Object} variant - Objeto de variante de Shopify
+     * @returns {string|null} - Código de color o null si no se encuentra
+     */
+    getColorCodeFromVariant(variant) {
+      // Método 1: Extraer del título de la variante (formato: "142-ARENA / XXS")
+      if (variant.title) {
+        // Si el título comienza con el código numérico seguido de un guion
+        const titleMatch = variant.title.match(/^(\d+)-/);
+        if (titleMatch) {
+          return titleMatch[1];
+        }
+      }
+      
+      // Método 2: Extraer del src de la imagen (formato: "...700600-142_2.jpg...")
+      if (variant.featured_media && 
+          variant.featured_media.preview_image && 
+          variant.featured_media.preview_image.src) {
+        const src = variant.featured_media.preview_image.src;
+        
+        // Extraer el nombre del archivo de la URL
+        const fileName = src.split('/').pop().split('?')[0];
+        
+        // Buscar el patrón modelo-código en el nombre del archivo
+        const fileMatch = fileName.match(/-(\d+)([_\-.]|$)/);
+        if (fileMatch) {
+          return fileMatch[1];
+        }
+      }
+      
+      // Método de respaldo: Buscar cualquier secuencia numérica en el título
+      if (variant.title) {
+        const numericMatch = variant.title.match(/\b(\d+)\b/);
+        if (numericMatch) {
+          return numericMatch[1];
+        }
+      }
+      
+      // Si no se encuentra el código de color, registrar y devolver null
+      console.warn('No se pudo encontrar código de color para la variante:', variant.title || 'Sin título');
+      return null;
+    }
+    /* onVariantChange(evt) {
       if (this.mediaGroupingEnabled) {
         this.setActiveMediaGroup(this.getMediaGroupFromOptionSelectors());
       }
@@ -104,13 +205,13 @@ if (!customElements.get('media-gallery')) {
         );
         this.customSetActiveMedia(variantMedia, true);
       }
-    }
+    } */
 
     /**
      * Gets the media group from currently selected variant options.
      * @returns {?object}
      */
-    getMediaGroupFromOptionSelectors() {
+/*     getMediaGroupFromOptionSelectors() {
       const optionSelectors = this.section.querySelectorAll('.option-selector');
       if (optionSelectors.length > this.getMediaGroupData().groupOptionIndex) {
         const selector = optionSelectors[this.getMediaGroupData().groupOptionIndex];
@@ -120,6 +221,56 @@ if (!customElements.get('media-gallery')) {
         return selector.querySelector('input:checked').value;
       }
       return null;
+    } */
+    getMediaGroupFromOptionSelectors() {
+      const optionSelectors = this.section.querySelectorAll('.option-selector');
+      
+      // Si no hay suficientes selectores o no hay un índice de grupo definido, salir
+      if (!optionSelectors.length || typeof this.getMediaGroupData().groupOptionIndex === 'undefined') {
+        return null;
+      }
+      
+      // Obtener el selector correspondiente al índice del grupo
+      const selector = optionSelectors[this.getMediaGroupData().groupOptionIndex];
+      if (!selector) return null;
+      
+      // Obtener el valor seleccionado según el tipo de selector
+      let selectedValue = '';
+      if (selector.dataset.selectorType === 'dropdown') {
+        selectedValue = selector.querySelector('.custom-select__btn').textContent.trim();
+      } else {
+        const checkedInput = selector.querySelector('input:checked');
+        selectedValue = checkedInput ? checkedInput.value : '';
+      }
+
+      // No hay valor seleccionado
+      if (!selectedValue) return null;
+      
+      // Extraer el código de color del valor seleccionado
+      
+      // Caso 1: El valor comienza con el código numérico (ej: "142-ARENA")
+      const prefixMatch = selectedValue.match(/^(\d+)-/);
+      if (prefixMatch) {
+        return prefixMatch[1];
+      }
+      
+      // Caso 2: El código numérico está entre barras (ej: "Color / 142 / Tamaño")
+      const slashSeparatedParts = selectedValue.split('/');
+      for (const part of slashSeparatedParts) {
+        const trimmedPart = part.trim();
+        if (/^\d+$/.test(trimmedPart)) {
+          return trimmedPart;
+        }
+      }
+      
+      // Caso 3: Buscar cualquier secuencia numérica en el valor
+      const numericMatch = selectedValue.match(/\b(\d+)\b/);
+      if (numericMatch) {
+        return numericMatch[1];
+      }
+      
+      // Si no se encuentra un código de color, devolver el valor original para mantener compatibilidad
+      return selectedValue;
     }
 
     /**
@@ -140,6 +291,68 @@ if (!customElements.get('media-gallery')) {
      * @returns {?object}
      */
     getMediaGroupMap() {
+      if (!this.mediaGroupMap) {
+        this.mediaGroupMap = {
+          groups: {}
+        };
+
+        // Obtener los elementos del visor
+        this.viewerItems = this.querySelectorAll('.media-viewer__item');
+
+        // Iterar por cada elemento de medio
+        this.viewerItems.forEach((item) => {
+          // Verificar si tiene el atributo data-image-name
+          if (!item.dataset.imageName) return;
+
+          // Extraer el código de color del nombre de la imagen
+          const colorCode = this.extractColorCode(item.dataset.imageName);
+          // Si no se pudo extraer un código de color, omitir este elemento
+          if (!colorCode) return;
+
+          // Crear el grupo para este código de color si no existe
+          if (!this.mediaGroupMap.groups[colorCode]) {
+            this.mediaGroupMap.groups[colorCode] = {
+              name: colorCode,
+              items: []
+            };
+          }
+
+          // Crear el objeto de ítem para este elemento
+          const groupItem = { main: item };
+
+          // Si hay thumbnails, encontrar el thumbnail correspondiente
+          if (this.thumbs) {
+            groupItem.thumb = this.thumbs.querySelector(
+              `[data-image-name="${item.dataset.imageName}"].media-thumbs__item`
+            );
+          }
+
+          // Añadir el ítem al grupo correspondiente
+          this.mediaGroupMap.groups[colorCode].items.push(groupItem);
+        });
+
+        // Método helper para encontrar el grupo de un ítem por su código de color
+        this.mediaGroupMap.groupFromItem = (item) => {
+          // Si no hay ítem o no tiene nombre de imagen, no se puede determinar el grupo
+          if (!item || !item.dataset.imageName) return null;
+
+          // Extraer el código de color del nombre de la imagen
+          const itemColorCode = this.extractColorCode(item.dataset.imageName);
+
+          // Si no hay código de color o no existe un grupo para ese código, devolver null
+          if (!itemColorCode || !this.mediaGroupMap.groups[itemColorCode]) {
+            return null;
+          }
+
+          // Devolver el grupo correspondiente al código de color
+          return this.mediaGroupMap.groups[itemColorCode];
+        };
+      }
+
+      return this.mediaGroupMap;
+    }
+
+    /* getMediaGroupMap() {
       if (!this.mediaGroupMap) {
         this.mediaGroupMap = {
           groups: {}
@@ -190,7 +403,7 @@ if (!customElements.get('media-gallery')) {
       }
 
       return this.mediaGroupMap;
-    }
+    } */
 
     /**
      * Show only images associated to the current variant
@@ -373,12 +586,25 @@ if (!customElements.get('media-gallery')) {
      * @param {object} evt - Event object.
      */
     handleThumbClick(evt) {
-      const thumb = evt.target.closest('[data-media-id]');
+      const thumb = evt.target.closest('[data-image-name]');
       if (!thumb) return;
-
-      const itemToShow = this.querySelector(`[data-media-id="${thumb.dataset.mediaId}"]`);
+    
+      // Intentar encontrar por data-image-name
+      let itemToShow = this.querySelector(`[data-image-name="${thumb.dataset.imageName}"]`);
+      
+      // Si no se encuentra, intentar por data-media-id como respaldo
+      if (!itemToShow && thumb.dataset.mediaId) {
+        itemToShow = this.querySelector(`[data-media-id="${thumb.dataset.mediaId}"]`);
+      }
+      
+      // Verificar que se encontró el elemento antes de continuar
+      if (!itemToShow) {
+        console.warn('No se pudo encontrar el elemento de media correspondiente al thumbnail:', 
+                     thumb.dataset.imageName || thumb.dataset.mediaId);
+        return;
+      }
+      
       this.customSetActiveMedia(itemToShow);
-
       MediaGallery.playActiveMedia(itemToShow);
     }
 

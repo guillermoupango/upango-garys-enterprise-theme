@@ -44,7 +44,7 @@
           "settings": {
             "selector_style": "buttons",
             "enable_dynamic_availability": false,
-            "dynamic_availability_downwards": false,
+            "dynamic_availability_downwards": true,
             "show_backorder_text": false,
             "enable_size_chart": false,
             "size_chart_variant": "",
@@ -68,17 +68,6 @@
             "upng_exportador_ficha_target": ".price__default",
             "upng_exportador_label_button": "Descargar ficha producto",
             "is_b2b": false
-          }
-        },
-        "collapsible_content_UaCy3P": {
-          "type": "collapsible-content",
-          "disabled": true,
-          "settings": {
-            "heading": "Collapsible content",
-            "icon": "none",
-            "text": "<p>Add your content here</p>",
-            "page": "",
-            "open": false
           }
         }
       },
@@ -117,7 +106,7 @@
         "thumb_crop": "none",
         "border_color": "#eeeeee",
         "bg_color": "#f4f4f4",
-        "enable_media_grouping": false,
+        "enable_media_grouping": true,
         "media_grouping_option": "Color,Colour,Couleur,Farbe"
       }
     },
