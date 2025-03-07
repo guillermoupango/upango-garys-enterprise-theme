@@ -1,0 +1,35 @@
+{%- comment -%}
+  Muestra la fecha de disponibilidad del producto o un mensaje de consulta según corresponda
+  - Define adicion_en_segundos como días adicoonales a mostrar cuando el producto NO está disponible
+
+  Uso: {% render 'UPNG-date-indicator', variant: product_variant %}
+{%- endcomment -%}
+
+{%- liquid
+    # Variable Global correspondiente a 2 días en segundos
+    assign adicion_en_segundos = 172800
+    
+    # Fechas formateadas en timestamp Unix
+    assign timestamp_fecha_actual = "now" | date: '%s'
+    assign timestamp_fecha_proxima_llegada = variant.metafields.upng.fecha_proxima_llegada | date: '%s'
+    assign timestamp_fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%s'
+    
+    assign fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%d-%m-%Y'
+    assign fecha_disponibilidad_mas_adicion = timestamp_fecha_disponibilidad | plus: adicion_en_segundos
+    assign mostrar_disponibilidad_con_adicion = fecha_disponibilidad_mas_adicion | date: '%d-%m-%Y'
+  
+    assign stock_upango = variant.metafields.upng.stock_disponible
+  -%}
+  
+  {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
+    {% comment %} Pendiente Acción "Consultar" {% endcomment %}
+    <span class="hover:underline hover:lighten" style="cursor: pointer">
+      Consultar
+    </span>
+  {%- else -%}
+    {%- if variant.inventory_quantity <= 0 and stock_upango <= 0 -%}
+      {{ mostrar_disponibilidad_con_adicion }}
+    {%- else -%}
+      {{ fecha_disponibilidad }}
+    {%- endif -%}
+  {%- endif -%}

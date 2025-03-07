@@ -446,3 +446,42 @@ quantity-input + .product-info__add-button {
 .product-info__sticky .product-info__product-bar{
   margin-bottom: 2rem;
 }
+
+/* ESTILOS CUSTOM FICHA DE PRODUCTO */
+
+/* Tabla de Guias de Talla en Pestaña colapsable */
+.disclosure .disclosure__panel{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Desplazamiento fluido en iOS */
+}
+.disclosure .disclosure__content .size-chart{
+  font-size: 14px;
+  white-space: collapse;
+}
+
+.size-chart {
+  width: 100%;
+  touch-action: pan-x; /* Permite desplazamiento en móviles */
+  border-collapse: collapse;
+}
+
+.size-chart th,
+.size-chart td {
+  padding: 12px 10px;
+  line-height: 1.15;
+}
+
+.size-chart td:first-child {
+  min-width: 150px;
+}
+.size-chart th:not(:first-child) {
+  text-align: center ;
+}
+.size-chart td:not(:first-child) {
+  min-width: 70px;
+  text-align: center ;
+}
+
+.size-chart tbody tr:nth-child(even) td {
+  background-color: rgb(245, 245, 245);
+}

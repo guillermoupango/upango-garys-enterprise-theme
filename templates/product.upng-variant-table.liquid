@@ -1,4 +1,5 @@
 {% layout none %}
+
 <table class="variant-table">
   <thead>
     <tr>
@@ -35,16 +36,11 @@
         <td class="variant-table__cell">{{ variant.option2 }}</td>
         {% comment %} PENDIENTE LOGICA DE STOCK {% endcomment %}
         <td class="variant-table__cell variant-table__cell--stock">
-          <div class="text-xs product-inventory__status" data-inventory-level="normal">
-            {% if variant.inventory_management == 'shopify' %}
-              {{ variant.inventory_quantity }}
-            {% else %}
-              ∞
-            {% endif %}
-          </div>
+          {% render 'UPNG-stock-indicator', variant: variant %}
         </td>
-        {% comment %} PENDIENTE / DATO DE FECHA {% endcomment %}
-        <td class="variant-table__cell variant-table__cell--date">31/12/2026</td>
+        <td class="variant-table__cell variant-table__cell--date">
+          {% render 'UPNG-date-indicator', variant: variant %}
+        </td>
         <td class="variant-table__cell variant-table__cell--status">
           {% if variant.available %}
           {% else %}
@@ -57,8 +53,20 @@
           {% render 'price', product: product, use_variant: true %}
         </td>
         <td class="variant-table__cell variant-table__cell--quantity">
-          <div class="qty-input qty-input--combined inline-flex items-center" {% unless variant.available %} style="background-color: rgb(239, 239, 239); pointer-events: none" {% endunless %}>
-            <button type="button" class="qty-input__btn btn btn--minus no-js-hidden" name="minus" {% unless variant.available %} disabled {% endunless %}>
+          <div
+            class="qty-input qty-input--combined inline-flex items-center"
+            {% unless variant.available %}
+              style="background-color: rgb(239, 239, 239); pointer-events: none"
+            {% endunless %}
+          >
+            <button
+              type="button"
+              class="qty-input__btn btn btn--minus no-js-hidden"
+              name="minus"
+              {% unless variant.available %}
+                disabled
+              {% endunless %}
+            >
               <span class="visually-hidden">-</span>
             </button>
             <input
@@ -69,10 +77,19 @@
               data-variant-id="{{ variant.id }}"
               data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
               data-variant-title="{{ variant.title }}"
-              {% unless variant.available %} disabled {% endunless %}
+              {% unless variant.available %}
+                disabled
+              {% endunless %}
               aria-label="Cantidad para {{ variant.title }}"
             >
-            <button type="button" class="qty-input__btn btn btn--plus no-js-hidden" name="plus" {% unless variant.available %} disabled {% endunless %}>
+            <button
+              type="button"
+              class="qty-input__btn btn btn--plus no-js-hidden"
+              name="plus"
+              {% unless variant.available %}
+                disabled
+              {% endunless %}
+            >
               <span class="visually-hidden">+</span>
             </button>
           </div>

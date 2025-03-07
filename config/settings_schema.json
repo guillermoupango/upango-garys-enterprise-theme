@@ -1128,7 +1128,7 @@
       {
         "type": "range",
         "id": "inventory_threshold_very_low",
-        "min": 1,
+        "min": 0,
         "max": 100,
         "step": 1,
         "label": "Very low inventory threshold",

@@ -30,7 +30,7 @@
         "custom_liquid_JUfhaV": {
           "type": "custom-liquid",
           "settings": {
-            "custom_liquid": "{% render 'upng-product-bar-info' %}"
+            "custom_liquid": "{% render 'UPNG-product-bar-info' %}"
           }
         },
         "price": {

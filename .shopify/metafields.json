@@ -445,6 +445,46 @@
         "name": "number_decimal",
         "category": "NUMBER"
       }
+    },
+    {
+      "key": "fecha_disponibilidad",
+      "namespace": "upng",
+      "name": "Fecha disponibilidad",
+      "description": "",
+      "type": {
+        "name": "date",
+        "category": "DATE_TIME"
+      }
+    },
+    {
+      "key": "fecha_proxima_llegada",
+      "namespace": "upng",
+      "name": "Fecha próxima llegada",
+      "description": "",
+      "type": {
+        "name": "date",
+        "category": "DATE_TIME"
+      }
+    },
+    {
+      "key": "stock_disponible",
+      "namespace": "upng",
+      "name": "Stock disponible",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "descatalogado",
+      "namespace": "upng",
+      "name": "Descatalogado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
     }
   ],
   "shop": [

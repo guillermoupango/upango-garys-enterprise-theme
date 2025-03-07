@@ -50,7 +50,9 @@
 {%- assign update_url = update_url | default: false, allow_false: true -%}
 
 <upng-variant-picker
-  {% if context %}data-context="{{ context }}"{% endif %}
+  {% if context %}
+    data-context="{{ context }}"
+  {% endif %}
   class="no-js-hidden"
   data-url="{{ product.url }}"
   data-update-url="{{ update_url }}"
@@ -326,6 +328,11 @@
     }
   </script>
 </upng-variant-picker>
+
+<div class="flex justify-center gap-3 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
+  <div class="text-xs product-inventory__status" data-inventory-level="normal">Disponibilidad Inmediata</div>
+  <div class="text-xs product-inventory__status" data-inventory-level="backordered">Próxima llegada</div>
+</div>
 
 <noscript>
   <div
