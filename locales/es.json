@@ -388,9 +388,13 @@
       "quantity_error": "Solo puede añadir {{ quantity }} unidades de este artículo al carrito."
     },
     "note": {
-      "add": "Añadir observaciones del pedido",
-      "edit": "Editar observaciones del pedido",
-      "label": "Observaciones del pedido",
+      "add": "Añadir comentarios al pedido",
+      "edit": "Editar comentarios del pedido",
+      "info": "Puedes realizar cualquier comentario sobre tu pedido o brindarnos información que consideres importante.",
+      "label": "Comentarios del pedido",
+      "delivery": "Comentarios al albaran de entrega",
+      "label_placeholder": "Comentario al Dpto. de Ventas de Uniformes Gary's",
+      "delivery_placeholder": "Comentario que aparece en el Albarán",
       "save": "Guardar"
     },
     "shipping_calculator": {
@@ -413,6 +417,11 @@
     "terms": {
       "agreement_html": "Acepto los <a href=\"{{ terms_url }}\" target=\"_blank\">términos y la política</a> de reembolso",
       "confirmation": "Tiene que aceptar los términos y condiciones antes de continuar."
+    },
+    "custom": {
+      "checkbox": "Personalizar este producto",
+      "placeholder": "Indica la personalización que desees sobre este producto",
+      "label": "Personalizacion"
     }
   },
   "customer": {

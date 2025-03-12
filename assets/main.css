@@ -5580,3 +5580,10 @@ body > .os-scrollbar {
   color: rgb(var(--btn-bg-color)) !important;
   stroke: rgb(var(--btn-bg-color)) !important;
 }
+
+cart-items .disclosure--row{
+  border: none;
+}
+cart-items .disclosure > summary{
+  padding: calc(2 * var(--space-unit)) 0;
+}

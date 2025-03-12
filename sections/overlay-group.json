@@ -13,34 +13,78 @@
   "sections": {
     "cart-drawer": {
       "type": "cart-drawer",
-      "settings": {}
+      "settings": {
+        "show_cart_page_link": true,
+        "show_backorder_text": true,
+        "show_vendor": true,
+        "position_cart_summary": "bottom",
+        "stick_footer": true,
+        "show_order_note": true,
+        "show_shipping_text_notice": true,
+        "show_additional_checkout_buttons": false,
+        "show_checkout_button": true,
+        "cart_terms_page": "",
+        "show_shipping_calculator": false,
+        "shipping_calculator_default_country": "United States",
+        "promoted_products_visibility": "always",
+        "promoted_products_heading": "Promoted products",
+        "promoted_products_list": [],
+        "promoted_products_layout": "carousel",
+        "show_media_promotion": false,
+        "media_promotion_visibility": "always",
+        "link_url": "",
+        "media_promotion_min_height": 150,
+        "content": "<p>Promotion text</p>",
+        "text_type_scale": "1em",
+        "text_width": 400,
+        "text_alignment": "justify-center items-center text-center",
+        "button_label": "",
+        "button_style": "btn btn--secondary",
+        "text_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 20
+      }
     },
     "product-compare": {
       "type": "product-compare",
       "blocks": {
         "compare-1": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "show_line": false
+          }
         },
         "compare-2": {
           "type": "vendor",
-          "settings": {}
+          "settings": {
+            "show_line": false
+          }
         },
         "compare-3": {
           "type": "title",
-          "settings": {}
+          "settings": {
+            "show_line": false
+          }
         },
         "compare-4": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_line": false
+          }
         },
         "compare-5": {
           "type": "description",
-          "settings": {}
+          "settings": {
+            "truncate_description": false,
+            "words_to_show": 20,
+            "show_line": false
+          }
         },
         "compare-6": {
           "type": "variants",
-          "settings": {}
+          "settings": {
+            "show_line": false
+          }
         }
       },
       "block_order": [
@@ -51,6 +95,7 @@
         "compare-5",
         "compare-6"
       ],
+      "disabled": true,
       "settings": {}
     }
   },

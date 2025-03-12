@@ -388,9 +388,13 @@
       "quantity_error": "You can only add {{ quantity }} of this item to your cart."
     },
     "note": {
-      "add": "Add order note",
-      "edit": "Edit order note",
-      "label": "Order note",
+      "add": "Add order comments",
+      "edit": "Edit order comments",
+      "info": "You can leave any comments about your order or provide any information you consider important.",
+      "label": "Order comments",
+      "delivery": "Delivery comments",
+      "label_placeholder": "Comment to the Sales Department",
+      "delivery_placeholder": "Comment on the Delivery Note",
       "save": "Save"
     },
     "shipping_calculator": {
@@ -413,6 +417,11 @@
     "terms": {
       "agreement_html": "I agree to the <a href=\"{{ terms_url }}\" target=\"_blank\">terms and refund policy</a>",
       "confirmation": "You must agree to the terms and conditions before continuing."
+    },
+    "custom": {
+      "checkbox": "Customize this product",
+      "placeholder": "Specify the customization you want for this product.",
+      "label": "Customization"
     }
   },
   "customer": {

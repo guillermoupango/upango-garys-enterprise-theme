@@ -1128,12 +1128,12 @@
       {
         "type": "range",
         "id": "inventory_threshold_very_low",
-        "min": 0,
+        "min": 1,
         "max": 100,
         "step": 1,
         "label": "Very low inventory threshold",
         "info": "When inventory levels are equal to or below this number, it is considered \"Very low\". This number should be less than the \"Low inventory threshold\".",
-        "default": 2
+        "default": 1
       },
       {
         "type": "header",
