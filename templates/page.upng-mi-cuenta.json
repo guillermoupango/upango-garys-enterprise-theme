@@ -19,22 +19,16 @@
     "1739449085b83f21ff": {
       "type": "apps",
       "blocks": {
-        "upango_agentes_garys_upng_agent_companies_agiqzK": {
-          "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-companies/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
+        "upango_b2b_garys_upng_my_account_menu_QXbehp": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-my-account-menu/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
-            "agent_carts_enabled": "false",
-            "cart_icon": "shopify://shop_images/cart-check.svg",
-            "cart_icon_empty": "shopify://shop_images/cart-x.svg",
-            "label_tipo": "default",
-            "mostrar_info_agente": true,
-            "mostrar_nombre_contacto": true,
-            "consulta_automatica": false,
-            "mostrar_ultima_visita": false
+            "menu": "customer-account-main-menu",
+            "div_classes": ""
           }
         }
       },
       "block_order": [
-        "upango_agentes_garys_upng_agent_companies_agiqzK"
+        "upango_b2b_garys_upng_my_account_menu_QXbehp"
       ],
       "settings": {
         "full_width": false

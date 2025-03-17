@@ -24,6 +24,8 @@
 {%- endif -%}
 
 {%- liquid
+  assign mostrar_privado = customer.b2b?
+
   if search.results_count > 0
     if section.settings.card_size == 'small'
       assign grid_classes_filters_open = 'grid-cols-2 md:grid-cols-3 xl:grid-cols-4'
@@ -123,48 +125,98 @@
             <ul class="grid mb-8 md:mb-12 {% if section.settings.filters_open_lg %}{{ grid_classes_filters_open }}{% else %}{{ grid_classes_filters_closed }}{% endif %} gap-x-theme {% if settings.card_contain %}gap-y-5 md:gap-y-8{% else %}gap-y-10{% endif %}"
                 data-filters-open-classes="grid mb-8 md:mb-12 {{ grid_classes_filters_open }} gap-x-theme {% if settings.card_contain %}gap-y-5 md:gap-y-8{% else %}gap-y-10{% endif %}"
                 data-filters-closed-classes="grid mb-8 md:mb-12 {{ grid_classes_filters_closed }} gap-x-theme {% if settings.card_contain %}gap-y-5 md:gap-y-8{% else %}gap-y-10{% endif %}" role="list">
-              {%- for item in search.results -%}
-                <li class="js-pagination-result">
-                  {%- case item.object_type -%}
-                    {%- when 'product' -%}
-                      {% render 'product-card', product: item, image_ratio: image_ratio, show_compare: settings.enable_compare %}
-                    {%- when 'article' -%}
-                      {% render 'article-card',
-                        article: item,
-                        image_ratio: image_ratio,
-                        show_image: section.settings.show_article_featured_image,
-                        image_ratio: image_ratio,
-                        show_author: section.settings.show_article_author,
-                        show_date: section.settings.show_article_date,
-                        show_tags: section.settings.show_article_tags,
-                        show_excerpt: section.settings.show_article_excerpt
-                      %}
-                    {%- when 'page' -%}
-                      <article class="card relative">
-                        <div class="card__info">
-                          <h3 class="card__title h5 last:mb-0">
-                            <a href="{{ item.url }}" class="card-link text-current">
-                              {{ item.title | truncate: 50 | escape }}
-                            </a>
-                          </h3>
 
-                          {%- if section.settings.show_page_excerpt -%}
-                            {%- if item.content.size > 0 -%}
-                            <p class="mb-2 last:mb-0">
-                              {{ item.content | strip_html | truncatewords: 30 }}
-                            </p>
-                            {%- endif -%}
-                          {%- endif -%}
-
-                          {%- if section.settings.show_page_date -%}
-                            <p class="text-theme-light last:mb-0">
-                              {{ item.published_at | time_tag: format: 'date' }}
-                            </p>
-                          {%- endif -%}
-                        </div>
-                      </article>
-                  {%- endcase -%}
-                </li>
+                {%- for item in search.results -%}
+                    {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+                    {% if mostrar_privado %}
+                      <li class="js-pagination-result">
+                        {%- case item.object_type -%}
+                          {%- when 'product' -%}
+                            {% render 'product-card', product: item, image_ratio: image_ratio, show_compare: settings.enable_compare %}
+                          {%- when 'article' -%}
+                            {% render 'article-card',
+                              article: item,
+                              image_ratio: image_ratio,
+                              show_image: section.settings.show_article_featured_image,
+                              image_ratio: image_ratio,
+                              show_author: section.settings.show_article_author,
+                              show_date: section.settings.show_article_date,
+                              show_tags: section.settings.show_article_tags,
+                              show_excerpt: section.settings.show_article_excerpt
+                            %}
+                          {%- when 'page' -%}
+                            <article class="card relative">
+                              <div class="card__info">
+                                <h3 class="card__title h5 last:mb-0">
+                                  <a href="{{ item.url }}" class="card-link text-current">
+                                    {{ item.title | truncate: 50 | escape }}
+                                  </a>
+                                </h3>
+      
+                                {%- if section.settings.show_page_excerpt -%}
+                                  {%- if item.content.size > 0 -%}
+                                  <p class="mb-2 last:mb-0">
+                                    {{ item.content | strip_html | truncatewords: 30 }}
+                                  </p>
+                                  {%- endif -%}
+                                {%- endif -%}
+      
+                                {%- if section.settings.show_page_date -%}
+                                  <p class="text-theme-light last:mb-0">
+                                    {{ item.published_at | time_tag: format: 'date' }}
+                                  </p>
+                                {%- endif -%}
+                              </div>
+                            </article>
+                        {%- endcase -%}
+                      </li>
+                    {%  else %}
+                      
+                      {%  if item.metafields.upng.privado != true %}
+                        <li class="js-pagination-result">
+                          {%- case item.object_type -%}
+                            {%- when 'product' -%}
+                              {% render 'product-card', product: item, image_ratio: image_ratio, show_compare: settings.enable_compare %}
+                            {%- when 'article' -%}
+                              {% render 'article-card',
+                                article: item,
+                                image_ratio: image_ratio,
+                                show_image: section.settings.show_article_featured_image,
+                                image_ratio: image_ratio,
+                                show_author: section.settings.show_article_author,
+                                show_date: section.settings.show_article_date,
+                                show_tags: section.settings.show_article_tags,
+                                show_excerpt: section.settings.show_article_excerpt
+                              %}
+                            {%- when 'page' -%}
+                              <article class="card relative">
+                                <div class="card__info">
+                                  <h3 class="card__title h5 last:mb-0">
+                                    <a href="{{ item.url }}" class="card-link text-current">
+                                      {{ item.title | truncate: 50 | escape }}
+                                    </a>
+                                  </h3>
+        
+                                  {%- if section.settings.show_page_excerpt -%}
+                                    {%- if item.content.size > 0 -%}
+                                    <p class="mb-2 last:mb-0">
+                                      {{ item.content | strip_html | truncatewords: 30 }}
+                                    </p>
+                                    {%- endif -%}
+                                  {%- endif -%}
+        
+                                  {%- if section.settings.show_page_date -%}
+                                    <p class="text-theme-light last:mb-0">
+                                      {{ item.published_at | time_tag: format: 'date' }}
+                                    </p>
+                                  {%- endif -%}
+                                </div>
+                              </article>
+                          {%- endcase -%}
+                        </li>
+                    {% endif %}
+                  {% endif %}
+                
               {%- endfor -%}
             </ul>
 

@@ -18,6 +18,18 @@
     },
     "17398785123f559b0a": {
       "type": "apps",
+      "blocks": {
+        "upango_usuarios_sec_garys_upng_usuarios_secundarios_KyjiXT": {
+          "type": "shopify://apps/upango-usuarios-sec-garys/blocks/upng-usuarios-secundarios/08f3adaf-a308-4345-9273-08b043f4c4f4",
+          "settings": {
+            "enable_permissions": "true",
+            "custom_fields": ""
+          }
+        }
+      },
+      "block_order": [
+        "upango_usuarios_sec_garys_upng_usuarios_secundarios_KyjiXT"
+      ],
       "settings": {
         "full_width": false
       }

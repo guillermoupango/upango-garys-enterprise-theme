@@ -33,7 +33,7 @@ class CollectionSelector extends HTMLElement {
   
           // Usar la vista alternativa
           const url = `/collections/${handle}?view=ajax`;
-          console.log('Fetching collection products:', url);
+          //console.log('Fetching collection products:', url);
   
           const response = await fetch(url);
           if (!response.ok) {
@@ -41,10 +41,10 @@ class CollectionSelector extends HTMLElement {
           }
   
           const html = await response.text();
-          console.log('Products received:', {
+          /* console.log('Products received:', {
               length: html.length,
               preview: html.substring(0, 100)
-          });
+          }); */
   
           if (this.productsContainer) {
               this.productsContainer.innerHTML = html;

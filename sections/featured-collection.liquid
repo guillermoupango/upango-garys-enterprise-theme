@@ -19,6 +19,8 @@
 {%- endif -%}
 
 {%- liquid
+  assign mostrar_privado = customer.b2b?
+
   assign collection = section.settings.collection
 
   assign carousel_desktop_small_promo = ' sm:auto-cols-3 md:auto-cols-2 lg:auto-cols-3 xl:auto-cols-4 small-cards-desktop'
@@ -254,15 +256,16 @@
               <ul class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}" role="list">
                 {%- if collection != blank -%}
                   {%- for product in collection.products limit: section.settings.products_to_show -%}
-                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
-                      {% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
-                    </li>
-                  {%- endfor -%}
-                {%- else -%}
-                  {%- for i in (1..section.settings.products_to_show) -%}
-                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
-                      {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
-                    </li>
+                      {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+                      {% if mostrar_privado %}
+                        <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                          {% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                        </li>
+                      {%  else %}
+                        {%  if product.metafields.upng.privado != true %}
+                          {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                      {% endif %}
+                    {% endif %}
                   {%- endfor -%}
                 {%- endif -%}
               </ul>

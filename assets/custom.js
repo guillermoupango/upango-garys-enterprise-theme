@@ -404,3 +404,35 @@
  *
  * Have fun! - The Clean Canvas Development Team.
  */
+
+/* Logica para mostrar y ocultar los precios PVD */
+
+
+function togglePvdPrices() {
+  const toggleButton = document.getElementById('togglePvdButton');
+  
+  // Verificamos que el botón existe
+  if (!toggleButton) return;
+  
+  const isPvdVisible = toggleButton.checked;
+  localStorage.setItem('pvdVisible', isPvdVisible.toString());
+
+  document.querySelectorAll('.upng-price-wrapper--pvd').forEach(item => {
+    item.style.display = isPvdVisible ? 'inline' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('togglePvdButton');
+  
+  // Verificamos que el botón existe
+  if (!toggleButton) return;
+  
+  // Recuperamos el estado, convertimos explícitamente a booleano
+  const isPvdVisible = localStorage.getItem('pvdVisible') === 'true';
+  toggleButton.checked = isPvdVisible;
+  
+  // Reutilizamos la función para actualizar la UI
+  togglePvdPrices();
+  
+});

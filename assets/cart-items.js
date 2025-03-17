@@ -589,7 +589,7 @@ if (!customElements.get('cart-items')) {
       }
     }
   }
-
+/* 
   function fetchShopifyCart() {
     fetch('/cart.js')
       .then(response => {
@@ -610,7 +610,7 @@ if (!customElements.get('cart-items')) {
   }
 
   // Llamar a la función para ejecutarla
-  fetchShopifyCart();
+  fetchShopifyCart(); */
 
   customElements.define('cart-items', CartItems);
 }

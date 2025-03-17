@@ -21,8 +21,10 @@
   assign price = variant.price | default: 1999
 -%}
 
+
+{% if customer.b2b? %}
 <div class="price{%- if compare_at_price > price %} price--on-sale{% endif -%}
-                 {%- if available == false %} price--sold-out{% endif -%}{% if class %} {{ class }}{% endif %}">
+                 {%- if available == false %} price--sold-out{% endif -%}{% if class %} {{ class }}{% endif %} upng-price-wrapper--pvd">
   <div class="price__default">
     {%- if product.price_varies and use_variant == false %}
       <span class="price__from">{{ 'products.product.from' | t }}</span>
@@ -41,3 +43,4 @@
     <strong class="price__current">{{ 'products.variant.non_existent' | t }}</strong>
   </div>
 </div>
+{% endif %}

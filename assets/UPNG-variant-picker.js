@@ -539,6 +539,10 @@ if (!customElements.get('upng-variant-picker')) {
         this.clearAllButton = tableContainer.querySelector('.variant-table__clear-button');
         this.viewCartButton = tableContainer.querySelector('.variant-table__view-cart-button');
         this.totalsLoader = tableContainer.querySelector('.variant-table__loader');
+        this.prices = tableContainer.querySelectorAll('.upng-price-wrapper--pvd');
+
+        //console.log(this.prices);
+        
 
         // Inicializar eventos para los botones de eliminar Linea
         if (this.removeButtons && this.removeButtons.length > 0) {
@@ -567,6 +571,20 @@ if (!customElements.get('upng-variant-picker')) {
       } catch (error) {
         console.error('Error loading variant table:', error);
         throw error;
+      }
+
+      finally {
+
+        const isPvdVisible = localStorage.getItem('pvdVisible') !== 'false';
+
+        console.log(isPvdVisible);
+
+        if (isPvdVisible) {
+          this.prices.forEach(el => {
+            el.style.display = 'inline';
+          });
+        }
+        
       }
     }
 

@@ -141,3 +141,21 @@
     padding-top: calc(12 * var(--space-unit));
   }
 }
+
+/* ESTILOS PERSONALIZADOS  */
+
+.pvp-container {
+  padding-bottom: 6px;
+}
+
+.pvd-container > span, .pvp-container{
+  font-size: 15px;
+}
+
+.pvd-container > span{
+  color: #868686;
+}
+
+.pvp-label{
+  padding: 0 6px;
+}

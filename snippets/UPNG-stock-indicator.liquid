@@ -10,7 +10,7 @@
   assign stock_de_variante = variant.inventory_quantity
   assign descatalogado = variant.metafields.upng.descatalogado
   assign stock_upango = variant.metafields.upng.stock_disponible
-  
+
   if descatalogado == false and stock_de_variante <= settings.inventory_threshold_very_low
     assign nivel_stock = 'backordered'
   elsif stock_de_variante <= settings.inventory_threshold_very_low
@@ -22,22 +22,27 @@
   endif
 -%}
 
-<div class="text-xs product-inventory__status" data-inventory-level="{{ nivel_stock }}">
-  {%- if descatalogado == true -%}
-    {%- if stock_de_variante < 1 -%}
-      No disponible
-    {%- elsif stock_de_variante <= 10 -%}
-      Últimas unidades
+{% if customer.b2b? %}
+  <div class="text-xs product-inventory__status" data-inventory-level="{{ nivel_stock }}">
+    {%- if descatalogado == true -%}
+      {%- if stock_de_variante < 1 -%}
+        No disponible
+      {%- elsif stock_de_variante <= 10 -%}
+        Últimas unidades
+      {%- else -%}
+        +10
+      {%- endif -%}
     {%- else -%}
-      +10
+      {%- if stock_de_variante < 1 -%}
+        0
+      {%- elsif stock_de_variante <= 10 -%}
+        {{ stock_de_variante }}
+      {%- else -%}
+        +10
+      {%- endif -%}
     {%- endif -%}
-  {%- else -%}
-    {%- if stock_de_variante < 1 -%}
-      0
-    {%- elsif stock_de_variante <= 10 -%}
-      {{ stock_de_variante }}
-    {%- else -%}
-      +10
-    {%- endif -%}
-  {%- endif -%}
-</div>
+  </div>
+
+{% else %}
+  <div class="product-inventory__status" hidden></div>
+{% endif %}

@@ -364,6 +364,7 @@
   }
 }
 
+/* ESTILOS PERSONALIZADOS  */
 .quick-add-drawer{
   position: fixed;
   top: 50%;
@@ -382,4 +383,21 @@
 }
 .quick-add-drawer .quick-add-info{
   margin-bottom: 0;
+}
+
+.quick-add-drawer .pvd-container > span, .quick-add-drawer .pvp-container{
+  font-size: 13px;
+}
+.quick-add-drawer .pvd-container > strong{
+  font-size: 16px;
+}
+.quick-add-drawer .pvp-container {
+  padding-bottom: 1px;
+}
+.quick-add-drawer .pvd-container > span{
+  color: #868686;
+}
+
+.quick-add-drawer .pvp-label{
+  padding: 0 6px;
 }

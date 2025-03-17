@@ -84,6 +84,16 @@
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "menu_cliente",
+      "namespace": "upng",
+      "name": "Menu Cliente",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
     }
   ],
   "company_location": [],
@@ -188,7 +198,7 @@
       "key": "color-pattern",
       "namespace": "shopify",
       "name": "Color",
-      "description": "Defines the primary color or pattern, such as blue or striped",
+      "description": "Define el patrón o color primario, como las rayas o el azul.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"

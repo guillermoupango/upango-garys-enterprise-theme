@@ -224,12 +224,12 @@
           {%- when 'price' -%}
             <div class="product-info__block product-info__block--sm product-price" {{ block.shopify_attributes }}>
               <div class="product-info__price">
-                {% render 'price', product: product, use_variant: true %}
+                {% render 'upng-price', product: product, use_variant: true %}
               </div>
 
               {%- if block.settings.show_tax_and_shipping -%}
                 {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
-                  <div class="product-policies text-sm rte">
+                  <div class="product-policies text-sm rte">s
                     {%- if cart.taxes_included -%}
                       {{ 'products.product.include_taxes' | t }}
                     {%- endif -%}
@@ -330,6 +330,8 @@
                           {{- 'products.product.add_to_cart' | t -}}
                         {%- endif -%}
                       {%- endcapture -%}
+
+                      
 
                       <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
                         {% if section.settings.select_first_variant == false and product.variants.size > 1 -%}

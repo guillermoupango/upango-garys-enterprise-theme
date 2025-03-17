@@ -10,6 +10,9 @@
   <script src="{{ 'cart-items.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{% if customer.b2b? %}
+
+
 {%- liquid
   if is_drawer
     assign section_id = 'cart-drawer'
@@ -186,7 +189,9 @@
                         {%- if property.last != blank and property_first_char != '_' -%}
                           <div>
                             <dt class="inline">
-                              <strong class="text-info-text"> <span class="visually-hidden">{{ property.first }}</span> {{ 'cart.custom.label' | t }}: </strong>
+                              <strong class="text-info-text">
+                                <span class="visually-hidden">{{ property.first }}</span> {{ 'cart.custom.label' | t }}:
+                              </strong>
                             </dt>
                             <dd class="inline m-0">
                               {%- if property.last contains '/uploads/' -%}
@@ -245,12 +250,14 @@
                             {% endif %}
                             onclick="document.getElementById('details-{{ item.index | plus: 1 }}').open = this.checked"
                           >
-                          <span class="text-sm bold" >{{ 'cart.custom.checkbox' | t }}</span>
+                          <span class="text-sm bold">{{ 'cart.custom.checkbox' | t }}</span>
                         </label>
                       </summary>
                       <div class="disclosure__panel has-motion">
                         <div class="disclosure__content">
-                          <label class="visually-hidden" for="item-properties-{{ item.index | plus: 1 }}">{{ 'cart.custom.label' | t }}</label>
+                          <label class="visually-hidden" for="item-properties-{{ item.index | plus: 1 }}">
+                            {{- 'cart.custom.label' | t -}}
+                          </label>
                           <textarea
                             class="input w-full"
                             id="item-properties-{{ item.index | plus: 1 }}"
@@ -345,3 +352,10 @@
     <div class="alert mt-6 bg-error-bg text-error-text" id="cart-errors" role="alert" hidden></div>
   {%- endif -%}
 </cart-items>
+
+{% else %}
+  <div class="cart-empty flex flex-col justify-center items-center h-full">
+    <p> No permitido </p>
+    <a class="btn btn--secondary" href="{{settings.signup_page.url }}">Solicitar alta</a>
+  </div>
+{% endif %}

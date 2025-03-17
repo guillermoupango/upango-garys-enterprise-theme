@@ -18,6 +18,8 @@
 {%- endif -%}
 
 {%- liquid
+  assign mostrar_privado = customer.b2b?
+
   assign carousel_desktop_small = ' md:auto-cols-3 lg:auto-cols-4 xl:auto-cols-5 small-cards-desktop'
   assign carousel_desktop_medium = ' sm:auto-cols-3 xl:auto-cols-4'
   assign carousel_desktop_large = ' sm:auto-cols-2 lg:auto-cols-3'
@@ -90,9 +92,14 @@
     <div class="container products-grid-container">
       <ul class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}" role="list">
         {%- for product in recommendations.products -%}
-          <li{% if carousel %} class="slider__item"{% endif %}>
-            {% render 'product-card', product: product %}
-          </li>
+            {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+            {% if mostrar_privado %}
+              <li{% if carousel %} class="slider__item"{% endif %}>{% render 'product-card', product: product %}</li>
+            {%  else %}
+              {%  if product.metafields.upng.privado != true %}
+                <li{% if carousel %} class="slider__item"{% endif %}>{% render 'product-card', product: product %}</li>
+            {% endif %}
+          {% endif %}
         {%- endfor -%}
       </ul>
     </div>

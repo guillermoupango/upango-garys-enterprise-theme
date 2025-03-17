@@ -1,5 +1,9 @@
 {% # theme-check-disable LiquidTag, TemplateLength %}
 
+{% if customer.b2b? %}
+<script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
 {%- liquid
   assign has_mega_nav_pills = false
   assign has_mega_nav_columns = false
@@ -46,6 +50,75 @@
     --shake-delay: 4s;
   {% endif %}
   }
+
+    /* Estilos iniciales para prevenir flash de contenido */
+
+    .upng-price-wrapper--pvd {
+      display: none;
+    }
+
+/*     .upng-price:nth-child(1) {
+      display: none;
+    } */
+
+    /* Toggle Switch Styles */
+    .pvd-toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 20px;
+    }
+
+    .pvd-toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .pvd-toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .pvd-toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(var(--text-color) / .4);
+      transition: 0.4s;
+      border-radius: 24px;
+    }
+
+    .pvd-toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    .pvd-toggle-text {
+      color: {{ section.settings.text_color.rgb }};
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    input:checked + .pvd-toggle-slider {
+      background-color:rgb(var(--btn-bg-color));;
+    }
+
+    input:checked + .pvd-toggle-slider:before {
+      transform: translateX(26px);
+    }
 {%- endstyle -%}
 
 <store-header class="header bg-theme-bg text-theme-text{% if section.settings.enable_sticky or search_is_minimised %} has-motion{% endif %}{% if search_is_minimised %} search-is-collapsed{% endif %}"
@@ -142,32 +215,74 @@
         {%- endif -%}
       {%- endif -%}
 
-      <a class="header__icon{% if settings.cart_shaking and cart != empty %} header__icon--cart-shake has-motion{% endif %} relative text-current" id="cart-icon" href="{{ routes.cart_url }}"{% if settings.cart_shaking and cart != empty %} data-shake-frequency="{{ settings.cart_shaking_frequency }}"{% endif %}{% if settings.preload_links %} data-no-instant{% endif %}>
-        {%- if settings.cart_icon == 'bag' -%}
-          {%- render 'icon-bag' -%}
-          <span class="visually-hidden">{{ 'sections.header.bag' | t }}</span>
-        {%- elsif settings.cart_icon == 'basket' -%}
-          {%- render 'icon-basket' -%}
-          <span class="visually-hidden">{{ 'sections.header.basket' | t }}</span>
-        {%- else -%}
-          {%- render 'icon-cart' -%}
-          <span class="visually-hidden">{{ 'sections.header.cart' | t }}</span>
-        {%- endif -%}
-
-        <div id="cart-icon-bubble">
-          {%- if cart != empty -%}
-            <div class="header__cart-count absolute bg-theme-text text-theme-bg text-center">
-              {%- if cart.item_count < 10000 -%}
-                <span aria-hidden="true" class="header__cart-count-number">{{ cart.item_count }}</span>
-              {%- endif -%}
-              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-            </div>
+      {% if customer.b2b? %}
+        
+        <a class="header__icon{% if settings.cart_shaking and cart != empty %} header__icon--cart-shake has-motion{% endif %} relative text-current" id="cart-icon" href="{{ routes.cart_url }}"{% if settings.cart_shaking and cart != empty %} data-shake-frequency="{{ settings.cart_shaking_frequency }}"{% endif %}{% if settings.preload_links %} data-no-instant{% endif %}>
+          {%- if settings.cart_icon == 'bag' -%}
+            {%- render 'icon-bag' -%}
+            <span class="visually-hidden">{{ 'sections.header.bag' | t }}</span>
+          {%- elsif settings.cart_icon == 'basket' -%}
+            {%- render 'icon-basket' -%}
+            <span class="visually-hidden">{{ 'sections.header.basket' | t }}</span>
+          {%- else -%}
+            {%- render 'icon-cart' -%}
+            <span class="visually-hidden">{{ 'sections.header.cart' | t }}</span>
           {%- endif -%}
+
+          <div id="cart-icon-bubble">
+            {%- if cart != empty -%}
+              <div class="header__cart-count absolute bg-theme-text text-theme-bg text-center">
+                {%- if cart.item_count < 10000 -%}
+                  <span aria-hidden="true" class="header__cart-count-number">{{ cart.item_count }}</span>
+                {%- endif -%}
+                <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        </a>
+
+        <div class="pvd-toggle-wrapper">
+          <label class="pvd-toggle-switch">
+            <input
+              type="checkbox"
+              id="togglePvdButton"
+              onclick="togglePvdPrices()"
+              checked
+            >
+            <span class="pvd-toggle-slider"></span>
+          </label>
         </div>
-      </a>
+      {%- endif -%}
+
     </div>
 
-    {%- if section.settings.menu != blank -%}
+    {%- liquid
+      assign menu_to_use = section.settings.menu
+      
+      if customer and customer.current_company.metafields.upng.menu_cliente != blank
+        assign custom_menu_handle = customer.current_company.metafields.upng.menu_cliente | strip
+        
+        # Intentar acceder directamente al menu (manera más eficiente)
+        assign custom_menu = linklists[custom_menu_handle]
+        if custom_menu != blank
+          assign menu_to_use = custom_menu
+        else
+          # Fallback: Intentar buscar ignorando mayúsculas/minúsculas
+          assign custom_menu_handle_downcase = custom_menu_handle | downcase
+          
+          # Iterar sobre todos los linklists disponibles
+          for linklist in linklists
+            assign current_handle_downcase = linklist.handle | downcase
+            if current_handle_downcase == custom_menu_handle_downcase
+              assign menu_to_use = linklist
+              break
+            endif
+          endfor
+        endif
+      endif
+    -%}
+    
+    {%- if menu_to_use != blank -%}
       {%- assign total_promo_count = 0 -%}
       {%- assign featured_links = section.settings.menu_featured_link | downcase | replace: ', ', ',' | replace: ' ,', ',' | split: ',' -%}
       <main-menu class="main-menu{% if section.settings.mobile_menu_position == "burger-left" %} main-menu--left-mob{% endif %}" data-menu-sensitivity="200">
@@ -179,7 +294,7 @@
           <div class="main-menu__content has-motion {% if section.settings.quicklinks_menu == blank and section.settings.cta_show == false and section.settings.menu_center %}justify-center{% else %}justify-between{% endif %}">
             <nav aria-label="{{ 'accessibility.main_navigation' | t }}">
               <ul class="main-nav{% if section.settings.quicklinks_menu == blank and section.settings.cta_show == false and section.settings.menu_center %} justify-center{% endif %}">
-                {%- for link in section.settings.menu.links -%}
+                {%- for link in menu_to_use.links -%}
                   {%- assign link_title_downcase = link.title | downcase -%}
                   <li>
                     {%- if link.links == blank -%}

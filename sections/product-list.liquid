@@ -13,12 +13,14 @@
 {%- if settings.enable_quick_add -%}
   <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {%- liquid
+  assign mostrar_privado = customer.b2b?
+
   assign product_list = section.settings.product_list
 
   assign carousel_desktop_small_promo = ' sm:auto-cols-3 md:auto-cols-2 lg:auto-cols-3 xl:auto-cols-4 small-cards-desktop'
@@ -254,15 +256,29 @@
               <ul class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }}{% if section.settings.layout == 'carousel_on_mobile' and section.settings.card_size_mobile == 'small' and settings.card_contain %} sm:gap-x-theme sm:gap-y-8{% else %} gap-x-theme gap-y-8{% endif %}{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}" role="list">
                 {%- if product_list != blank -%}
                   {%- for product in product_list -%}
-                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
-                      {% render 'product-card', product: product, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
-                    </li>
+                    {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+                    {% if mostrar_privado %}
+                      <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                        {% render 'product-card', product: product, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                      </li>
+                    {% else %}
+                      {%  if product.metafields.upng.privado != true %}
+                        <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                          {% render 'product-card', product: product, image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                        </li>
+                        {% endif %}
+                    {% endif %}
                   {%- endfor -%}
                 {%- else -%}
                   {%- for i in (1..8) -%}
-                    <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
-                      {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
-                    </li>
+                      {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+                      {% if mostrar_privado %}
+                        {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                      {%  else %}
+                        {%  if product.metafields.upng.privado != true %}
+                          {% render 'product-card', product: "", image_ratio: image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                      {% endif %}
+                    {% endif %}
                   {%- endfor -%}
                 {%- endif -%}
               </ul>
@@ -286,6 +302,19 @@
     </div>
   {%- endif -%}
 </div>
+
+{% comment %}
+
+  {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
+    {% if mostrar_privado %}
+      //
+    {%  else %}
+      {%  if product.metafields.upng.privado != true %}
+      //
+    {% endif %}
+  {% endif %}
+
+   {% endcomment %}
 
 {% schema %}
 {

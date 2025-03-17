@@ -3065,5 +3065,18 @@
         "content": "For a full list of JavaScript events included with Enterprise, please refer to the /assets/custom.js file within the theme code, or read our [JavaScript Technical Guide](https://cleancanvas.co.uk/support/enterprise/technical-guides/js)."
       }
     ]
+  },
+  {
+    "name": "UPANGO",
+    "settings": [      {
+      "type": "header",
+      "content": "Página de alta"
+    },
+    {
+      "type": "page",
+      "id": "signup_page",
+      "label": "Pagina de alta",
+      "info": "Info de pagina de alta"
+    },]
   }
 ]
