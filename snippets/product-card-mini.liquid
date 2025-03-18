@@ -33,18 +33,31 @@
   endif
 -%}
 
-<div class="card card--row card--related {{ classes }} relative flex"{% if id %} id="{{ id }}"{% endif %}>
+<div
+  class="card card--row card--related {{ classes }} relative flex"
+  {% if id %}
+    id="{{ id }}"
+  {% endif %}
+>
   <div class="card__media">
     {% if settings.blend_product_images %}<div class="image-blend">{% endif %}
-      {%- if product.featured_media -%}
-        <div class="media relative" style="padding-top: {{ 1 | divided_by: product.featured_media.preview_image.aspect_ratio | times: 100 }}%;">
-          {% render 'image', image: product.featured_media.preview_image, src_width: 88, srcset_2x: true, class: 'img-fit' %}
-        </div>
-      {%- else -%}
-        <div class="media relative">
-          {{ 'image' | placeholder_svg_tag: 'media__placeholder dark' }}
-        </div>
-      {%- endif -%}
+    {%- if product.featured_media -%}
+      <div
+        class="media relative"
+        style="padding-top: {{ 1 | divided_by: product.featured_media.preview_image.aspect_ratio | times: 100 }}%;"
+      >
+        {% render 'image',
+          image: product.featured_media.preview_image,
+          src_width: 88,
+          srcset_2x: true,
+          class: 'img-fit'
+        %}
+      </div>
+    {%- else -%}
+      <div class="media relative">
+        {{ 'image' | placeholder_svg_tag: 'media__placeholder dark' }}
+      </div>
+    {%- endif -%}
     {% if settings.blend_product_images %}</div>{% endif %}
   </div>
 
@@ -73,38 +86,55 @@
               {%- endif -%}
             {%- endcapture -%}
 
-            <button class="btn btn--secondary btn--sm" name="add" aria-haspopup="dialog" data-add-to-cart-text="{{ add_to_cart_text }}"
-                    {%- if product.selected_or_first_available_variant.available == false %}disabled{%- endif %}>
+            <button
+              class="btn btn--secondary btn--sm"
+              name="add"
+              aria-haspopup="dialog"
+              data-add-to-cart-text="{{ add_to_cart_text }}"
+              {%- if product.selected_or_first_available_variant.available == false %}
+                disabled
+              {%- endif %}
+            >
               {{- add_to_cart_text -}}
             </button>
           {%- endform -%}
         </product-form>
       {%- else -%}
         {%- if settings.enable_quick_add -%}
-          <button type="button"
-                  class="btn btn--secondary btn--sm js-quick-add no-js-hidden"
-                  aria-haspopup="dialog"
-                  data-product-url="{{ product.url }}">
-            {% if product.has_only_default_variant and product_not_for_sale == false %}
-              {{- 'products.product.add_to_cart' | t -}}
-            {% else %}
-              {{- 'products.product.choose_options' | t -}}
-            {% endif %}
-          </button>
-        {% else %}
-          <a class="btn btn--secondary btn--sm" href="{{ product.url }}">
-            {% if product.has_only_default_variant and product_not_for_sale == false %}
-              {{- 'products.product.add_to_cart' | t -}}
-            {% else %}
-              {{- 'products.product.choose_options' | t -}}
-            {% endif %}
-          </a>
+          {% if customer.b2b? %}
+            <button
+              type="button"
+              class="btn btn--secondary btn--sm js-quick-add no-js-hidden"
+              aria-haspopup="dialog"
+              data-product-url="{{ product.url }}"
+            >
+              {% if product.has_only_default_variant and product_not_for_sale == false %}
+                {{- 'products.product.add_to_cart' | t -}}
+              {% else %}
+                {{- 'products.product.choose_options' | t -}}
+              {% endif %}
+            </button>
+          {% else %}
+            <a class="btn btn--secondary btn--sm" href="{{ product.url }}">
+              {% if product.has_only_default_variant and product_not_for_sale == false %}
+                {{- 'products.product.add_to_cart' | t -}}
+              {% else %}
+                {{- 'products.product.choose_options' | t -}}
+              {% endif %}
+            </a>
+          {% else %}
+            <a class="btn btn--secondary w-full" href="{{settings.signup_page.url }}">Solicitar alta</a>
+          {% endif %}
         {%- endif -%}
       {%- endif -%}
     {%- endunless -%}
 
     {%- if show_close -%}
-      <button type="button" class="btn btn--icon text-current absolute top-0 end {{ close_classes }}" data-product-id="{{ product.id }}">
+      <button
+        type="button"
+        class="btn btn--icon text-current absolute top-0 end {{ close_classes }}"
+        data-product-id="{{ product.id }}"
+      >
         <span class="visually-hidden">{{ close_a11y_text }}</span>
         {% render 'icon-close' %}
       </button>

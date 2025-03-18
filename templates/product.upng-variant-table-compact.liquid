@@ -106,7 +106,6 @@
     {% endfor %}
   </tbody>
   <tfoot>
-    {% if customer.b2b? %}
       <tr class="variant-table__last-row">
         <td colspan="100%">
           <div class="flex justify-between">
@@ -139,12 +138,5 @@
           </div>
         </td>
       </tr>
-    {% else %}
-      <tr class="variant-table__last-row">
-        <td colspan="100%">
-          <a class="btn btn--secondary" href="{{settings.signup_page.url }}">Solicitar alta</a>
-        </td>
-      </tr>
-    {% endif %}
   </tfoot>
 </table>

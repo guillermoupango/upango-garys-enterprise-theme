@@ -201,7 +201,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .quick-add__product-details .variant-table tbody {
-  height: 327px;
+  height: 321px;
   min-height: auto;
   display: block;
   overflow-y: auto;

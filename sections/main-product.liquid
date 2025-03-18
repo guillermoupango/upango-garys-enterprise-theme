@@ -139,6 +139,14 @@
               {% render block %}
             </div>
 
+          {%- when 'upng-product-details-bar' -%}
+
+            {% comment %} PENDIENTE: DEFINIR METODO Y CONEXION DE METACAMPO / Ref o String a Metaobjeto {% endcomment %}
+             
+            <div class="product-info__product-bar flex gap-3 justify-between">
+            {% render 'upng-product-bar-info' %}
+            </div>
+
           {%- when 'vendor-sku' -%}
             {%- if block.settings.show_vendor or block.settings.show_sku or block.settings.show_barcode or block.settings.show_ref -%}
               <div class="product-info__block product-info__block--sm product-vendor-sku text-sm" {{ block.shopify_attributes }}>
@@ -1601,6 +1609,18 @@
           "id": "divider",
           "label": "Show dividing line below",
           "default": false
+        }
+      ]
+    },
+    {
+      "type": "upng-product-details-bar",
+      "name": "UPNG Product Details Bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "UPNG Product Details",
+          "info": "Bar with custom product details"
         }
       ]
     },

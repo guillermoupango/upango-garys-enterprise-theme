@@ -303,19 +303,6 @@
   {%- endif -%}
 </div>
 
-{% comment %}
-
-  {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
-    {% if mostrar_privado %}
-      //
-    {%  else %}
-      {%  if product.metafields.upng.privado != true %}
-      //
-    {% endif %}
-  {% endif %}
-
-   {% endcomment %}
-
 {% schema %}
 {
   "name": "Product list",

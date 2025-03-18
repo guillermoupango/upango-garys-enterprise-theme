@@ -1198,6 +1198,9 @@ address {
 .border-bottom {
   border-bottom: 1px solid rgba(var(--text-color)/0.15);
 }
+.border-none {
+  border: none !important;
+}
 
 .start {
   left: var(--start-gutter, 0);

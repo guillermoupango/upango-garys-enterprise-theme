@@ -429,25 +429,29 @@
               {%- endform -%}
             </product-form>
           {%- else -%}
-            <div class="no-js-hidden">
-              <button type="button"
-                      class="btn btn--primary w-full js-quick-add"
-                      aria-haspopup="dialog"
-                      data-product-url="{{ product_url }}"
-                      data-product-default-variant="{{ product.has_only_default_variant }}"
-                      {% if selected_color %}data-selected-color="{{ selected_color }}"{% endif %}>
-                <span class="quick-add-btn-icon block pointer-events-none">
-                  <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
-                  {% render 'icon-add-to-cart' %}
-                </span>
-                <span class="quick-add-btn-text block pointer-events-none">
-                  {{- 'products.product.choose_options' | t -}}
-                </span>
-              </button>
-              <a href="{{ product_url }}" class="btn btn--secondary quick-add-view-btn">
-                {{- 'products.product.view_details' | t -}}
-              </a>
-            </div>
+            {% if customer.b2b? %}
+              <div class="no-js-hidden">
+                <button type="button"
+                        class="btn btn--primary w-full js-quick-add"
+                        aria-haspopup="dialog"
+                        data-product-url="{{ product_url }}"
+                        data-product-default-variant="{{ product.has_only_default_variant }}"
+                        {% if selected_color %}data-selected-color="{{ selected_color }}"{% endif %}>
+                  <span class="quick-add-btn-icon block pointer-events-none">
+                    <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
+                    {% render 'icon-add-to-cart' %}
+                  </span>
+                  <span class="quick-add-btn-text block pointer-events-none">
+                    {{- 'products.product.choose_options' | t -}}
+                  </span>
+                </button>
+                <a href="{{ product_url }}" class="btn btn--secondary quick-add-view-btn">
+                  {{- 'products.product.view_details' | t -}}
+                </a>
+              </div>
+            {% else %}
+                  <a class="btn btn--secondary w-full" href="{{settings.signup_page.url }}">Solicitar alta</a>
+            {% endif %}
           {%- endif -%}
         </div>
       {%- endif -%}

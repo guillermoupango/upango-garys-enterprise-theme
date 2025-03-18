@@ -393,6 +393,8 @@
 }
 .quick-add-drawer .pvp-container {
   padding-bottom: 1px;
+  height: 43px;
+  align-items: end;
 }
 .quick-add-drawer .pvd-container > span{
   color: #868686;
