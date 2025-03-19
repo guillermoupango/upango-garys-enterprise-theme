@@ -1,74 +1,9 @@
-<style>
-  .tratamiento-icons {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .tratamiento-icon {
-    position: relative;
-    cursor: pointer;
-  }
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 4px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 12px;
-  }
-  .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #333 transparent transparent transparent;
-  }
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-  }
-</style>
-
 {%- liquid
   assign producto_composicion = product.metafields.upng.composicion.value
-  assign tratamiento_reference = product.selected_or_first_available_variant.metafields.upng.ref-tratamiento.value
 -%}
 
 <div>
-    {% if product.selected_or_first_available_variant.metafields.upng.ref-tratamiento %}
-      {% if tratamiento_reference != blank %}
-        <div class="tratamiento-icons">
-          {% for tratamiento in tratamiento_reference %}
-            <div class="tratamiento-icon tooltip">
-              {% if tratamiento.icono %}
-                {{
-                  tratamiento.icono
-                  | image_url: width: 24
-                  | image_tag: height: null, loading: 'lazy', alt: ptratamiento.tipo
-                }}
-                <span class="tooltiptext">{{ tratamiento.tipo }}</span>
-              {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endif %}
+    {% render 'UPNG-tratamiento-tooltip' %}
   </div>
   <div>
     <span>{{ producto_composicion }}</span>
