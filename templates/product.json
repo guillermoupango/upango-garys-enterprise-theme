@@ -27,11 +27,9 @@
             "show_ref": true
           }
         },
-        "custom_liquid_JUfhaV": {
-          "type": "custom-liquid",
-          "settings": {
-            "custom_liquid": "{% render 'UPNG-product-bar-info' %}"
-          }
+        "upng_product_details_bar_hXKLK3": {
+          "type": "upng-product-details-bar",
+          "settings": {}
         },
         "price": {
           "type": "price",
@@ -74,7 +72,7 @@
       "block_order": [
         "title",
         "vendor-sku",
-        "custom_liquid_JUfhaV",
+        "upng_product_details_bar_hXKLK3",
         "price",
         "variant-picker",
         "buy-buttons",
@@ -122,7 +120,7 @@
         "question_6keJgU": {
           "type": "question",
           "settings": {
-            "icon": "question_mark",
+            "icon": "check_mark_in_circle",
             "heading": "Descripción y cuidados",
             "text": "<p>&lt;img&gt; &lt;img  &lt;img&gt;<br/><br/>{{ product.metafields.upng.composicion.value }}</p>{{ product.description }}"
           }
