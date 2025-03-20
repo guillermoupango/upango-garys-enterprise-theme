@@ -114,6 +114,46 @@
       "custom_css": [],
       "settings": {}
     },
+    "upng_collapsible_C9YqPE": {
+      "type": "UPNG_collapsible",
+      "blocks": {
+        "question_Jfcz3t": {
+          "type": "question",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "heading": "Descripción y cuidados",
+            "text": "{% render 'UPNG-tratamiento-tooltip' %} <br>\n<p>{{ product.metafields.upng.composicion.value }}</p>\n<p>{{ product.description }}</p>"
+          }
+        },
+        "question_LiUnwU": {
+          "type": "question",
+          "settings": {
+            "icon": "star",
+            "heading": "Croquis y Características",
+            "text": "<div class=\"flex justify-between items-start\">\n{% assign croquis = product.metafields.upng.croquis %}\n<p>{{ product.metafields.upng.caracteristicas | metafield_tag }}</p>\n{% if croquis %}\n{{ croquis | image_url: height: 230 | image_tag: widht: null, loading: 'lazy', alt: tratamiento.tipo }}\n{% endif %}\n</div>"
+          }
+        },
+        "question_wCC3Df": {
+          "type": "question",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Guía de tallas",
+            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_Jfcz3t",
+        "question_LiUnwU",
+        "question_wCC3Df"
+      ],
+      "settings": {
+        "heading": "Detalles UPNG",
+        "heading_align": "text-center",
+        "color_scheme": "none",
+        "full_width": true
+      }
+    },
     "faq_NkeEWL": {
       "type": "faq",
       "blocks": {
@@ -147,6 +187,7 @@
         "question_jy4cYr",
         "question_mePKgB"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Detalles",
         "heading_align": "text-center",
@@ -154,8 +195,22 @@
         "full_width": true
       }
     },
+    "upng_botones_descarga_qphGgG": {
+      "type": "UPNG-botones-descarga",
+      "settings": {
+        "subtitle": "",
+        "section_padding": true,
+        "button1_visible": true,
+        "button1_text": "Descargar ficha",
+        "button1_action": "void()",
+        "button2_visible": true,
+        "button2_text": "Descargar galería HD",
+        "button2_action": "generateZIP()"
+      }
+    },
     "custom_liquid_JhdRKK": {
       "type": "custom-liquid",
+      "disabled": true,
       "custom_css": [
         "div {display: flex; justify-content: center; gap: 2rem;}"
       ],
@@ -255,7 +310,9 @@
   "order": [
     "main",
     "details",
+    "upng_collapsible_C9YqPE",
     "faq_NkeEWL",
+    "upng_botones_descarga_qphGgG",
     "custom_liquid_JhdRKK",
     "174240140262d6ac42",
     "recommendations",
