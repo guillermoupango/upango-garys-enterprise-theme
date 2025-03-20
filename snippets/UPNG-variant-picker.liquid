@@ -330,8 +330,8 @@
 </upng-variant-picker>
 
 <div class="flex justify-center gap-3 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
-  <div class="text-xs product-inventory__status" data-inventory-level="normal">Disponibilidad Inmediata</div>
-  <div class="text-xs product-inventory__status" data-inventory-level="backordered">Próxima llegada</div>
+  <div class="text-xs product-inventory__status" data-inventory-level="normal">{{- 'custom.availability.available' | t -}}</div>
+  <div class="text-xs product-inventory__status" data-inventory-level="backordered">{{- 'custom.availability.next-arrival' | t -}}</div>
 </div>
 
 <noscript>

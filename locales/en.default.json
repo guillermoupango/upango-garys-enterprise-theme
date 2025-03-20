@@ -41,9 +41,12 @@
     "stock-indicator": {
       "not-available": "Not available",
       "last-units": "Last units",
-      "more": "+10",
       "notify": "Notify me",
-    }
+    },
+    "availability": {
+      "available": "Immediate Availability",
+      "next-arrival": "Upcoming Arrival"
+    },
   },
   "general": {
     "localization": {

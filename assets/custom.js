@@ -418,7 +418,7 @@ function togglePvdPrices() {
   localStorage.setItem('pvdVisible', isPvdVisible.toString());
 
   document.querySelectorAll('.upng-price-wrapper--pvd').forEach(item => {
-    item.style.display = isPvdVisible ? 'inline' : 'none';
+    item.style.display = isPvdVisible ? 'block' : 'none';
   });
 }
 

@@ -581,7 +581,7 @@ if (!customElements.get('upng-variant-picker')) {
 
         if (isPvdVisible) {
           this.prices.forEach(el => {
-            el.style.display = 'inline';
+            el.style.display = 'block';
           });
         }
         

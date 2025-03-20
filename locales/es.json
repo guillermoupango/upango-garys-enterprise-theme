@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "custom": {
     "cart": {
       "info": "Puedes realizar cualquier comentario sobre tu pedido o brindarnos información que consideres importante.",
@@ -41,8 +41,11 @@
     "stock-indicator": {
       "not-available": "No disponible",
       "last-units": "Últimas unidades",
-      "more": "+10",
       "notify": "Consultar"
+    },
+    "availability": {
+      "available": "Disponibilidad Inmediata",
+      "next-arrival": "Próxima Llegada",
     }
   },
   "general": {
