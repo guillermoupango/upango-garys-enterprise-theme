@@ -28,7 +28,7 @@
     <div class="container">
   {%- endunless -%}
 
-  <div class="section{% unless bg_color == false %} section--padded{% if section.settings.full_width %} section--full-width{% endif %}{% endunless %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}" id="{{ section.id }}">
+  <div id="detalles-{{ product.id }}" data-section-id="seccion-detalles" class="section{% unless bg_color == false %} section--padded{% if section.settings.full_width %} section--full-width{% endif %}{% endunless %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}" id="{{ section.id }}">
     <div class="container">
       <div class="reading-width"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
         {%- if section.settings.heading != blank -%}
@@ -112,7 +112,6 @@
 {% schema %}
 {
   "name": "UPNG Collapsible content",
-  "tag": "section",
   "class": "cc-faq upng-collapsible",
   "settings": [
     {
