@@ -1,0 +1,108 @@
+{% comment %}
+  UPNG-botones-descarga.liquid
+  Section para botones de descarga configurable
+{% endcomment %}
+
+    
+
+      {% if section.settings.subtitle != blank %}
+        <div class="section__subheading rte text-center">
+          {{ section.settings.subtitle }}
+        </div>
+      {% endif %}
+
+      <div class="flex justify-center gap-4 buttons-container">
+      {% if section.settings.button1_visible %}
+        <button class="btn btn--secondary" {% if section.settings.button1_action != blank %}onclick="{{ section.settings.button1_action }}"{% endif %}>
+          <span>{{ section.settings.button1_text }}</span>{% render 'icon-chevron-down' %}
+        </button>
+      {% endif %}
+      
+      {% if section.settings.button2_visible %}
+        <button class="btn btn--secondary" {% if section.settings.button2_action != blank %}onclick="{{ section.settings.button2_action }}"{% endif %}>
+          <span>{{ section.settings.button2_text }}</span>{% render 'icon-chevron-down' %}
+        </button>
+
+      {% endif %}
+    </div>
+
+{% schema %}
+{
+  "name": "Botones de Descarga",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtítulo",
+    },
+    {
+      "type": "checkbox",
+      "id": "section_padding",
+      "label": "Añadir espaciado a la sección",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Botón 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "button1_visible",
+      "label": "Mostrar botón 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button1_text",
+      "label": "Texto del botón 1",
+      "default": "Descargar ficha"
+    },
+    {
+      "type": "text",
+      "id": "button1_action",
+      "label": "Acción JavaScript para botón 1",
+      "info": "Función JavaScript a ejecutar (ej: descargarPDF())"
+    },
+    {
+      "type": "header",
+      "content": "Botón 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "button2_visible",
+      "label": "Mostrar botón 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button2_text",
+      "label": "Texto del botón 2",
+      "default": "Descargar galería HD"
+    },
+    {
+      "type": "text",
+      "id": "button2_action",
+      "label": "Acción JavaScript para botón 2",
+      "info": "Función JavaScript a ejecutar (ej: generateZIP())"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Botones de Descarga",
+      "category": "Botones"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.buttons-container {
+  margin-top: 20px;
+}
+{% endstylesheet %}
+
+{% javascript %}
+// Puedes agregar JavaScript personalizado aquí
+{% endjavascript %}
