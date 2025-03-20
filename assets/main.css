@@ -1535,9 +1535,29 @@ button {
   border-color: rgb(var(--btn-alt-text-color));
 }
 
+.btn--tertiary {
+  outline-color: rgb(var(--btn-alt-text-color));
+  outline-offset: 3px;
+  background: rgb(245, 245, 245) linear-gradient(104deg, rgb(235, 235, 235) 60%, rgb(245, 245, 245) 60%, rgb(245, 245, 245) 100%) no-repeat 100% 100%;
+  background-size: 300% 100%;
+  color: rgb(var(--btn-alt-text-color));
+  font-weight: 500;
+}
+.btn--tertiary.is-loading {
+  color: rgba(var(--btn-alt-text-color)/0.1);
+}
+.btn--tertiary.is-loading::after {
+  border-color: rgb(var(--btn-alt-text-color));
+  border-top-color: transparent;
+}
+.btn--tertiary.is-loading::before {
+  border-color: rgb(var(--btn-alt-text-color));
+}
+
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:not(.slider-nav__btn):not([disabled]):hover,
 .btn--secondary:not(.slider-nav__btn):not([disabled]):hover,
+.btn--tertiary:not(.slider-nav__btn):not([disabled]):hover,
 .shopify-challenge__button:not([disabled]):hover,
 .shopify-payment-button .shopify-payment-button__button--unbranded:not([disabled]):hover {
     background-position: 0 100%;

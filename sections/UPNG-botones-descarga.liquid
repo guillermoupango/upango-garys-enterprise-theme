@@ -3,39 +3,62 @@
   Section para botones de descarga configurable
 {% endcomment %}
 
-    
+{% if section.settings.subtitle != blank %}
+  <div class="section__subheading rte text-center">
+    {{ section.settings.subtitle }}
+  </div>
+{% endif %}
 
-      {% if section.settings.subtitle != blank %}
-        <div class="section__subheading rte text-center">
-          {{ section.settings.subtitle }}
-        </div>
+<div class="flex justify-center gap-3 buttons-container">
+  {% if section.settings.button1_visible %}
+    <button
+      class="btn btn--tertiary"
+      {% if section.settings.button1_action != blank %}
+        onclick="{{ section.settings.button1_action }}"
       {% endif %}
+    >
+      <div class="flex items-center justify-center gap-3">
+        {% if section.settings.button1_icon_left != 'none' %}
+          {% render 'icon', icon: section.settings.button1_icon_left, height: 18, width: 20 %}
+        {% endif %}
+        <span style="line-height: 1"> {{ section.settings.button1_text }} </span>
+        {% if section.settings.button1_icon_right != 'none' %}
+          {% render 'icon', icon: section.settings.button1_icon_right, height: 18, width: 18 %}
+        {% endif %}
+      </div>
+    </button>
+  {% endif %}
 
-      <div class="flex justify-center gap-4 buttons-container">
-      {% if section.settings.button1_visible %}
-        <button class="btn btn--secondary" {% if section.settings.button1_action != blank %}onclick="{{ section.settings.button1_action }}"{% endif %}>
-          <span>{{ section.settings.button1_text }}</span>{% render 'icon-chevron-down' %}
-        </button>
+  {% if section.settings.button2_visible %}
+    <button
+      class="btn btn--tertiary"
+      {% if section.settings.button2_action != blank %}
+        onclick="{{ section.settings.button2_action }}"
       {% endif %}
-      
-      {% if section.settings.button2_visible %}
-        <button class="btn btn--secondary" {% if section.settings.button2_action != blank %}onclick="{{ section.settings.button2_action }}"{% endif %}>
-          <span>{{ section.settings.button2_text }}</span>{% render 'icon-chevron-down' %}
-        </button>
-
-      {% endif %}
-    </div>
+    >
+      <div class="flex items-center justify-center gap-3">
+        {% if section.settings.button2_icon_left != 'none' %}
+          {% render 'icon', icon: section.settings.button2_icon_left, height: 18, width: 20 %}
+        {% endif %}
+        <span style="line-height: 1">{{ section.settings.button2_text }}</span>
+        {% if section.settings.button2_icon_right != 'none' %}
+          {% render 'icon', icon: section.settings.button2_icon_right, height: 18, width: 18 %}
+        {% endif %}
+      </div>
+    </button>
+  {% endif %}
+</div>
 
 {% schema %}
 {
-  "name": "Botones de Descarga",
+  "name": "UPNG Botones de Descarga",
   "tag": "section",
-  "class": "section",
+  "class": "section upng-botones-descarga",
   "settings": [
     {
       "type": "richtext",
       "id": "subtitle",
-      "label": "Subtítulo",
+      "label": "Subtítulo"
     },
     {
       "type": "checkbox",
@@ -60,6 +83,350 @@
       "default": "Descargar ficha"
     },
     {
+      "type": "select",
+      "id": "button1_icon_left",
+      "label": "Icono izquierdo del botón 1",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "upng-descarga",
+          "label": "UPNG DESCARGA"
+        },
+        {
+          "value": "upng-pdf",
+          "label": "UPNG PDF"
+        },
+        {
+          "value": "upng-avisame",
+          "label": "UPNG AVISAME"
+        },
+        {
+          "value": "upng-galeria",
+          "label": "UPNG GALERIA"
+        },
+        {
+          "value": "award",
+          "label": "Award"
+        },
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "briefcase",
+          "label": "Briefcase"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "Chat bubble"
+        },
+        {
+          "value": "check_mark",
+          "label": "Check mark"
+        },
+        {
+          "value": "check_mark_in_circle",
+          "label": "Check mark in circle"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "credit_card",
+          "label": "Credit card"
+        },
+        {
+          "value": "dollar_sign",
+          "label": "Dollar sign"
+        },
+        {
+          "value": "dryer",
+          "label": "Dryer"
+        },
+        {
+          "value": "email",
+          "label": "Email"
+        },
+        {
+          "value": "eye",
+          "label": "Eye"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "iron",
+          "label": "Iron"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "leather",
+          "label": "Leather"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "Map pin"
+        },
+        {
+          "value": "pants",
+          "label": "Pants"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "plane",
+          "label": "Plane"
+        },
+        {
+          "value": "price_tag",
+          "label": "Price tag"
+        },
+        {
+          "value": "question_mark",
+          "label": "Question mark"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "scissors",
+          "label": "Scissors"
+        },
+        {
+          "value": "shirt",
+          "label": "Shirt"
+        },
+        {
+          "value": "shoe",
+          "label": "Shoe"
+        },
+        {
+          "value": "silhouette",
+          "label": "Silhouette"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "washing",
+          "label": "Washing"
+        }
+      ],
+      "default": "upng-pdf"
+    },
+    {
+      "type": "select",
+      "id": "button1_icon_right",
+      "label": "Icono derecho del botón 1",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "upng-descarga",
+          "label": "UPNG DESCARGA"
+        },
+        {
+          "value": "upng-pdf",
+          "label": "UPNG PDF"
+        },
+        {
+          "value": "upng-avisame",
+          "label": "UPNG AVISAME"
+        },
+        {
+          "value": "upng-galeria",
+          "label": "UPNG GALERIA"
+        },
+        {
+          "value": "award",
+          "label": "Award"
+        },
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "briefcase",
+          "label": "Briefcase"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "Chat bubble"
+        },
+        {
+          "value": "check_mark",
+          "label": "Check mark"
+        },
+        {
+          "value": "check_mark_in_circle",
+          "label": "Check mark in circle"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "credit_card",
+          "label": "Credit card"
+        },
+        {
+          "value": "dollar_sign",
+          "label": "Dollar sign"
+        },
+        {
+          "value": "dryer",
+          "label": "Dryer"
+        },
+        {
+          "value": "email",
+          "label": "Email"
+        },
+        {
+          "value": "eye",
+          "label": "Eye"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "iron",
+          "label": "Iron"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "leather",
+          "label": "Leather"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "Map pin"
+        },
+        {
+          "value": "pants",
+          "label": "Pants"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "plane",
+          "label": "Plane"
+        },
+        {
+          "value": "price_tag",
+          "label": "Price tag"
+        },
+        {
+          "value": "question_mark",
+          "label": "Question mark"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "scissors",
+          "label": "Scissors"
+        },
+        {
+          "value": "shirt",
+          "label": "Shirt"
+        },
+        {
+          "value": "shoe",
+          "label": "Shoe"
+        },
+        {
+          "value": "silhouette",
+          "label": "Silhouette"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "washing",
+          "label": "Washing"
+        }
+      ],
+      "default": "upng-descarga"
+    },
+    {
       "type": "text",
       "id": "button1_action",
       "label": "Acción JavaScript para botón 1",
@@ -82,6 +449,350 @@
       "default": "Descargar galería HD"
     },
     {
+      "type": "select",
+      "id": "button2_icon_left",
+      "label": "Icono izquierdo del botón 2",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "upng-descarga",
+          "label": "UPNG DESCARGA"
+        },
+        {
+          "value": "upng-pdf",
+          "label": "UPNG PDF"
+        },
+        {
+          "value": "upng-avisame",
+          "label": "UPNG AVISAME"
+        },
+        {
+          "value": "upng-galeria",
+          "label": "UPNG GALERIA"
+        },
+        {
+          "value": "award",
+          "label": "Award"
+        },
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "briefcase",
+          "label": "Briefcase"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "Chat bubble"
+        },
+        {
+          "value": "check_mark",
+          "label": "Check mark"
+        },
+        {
+          "value": "check_mark_in_circle",
+          "label": "Check mark in circle"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "credit_card",
+          "label": "Credit card"
+        },
+        {
+          "value": "dollar_sign",
+          "label": "Dollar sign"
+        },
+        {
+          "value": "dryer",
+          "label": "Dryer"
+        },
+        {
+          "value": "email",
+          "label": "Email"
+        },
+        {
+          "value": "eye",
+          "label": "Eye"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "iron",
+          "label": "Iron"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "leather",
+          "label": "Leather"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "Map pin"
+        },
+        {
+          "value": "pants",
+          "label": "Pants"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "plane",
+          "label": "Plane"
+        },
+        {
+          "value": "price_tag",
+          "label": "Price tag"
+        },
+        {
+          "value": "question_mark",
+          "label": "Question mark"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "scissors",
+          "label": "Scissors"
+        },
+        {
+          "value": "shirt",
+          "label": "Shirt"
+        },
+        {
+          "value": "shoe",
+          "label": "Shoe"
+        },
+        {
+          "value": "silhouette",
+          "label": "Silhouette"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "washing",
+          "label": "Washing"
+        }
+      ],
+      "default": "upng-galeria"
+    },
+    {
+      "type": "select",
+      "id": "button2_icon_right",
+      "label": "Icono derecho del botón 2",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "upng-descarga",
+          "label": "UPNG DESCARGA"
+        },
+        {
+          "value": "upng-pdf",
+          "label": "UPNG PDF"
+        },
+        {
+          "value": "upng-avisame",
+          "label": "UPNG AVISAME"
+        },
+        {
+          "value": "upng-galeria",
+          "label": "UPNG GALERIA"
+        },
+        {
+          "value": "award",
+          "label": "Award"
+        },
+        {
+          "value": "box",
+          "label": "Box"
+        },
+        {
+          "value": "briefcase",
+          "label": "Briefcase"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "Chat bubble"
+        },
+        {
+          "value": "check_mark",
+          "label": "Check mark"
+        },
+        {
+          "value": "check_mark_in_circle",
+          "label": "Check mark in circle"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "credit_card",
+          "label": "Credit card"
+        },
+        {
+          "value": "dollar_sign",
+          "label": "Dollar sign"
+        },
+        {
+          "value": "dryer",
+          "label": "Dryer"
+        },
+        {
+          "value": "email",
+          "label": "Email"
+        },
+        {
+          "value": "eye",
+          "label": "Eye"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "iron",
+          "label": "Iron"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "leather",
+          "label": "Leather"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "map_pin",
+          "label": "Map pin"
+        },
+        {
+          "value": "pants",
+          "label": "Pants"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        },
+        {
+          "value": "phone",
+          "label": "Phone"
+        },
+        {
+          "value": "plane",
+          "label": "Plane"
+        },
+        {
+          "value": "price_tag",
+          "label": "Price tag"
+        },
+        {
+          "value": "question_mark",
+          "label": "Question mark"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "scissors",
+          "label": "Scissors"
+        },
+        {
+          "value": "shirt",
+          "label": "Shirt"
+        },
+        {
+          "value": "shoe",
+          "label": "Shoe"
+        },
+        {
+          "value": "silhouette",
+          "label": "Silhouette"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "washing",
+          "label": "Washing"
+        }
+      ],
+      "default": "upng-descarga"
+    },
+    {
       "type": "text",
       "id": "button2_action",
       "label": "Acción JavaScript para botón 2",
@@ -96,13 +807,3 @@
   ]
 }
 {% endschema %}
-
-{% stylesheet %}
-.buttons-container {
-  margin-top: 20px;
-}
-{% endstylesheet %}
-
-{% javascript %}
-// Puedes agregar JavaScript personalizado aquí
-{% endjavascript %}
