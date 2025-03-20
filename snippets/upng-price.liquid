@@ -32,12 +32,12 @@
       <span class="price__from">{{ 'products.product.from' | t }}</span>
     {%- endif %}
     <div class="pvd-container flex flex-col items-start">
-      <span class="text-current text-xs upng-price-wrapper--pvd">PVD desde</span>
+      <span class="text-current text-xs upng-price-wrapper--pvd">{{ 'custom.price.pvd' | t }}</span>
       <strong class="price__current text-info-text upng-price-wrapper--pvd">{%- render 'price-as-money', price: price -%}</strong>
     </div>
     {% if product.metafields.upng.pvp %}
       <div class="pvp-container flex" >
-        <span class="upng-price-wrapper--pvd pvp-label">PVP desde</span>
+        <span class="upng-price-wrapper--pvd pvp-label">{{ 'custom.price.pvp' | t }}</span>
         <span class="">{{ product.metafields.upng.pvp | times: 100 | money }}</span>
       </div>
     {% endif %}

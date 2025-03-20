@@ -7,7 +7,44 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
+  "custom": {
+    "cart": {
+      "info": "Puedes realizar cualquier comentario sobre tu pedido o brindarnos información que consideres importante.",
+      "delivery": "Comentarios al albaran de entrega",
+      "label_placeholder": "Comentario al Dpto. de Ventas de Uniformes Gary's",
+      "delivery_placeholder": "Comentario que aparece en el Albarán",
+      "checkbox": "Personalizar este producto",
+      "placeholder": "Indica la personalización que desees sobre este producto",
+      "label": "Personalizacion",
+    },
+    "price": {
+      "pvp": "PVP desde",
+      "pvd": "PVD desde",
+    },
+    "variant-table": {
+      "color": "Color",
+      "variant-name": "Nombre variante",
+      "size": "Talla",
+      "stock": "Stock",
+      "next-arrival": "Prox. llegada",
+      "notify-me": "Avísame",
+      "discounted-price": "Precio con DTO.",
+      "quantity": "Cantidad",
+      "clear-all": "Borrar Todo",
+      "view-cart": "Ver Cesta",
+      "subtotal": "Subtotal",
+      "total-items": "Total Items",
+      "request-access": "Solicitar alta",
+      "quantity-for": "Cantidad para %{title}"
+    },
+    "stock-indicator": {
+      "not-available": "No disponible",
+      "last-units": "Últimas unidades",
+      "more": "+10",
+      "notify": "Consultar"
+    }
+  },
   "general": {
     "localization": {
       "country_label": "País/Región",
@@ -388,13 +425,9 @@
       "quantity_error": "Solo puede añadir {{ quantity }} unidades de este artículo al carrito."
     },
     "note": {
-      "add": "Añadir comentarios al pedido",
-      "edit": "Editar comentarios del pedido",
-      "info": "Puedes realizar cualquier comentario sobre tu pedido o brindarnos información que consideres importante.",
-      "label": "Comentarios del pedido",
-      "delivery": "Comentarios al albaran de entrega",
-      "label_placeholder": "Comentario al Dpto. de Ventas de Uniformes Gary's",
-      "delivery_placeholder": "Comentario que aparece en el Albarán",
+      "add": "Añadir observaciones del pedido",
+      "edit": "Editar observaciones del pedido",
+      "label": "Observaciones del pedido",
       "save": "Guardar"
     },
     "shipping_calculator": {
@@ -417,11 +450,6 @@
     "terms": {
       "agreement_html": "Acepto los <a href=\"{{ terms_url }}\" target=\"_blank\">términos y la política</a> de reembolso",
       "confirmation": "Tiene que aceptar los términos y condiciones antes de continuar."
-    },
-    "custom": {
-      "checkbox": "Personalizar este producto",
-      "placeholder": "Indica la personalización que desees sobre este producto",
-      "label": "Personalizacion"
     }
   },
   "customer": {
@@ -501,7 +529,7 @@
     "orders": {
       "title": "Historial de pedidos",
       "order_number": "Pedido",
-      "view_order": "",
+      "view_order": "Ver pedido",
       "date": "Fecha",
       "payment_status": "Estado del pago",
       "fulfillment_status": "Estado del proceso de envío",

@@ -9,10 +9,10 @@
 
 <table class="variant-table">
   <thead>
-    <tr class="variant-table__row">
-      <th class="variant-table__header">{{ option1_name }}</th>
+    <tr class="variant-table__row" style="width: 98%">
+      <th class="variant-table__header" style="width: 100px">{{ option1_name }}</th>
       {% for option2_value in option2_values %}
-        <th class="variant-table__header">{{ option2_value }}</th>
+        <th class="variant-table__header w-full">{{ option2_value }}</th>
       {% endfor %}
     </tr>
   </thead>
@@ -20,7 +20,7 @@
     {% for option1_value in option1_values %}
       <tr class="variant-table__row">
         {% comment %} Primera celda con imagen del color {% endcomment %}
-        <td class="variant-table__cell">
+        <td class="variant-table__cell" style="width: 100px">
           {% assign first_variant_of_color = null %}
           {% for variant in product.variants %}
             {% if variant.option1 == option1_value %}
@@ -85,7 +85,7 @@
                 {% unless current_variant.available %}
                   disabled
                 {% endunless %}
-                aria-label="Cantidad para {{ current_variant.title }}"
+                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
               >
               <button
                 type="button"
@@ -117,22 +117,22 @@
                 aria-label="{{- 'cart.items.remove' | t -}}"
               >
                 {% render 'icon-trash' %}
-                Borrar Todo
+                {{ 'custom.variant-table.clear-all' | t }}
               </a>
               <div class="variant-table__loader is-loading hidden"></div>
 
-              <button class="btn btn--secondary variant-table__view-cart-button">Ver Cesta</button>
+              <button class="btn btn--secondary variant-table__view-cart-button">{{ 'custom.variant-table.view-cart' | t }}</button>
             </div>
             <div class="flex justify-end items-center gap-theme">
               <div class="upng-price-wrapper--pvd">
-                <span class="variant-table__total">Subtotal:</span>
+                <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
                 <span class="variant-table__subtotal-value"
                   ><strong>{{ 0 | money }}</strong></span
                 >
               </div>
               <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
                 <span class="variant-table__total-items-value"><strong>0</strong></span>
-                <span class="variant-table__total">Total Items</span>
+                <span class="variant-table__total">{{ 'custom.variant-table.total-items' | t }}</span>
               </div>
             </div>
           </div>

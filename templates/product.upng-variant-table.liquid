@@ -4,14 +4,16 @@
   <table class="variant-table">
     <thead>
       <tr>
-        <th scope="col" class="variant-table__header table-header-left">Color</th>
-        <th scope="col" class="variant-table__header visually-hidden">Nombre variante</th>
-        <th scope="col" class="variant-table__header">Talla</th>
-        <th scope="col" class="variant-table__header">Stock</th>
-        <th scope="col" class="variant-table__header">Prox. llegada</th>
-        <th scope="col" class="variant-table__header">Avísame</th>
-        <th scope="col" class="variant-table__header"><span class="upng-price-wrapper--pvd">Precio con DTO.</span></th>
-        <th scope="col" class="variant-table__header table-header-left">Cantidad</th>
+        <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.color' | t }}</th>
+        <th scope="col" class="variant-table__header visually-hidden">{{ 'custom.variant-table.variant-name' | t }}</th>
+        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.size' | t }}</th>
+        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
+        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival' | t }}</th>
+        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
+        <th scope="col" class="variant-table__header">
+          <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price' | t }}</span>
+        </th>
+        <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
       </tr>
     </thead>
     <tbody>
@@ -80,7 +82,7 @@
                 {% unless variant.available %}
                   disabled
                 {% endunless %}
-                aria-label="Cantidad para {{ variant.title }}"
+                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
               >
               <button
                 type="button"
@@ -105,42 +107,47 @@
           </td>
         </tr>
       {% endfor %}
-      <tr class="variant-table__last-row">
-        <td colspan="3">
-          <a
-            class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
-            href="#"
-            data-index="item.index | plus: 1 "
-            aria-label="{{- 'cart.items.remove' | t -}}"
-          >
-            {% render 'icon-trash' %}
-            Borrar Todo
-          </a>
-          <div class="variant-table__loader is-loading hidden"></div>
-        </td>
-        <td colspan="2"><button class="btn btn--secondary variant-table__view-cart-button">Ver Cesta</button></td>
-        <td colspan="2">
-          <div class="upng-price-wrapper--pvd">
-            <span class="variant-table__total">Subtotal:</span>
-            <span class="variant-table__subtotal-value"
-              ><strong>{{ 0 | money }}</strong></span
-            >
-          </div>
-        </td>
-        <td colspan="1">
-          <div class="flex flex-col items-start" style="width: fit-content">
-            <span class="variant-table__total-items-value"><strong>0</strong></span>
-            <span class="variant-table__total">Total Items</span>
-          </div>
-        </td>
-      </tr>
-    </tbody>
+      </tbody>
+      <tfoot>
+        <tr class="variant-table__last-row">
+          <td colspan="100%">
+            <div class="flex justify-between">
+              <div class="flex justify-start items-center gap-theme">
+                <a
+                  class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
+                  href="#"
+                  data-index="item.index | plus: 1 "
+                  aria-label="{{- 'cart.items.remove' | t -}}"
+                >
+                  {% render 'icon-trash' %}
+                  {{ 'custom.variant-table.clear-all' | t }}
+                </a>
+                <div class="variant-table__loader is-loading hidden"></div>
+  
+                <button class="btn btn--secondary variant-table__view-cart-button">{{ 'custom.variant-table.view-cart' | t }}</button>
+              </div>
+              <div class="flex justify-end items-center gap-theme">
+                <div class="upng-price-wrapper--pvd">
+                  <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
+                  <span class="variant-table__subtotal-value"
+                    ><strong>{{ 0 | money }}</strong></span
+                  >
+                </div>
+                <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
+                  <span class="variant-table__total-items-value"><strong>0</strong></span>
+                  <span class="variant-table__total">{{ 'custom.variant-table.total-items' | t }}</span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+    </tfoot>
   </table>
 {% else %}
   <table class="w-full">
     <tr class="variant-table__last-row">
       <td colspan="100%" class="text-center border-none">
-        <a class="btn btn--secondary" href="{{settings.signup_page.url }}">Solicitar alta</a>
+        <a class="btn btn--secondary" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
       </td>
     </tr>
   </table>

@@ -90,7 +90,7 @@
                 <div class="disclosure__panel has-motion">
                   <div class="disclosure__content">
                     <span class="text-sm">
-                      {{- 'cart.note.info' | t -}}
+                      {{- 'custom.cart.info' | t -}}
                     </span>
                     <cart-note>
                       <label class="visually-hidden" for="cart-note">{{ 'cart.note.label' | t }}</label>
@@ -99,15 +99,15 @@
                         id="cart-note"
                         name="note"
                         rows="4"
-                        placeholder="{{ 'cart.note.label_placeholder' | t }}"
+                        placeholder="{{ 'custom.cart.label_placeholder' | t }}"
                       >{{ cart.note }}</textarea>
-                      <label class="visually-hidden" for="delivery-note">{{ 'cart.note.delivery' | t }}</label>
+                      <label class="visually-hidden" for="delivery-note">{{ 'custom.cart.delivery' | t }}</label>
                       <textarea
                         class="input w-full"
                         id="delivery-note"
                         name="attributes[delivery-note]"
                         rows="4"
-                        placeholder="{{ 'cart.note.delivery_placeholder' | t }}"
+                        placeholder="{{ 'custom.cart.delivery_placeholder' | t }}"
                         value="{{ cart.attributes.delivery-note }}"
                       ></textarea>
                     </cart-note>

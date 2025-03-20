@@ -24,7 +24,7 @@
   {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
     {% comment %} Pendiente Acción "Consultar" {% endcomment %}
     <span class="hover:underline hover:lighten" style="cursor: pointer">
-      Consultar
+      {{ 'custom.stock-indicator.notify' | t }}
     </span>
   {%- else -%}
     {%- if variant.inventory_quantity <= 0 and stock_upango <= 0 -%}

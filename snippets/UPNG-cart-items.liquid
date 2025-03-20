@@ -190,7 +190,7 @@
                           <div>
                             <dt class="inline">
                               <strong class="text-info-text">
-                                <span class="visually-hidden">{{ property.first }}</span> {{ 'cart.custom.label' | t }}:
+                                <span class="visually-hidden">{{ property.first }}</span> {{ 'custom.cart.label' | t }}:
                               </strong>
                             </dt>
                             <dd class="inline m-0">
@@ -250,19 +250,19 @@
                             {% endif %}
                             onclick="document.getElementById('details-{{ item.index | plus: 1 }}').open = this.checked"
                           >
-                          <span class="text-sm bold">{{ 'cart.custom.checkbox' | t }}</span>
+                          <span class="text-sm bold">{{ 'custom.cart.checkbox' | t }}</span>
                         </label>
                       </summary>
                       <div class="disclosure__panel has-motion">
                         <div class="disclosure__content">
                           <label class="visually-hidden" for="item-properties-{{ item.index | plus: 1 }}">
-                            {{- 'cart.custom.label' | t -}}
+                            {{- 'custom.cart.label' | t -}}
                           </label>
                           <textarea
                             class="input w-full"
                             id="item-properties-{{ item.index | plus: 1 }}"
                             name="properties[customization]"
-                            placeholder="{{ 'cart.custom.placeholder' | t }}"
+                            placeholder="{{ 'custom.cart.placeholder' | t }}"
                           >{% if item.properties.customization %}{{ item.properties.customization }}{% endif %}</textarea>
                         </div>
                       </div>

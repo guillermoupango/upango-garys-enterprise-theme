@@ -8,6 +8,43 @@
  * ------------------------------------------------------------
  */
 {
+  "custom": {
+    "cart": {
+      "info": "You can leave any comments about your order or provide any information you consider important.",
+      "delivery": "Delivery comments",
+      "label_placeholder": "Comment to the Sales Department",
+      "delivery_placeholder": "Comment on the Delivery Note",
+      "checkbox": "Customize this product",
+      "placeholder": "Specify the customization you want for this product.",
+      "label": "Customization"
+    },
+    "price": {
+      "pvp": "WP from",
+      "pvd": "DP from",
+    },
+    "variant-table": {
+      "color": "Color",
+      "variant-name": "Variant Name",
+      "size": "Size",
+      "stock": "Stock",
+      "next-arrival": "Next arrival",
+      "notify-me": "Notify me",
+      "discounted-price": "Discount",
+      "quantity": "Quantity",
+      "clear-all": "Clear All",
+      "view-cart": "View Cart",
+      "subtotal": "Subtotal",
+      "total-items": "Total Items",
+      "request-access": "Sign up",
+      "quantity-for": "Quantity for %{title}"
+    },
+    "stock-indicator": {
+      "not-available": "Not available",
+      "last-units": "Last units",
+      "more": "+10",
+      "notify": "Notify me",
+    }
+  },
   "general": {
     "localization": {
       "country_label": "Country/Region",
@@ -388,13 +425,9 @@
       "quantity_error": "You can only add {{ quantity }} of this item to your cart."
     },
     "note": {
-      "add": "Add order comments",
-      "edit": "Edit order comments",
-      "info": "You can leave any comments about your order or provide any information you consider important.",
-      "label": "Order comments",
-      "delivery": "Delivery comments",
-      "label_placeholder": "Comment to the Sales Department",
-      "delivery_placeholder": "Comment on the Delivery Note",
+      "add": "Add order note",
+      "edit": "Edit order note",
+      "label": "Order note",
       "save": "Save"
     },
     "shipping_calculator": {
@@ -417,11 +450,6 @@
     "terms": {
       "agreement_html": "I agree to the <a href=\"{{ terms_url }}\" target=\"_blank\">terms and refund policy</a>",
       "confirmation": "You must agree to the terms and conditions before continuing."
-    },
-    "custom": {
-      "checkbox": "Customize this product",
-      "placeholder": "Specify the customization you want for this product.",
-      "label": "Customization"
     }
   },
   "customer": {

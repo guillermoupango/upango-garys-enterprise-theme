@@ -148,7 +148,7 @@
         "question_wCC3Df"
       ],
       "settings": {
-        "heading": "Detalles UPNG",
+        "heading": "Detalles",
         "heading_align": "text-center",
         "color_scheme": "none",
         "full_width": true
@@ -202,9 +202,13 @@
         "section_padding": true,
         "button1_visible": true,
         "button1_text": "Descargar ficha",
+        "button1_icon_left": "upng-pdf",
+        "button1_icon_right": "upng-descarga",
         "button1_action": "void()",
         "button2_visible": true,
         "button2_text": "Descargar galería HD",
+        "button2_icon_left": "upng-galeria",
+        "button2_icon_right": "upng-descarga",
         "button2_action": "generateZIP()"
       }
     },
