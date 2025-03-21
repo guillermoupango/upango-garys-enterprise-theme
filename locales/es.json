@@ -192,7 +192,7 @@
       "value_reduction_html": "{{ amount }} de descuento",
       "value_reduction_up_to_html": "Hasta un {{ amount }} de descuento",
       "vendor": "Por",
-      "view_details": "Ver información",
+      "view_details": "Ver Detalles",
       "weight": "Peso",
       "xr_button": "Ver en su espacio"
     },
