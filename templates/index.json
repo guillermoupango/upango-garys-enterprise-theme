@@ -69,6 +69,55 @@
         "prevent_animation": true
       }
     },
+    "upng_tabs_product_list_GVxfHN": {
+      "type": "UPNG-tabs-product-list",
+      "blocks": {
+        "tab_pJj7e9": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Coleccion 1",
+            "tab_collection": "doctores-1",
+            "layout": "carousel",
+            "card_size_mobile": "small",
+            "card_size": "small",
+            "products_to_show": 8
+          }
+        },
+        "tab_6HxTRW": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Coleccion 2",
+            "tab_collection": "comercio-1",
+            "layout": "carousel",
+            "card_size_mobile": "small",
+            "card_size": "small",
+            "products_to_show": 4
+          }
+        },
+        "tab_AyfwcR": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Coleccion 3",
+            "tab_collection": "bar-restauracion",
+            "layout": "carousel",
+            "card_size_mobile": "large",
+            "card_size": "small",
+            "products_to_show": 4
+          }
+        }
+      },
+      "block_order": [
+        "tab_pJj7e9",
+        "tab_6HxTRW",
+        "tab_AyfwcR"
+      ],
+      "settings": {
+        "title": "Novedades",
+        "heading_align": "text-center",
+        "show_highlight_products": false,
+        "show_view_all": false
+      }
+    },
     "product_list_9RgR3c": {
       "type": "product-list",
       "settings": {
@@ -673,6 +722,7 @@
   },
   "order": [
     "slideshow",
+    "upng_tabs_product_list_GVxfHN",
     "product_list_9RgR3c",
     "collection-list",
     "shoppable-image",

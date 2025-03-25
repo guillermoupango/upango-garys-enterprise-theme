@@ -11,7 +11,7 @@
 
 <div class="flex justify-center gap-3 buttons-container">
   {% if section.settings.button1_visible %}
-    <button
+    <button id="ficha-{{ product.id }}"
       class="btn btn--tertiary"
       {% if section.settings.button1_action != blank %}
         onclick="{{ section.settings.button1_action }}"
@@ -30,7 +30,7 @@
   {% endif %}
 
   {% if section.settings.button2_visible %}
-    <button
+    <button id="galeria-{{ product.id }}"
       class="btn btn--tertiary"
       {% if section.settings.button2_action != blank %}
         onclick="{{ section.settings.button2_action }}"
