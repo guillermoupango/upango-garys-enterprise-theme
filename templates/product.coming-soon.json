@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -34,7 +25,7 @@
           "type": "message",
           "settings": {
             "icon": "calendar",
-            "title": "<h6>Coming Soon!</h6><p>We're so excited about our upcoming releases that we just couldn't keep them under wraps anymore! Drop us your email in the box below, and we'll let you know when it's good to go :)</p>",
+            "title": "<h6>Coming Soon!<\/h6><p>We're so excited about our upcoming releases that we just couldn't keep them under wraps anymore! Drop us your email in the box below, and we'll let you know when it's good to go :)<\/p>",
             "close": "none",
             "show_over_media": false,
             "visibility_duration": 7,
@@ -59,7 +50,7 @@
           "type": "product-signup",
           "settings": {
             "heading": "",
-            "text": "<p>Sign up to be the first to know when it's here</p>"
+            "text": "<p>Sign up to be the first to know when it's here<\/p>"
           }
         },
         "share": {
@@ -181,7 +172,7 @@
         "newsletter-text-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Sign up for updates, and we'll let you know when it's arrived.</p>",
+            "text": "<p>Sign up for updates, and we'll let you know when it's arrived.<\/p>",
             "enlarge_text": false
           }
         },

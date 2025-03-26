@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -50,7 +41,7 @@
           "type": "message",
           "settings": {
             "icon": "none",
-            "title": "<p><strong>Pre-order now to make sure you don't miss out!</strong><br/><br/>As soon as it's in stock, we will ship it to you.</p>",
+            "title": "<p><strong>Pre-order now to make sure you don't miss out!<\/strong><br\/><br\/>As soon as it's in stock, we will ship it to you.<\/p>",
             "close": "once",
             "show_over_media": false
           }
@@ -59,7 +50,7 @@
           "type": "newsletter-signup",
           "settings": {
             "heading": "Subscribe to our newsletter",
-            "text": "<p>Get the latest updates on all our new collections, sales, offers and product arrival dates.</p>"
+            "text": "<p>Get the latest updates on all our new collections, sales, offers and product arrival dates.<\/p>"
           }
         }
       },

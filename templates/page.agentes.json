@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -20,11 +11,11 @@
       "type": "apps",
       "blocks": {
         "upango_agentes_garys_upng_agent_companies_LCNP7a": {
-          "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-companies/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
+          "type": "shopify:\/\/apps\/upango-agentes-garys\/blocks\/upng-agent-companies\/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
           "settings": {
             "agent_carts_enabled": "true",
-            "cart_icon": "shopify://shop_images/cart-check.svg",
-            "cart_icon_empty": "shopify://shop_images/cart-x.svg",
+            "cart_icon": "shopify:\/\/shop_images\/cart-check.svg",
+            "cart_icon_empty": "shopify:\/\/shop_images\/cart-x.svg",
             "label_tipo": "default",
             "mostrar_info_agente": true,
             "mostrar_nombre_contacto": false,
