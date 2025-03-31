@@ -1,16 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "general": {
     "localization": {
-      "country_label": "Land/Region",
+      "country_label": "Land\/Region",
       "countries_error": "Fehler beim Abrufen der Länder, bitte versuchen Sie es erneut.",
       "language_label": "Sprache",
       "update": "Aktualisieren"
@@ -36,7 +27,7 @@
       "label": "Seitennummerierung",
       "next": "Nächste",
       "previous": "Vorherige",
-      "position": "Seite {{ current_page }} / {{ total_pages }}",
+      "position": "Seite {{ current_page }} \/ {{ total_pages }}",
       "position_results": "{{ visible_results }} von {{ total_results }} wird angezeigt",
       "show_more": "Mehr anzeigen"
     },
@@ -121,9 +112,9 @@
       "pickup_availability": {
         "check_other_stores": "Verfügbarkeit in anderen Shops überprüfen",
         "pick_up_available": "Abholung verfügbar",
-        "pick_up_available_at_html": "Abholung bei <strong>{{ location_name }}</strong> verfügbar",
+        "pick_up_available_at_html": "Abholung bei <strong>{{ location_name }}<\/strong> verfügbar",
         "pick_up_unavailable": "Abholung derzeit nicht verfügbar",
-        "pick_up_unavailable_at_html": "Abholung bei <strong>{{ location_name }}</strong> derzeit nicht verfügbar",
+        "pick_up_unavailable_at_html": "Abholung bei <strong>{{ location_name }}<\/strong> derzeit nicht verfügbar",
         "refresh": "Aktualisieren",
         "unavailable": "Verfügbarkeit für Abholungen konnte nicht geladen werden",
         "view_store_info": "Shop-Informationen anzeigen"
@@ -135,14 +126,14 @@
         "regular_price": "Normaler Preis",
         "sale_price": "Verkaufspreis",
         "unit_price": "Grundpreis",
-        "unit_price_separator": " / "
+        "unit_price_separator": " \/ "
       },
       "product_variants": "Produktvarianten",
       "qty": "Anzahl",
       "rating": "Bewertung",
       "reviews": "Bewertungen",
       "sale": "Sale",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Versand</a> wird beim Checkout berechnet.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Versand<\/a> wird beim Checkout berechnet.",
       "size_chart": "Größentabelle",
       "sku": "SKU:",
       "sold_out": "Ausverkauft",
@@ -235,7 +226,7 @@
     },
     "footer": {
       "payment_methods": "Zahlungsmethoden",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
       "back_to_top": "Zurück nach oben"
     },
     "collection": {
@@ -292,7 +283,7 @@
         "powered_by": "Dieser Shop wird unterstützt von"
       },
       "login_form": {
-        "admin_link_html": "Bist du der Shop-Inhaber? <a href=\"/admin\">Hier einloggen</a>",
+        "admin_link_html": "Bist du der Shop-Inhaber? <a href=\"\/admin\">Hier einloggen<\/a>",
         "error": "Falsches Passwort!",
         "heading": "Shop mit Passwort betreten",
         "password_label": "Passwort",
@@ -372,11 +363,11 @@
       "backorder": "Das Produkt  ist auf Lager und wird versandt, sobald es wieder verfügbar ist.",
       "view_cart": "Warenkorb ansehen",
       "free_shipping": "Ihre Bestellung ist versandkostenfrei!",
-      "free_shipping_deficit_html": "Geben Sie <strong>{{ amount }}</strong> mehr für <strong>kostenlosen Versand</strong> aus!",
+      "free_shipping_deficit_html": "Geben Sie <strong>{{ amount }}<\/strong> mehr für <strong>kostenlosen Versand<\/strong> aus!",
       "taxes_and_shipping_at_checkout": "Steuern, Rabatte und Versand werden beim Checkout berechnet.",
-      "taxes_and_shipping_at_checkout_html": "Steuern, Rabatte und <a href=\"{{ link }}\">Versand</a> werden beim Checkout berechnet.",
+      "taxes_and_shipping_at_checkout_html": "Steuern, Rabatte und <a href=\"{{ link }}\">Versand<\/a> werden beim Checkout berechnet.",
       "taxes_included_shipping_at_checkout": "Inklusive Steuern, Versand und Rabatte werden beim Checkout berechnet.",
-      "taxes_included_shipping_at_checkout_html": "Inklusive Steuern. <a href=\"{{ link }}\">Versand</a> und Rabatte werden beim Checkout berechnet.",
+      "taxes_included_shipping_at_checkout_html": "Inklusive Steuern. <a href=\"{{ link }}\">Versand<\/a> und Rabatte werden beim Checkout berechnet.",
       "error": "Beim Aktualisieren deines Warenkorbs ist ein Fehler aufgetreten. Bitte versuche es erneut."
     },
     "items": {
@@ -396,7 +387,7 @@
     "shipping_calculator": {
       "title": "Erhalten Sie Versandkostenschätzungen",
       "country": "Land",
-      "province": "Bundesland/Provinz",
+      "province": "Bundesland\/Provinz",
       "zip": "PLZ",
       "submit": "Berechnung",
       "single_rate": "Es ist eine Versandrate verfügbar für:",
@@ -411,7 +402,7 @@
       "continue_shopping": "Weiter shoppen"
     },
     "terms": {
-      "agreement_html": "Ich stimme den <a href=\"{{ terms_url }}\" target=\"_blank\">Bedingungen und Rückerstattungsrichtlinien zu</a>",
+      "agreement_html": "Ich stimme den <a href=\"{{ terms_url }}\" target=\"_blank\">Bedingungen und Rückerstattungsrichtlinien zu<\/a>",
       "confirmation": "Sie müssen den Nutzungsbedingungen zustimmen, bevor Sie fortfahren."
     }
   },
@@ -446,8 +437,8 @@
       "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "Ort",
-      "country": "Land/Region",
-      "province": "Bundesland/Provinz",
+      "country": "Land\/Region",
+      "province": "Bundesland\/Provinz",
       "zip": "PLZ",
       "phone": "Telefonnummer",
       "set_default": "Als Standard-Adresse festlegen",

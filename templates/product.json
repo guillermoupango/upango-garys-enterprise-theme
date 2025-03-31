@@ -53,10 +53,9 @@
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm": {
           "type": "shopify:\/\/apps\/upango-exportador-garys\/blocks\/upng-exportador-ficha-producto\/28298ecf-a279-40fd-9bfe-16b5b6f7f4a8",
           "settings": {
-            "upng_exportador_ficha_target": "",
-            "upng_exportador_label_button": "Descargar ficha producto",
-            "is_b2b": false,
-            "upng_exportador_button_id": "ficha-8354131804316"
+            "upng_exportador_ficha_button_id": "ficha-8354131804316",
+            "upng_exportador_label_button": "",
+            "is_b2b": false
           }
         }
       },

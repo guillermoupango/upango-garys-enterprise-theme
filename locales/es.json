@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "custom": {
     "cart": {
@@ -16,11 +7,11 @@
       "delivery_placeholder": "Comentario que aparece en el Albarán",
       "checkbox": "Personalizar este producto",
       "placeholder": "Indica la personalización que desees sobre este producto",
-      "label": "Personalizacion",
+      "label": "Personalizacion"
     },
     "price": {
       "pvp": "PVP desde",
-      "pvd": "PVD desde",
+      "pvd": "PVD desde"
     },
     "variant-table": {
       "color": "Color",
@@ -45,12 +36,12 @@
     },
     "availability": {
       "available": "Disponibilidad Inmediata",
-      "next-arrival": "Próxima Llegada",
+      "next-arrival": "Próxima Llegada"
     }
   },
   "general": {
     "localization": {
-      "country_label": "País/Región",
+      "country_label": "País\/Región",
       "countries_error": "Se ha producido un error al buscar los países. Inténtelo nuevamente.",
       "language_label": "Idioma",
       "update": "Idioma"
@@ -76,7 +67,7 @@
       "label": "Paginación",
       "next": "Siguiente",
       "previous": "Anterior",
-      "position": "Página {{ current_page }} / {{ total_pages }}",
+      "position": "Página {{ current_page }} \/ {{ total_pages }}",
       "position_results": "Mostrando {{ visible_results }} de {{ total_results }}",
       "show_more": "Mostrar más"
     },
@@ -161,9 +152,9 @@
       "pickup_availability": {
         "check_other_stores": "Comprobar disponibilidad en otras tiendas",
         "pick_up_available": "Recogida disponible",
-        "pick_up_available_at_html": "Recogida disponible en <strong>{{ location_name }}</strong>",
+        "pick_up_available_at_html": "Recogida disponible en <strong>{{ location_name }}<\/strong>",
         "pick_up_unavailable": "La recogida no está disponible en este momento",
-        "pick_up_unavailable_at_html": "En este momento, la recogida no está disponible en <strong>{{ location_name }}</strong>",
+        "pick_up_unavailable_at_html": "En este momento, la recogida no está disponible en <strong>{{ location_name }}<\/strong>",
         "refresh": "Actualizar",
         "unavailable": "No se ha podido cargar la disponibilidad de recogida",
         "view_store_info": "Ver información de la tienda"
@@ -175,14 +166,14 @@
         "regular_price": "Precio normal",
         "sale_price": "Precio de venta",
         "unit_price": "Precio unitario",
-        "unit_price_separator": " / "
+        "unit_price_separator": " \/ "
       },
       "product_variants": "Variantes del producto",
       "qty": "Cant.",
       "rating": "Calificación",
       "reviews": "Reseñas",
       "sale": "Oferta",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Los gastos de envío</a> se calcularán al momento de pagar.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Los gastos de envío<\/a> se calcularán al momento de pagar.",
       "size_chart": "Guía de tallas",
       "sku": "SKU:",
       "sold_out": "Agotado",
@@ -275,7 +266,7 @@
     },
     "footer": {
       "payment_methods": "Formas de pago aceptadas",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
       "back_to_top": "Volver al principio"
     },
     "collection": {
@@ -332,7 +323,7 @@
         "powered_by": "Esta tienda será desarrollada por"
       },
       "login_form": {
-        "admin_link_html": "¿Es el dueño de la tienda? <a href=\"/admin\">Inicie sesión aquí</a>",
+        "admin_link_html": "¿Es el dueño de la tienda? <a href=\"\/admin\">Inicie sesión aquí<\/a>",
         "error": "Contraseña incorrecta",
         "heading": "Ingresar a la tienda con la contraseña",
         "password_label": "Contraseña",
@@ -412,11 +403,11 @@
       "backorder": "El producto está agotado y se enviará tan pronto como vuelva a estar disponible.",
       "view_cart": "Ver carrito",
       "free_shipping": "¡El pedido es apto para el envío gratuito!",
-      "free_shipping_deficit_html": "¡Gaste <strong>{{ amount }}</strong> más para <strong>el envío gratuito!</strong>",
+      "free_shipping_deficit_html": "¡Gaste <strong>{{ amount }}<\/strong> más para <strong>el envío gratuito!<\/strong>",
       "taxes_and_shipping_at_checkout": "Impuestos, descuentos y envío calculados en la pantalla de pago.",
-      "taxes_and_shipping_at_checkout_html": "Impuestos, descuentos y <a href=\"{{ link }}\">envío</a> calculados en la pantalla de pago.",
+      "taxes_and_shipping_at_checkout_html": "Impuestos, descuentos y <a href=\"{{ link }}\">envío<\/a> calculados en la pantalla de pago.",
       "taxes_included_shipping_at_checkout": "Impuesto incluido, envío y descuentos calculados en la pantalla de pago.",
-      "taxes_included_shipping_at_checkout_html": "Impuesto incluido. <a href=\"{{ link }}\">Envío</a> y descuentos calculados en la pantalla de pago.",
+      "taxes_included_shipping_at_checkout_html": "Impuesto incluido. <a href=\"{{ link }}\">Envío<\/a> y descuentos calculados en la pantalla de pago.",
       "error": "Se ha producido un error al actualizar el carrito. Inténtelo nuevamente."
     },
     "items": {
@@ -451,7 +442,7 @@
       "continue_shopping": "Seguir comprando"
     },
     "terms": {
-      "agreement_html": "Acepto los <a href=\"{{ terms_url }}\" target=\"_blank\">términos y la política</a> de reembolso",
+      "agreement_html": "Acepto los <a href=\"{{ terms_url }}\" target=\"_blank\">términos y la política<\/a> de reembolso",
       "confirmation": "Tiene que aceptar los términos y condiciones antes de continuar."
     }
   },

@@ -7,19 +7,20 @@
         "heading_align": "text-center"
       }
     },
-    "1739449085b83f21ff": {
+    "1743418555b1a7b16d": {
       "type": "apps",
       "blocks": {
-        "upango_b2b_garys_upng_my_account_menu_QXbehp": {
-          "type": "shopify:\/\/apps\/upango-b2b-garys\/blocks\/upng-my-account-menu\/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+        "garys_biblioteca_documentos_upng_file_library_JaLpMe": {
+          "type": "shopify:\/\/apps\/garys-biblioteca-documentos\/blocks\/upng-file-library\/74b1e848-61c5-48e6-9760-81730cd00db0",
           "settings": {
-            "menu": "mi-cuenta",
+            "general_files": "General",
+            "for_me_files": "Para mí",
             "div_classes": ""
           }
         }
       },
       "block_order": [
-        "upango_b2b_garys_upng_my_account_menu_QXbehp"
+        "garys_biblioteca_documentos_upng_file_library_JaLpMe"
       ],
       "settings": {
         "full_width": false
@@ -28,6 +29,6 @@
   },
   "order": [
     "main",
-    "1739449085b83f21ff"
+    "1743418555b1a7b16d"
   ]
 }

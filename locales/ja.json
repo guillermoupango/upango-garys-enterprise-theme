@@ -1,16 +1,7 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "general": {
     "localization": {
-      "country_label": "国/地域",
+      "country_label": "国\/地域",
       "countries_error": "国の取得にエラーが発生。もう一度お試しください。",
       "language_label": "言語",
       "update": "更新"
@@ -36,7 +27,7 @@
       "label": "ページ付け",
       "next": "次",
       "previous": "前",
-      "position": "ページ {{ current_page }} / {{ total_pages }}",
+      "position": "ページ {{ current_page }} \/ {{ total_pages }}",
       "position_results": "{{ total_results }} 件中 {{ visible_results }} 件を表示",
       "show_more": "さらに表示"
     },
@@ -121,9 +112,9 @@
       "pickup_availability": {
         "check_other_stores": "他のストアで入手可能か確認",
         "pick_up_available": "受取可能",
-        "pick_up_available_at_html": "<strong>{{ location_name }}</strong>で受取可能",
+        "pick_up_available_at_html": "<strong>{{ location_name }}<\/strong>で受取可能",
         "pick_up_unavailable": "受取は現在利用不可",
-        "pick_up_unavailable_at_html": "受取は<strong>{{ location_name }}</strong>で現在利用不可",
+        "pick_up_unavailable_at_html": "受取は<strong>{{ location_name }}<\/strong>で現在利用不可",
         "refresh": "再読込",
         "unavailable": "受取を利用可能か読み込めませんでした",
         "view_store_info": "ストア情報を表示"
@@ -135,14 +126,14 @@
         "regular_price": "定価",
         "sale_price": "セール価格",
         "unit_price": "単価",
-        "unit_price_separator": " / "
+        "unit_price_separator": " \/ "
       },
       "product_variants": "商品バリエーション",
       "qty": "数量",
       "rating": "評価",
       "reviews": "レビュー",
       "sale": "セール",
-      "shipping_policy_html": "次精算時に<a href=\"{{ link }}\">配送料</a>を算出。",
+      "shipping_policy_html": "次精算時に<a href=\"{{ link }}\">配送料<\/a>を算出。",
       "size_chart": "サイズガイド",
       "sku": "SKU:",
       "sold_out": "売切れ",
@@ -235,7 +226,7 @@
     },
     "footer": {
       "payment_methods": "支払方法",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
       "back_to_top": "トップへ戻る"
     },
     "collection": {
@@ -292,7 +283,7 @@
         "powered_by": "このショップは以下を使って構築されます"
       },
       "login_form": {
-        "admin_link_html": "あなたはストアオーナーですか。<a href=\"/admin\">こちらでログイン</a>",
+        "admin_link_html": "あなたはストアオーナーですか。<a href=\"\/admin\">こちらでログイン<\/a>",
         "error": "不正確なパスワード",
         "heading": "パスワードを使ってストアにアクセス",
         "password_label": "パスワード",
@@ -372,11 +363,11 @@
       "backorder": "商品は取り寄せ中で入荷次第発送します。",
       "view_cart": "カートを表示",
       "free_shipping": "ご注文は無料配送の対象です！",
-      "free_shipping_deficit_html": "さらに<strong>{{ amount }}</strong>分購入して<strong>無料配送に！</strong>!",
+      "free_shipping_deficit_html": "さらに<strong>{{ amount }}<\/strong>分購入して<strong>無料配送に！<\/strong>!",
       "taxes_and_shipping_at_checkout": "税、ディスカウント、および配送料はチェックアウト時に計算されます",
-      "taxes_and_shipping_at_checkout_html": "税、ディスカウント、および<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます",
+      "taxes_and_shipping_at_checkout_html": "税、ディスカウント、および<a href=\"{{ link }}\">配送料<\/a>はチェックアウト時に計算されます",
       "taxes_included_shipping_at_checkout": "税込みで、配送料とディスカウントはチェックアアウト時に計算されます",
-      "taxes_included_shipping_at_checkout_html": "税込。<a href=\"{{ link }}\">配送料</a>とディスカウントはチェックアウト時に計算されます",
+      "taxes_included_shipping_at_checkout_html": "税込。<a href=\"{{ link }}\">配送料<\/a>とディスカウントはチェックアウト時に計算されます",
       "error": "カートを更新中にエラーが発生しました。もう一度お試しください。"
     },
     "items": {
@@ -411,7 +402,7 @@
       "continue_shopping": "ショッピングを続行"
     },
     "terms": {
-      "agreement_html": "条<a href=\"{{ terms_url }}\" target=\"_blank\">件と返金ポリシーに同意します。</a>",
+      "agreement_html": "条<a href=\"{{ terms_url }}\" target=\"_blank\">件と返金ポリシーに同意します。<\/a>",
       "confirmation": "続行前に利用規約に同意しなければなりません。"
     }
   },
