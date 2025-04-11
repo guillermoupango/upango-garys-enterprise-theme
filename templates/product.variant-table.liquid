@@ -47,7 +47,7 @@
         <td class="variant-table__cell variant-table__cell--status">
           {% if variant.available %}
           {% else %}
-            <button class="variant-table__button">
+            <button class="variant-table__button" variant-id="{{ variant.id }}">
               {% render 'icon', icon: 'upng-avisame', height: 24, width: 24, class: 'variant-table__icon' %}
             </button>
           {% endif %}
