@@ -20,8 +20,8 @@
   assign compare_at_price = variant.compare_at_price
   assign price = variant.price | default: 1999
 -%}
-
-<div
+{% if customer.metafields['upng-permission'].verPrecios %}
+  <div
   class="
     price{%- if compare_at_price > price %} price--on-sale{% endif -%}
     {%- if available == false %} price--sold-out{% endif -%}{% if class %} {{ class }}{% endif %}
@@ -70,3 +70,4 @@
     <strong class="price__current">{{ 'products.variant.non_existent' | t }}</strong>
   </div>
 </div>
+{% endif %}

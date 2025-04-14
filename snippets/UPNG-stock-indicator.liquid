@@ -22,7 +22,7 @@
   endif
 -%}
 
-{% if customer.b2b? %}
+{% if customer.b2b? and customer.metafields['upng-permission'].verStock %}
   <div class="text-xs product-inventory__status" data-inventory-level="{{ nivel_stock }}">
     {%- if descatalogado == true -%}
       {%- if stock_de_variante < 1 -%}

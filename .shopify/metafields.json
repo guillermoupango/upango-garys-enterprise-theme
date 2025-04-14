@@ -1,7 +1,6 @@
 {
   "article": [],
   "blog": [],
-  "brand": [],
   "collection": [
     {
       "key": "hidden",
@@ -68,7 +67,7 @@
     {
       "key": "codigo_agente_asignado2",
       "namespace": "upng",
-      "name": "Agente 2",
+      "name": "Código de agente jefe",
       "description": "Código del segundo agente",
       "type": {
         "name": "single_line_text_field",
@@ -127,6 +126,16 @@
       "namespace": "upng",
       "name": "Grupo Clientes",
       "description": "Para indicar el grupo de clientes que queremos que tenga acceso a la página",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "page_restriction",
+      "namespace": "upng",
+      "name": "Restricción de página",
+      "description": "Metacampo para identificar una página desde liquid",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -413,6 +422,26 @@
         "name": "list.file_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "external_id",
+      "namespace": "custom",
+      "name": "External ID",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "video",
+      "namespace": "upng",
+      "name": "Video",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "variant": [
@@ -424,16 +453,6 @@
       "type": {
         "name": "file_reference",
         "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "tratamiento",
-      "namespace": "upng",
-      "name": "Tratamiento",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
       }
     },
     {
@@ -504,6 +523,26 @@
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "tratamiento",
+      "namespace": "upng",
+      "name": "Tratamiento",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "pvp",
+      "namespace": "upng",
+      "name": "PVP",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
       }
     }
   ],

@@ -22,7 +22,7 @@
 -%}
 
 
-{% if customer.b2b? %}
+{% if customer.b2b? and customer.metafields.upng.verPrecios == true %}
 <div class="price{%- if compare_at_price > price %} price--on-sale{% endif -%}
                  {%- if available == false %} price--sold-out{% endif -%}{% if class %} {{ class }}{% endif %} upng-price-wrapper--pvd">
   <div class="price__default">

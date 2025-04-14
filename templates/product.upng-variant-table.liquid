@@ -7,7 +7,9 @@
         <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.color' | t }}</th>
         <th scope="col" class="variant-table__header visually-hidden">{{ 'custom.variant-table.variant-name' | t }}</th>
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.size' | t }}</th>
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
+        {% if customer.metafields['upng-permission'].verStock %}
+          <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
+        {% endif %}
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival' | t }}</th>
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
         <th scope="col" class="variant-table__header">
@@ -37,9 +39,11 @@
           <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
           <!-- Oculto - logica de mostrar / ocultar filas -->
           <td class="variant-table__cell">{{ variant.option2 }}</td>
-          <td class="variant-table__cell variant-table__cell--stock">
-            {% render 'UPNG-stock-indicator', variant: variant %}
-          </td>
+          {% if customer.metafields['upng-permission'].verStock %}
+            <td class="variant-table__cell variant-table__cell--stock">
+              {% render 'UPNG-stock-indicator', variant: variant %}
+            </td>
+          {% endif %}
           <td class="variant-table__cell variant-table__cell--date">
             {% render 'UPNG-date-indicator', variant: variant %}
           </td>
