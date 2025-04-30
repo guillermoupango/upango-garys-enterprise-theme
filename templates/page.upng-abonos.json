@@ -16,33 +16,30 @@
         "heading_align": "text-center"
       }
     },
-    "1744791569c1e103eb": {
+    "1743487399c0398fa5": {
       "type": "apps",
       "blocks": {
-        "upango_posventa_garys_upng_mis_pedidos_UAX84a": {
-          "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-pedidos/545bbf88-b761-48a8-9651-c0b85f0916b1",
+        "upango_posventa_garys_upng_mis_abonos_tnxjL4": {
+          "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-abonos/545bbf88-b761-48a8-9651-c0b85f0916b1",
           "settings": {
-            "pedido_table_headers": "Referencia Pedido.,Fecha,Estado,Total,,",
-            "pedido_lineas_table_headers": "Nombre,Referencia,Cantidad,Precio,IVA,Total",
-            "pedido_estados": "PENDIENTE,PENDIENTE;SERVIDO,SERVIDO",
-            "pedido_filtros": "",
+            "facturas_table_headers": "Fecha,Número Factura,Origen,Fecha de Vencimiento,Estado,Base,IVA,Importe",
+            "lineas_table_headers": "Producto,ID Producto,Estado,Unidades,Precio Ud,Base imponible,Dto,IVA,Importe Total",
+            "facturas_filtros": "",
             "label_tipo": "default",
             "filtros_column": 3,
-            "enlace_lineas_modal": "mostrar_lineas",
+            "enlace_lineas_modal": "no_mostrar_lineas",
             "enlace_pdf_tipo": "texto",
-            "custom_css": "",
-            "mostrar_pedido_erp": true,
-            "mostrar_pedido_web": true,
-            "mostrar_pedido_cliente": true,
+            "mostrar_numero_factura": false,
+            "mostrar_pedido_erp": false,
+            "mostrar_pedido_web": false,
+            "mostrar_pedido_cliente": false,
             "mostrar_fecha_desde": true,
-            "mostrar_fecha_hasta": true,
-            "mostrar_estado": true,
-            "repetir_pedido": false
+            "mostrar_fecha_hasta": true
           }
         }
       },
       "block_order": [
-        "upango_posventa_garys_upng_mis_pedidos_UAX84a"
+        "upango_posventa_garys_upng_mis_abonos_tnxjL4"
       ],
       "settings": {
         "full_width": false
@@ -51,6 +48,6 @@
   },
   "order": [
     "main",
-    "1744791569c1e103eb"
+    "1743487399c0398fa5"
   ]
 }

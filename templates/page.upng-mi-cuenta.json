@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -11,10 +20,16 @@
       "type": "apps",
       "blocks": {
         "upango_b2b_garys_upng_my_account_menu_QXbehp": {
-          "type": "shopify:\/\/apps\/upango-b2b-garys\/blocks\/upng-my-account-menu\/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-my-account-menu/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
             "menu": "mi-cuenta",
-            "div_classes": ""
+            "div_classes": "",
+            "micuenta_alignment": "row",
+            "div_over_column_bg_color": "#f8f8f8",
+            "div_over_column_text_color": "#0085ca",
+            "columns_desktop": 5,
+            "columns_mobile": 2,
+            "height_li": 10
           }
         }
       },

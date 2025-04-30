@@ -16,11 +16,21 @@
         "heading_align": "text-center"
       }
     },
-    "1744791531a1f0f6a2": {
+    "custom_liquid_gAUpBF": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<b>Cuidado!</b>\nLa aplicación está conectada a producción, por lo que si haces click en \"Confirmar entrega\" esta operación se envía a producción.",
+        "section_height": "default",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "17434879276b36aacf": {
       "type": "apps",
       "blocks": {
-        "upango_posventa_garys_upng_mis_albaranes_4yMbFW": {
-          "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-albaranes/545bbf88-b761-48a8-9651-c0b85f0916b1",
+        "upango_posventa_garys_upng_productos_pendientes_gTFGnW": {
+          "type": "shopify://apps/upango-posventa-garys/blocks/upng-productos-pendientes/545bbf88-b761-48a8-9651-c0b85f0916b1",
           "settings": {
             "albaranes-table-headers": "Empresa,Estado,Fecha,Cantidad,Numero,Tracking,Serie,,",
             "lineas_table_headers": "Id,Referencia,Descripción,Formato,Estado,Precio,Cantidad,Precio sin Iva,Iva,Total",
@@ -41,7 +51,7 @@
         }
       },
       "block_order": [
-        "upango_posventa_garys_upng_mis_albaranes_4yMbFW"
+        "upango_posventa_garys_upng_productos_pendientes_gTFGnW"
       ],
       "settings": {
         "full_width": false
@@ -50,6 +60,7 @@
   },
   "order": [
     "main",
-    "1744791531a1f0f6a2"
+    "custom_liquid_gAUpBF",
+    "17434879276b36aacf"
   ]
 }
