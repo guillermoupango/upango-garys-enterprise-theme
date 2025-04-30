@@ -69,6 +69,13 @@
       margin: 0 20px;
     }
 
+    @media (max-width: 768px) {
+      .pvd-toggle-wrapper {
+        margin: 0;
+        scale: 90%;
+      }
+    }
+
     .pvd-toggle-switch {
       position: relative;
       display: inline-block;
@@ -126,7 +133,7 @@
   {%- if search_is_minimised -%} data-is-search-minimised="true"{%- endif -%}
   style="--header-transition-speed: 300ms">
   <header class="header__grid{% if section.settings.logo_center %} header__grid--centered-logo{% else %} header__grid--left-logo{% endif %} container flex flex-wrap items-center">
-    <div class="header__logo logo{% if section.settings.logo_center %} text-center{% endif %} flex js-closes-menu">
+    <div class="header__logo logo{% if section.settings.logo_center %} text-center{% endif %} flex justify-center js-closes-menu">
       {%- if request.page_type == 'index' and section.settings.logo_h1 -%}
         <h1 class="logo__h1 m-0">
       {%- endif -%}

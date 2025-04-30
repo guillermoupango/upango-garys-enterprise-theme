@@ -5611,3 +5611,29 @@ cart-items .disclosure--row{
 cart-items .disclosure > summary{
   padding: calc(2 * var(--space-unit)) 0;
 }
+
+.upng-agente-info-container .upng-agente-info-section a,
+.upng-agente-info-container .upng-agente-info-section span{
+  font-family: var(--body-font-family);
+  font-weight: bolder;
+}
+
+.upng-agente-info-value::after {
+  color: rgb(var(--btn-alt-text-color)) !important;
+  opacity: 1 !important;
+  font-weight: bolder !important;
+}
+
+.search__input {
+  background-color: transparent;
+  font-size: 14px;
+  border-bottom: 1px solid;
+}
+
+@media (max-width: 768px) {
+  .header__icon {
+    width: 36px;
+    height: 40px;
+    padding: 9px 0 9px 6px;
+  }
+}
