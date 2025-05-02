@@ -17,19 +17,12 @@
         "announcement-1": {
           "type": "announcement",
           "settings": {
-            "text": "<p><strong>Welcome to our store<\/strong> <a href=\"#\" title=\"#\">Learn more<\/a><\/p>"
-          }
-        },
-        "announcement-2": {
-          "type": "announcement",
-          "settings": {
-            "text": "<p><strong>New collections added!<\/strong> <a href=\"#\" title=\"#\">Learn more<\/a><\/p>"
+            "text": "<p><strong>Welcome to our store</strong> <a href=\"#\" title=\"#\">Learn more</a></p>"
           }
         }
       },
       "block_order": [
-        "announcement-1",
-        "announcement-2"
+        "announcement-1"
       ],
       "settings": {
         "link1": "",
@@ -38,7 +31,7 @@
         "link2_label": "",
         "enable_country_selector": false,
         "enable_language_selector": true,
-        "bg_color": "#ffffff",
+        "bg_color": "#f1f1f1",
         "text_color": "#000000",
         "text_type_scale": "small",
         "read_time": 3
@@ -90,7 +83,7 @@
         "text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Share something special with your customers.<\/p>",
+            "text": "<p>Share something special with your customers.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
