@@ -294,8 +294,19 @@
 }
 .footer .social li {
   background-color: rgb(var(--btn-bg-color));
-  border-radius: 50%;
-}
-.footer .social li a {
-  color: black;
-}
+    border-radius: 50%;
+  }
+  
+  .footer .social li a {
+    color: white;
+  }
+  
+  .footer .input-with-button {
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid;
+  }
+  
+  .footer .input-with-button svg {
+    color: rgb(var(--btn-bg-color));
+  }

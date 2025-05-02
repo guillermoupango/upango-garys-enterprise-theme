@@ -53,14 +53,14 @@
           "type": "buy-buttons",
           "disabled": true,
           "settings": {
-            "show_qty_selector": true,
+            "show_qty_selector": false,
             "enable_dynamic_checkout": false,
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
           }
         },
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm": {
-          "type": "shopify:\/\/apps\/upango-exportador-garys\/blocks\/upng-exportador-ficha-producto\/28298ecf-a279-40fd-9bfe-16b5b6f7f4a8",
+          "type": "shopify://apps/upango-exportador-garys/blocks/upng-exportador-ficha-producto/28298ecf-a279-40fd-9bfe-16b5b6f7f4a8",
           "settings": {
             "upng_exportador_ficha_button_id": "ficha-8354131804316",
             "upng_exportador_label_button": "",
@@ -121,7 +121,7 @@
           "settings": {
             "icon": "check_mark_in_circle",
             "heading": "Descripción y cuidados",
-            "text": "{% render 'UPNG-tratamiento-tooltip' %} <br>\n<p>{{ product.metafields.upng.composicion.value }}<\/p>\n<p>{{ product.description }}<\/p>"
+            "text": "{% render 'UPNG-tratamiento-tooltip' %} <br>\n<p>{{ product.metafields.upng.composicion.value }}</p>\n<p>{{ product.description }}</p>"
           }
         },
         "question_LiUnwU": {
@@ -129,7 +129,7 @@
           "settings": {
             "icon": "star",
             "heading": "Croquis y Características",
-            "text": "<div class=\"flex justify-between items-start\">\n{% assign croquis = product.metafields.upng.croquis %}\n<p>{{ product.metafields.upng.caracteristicas | metafield_tag }}<\/p>\n{% if croquis %}\n{{ croquis | image_url: height: 230 | image_tag: widht: null, loading: 'lazy', alt: tratamiento.tipo }}\n{% endif %}\n<\/div>"
+            "text": "<div class=\"flex justify-between items-start\">\n{% assign croquis = product.metafields.upng.croquis %}\n<p>{{ product.metafields.upng.caracteristicas | metafield_tag }}</p>\n{% if croquis %}\n{{ croquis | image_url: height: 230 | image_tag: widht: null, loading: 'lazy', alt: tratamiento.tipo }}\n{% endif %}\n</div>"
           }
         },
         "question_wCC3Df": {
@@ -137,7 +137,7 @@
           "settings": {
             "icon": "ruler",
             "heading": "Guía de tallas",
-            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}<\/p>"
+            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}</p>"
           }
         }
       },
@@ -161,7 +161,7 @@
           "settings": {
             "icon": "check_mark_in_circle",
             "heading": "Descripción y cuidados",
-            "text": "<p>&lt;img&gt; &lt;img  &lt;img&gt;<br\/><br\/>{{ product.metafields.upng.composicion.value }}<\/p>{{ product.description }}"
+            "text": "<p>&lt;img&gt; &lt;img  &lt;img&gt;<br/><br/>{{ product.metafields.upng.composicion.value }}</p>{{ product.description }}"
           }
         },
         "question_jy4cYr": {
@@ -169,7 +169,7 @@
           "settings": {
             "icon": "star",
             "heading": "Croquis y Características",
-            "text": "{{ product.metafields.upng.caracteristicas | metafield_tag }}<p><\/p>"
+            "text": "{{ product.metafields.upng.caracteristicas | metafield_tag }}<p></p>"
           }
         },
         "question_mePKgB": {
@@ -177,7 +177,7 @@
           "settings": {
             "icon": "ruler",
             "heading": "Guía de tallas",
-            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}<\/p>"
+            "text": "<p>{{ product.metafields.upng.tabla_de_medidas.value }}</p>"
           }
         }
       },
@@ -218,7 +218,7 @@
         "div {display: flex; justify-content: center; gap: 2rem;}"
       ],
       "settings": {
-        "custom_liquid": "<button class=\"btn btn--secondary\">\n<span>Descargar ficha<\/span>{% render 'icon-chevron-down' %}\n<\/button>\n\n<button class=\"btn btn--secondary\" onclick=\"generateZIP()\">\n<span>Descargar galería HD<\/span>{% render 'icon-chevron-down' %}<\/button>",
+        "custom_liquid": "<button class=\"btn btn--secondary\">\n<span>Descargar ficha</span>{% render 'icon-chevron-down' %}\n</button>\n\n<button class=\"btn btn--secondary\" onclick=\"generateZIP()\">\n<span>Descargar galería HD</span>{% render 'icon-chevron-down' %}</button>",
         "section_height": "tight",
         "full_width": false,
         "dividers": "none",
@@ -229,7 +229,7 @@
       "type": "apps",
       "blocks": {
         "upango_b2b_garys_upng_download_images_ejQKMW": {
-          "type": "shopify:\/\/apps\/upango-b2b-garys\/blocks\/upng-download-images\/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-download-images/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
             "show_button": false,
             "text_button": "Descarga imágenes",
@@ -269,7 +269,7 @@
         "text_KD6ynB": {
           "type": "text",
           "settings": {
-            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
             "enlarge_text": false
           }
         }
@@ -283,7 +283,7 @@
         ".media-with-text {--media-width: 60%; margin: 0; max-width: 100%;}"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/Rectangle_8_c08fb2c9-64b7-4d23-967e-2098827764ed.jpg",
+        "image": "shopify://shop_images/Rectangle_8_c08fb2c9-64b7-4d23-967e-2098827764ed.jpg",
         "video_external": "",
         "video_description": "",
         "video_autoplay": false,
@@ -302,7 +302,7 @@
         ".product-tags {display: flex; flex-wrap: wrap; gap: 1rem;}"
       ],
       "settings": {
-        "custom_liquid": "{% if product.tags.size > 0 %}\n  <div class=\"product-tags\">\n    {% for tag in product.tags %}\n      <button class=\"btn btn--secondary\">{{ tag }}<\/button>\n    {% endfor %}\n  <\/div>\n{% endif %}",
+        "custom_liquid": "{% if product.tags.size > 0 %}\n  <div class=\"product-tags\">\n    {% for tag in product.tags %}\n      <button class=\"btn btn--secondary\">{{ tag }}</button>\n    {% endfor %}\n  </div>\n{% endif %}",
         "section_height": "default",
         "full_width": false,
         "dividers": "none",
