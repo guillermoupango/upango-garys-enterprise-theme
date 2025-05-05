@@ -1,16 +1,65 @@
 {{ 'article.css' | asset_url | stylesheet_tag }}
+<style>
+  .content-title-micuenta {
+    display: grid !important;
+    grid-template-columns: 2fr 8fr 2fr !important;
+  }
+  .content-title-micuenta div { 
+      display: flex ;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+  }
+  .div_over_column_text_color_web {
+      color: {{ section.settings.div_over_column_text_color_web }} !important;
+  }
+  .div_over_column_text_color_web a{
+    color: {{ section.settings.div_over_column_text_color_web }} !important;
+    display: flex ;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+  }
 
-<div class="container">
+  @media (max-width: 668px) {
+    .content-title-micuenta {
+      display: flex !important;
+      flex-direction: column-reverse !important;
+    }
+    .boton_exit_web{
+      display: flex!important;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+</style>
+<div class="container  ">
+  {%- if section.settings.boton_exit_web == true -%} <div class="content-title-micuenta ">{%-endif-%}
   {%- if section.settings.show_page_title -%}
+    {%- if section.settings.boton_exit_web == true -%}<div></div>{%-endif-%}
     <div class="reading-width rte mb-6 md:mb-8 mt-10 md:mt-16 mx-auto">
       <h1 class="page__title lg:mt-8 {{ section.settings.heading_align }}">{{ page.title | escape }}</h1>
     </div>
+    {%- if section.settings.boton_exit_web == true -%}
+        <div class="boton_exit_web">
+          {% # Close session button %}
+          <a href="{{ routes.account_logout_url }}" data-no-instant >
+            <span class="div_over_column_text_color_web" >{{ 'upango.customer.log_out' | t }} </span>
+            {%- if section.settings.icon_exit != blank -%}
+              <img src="{{ section.settings.icon_exit | image_url: width: 120 }}"/>
+            {%-endif-%}
+          </a>
+          {%- if section.settings.boton_exit_web == true -%} </div >{%-endif-%}
+      {%- endif -%}
   {%- endif -%}
 
   <div class="page__content reading-width rte article-content mt-12 mx-auto">
     {{ page.content }}
   </div>
-</div>
+</>
 
 <script>
   document.querySelectorAll('.page__content table').forEach((table) => {
@@ -52,6 +101,23 @@
         }
       ],
       "default": "text-center"
+    },
+    {
+      "type": "checkbox",
+      "id": "boton_exit_web",
+      "default": false,
+      "label": "Mostrar botón Cerrar Sesión"
+    },
+    {
+      "type": "color",
+      "id": "div_over_column_text_color_web",
+      "label": "Color del texto ",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "image_picker",
+      "label": "Icono salir",
+      "id": "icon_exit"
     }
   ]
 }

@@ -601,5 +601,10 @@
       "sku": "SKU1234",
       "description": "Una descripción del producto, incluida información como la calidad de fabricación, los materiales utilizados y los motivos de compra."
     }
+  },
+  "upango":{
+    "customer": {
+      "log_out": "SALIR"
+    }
   }
 }

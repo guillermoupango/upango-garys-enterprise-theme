@@ -1,6 +1,7 @@
 {
   "article": [],
   "blog": [],
+  "brand": [],
   "collection": [
     {
       "key": "hidden",
@@ -134,7 +135,7 @@
     {
       "key": "page_restriction",
       "namespace": "upng",
-      "name": "Restricción de página",
+      "name": "Restricción de pagina",
       "description": "Metacampo para identificar una página desde liquid",
       "type": {
         "name": "single_line_text_field",
