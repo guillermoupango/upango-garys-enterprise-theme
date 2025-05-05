@@ -378,6 +378,7 @@
     "card_show_inventory": false,
     "card_atc_mobile": "text_button_bottom",
     "card_atc_desktop": "text_button_bottom",
+    "show_dividers": false,
     "card_contain": false,
     "card_bg_color": "#ffffff",
     "card_text_color": "#26262b",

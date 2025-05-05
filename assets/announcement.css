@@ -61,7 +61,7 @@ body:not(.tab-used) .announcement__localization .custom-select__btn:focus {
   display: inline-block;
 }
 .announcement__localization .custom-select__listbox {
-  min-width: 100px;
+  min-width: 120px;
 }
 
 .announcement__col--left {

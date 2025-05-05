@@ -18,6 +18,11 @@
   - native_name {String} - Unique 'name' attribute for the native select element (optional).
   - native_form_id {String} - Associated form for the native select element, if outside the form (optional).
 
+  # NUEVA LOGICA PARA MOSTRAR ICONOS DENTRO DEL SELECTOR
+
+  - show_icons {Boolean} - Show icons next to options (optional, default is false).
+  - icon_type {String} - Type of icon to show (optional, options: 'flag' for language selector).
+
   Usage:
   {%- assign values = 'Blue,Green,Red' | split: ',' -%}
   {% render 'custom-select',
@@ -78,6 +83,11 @@
                 style="--native-swatch-color: rgb({{ selected_value.swatch.color.rgb }})"
               {%- endif %}
             {%- endif %}>
+      {% if show_icons and icon_type == 'flag' and selected_value != blank %}
+        <span class="custom-select__icon-container mr-2">
+          {% render 'flag', iso_code: selected_value, width: 20, height: 20 %}
+        </span>
+      {% endif %}
       <span class="text-start">{{- selected_name -}}</span>
       <svg width="20" height="20" viewBox="0 0 24 24" class="icon" role="presentation" focusable="false" aria-hidden="true">
         <path d="M20 8.5 12.5 16 5 8.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
@@ -101,6 +111,11 @@
               {%- endif %}
             {% endif %}
             {%- if value == selected_value %} aria-selected="true"{% endif %}>
+          {% if show_icons and icon_type == 'flag' %}
+            <span class="custom-select__icon-container mr-2">
+              {% render 'flag', iso_code: value, width: 20, height: 20 %}
+            </span>
+          {% endif %}
           <span class="pointer-events-none">{{- option_names[forloop.index0] -}}</span>
         </li>
       {%- endfor -%}
@@ -129,3 +144,20 @@
     </select>
   </div>
 {%- endif -%}
+
+<style>
+  .custom-select__icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-select__option {
+    padding: 0.5rem 1rem;
+  }
+  
+  .custom-select__btn {
+    display: flex;
+    align-items: center;
+  }
+</style>

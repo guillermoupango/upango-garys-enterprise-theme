@@ -138,7 +138,7 @@
       "awaiting_sale": "Este producto no está disponible para comprar todavía.",
       "backorder": "está agotado y se enviará tan pronto como vuelva a estar disponible.",
       "barcode": "Código de barras:",
-      "choose_options": "Elegir opciones",
+      "choose_options": "Compra Rápida",
       "description": "Descripción",
       "from": "Desde",
       "include_taxes": "Impuestos incluidos.",
@@ -275,7 +275,7 @@
     },
     "footer": {
       "payment_methods": "Formas de pago aceptadas",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
+      "copyright_html": "{{ year }} Copyright &copy;<a href=\"{{ shop_url }}\">UNIFORMES GARY'S, S.L.U.<\/a>.Todos los derechos reservados",
       "back_to_top": "Volver al principio"
     },
     "collection": {

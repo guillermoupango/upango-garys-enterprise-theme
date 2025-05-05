@@ -4,11 +4,13 @@
   - id {String} - Unique id for the form.
   - hide_labels {Boolean} - Visually hide the selector labels (optional, default is false).
   - include_native {Boolean} - Include a hidden native select element (optional, default is false).
+  - show_flags {Boolean} - Show flags next to language options (optional, default is false).
 
   Usage:
   {% render 'localization-form',
     id: 'header-localization',
-    hide_labels: true
+    hide_labels: true,
+    show_flags: true
   %}
 {%- endcomment -%}
 
@@ -116,7 +118,9 @@
           option_names: language_names,
           selected_value: localization.language.iso_code,
           include_native: include_native,
-          native_name: 'locale_code'
+          native_name: 'locale_code',
+          show_icons: true,
+          icon_type: 'flag'
         -%}
       </div>
     {%- endif -%}

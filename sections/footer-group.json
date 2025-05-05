@@ -17,10 +17,10 @@
         "text": {
           "type": "text",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Garys-Inv.png",
+            "image": "shopify://shop_images/garys-inv_1.png",
             "image_width": 150,
             "heading": "",
-            "text": "<p>Share store details, promotions, or brand content with your customers.<\/p>",
+            "text": "<p>Share store details, promotions, or brand content with your customers.</p>",
             "button_label": "",
             "button_link": "",
             "enable_follow_on_shop": false,
@@ -46,7 +46,7 @@
           "type": "newsletter",
           "settings": {
             "heading": "Newsletter",
-            "text": "<p>Únete para estar al tanto de nuestras ofertas y novedades.<\/p>",
+            "text": "<p>Únete para estar al tanto de nuestras ofertas y novedades.</p>",
             "collapse_mobile": true
           }
         }
@@ -63,9 +63,9 @@
         "show_powered_by": false,
         "enable_country_selector": false,
         "enable_language_selector": false,
-        "secondary_menu": "",
-        "bg_color": "#000000",
-        "text_color": "#ffffff"
+        "secondary_menu": "footer",
+        "bg_color": "#f1f1f1",
+        "text_color": "#000000"
       }
     }
   },
