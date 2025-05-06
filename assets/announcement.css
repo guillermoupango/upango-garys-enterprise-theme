@@ -115,3 +115,35 @@ body:not(.tab-used) .announcement__localization .custom-select__btn:focus {
     text-align: start;
   }
 }
+
+/* ESTILOS BARRA DE AGENTE */
+
+.upng-agente-info-container{
+  padding: 6px 0;
+}
+.upng-agente-info-container .upng-working-with{
+  font-weight: lighter !important;
+}
+.upng-agente-info-section-change{
+  font-weight: lighter;
+  color: rgb(var(--btn-bg-color));
+}
+
+.upng-agente-info-container .upng-agente-info-section-company::after,
+.upng-agente-info-section-agent-name::after {
+  font-weight: bolder !important;
+  color: rgb(var(--btn-bg-color)) !important;
+}
+.upng-agente-info-section-customer-name::after {
+  display: none !important;
+}
+
+.upng-agente-info-container .upng-agente-info-section-tel .upng-agente-info-value,
+.upng-agente-info-container .upng-agente-info-section .upng-agente-info-value {
+  padding-inline-start: 0.5rem;
+}
+.upng-agente-info-container .upng-agente-info-section-tel img,
+.upng-agente-info-container .upng-agente-info-section img {
+  width: 23px;
+  margin-inline-start: 0.5rem;
+}
