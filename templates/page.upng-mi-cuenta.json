@@ -13,7 +13,10 @@
       "type": "main-page",
       "settings": {
         "show_page_title": true,
-        "heading_align": "text-center"
+        "heading_align": "text-center",
+        "boton_exit_web": true,
+        "div_over_column_text_color_web": "#0085ca",
+        "icon_exit": "shopify://shop_images/icon-exit.svg"
       }
     },
     "1739449085b83f21ff": {
@@ -24,12 +27,15 @@
           "settings": {
             "menu": "mi-cuenta",
             "div_classes": "",
+            "boton_exit": true,
+            "columns_desktop": 5,
+            "columns_mobile": 2,
+            "height_li": 10,
+            "text_alignment": "left",
             "micuenta_alignment": "row",
             "div_over_column_bg_color": "#f8f8f8",
             "div_over_column_text_color": "#0085ca",
-            "columns_desktop": 5,
-            "columns_mobile": 2,
-            "height_li": 10
+            "size_img": 25
           }
         }
       },

@@ -44,8 +44,10 @@
           "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-companies/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
           "settings": {
             "agent_carts_enabled": "true",
-            "cart_icon": "shopify://shop_images/cart-check.svg",
             "cart_icon_empty": "shopify://shop_images/cart-x.svg",
+            "icon_visits": "shopify://shop_images/ico-detalle_carrito-pantalla-agentes.svg",
+            "cart_icon_detail": "shopify://shop_images/ico-ultimo-acceso-pantalla-agentes.svg",
+            "icon_clic_agent": "shopify://shop_images/ico-boton-seleccionar-pantalla-agentes.svg",
             "label_tipo": "default",
             "mostrar_info_agente": true,
             "mostrar_nombre_contacto": false,
