@@ -69,79 +69,47 @@
         "prevent_animation": true
       }
     },
-    "upng_tabs_product_list_GVxfHN": {
-      "type": "UPNG-tabs-product-list",
+    "upng_product_list_with_tabs_wDayak": {
+      "type": "UPNG-product-list-with-tabs",
       "blocks": {
-        "tab_pJj7e9": {
-          "type": "tab",
+        "collection_idQefX": {
+          "type": "collection",
           "settings": {
-            "tab_title": "Coleccion 1",
-            "tab_collection": "doctores-1",
-            "layout": "carousel",
-            "card_size_mobile": "small",
-            "card_size": "small",
-            "products_to_show": 8
+            "collection": "comercio-1",
+            "tab_title": ""
           }
         },
-        "tab_6HxTRW": {
-          "type": "tab",
+        "collection_qez9ck": {
+          "type": "collection",
           "settings": {
-            "tab_title": "Coleccion 2",
-            "tab_collection": "comercio-1",
-            "layout": "carousel",
-            "card_size_mobile": "small",
-            "card_size": "small",
-            "products_to_show": 4
+            "collection": "doctores-1",
+            "tab_title": ""
           }
         },
-        "tab_AyfwcR": {
-          "type": "tab",
+        "collection_x7AaCj": {
+          "type": "collection",
           "settings": {
-            "tab_title": "Coleccion 3",
-            "tab_collection": "bar-restauracion",
-            "layout": "carousel",
-            "card_size_mobile": "large",
-            "card_size": "small",
-            "products_to_show": 4
+            "collection": "bar-restauracion",
+            "tab_title": ""
           }
         }
       },
       "block_order": [
-        "tab_pJj7e9",
-        "tab_6HxTRW",
-        "tab_AyfwcR"
+        "collection_idQefX",
+        "collection_qez9ck",
+        "collection_x7AaCj"
       ],
+      "name": "Product list with tabs",
       "settings": {
-        "title": "Novedades",
-        "heading_align": "text-center",
-        "show_highlight_products": false,
-        "show_view_all": false
-      }
-    },
-    "product_list_9RgR3c": {
-      "type": "product-list",
-      "settings": {
-        "title": "Novedades",
+        "title": "UPANGO Collections with Tabs",
         "heading_align": "text-center",
         "view_all_url": "",
-        "product_list": [
-          "upng-test-sin-variant-featured-image",
-          "pantalon-unisex-goma-cordon-exterior-microfibra",
-          "pantalon-unisex-goma",
-          "camiseta-hombre-slim"
-        ],
+        "products_to_show": 8,
         "layout": "carousel",
         "card_size_mobile": "small",
         "card_size": "small",
         "show_highlight_products": true,
-        "show_promo_info": false,
-        "image_ratio": "fill",
-        "promo_title": "A headline to grab attention",
-        "content": "<p>Use this card with an image to highlight your product list or introduce a promotion.</p>",
-        "link_url": "",
-        "button_label": "Button",
-        "color_scheme": "2",
-        "button_style": "btn btn--primary"
+        "color_scheme": "default"
       }
     },
     "collection-list": {
@@ -238,7 +206,7 @@
         "hotspot-2"
       ],
       "custom_css": [
-        "@media (min-width: 1024px) {.shoppable-image__text {flex: 0 0 calc((100% - var(--column-gap) * -6) / 3);}}"
+        "@media (min-width: 1024px) {.shoppable-image__text {flex: 0 0 calc((100% - var(--column-gap) * -6) / 3); }}"
       ],
       "settings": {
         "image": "shopify://shop_images/055c7e8e35f163d346120f78508e1cfb.jpg",
@@ -725,8 +693,7 @@
   },
   "order": [
     "slideshow",
-    "upng_tabs_product_list_GVxfHN",
-    "product_list_9RgR3c",
+    "upng_product_list_with_tabs_wDayak",
     "collection-list",
     "shoppable-image",
     "media-grid",
