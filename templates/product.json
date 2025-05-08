@@ -62,7 +62,7 @@
         "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm": {
           "type": "shopify://apps/upango-exportador-garys/blocks/upng-exportador-ficha-producto/28298ecf-a279-40fd-9bfe-16b5b6f7f4a8",
           "settings": {
-            "upng_exportador_ficha_button_id": "ficha-8354131804316",
+            "upng_exportador_ficha_button_id": "descarga-pdf",
             "upng_exportador_label_button": "",
             "is_b2b": false
           }
@@ -203,7 +203,7 @@
         "button1_text": "Descargar ficha",
         "button1_icon_left": "upng-pdf",
         "button1_icon_right": "upng-descarga",
-        "button1_action": "void()",
+        "button1_action": "generatePDF()",
         "button2_visible": true,
         "button2_text": "Descargar galería HD",
         "button2_icon_left": "upng-galeria",

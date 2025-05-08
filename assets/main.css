@@ -1555,6 +1555,12 @@ button {
   border-color: rgb(var(--btn-alt-text-color));
 }
 
+.btn--tertiary:disabled,
+.btn--tertiary.is-loading {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:not(.slider-nav__btn):not([disabled]):hover,
 .btn--secondary:not(.slider-nav__btn):not([disabled]):hover,

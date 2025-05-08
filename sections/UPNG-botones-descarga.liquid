@@ -11,10 +11,13 @@
 
 <div class="flex justify-center gap-3 buttons-container">
   {% if section.settings.button1_visible %}
-    <button id="ficha-8354131804316"
+    <button id="descarga-pdf"
       class="btn btn--tertiary"
       {% if section.settings.button1_action != blank %}
-        onclick=""
+        onclick="{{ section.settings.button1_action }}"
+      {% else %}
+        disabled
+        aria-disabled="true"
       {% endif %}
     >
       <div class="flex items-center justify-center gap-3">
@@ -430,7 +433,7 @@
       "type": "text",
       "id": "button1_action",
       "label": "Acción JavaScript para botón 1",
-      "info": "Función JavaScript a ejecutar (ej: descargarPDF())"
+      "info": "Función JavaScript a ejecutar (ej: generatePDF())"
     },
     {
       "type": "header",
