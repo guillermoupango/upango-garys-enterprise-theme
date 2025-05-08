@@ -9,12 +9,53 @@
  */
 {
   "sections": {
+    "174669530218ee3336": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_mkwTAJ": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "back_page_text": "Volver",
+            "back_page_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_mkwTAJ"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
-      "settings": {}
+      "settings": {
+        "show_page_title": true,
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
+      }
+    },
+    "1746695314276817f2": {
+      "type": "apps",
+      "blocks": {
+        "upango_posventa_garys_upng_modelo_347_fkqMMC": {
+          "type": "shopify://apps/upango-posventa-garys/blocks/upng-modelo-347/545bbf88-b761-48a8-9651-c0b85f0916b1",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "upango_posventa_garys_upng_modelo_347_fkqMMC"
+      ],
+      "settings": {
+        "full_width": false
+      }
     }
   },
   "order": [
-    "main"
+    "174669530218ee3336",
+    "main",
+    "1746695314276817f2"
   ]
 }

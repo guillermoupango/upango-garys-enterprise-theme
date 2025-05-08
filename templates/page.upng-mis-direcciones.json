@@ -9,18 +9,39 @@
  */
 {
   "sections": {
+    "1746695072daa404a7": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_gT4wWt": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "back_page_text": "Volver",
+            "back_page_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_gT4wWt"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
         "show_page_title": true,
-        "heading_align": "text-center"
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
       }
     },
     "173945015288d94788": {
       "type": "apps",
       "blocks": {
         "upango_b2b_garys_upng_mis_direcciones_EKfKUN": {
-          "type": "shopify:\/\/apps\/upango-b2b-garys\/blocks\/upng-mis-direcciones\/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-mis-direcciones/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
             "div_classes": ""
           }
@@ -35,6 +56,7 @@
     }
   },
   "order": [
+    "1746695072daa404a7",
     "main",
     "173945015288d94788"
   ]

@@ -9,18 +9,39 @@
  */
 {
   "sections": {
+    "17466952188d32641f": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_w4gyyQ": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "back_page_text": "Volver",
+            "back_page_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_w4gyyQ"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
         "show_page_title": true,
-        "heading_align": "text-center"
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
       }
     },
     "1743418555b1a7b16d": {
       "type": "apps",
       "blocks": {
         "garys_biblioteca_documentos_upng_file_library_JaLpMe": {
-          "type": "shopify:\/\/apps\/garys-biblioteca-documentos\/blocks\/upng-file-library\/74b1e848-61c5-48e6-9760-81730cd00db0",
+          "type": "shopify://apps/garys-biblioteca-documentos/blocks/upng-file-library/74b1e848-61c5-48e6-9760-81730cd00db0",
           "settings": {
             "general_files": "General",
             "for_me_files": "Para mí",
@@ -37,6 +58,7 @@
     }
   },
   "order": [
+    "17466952188d32641f",
     "main",
     "1743418555b1a7b16d"
   ]

@@ -9,20 +9,42 @@
  */
 {
   "sections": {
+    "174669490770c13b47": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_GHpGBV": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "back_page_text": "Volver",
+            "back_page_page": "",
+            "back_page_styles": "text-decoration: none; color: #000;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_GHpGBV"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
         "show_page_title": true,
-        "heading_align": "text-center"
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
       }
     },
     "17398785123f559b0a": {
       "type": "apps",
       "blocks": {
         "upango_usuarios_sec_garys_upng_usuarios_secundarios_KyjiXT": {
-          "type": "shopify:\/\/apps\/upango-usuarios-sec-garys\/blocks\/upng-usuarios-secundarios\/08f3adaf-a308-4345-9273-08b043f4c4f4",
+          "type": "shopify://apps/upango-usuarios-sec-garys/blocks/upng-usuarios-secundarios/08f3adaf-a308-4345-9273-08b043f4c4f4",
           "settings": {
             "enable_permissions": "true",
+            "is_b2b": "true",
             "custom_fields": ""
           }
         }
@@ -36,6 +58,7 @@
     }
   },
   "order": [
+    "174669490770c13b47",
     "main",
     "17398785123f559b0a"
   ]

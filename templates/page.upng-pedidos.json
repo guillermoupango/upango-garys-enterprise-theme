@@ -9,11 +9,32 @@
  */
 {
   "sections": {
+    "17466953335cdd47dc": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_8T7fwL": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "back_page_text": "Volver",
+            "back_page_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_8T7fwL"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
         "show_page_title": true,
-        "heading_align": "text-center"
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
       }
     },
     "1744791569c1e103eb": {
@@ -50,6 +71,7 @@
     }
   },
   "order": [
+    "17466953335cdd47dc",
     "main",
     "1744791569c1e103eb"
   ]
