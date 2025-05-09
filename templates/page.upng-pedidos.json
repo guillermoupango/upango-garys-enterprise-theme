@@ -43,7 +43,7 @@
         "upango_posventa_garys_upng_mis_pedidos_UAX84a": {
           "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-pedidos/545bbf88-b761-48a8-9651-c0b85f0916b1",
           "settings": {
-            "pedido_table_headers": "Referencia Pedido.,Fecha,Estado,Total,,",
+            "pedido_table_headers": "ID,ALBARANES,FACTURAS,FECHA,ENVÍO,FACTURACIÓN,BASE,IVA,TOTAL,SERVIDO",
             "pedido_lineas_table_headers": "Nombre,Referencia,Cantidad,Precio,IVA,Total",
             "pedido_estados": "PENDIENTE,PENDIENTE;SERVIDO,SERVIDO",
             "pedido_filtros": "",
@@ -51,7 +51,7 @@
             "filtros_column": 3,
             "enlace_lineas_modal": "mostrar_lineas",
             "enlace_pdf_tipo": "texto",
-            "custom_css": "",
+            "custom_css": ".upng-posventa-table th,.upng-posventa-table td{ text-align: left;font-size: 12px;}",
             "mostrar_pedido_erp": true,
             "mostrar_pedido_web": true,
             "mostrar_pedido_cliente": true,
