@@ -43,7 +43,7 @@
         "upango_posventa_garys_upng_mis_albaranes_4yMbFW": {
           "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-albaranes/545bbf88-b761-48a8-9651-c0b85f0916b1",
           "settings": {
-            "albaranes-table-headers": "Empresa,Estado,Fecha,Cantidad,Numero,Tracking,Serie,,",
+            "albaranes-table-headers": "Albarán,Fecha,F.Envío,Método Envío,Documento origen,Enviado,,",
             "lineas_table_headers": "Id,Referencia,Descripción,Formato,Estado,Precio,Cantidad,Precio sin Iva,Iva,Total",
             "albaranes_estados": "PENDIENTE,PENDIENTE;SERVIDO,SERVIDO",
             "albaranes_filtros": "",
@@ -63,6 +63,9 @@
       },
       "block_order": [
         "upango_posventa_garys_upng_mis_albaranes_4yMbFW"
+      ],
+      "custom_css": [
+        ".upng-posventa-table th,.upng-posventa-table td {text-align: left; font-size: 12px;}"
       ],
       "settings": {
         "full_width": false

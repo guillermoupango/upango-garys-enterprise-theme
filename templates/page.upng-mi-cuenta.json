@@ -27,7 +27,7 @@
           "settings": {
             "menu": "mi-cuenta",
             "div_classes": "",
-            "boton_exit": true,
+            "boton_exit": false,
             "columns_desktop": 5,
             "columns_mobile": 2,
             "height_li": 10,
