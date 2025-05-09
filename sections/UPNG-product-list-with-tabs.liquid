@@ -13,7 +13,7 @@
 {%- if settings.enable_quick_add -%}
   <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
@@ -111,9 +111,11 @@
                 aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" 
                 aria-controls="tab-{{ section.id }}-{{ forloop.index }}-panel"
                 tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-                data-tab-index="{{ forloop.index0 }}">
-          {{ block.settings.tab_title | default: collection.title }}
-        </button>
+                data-tab-index="{{ forloop.index0 }}"
+                data-translate="true"
+                data-translate-key="tab-{{ section.id }}-{{ forloop.index }}-title">
+                {{ block.settings.tab_title | default: collection.title }}
+              </button>
             {% endif %}
           {% endfor %}
         </div>
