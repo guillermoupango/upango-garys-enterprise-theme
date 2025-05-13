@@ -236,7 +236,8 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .quick-add__product-details .variant-table__cell--quantity .qty-input {
-  height: 34px;
+  height: 36px;
+  scale: 80%
 }
 
 .quick-add__product-details .variant-table__cell--quantity .price {
