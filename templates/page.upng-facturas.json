@@ -48,7 +48,7 @@
             "facturas_filtros": "",
             "label_tipo": "default",
             "filtros_column": 3,
-            "enlace_lineas_modal": "mostrar_lineas",
+            "enlace_lineas_modal": "no_mostrar_lineas",
             "enlace_pdf_tipo": "texto",
             "mostrar_numero_factura": true,
             "mostrar_pedido_erp": true,
@@ -63,7 +63,7 @@
         "upango_posventa_garys_upng_mis_facturas_pXnzqF"
       ],
       "custom_css": [
-        ".upng-posventa-table th,.upng-posventa-table td{text-align: left;font-size: 12px;}"
+        ".upng-posventa-table th,.upng-posventa-table td {text-align: left; font-size: 12px;}"
       ],
       "settings": {
         "full_width": false

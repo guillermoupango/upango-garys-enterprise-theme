@@ -76,21 +76,21 @@
           "type": "collection",
           "settings": {
             "collection": "comercio-1",
-            "tab_title": ""
+            "tab_title": "Comercio"
           }
         },
         "collection_qez9ck": {
           "type": "collection",
           "settings": {
             "collection": "doctores-1",
-            "tab_title": ""
+            "tab_title": "Doctores"
           }
         },
         "collection_x7AaCj": {
           "type": "collection",
           "settings": {
             "collection": "bar-restauracion",
-            "tab_title": ""
+            "tab_title": "Bar & Restaurantes"
           }
         }
       },
