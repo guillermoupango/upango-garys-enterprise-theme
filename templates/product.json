@@ -51,11 +51,10 @@
         },
         "buy-buttons": {
           "type": "buy-buttons",
-          "disabled": true,
           "settings": {
             "show_qty_selector": false,
             "enable_dynamic_checkout": false,
-            "show_pickup_availability": true,
+            "show_pickup_availability": false,
             "show_gift_card_recipient": false
           }
         },

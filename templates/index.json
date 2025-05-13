@@ -101,7 +101,7 @@
       ],
       "name": "Product list with tabs",
       "settings": {
-        "title": "UPANGO Collections with Tabs",
+        "title": "Novedades",
         "heading_align": "text-center",
         "view_all_url": "",
         "products_to_show": 8,
@@ -110,6 +110,33 @@
         "card_size": "small",
         "show_highlight_products": true,
         "color_scheme": "default"
+      }
+    },
+    "product_list_pnePnX": {
+      "type": "product-list",
+      "name": "Product list",
+      "settings": {
+        "title": "Product list",
+        "heading_align": "text-start",
+        "view_all_url": "",
+        "product_list": [
+          "camiseta-hombre-slim",
+          "pantalon-unisex-goma",
+          "upng-test-sin-variant-featured-image",
+          "pantalon-unisex-goma-cordon-exterior-microfibra"
+        ],
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "show_highlight_products": true,
+        "show_promo_info": false,
+        "image_ratio": "fill",
+        "promo_title": "A headline to grab attention",
+        "content": "<p>Use this card with an image to highlight your product list or introduce a promotion.</p>",
+        "link_url": "",
+        "button_label": "Button",
+        "color_scheme": "2",
+        "button_style": "btn btn--primary"
       }
     },
     "collection-list": {
@@ -694,6 +721,7 @@
   "order": [
     "slideshow",
     "upng_product_list_with_tabs_wDayak",
+    "product_list_pnePnX",
     "collection-list",
     "shoppable-image",
     "media-grid",
