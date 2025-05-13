@@ -129,6 +129,8 @@ if (!customElements.get('upng-variant-picker')) {
       this.productForm = this.section.querySelector('.js-product-form-main');
       if (!this.productForm) return;
 
+/*    //DEJAR COMENTADO PORQUE NO SE USA 'ADD TO CART' DE TEMA
+
       this.addBtn = this.addBtn || this.productForm.querySelector('[name="add"]');
       const variantAvailable = this.variant && this.variant.available;
 
@@ -142,7 +144,7 @@ if (!customElements.get('upng-variant-picker')) {
         this.addBtn.textContent = variantAvailable
           ? this.addBtn.dataset.addToCartText
           : unavailableStr;
-      }
+      } */
     }
 
     /**
