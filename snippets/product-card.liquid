@@ -248,7 +248,7 @@
                 endif
               -%}
               {%- if is_native_swatch or settings.swatch_option_name contains option.name -%}
-                {%- if is_native_swatch or settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' -%}
+                {%- if is_native_swatch or settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' or settings.card_colors_style == 'upng-variant-images' -%}
                   <div class="card__swatches{% if settings.show_dividers %} mt-3 border-top{% else %} mt-2 pb-1{% endif %} pt-3 flex items-start relative">
                     {%- capture option_id %}{{ section.id }}-{{ product.id }}-{{ option.name | handle }}{% endcapture -%}
                     {%- assign variant_key = 'option' | append: option.position -%}
@@ -292,8 +292,21 @@
                             {%- if settings.card_swatch_shape == "natural" -%}
                               <img loading="lazy" class="bg-theme-bg" src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}" height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
                             {%- else -%}
+                              {% comment %} CAMBIO PARA RENDERIZAR ICONO {% endcomment %}
                               <img loading="lazy" class="img-fit bg-theme-bg" src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}" height="{{ swatch_size }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
                             {%- endif -%}
+                          {%- elsif settings.card_colors_style == 'upng-variant-images' -%}
+                          {%- liquid
+                            # Renderizado condicional de la Imagen de la Variante Custom / o por Defecto del Tema (featured_media)
+                            assign image_to_render = variant_value.featured_media
+                            if settings.variant_picker_color_style == 'upng-variant-images' and variant_value.metafields.upng.icono_color != blank
+                              assign image_to_render = variant_value.metafields.upng.icono_color.value
+                            endif
+                          -%}
+                          <img loading="lazy" class="img-fit bg-theme-bg" src="{{ image_to_render | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}" height="{{ swatch_size }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
+
+                            <pre>{{ image_to_render | json }}</pre>
+
                           {%- endif -%}
                           <span class="visually-hidden">{{ value }}</span>
                         </label>

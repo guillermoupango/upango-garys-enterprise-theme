@@ -339,8 +339,9 @@
                         {%- endif -%}
                       {%- endcapture -%}
 
-                      
+                      {% comment %} Reemplazo de Boton de Tema por 'Quick Add' {% endcomment %}
 
+                      {% comment %}
                       <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
                         {% if section.settings.select_first_variant == false and product.variants.size > 1 -%}
                           {{ "products.variant.not_selected" | t }}
@@ -350,6 +351,23 @@
                           {{- 'products.product.sold_out' | t -}}
                         {%- endif -%}
                       </button>
+                      {% endcomment %}
+
+                    <button type="button"
+                            class="btn btn--secondary w-full js-quick-add"
+                            aria-haspopup="dialog"
+                            data-product-url="{{ product.url }}"
+                            data-product-default-variant="{{ product.has_only_default_variant }}"
+                            >
+                      <span class="quick-add-btn-icon block pointer-events-none">
+                        <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
+                        {% render 'icon-add-to-cart' %}
+                      </span>
+                      <span class="quick-add-btn-text block pointer-events-none">
+                        {{- 'products.product.choose_options' | t -}}
+                      </span>
+                    </button>
+                
                     </div>
                   </div>
 
