@@ -45,7 +45,9 @@
     },
     "availability": {
       "available": "Immediate Availability",
-      "next-arrival": "Upcoming Arrival"
+      "next-arrival": "Upcoming Arrival",
+      "outlet": "OUTLET Last Units",
+      "not-available": "Not Available",
     }
   },
   "general": {

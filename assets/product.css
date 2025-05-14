@@ -337,30 +337,9 @@ quantity-input + .product-info__add-button {
   display: inline-block;
   width: 9px;
   height: 9px;
-  margin-inline-end: 0.5em;
+  margin-inline-end: 0.4em;
   border-radius: 9px;
   background-color: currentColor;
-}
-
-[data-inventory-level=none] {
-  color: rgb(var(--no-stock-text-color));
-}
-
-[data-inventory-level=low] {
-  color: rgb(var(--low-stock-text-color));
-}
-
-[data-inventory-level=very_low] {
-  color: rgb(var(--very-low-stock-text-color));
-}
-
-[data-inventory-level=normal],
-[data-inventory-level=in_stock] {
-  color: rgb(var(--in-stock-text-color));
-}
-
-[data-inventory-level=backordered] {
-  color: rgb(var(--no-stock-backordered-text-color));
 }
 
 .product-spec {

@@ -44,8 +44,10 @@
       "notify": "Consultar"
     },
     "availability": {
-      "available": "Disponibilidad Inmediata",
-      "next-arrival": "Próxima Llegada"
+      "available": "Unidades Disponibles",
+      "next-arrival": "Sin stock, próxima llegada",
+      "outlet": "OUTLET, últimas unidades",
+      "not-available": "No Disponible"
     }
   },
   "general": {

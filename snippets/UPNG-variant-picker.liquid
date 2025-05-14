@@ -329,10 +329,14 @@
   </script>
 </upng-variant-picker>
 
+{% if customer.b2b? %}
 <div class="flex justify-center gap-3 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
   <div class="text-xs product-inventory__status" data-inventory-level="normal">{{- 'custom.availability.available' | t -}}</div>
   <div class="text-xs product-inventory__status" data-inventory-level="backordered">{{- 'custom.availability.next-arrival' | t -}}</div>
+  <div class="text-xs product-inventory__status" data-inventory-level="low">{{- 'custom.availability.outlet' | t -}}</div>
+  <div class="text-xs product-inventory__status" data-inventory-level="very_low">{{- 'custom.availability.not-available' | t -}}</div>
 </div>
+{% endif %}
 
 <noscript>
   <div
