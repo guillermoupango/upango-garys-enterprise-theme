@@ -22,7 +22,7 @@
   endif
 -%}
 {%- if is_native_swatch or settings.swatch_option_name contains option.name -%}
-  {%- if is_native_swatch or settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' -%}
+  {%- if is_native_swatch or settings.card_colors_style == 'swatches' or settings.card_colors_style == 'variant-images' or settings.card_colors_style == 'upng-variant-images' -%}
     <div class="card__swatches mb-3 flex items-start relative pointer-events-none">
       {%- capture option_id %}{{ section.id }}-{{ product.id }}-{{ option.name | handle }}{% endcapture -%}
       {%- assign variant_key = 'option' | append: option.position -%}

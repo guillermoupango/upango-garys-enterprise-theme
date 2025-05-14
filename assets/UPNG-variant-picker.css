@@ -9,7 +9,6 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   min-height: 500px;
   border-collapse: collapse;
   border-spacing: 0;
-  margin: 0;
   padding: 0;
   position: relative;
 }
@@ -186,7 +185,52 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   left: 0;
 }
 
-/* ESTILOS VISTA TABLA COMPACTA EN DRAER / MODAL */
+/* ESTILOS VISTA TABLA COMPACTA EN DRAWER / MODAL */
+
+.quick-add-info__details {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.quick-add-info__details .product-title {
+  order: -1;
+}
+
+.quick-add-info__details .view-more-link {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+}
+
+upng-variant-picker .option-selector {
+  position: relative;
+}
+
+.drawer__content upng-variant-picker .option-selector {
+  padding-top: 1.5rem;
+}
+
+.drawer__content upng-variant-picker .option-selector .opt-label--image {
+  width: 24px;
+  height: 24px;
+  margin-top: 10px;
+  margin-inline-end: 10px;
+}
+
+.drawer__content upng-variant-picker .variant-table-container {
+  padding-top: 1.5rem !important;
+}
+
+.drawer__content upng-variant-picker .option-selector legend {
+  bottom: -3px;
+}
+
+upng-variant-picker .option-selector legend {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: -24px !important;
+}
 
 .quick-add-drawer .drawer__content {
   overflow-y: hidden;
@@ -236,7 +280,8 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .quick-add__product-details .variant-table__cell--quantity .qty-input {
-  height: 34px;
+  height: 36px;
+  scale: 80%
 }
 
 .quick-add__product-details .variant-table__cell--quantity .price {

@@ -43,12 +43,12 @@
         "upango_posventa_garys_upng_mis_facturas_pXnzqF": {
           "type": "shopify://apps/upango-posventa-garys/blocks/upng-mis-facturas/545bbf88-b761-48a8-9651-c0b85f0916b1",
           "settings": {
-            "facturas_table_headers": "Series,Número,Fecha de facturación,Fecha de vencimiento,Total,,",
+            "facturas_table_headers": "Fecha,Factura,Documento origen,Fecha vencimiento, Estado,Base,IVA,Total",
             "lineas_table_headers": "Producto,ID Producto,Estado,Unidades,Precio Ud,Base imponible,Dto,IVA,Importe Total",
             "facturas_filtros": "",
             "label_tipo": "default",
             "filtros_column": 3,
-            "enlace_lineas_modal": "mostrar_lineas",
+            "enlace_lineas_modal": "no_mostrar_lineas",
             "enlace_pdf_tipo": "texto",
             "mostrar_numero_factura": true,
             "mostrar_pedido_erp": true,
@@ -61,6 +61,9 @@
       },
       "block_order": [
         "upango_posventa_garys_upng_mis_facturas_pXnzqF"
+      ],
+      "custom_css": [
+        ".upng-posventa-table th,.upng-posventa-table td {text-align: left; font-size: 12px;}"
       ],
       "settings": {
         "full_width": false

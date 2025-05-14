@@ -85,7 +85,7 @@
                 {% unless current_variant.available %}
                   disabled
                 {% endunless %}
-                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
+                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: current_variant.title }}"
               >
               <button
                 type="button"

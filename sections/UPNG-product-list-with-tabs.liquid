@@ -13,12 +13,15 @@
 {%- if settings.enable_quick_add -%}
   <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {%- liquid
+  # Funcionalidad para mostrar/ocultar productos privados
+  assign mostrar_privado = customer.b2b?
+
   if section.settings.card_size_mobile == 'small'
     assign carousel_mobile_cols = 'grid-flow-col auto-cols-2 small-cards-mobile'
     assign grid_mobile_cols = 'grid-cols-2 small-cards-mobile'
@@ -111,9 +114,11 @@
                 aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" 
                 aria-controls="tab-{{ section.id }}-{{ forloop.index }}-panel"
                 tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-                data-tab-index="{{ forloop.index0 }}">
-          {{ block.settings.tab_title | default: collection.title }}
-        </button>
+                data-tab-index="{{ forloop.index0 }}"
+                data-translate="true"
+                data-translate-key="tab-{{ section.id }}-{{ forloop.index }}-title">
+                {{ block.settings.tab_title | default: collection.title }}
+              </button>
             {% endif %}
           {% endfor %}
         </div>
@@ -137,14 +142,31 @@
                       <div class="container">
                         <ul class="{% if carousel %}slider__grid {% endif %}grid {{ grid_classes }} gap-x-theme gap-y-8{% if section.settings.card_size_mobile == 'small' and settings.card_contain %} small__grid{% endif %}" role="list">
                           {%- for product in collection.products limit: section.settings.products_to_show -%}
+                            {% comment %} AJUSTE DE LOGICA PARA OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B  {% endcomment %}
+                            {% if mostrar_privado %}
                             <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
                               {% render 'product-card', product: product, image_ratio: settings.prod_card_image_ratio, show_highlight_product: section.settings.show_highlight_products %}
                             </li>
+                          {%  else %}
+                            {%  if product.metafields.upng.privado != true %}
+                            <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                              {% render 'product-card', product: product, image_ratio: settings.prod_card_image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                            </li>
+                            {%  endif %}
+                            {%  endif %}
                           {%- else -%}
                             {%- for i in (1..section.settings.products_to_show) -%}
+                              {% if mostrar_privado %}
                               <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
                                 {% render 'product-card', product: "", image_ratio: settings.prod_card_image_ratio, show_highlight_product: section.settings.show_highlight_products %}
                               </li>
+                            {% else %}
+                              {% if product.metafields.upng.privado != true %}
+                              <li {% if carousel %}class="slider__item"{% endif %}{% if settings.animations_enabled != "disabled" %}data-cc-animate data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"{% endif %}>
+                                {% render 'product-card', product: "", image_ratio: settings.prod_card_image_ratio, show_highlight_product: section.settings.show_highlight_products %}
+                              </li>
+                              {% endif %}
+                              {% endif %}
                             {%- endfor -%}
                           {%- endfor -%}
                         </ul>

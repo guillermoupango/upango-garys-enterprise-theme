@@ -303,11 +303,10 @@ if (!customElements.get('quick-add-drawer')) {
               </a>
             </div>
             ${weightElem}
-            <hr>
             <div class="product-price">
               ${this.getElementHtml('.product-price')}
             </div>
-            <div class="text-theme-light text-sm mt-4">
+            <div class="view-more-link text-theme-light text-sm">
               <a href="${this.productUrl}" class="link js-prod-link">
                 ${theme.strings.viewDetails}
               </a>

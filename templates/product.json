@@ -51,11 +51,10 @@
         },
         "buy-buttons": {
           "type": "buy-buttons",
-          "disabled": true,
           "settings": {
             "show_qty_selector": false,
             "enable_dynamic_checkout": false,
-            "show_pickup_availability": true,
+            "show_pickup_availability": false,
             "show_gift_card_recipient": false
           }
         },
@@ -66,6 +65,12 @@
             "upng_exportador_label_button": "",
             "is_b2b": false
           }
+        },
+        "upango_b2b_garys_upng_product_details_m7XRWB": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-product-details/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "mostrar_datos": "crm"
+          }
         }
       },
       "block_order": [
@@ -75,7 +80,8 @@
         "price",
         "variant-picker",
         "buy-buttons",
-        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm"
+        "upango_exportador_garys_upng_exportador_ficha_producto_CEyLbm",
+        "upango_b2b_garys_upng_product_details_m7XRWB"
       ],
       "custom_css": [],
       "settings": {

@@ -2301,6 +2301,10 @@
             "label": "Variant images"
           },
           {
+            "value": "upng-variant-images",
+            "label": "UNPG Custom Variant images"
+          },
+          {
             "value": "none",
             "label": "None"
           }
