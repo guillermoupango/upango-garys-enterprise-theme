@@ -200,8 +200,14 @@
               {{- product.vendor -}}
             </p>
           {%- endif -%}
+          {%- if settings.card_show_ref -%}
+            <p class="card__vendor{% if settings.show_dividers %} mb-1{% else %} mb-0{% endif %} text-sm text-theme-light">
+              <span>Ref.:</span>
+              <span>{{ product.metafields.upng.codigo_modelo }}</span>
+            </p>
+          {%- endif -%}
 
-          <p class="card__title font-bold{% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
+          <p class="card__title {% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
             <a href="{{ product_url }}" class="card-link text-current js-prod-link">
               {{- product.title | escape -}}
             </a>

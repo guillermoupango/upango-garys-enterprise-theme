@@ -878,6 +878,13 @@
       },
       {
         "type": "checkbox",
+        "id": "card_show_ref",
+        "label": "Show REF",
+        "info": "From product Metafiled",
+        "default": false
+      },
+      {
+        "type": "checkbox",
         "id": "card_show_subtitle",
         "label": "Show product subtitle",
         "info": "Uses product subtitle [metafield](https:\/\/help.shopify.com\/en\/manual\/metafields)",

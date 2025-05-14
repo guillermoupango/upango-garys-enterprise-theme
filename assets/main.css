@@ -1463,8 +1463,8 @@ button {
   transition: opacity 0.6s ease, color 0.6s ease, background-position 0.4s ease-out;
   border-radius: var(--btn-border-radius, 0);
   outline-offset: var(--btn-border-width);
-  font-size: 0.88em;
-  font-weight: 700;
+  font-size: 1em;
+  font-weight: 500;
   line-height: 1.2em;
   text-align: center;
   text-transform: var(--btn-text-transform, none);
@@ -5603,6 +5603,18 @@ body > .os-scrollbar {
 }
 
 /* ESTILOS PERSONALIZADOS */
+.card__title{
+  font-weight: 500;
+}
+
+.product-info__block .product-info__add-button button{
+  background: none;
+  background-color: rgb(var(--text-color));
+  border: none;
+}
+.product-info__block .product-info__add-button button:hover{
+  background-color: black;
+}
 
 .products-toolbar .label, .products-toolbar .products-toolbar__filter span{
   font-weight: 400;
