@@ -22,11 +22,11 @@
       "type": "custom-liquid",
       "custom_css": [
         ".link-button.btn-red-warm > a,.link-button.btn-red-warm > span,.link-button[data-button=\"red-warm\"] > a,.link-button[data-button=\"red-warm\"] > span {background: #f9423a; border-color: #f9423a; color: #fff !important; padding-left: 2em; padding-right: 2em; padding-top: 1em; padding-bottom: 1em; text-decoration: none; text-align: center; line-height: 1.1 !important; border-radius: 28px; display: inline-block;}",
-        "@media (min-width: 576px) {.section-heading+[class*=-content], div+.link-button, p+.link-button {margin-top: 32px; }}"
+        "@media (min-width: 576px) {.section-heading + [class*=\"-content\"], div + .link-button, p + .link-button {margin-top: 32px; }}"
       ],
       "name": "Custom HTML/Liquid",
       "settings": {
-        "custom_liquid": "<div data-page-height=\"353\" data-page-width=\"500\" style=\"position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;\"><iframe allowfullscreen=\"true\" allowtransparency=\"true\" frameborder=\"0\" src=\"https://www.yumpu.com/es/embed/view/P9A7xJ5dw8DHi2vp\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;\"></iframe></div>\n\n<p class=\"link-button btn-red-warm\"><a href=\"/productos/por-articulo/delantales\">VER LOS DELANTALES</a></p>\n\n<p>&nbsp;</p>\n\n<div align=\"center\" class=\"upg-body strech\">\n<p class=\"link-button btn-red-warm\"><a href=\"https://www.dropbox.com/s/07kw81lht4uaevy/CATALOGO%20WEB%20DELANTALES%20GARYS.pdf?dl=0\">DESCARGAR CATÁLOGO</a></p>\n</div>",
+        "custom_liquid": "<div data-page-height=\"353\" data-page-width=\"500\" style=\"position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;\"><iframe allowfullscreen=\"true\" allowtransparency=\"true\" frameborder=\"0\" src=\"https://www.yumpu.com/es/embed/view/ymCJW0uUQG1DzYId\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;\"></iframe></div>\n\n<p class=\"link-button btn-red-warm\"><a href=\"/collections/agatha-ruiz-de-la-prada\">VER LOS PRODUCTOS DE AGATHA RUIZ DE LA PRADA PARA GARY'S WORKWEAR</a></p>\n\n<p>&nbsp;</p>\n\n<div align=\"center\" class=\"upg-body strech\">\n<p class=\"link-button btn-red-warm\"><a href=\"https://www.dropbox.com/scl/fi/v54fdcuxgika1bpj0ihhd/CAPSULA_AGATHA.pdf?rlkey=la1kvbtrvmdeoptq366lx0b8w&amp;dl=0\">DESCARGAR CATÁLOGO</a></p>\n</div>",
         "section_height": "default",
         "full_width": false,
         "dividers": "none",

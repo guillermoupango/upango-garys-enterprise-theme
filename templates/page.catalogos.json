@@ -347,7 +347,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/DELANTALES.jpg",
-            "link_url": "",
+            "link_url": "shopify://pages/catalogo",
             "columns": 1,
             "rows": 2,
             "subheading": "",
