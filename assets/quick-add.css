@@ -218,7 +218,7 @@
   }
 
   .quick-add-info {
-    grid-template-columns: 30% auto;
+    grid-template-columns: 144px auto;
   }
 
   .quick-add-info__details {
@@ -371,10 +371,13 @@
   left: 50%;
   transform: translate(-50%, -50%) !important;
   min-width: 80vw;
+  min-height: 728px;
+  height: 728px;
   max-height: 80vh;
   border-radius: 0 !important;
   overflow-y: hidden;
 }
+
 .quick-add-drawer .drawer__close-btn{
   position: absolute;
   right: 0;

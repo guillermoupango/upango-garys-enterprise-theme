@@ -194,13 +194,17 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .quick-add-info__details .product-title {
-  order: -1;
+  order: -2;
 }
 
-.quick-add-info__details .view-more-link {
+/* .quick-add-info__details .view-more-link {
   position: absolute;
   top: 0;
   right: 3rem;
+} */
+.quick-add-info__details .view-more-link {
+  order: -1;
+  margin-bottom: 8px;
 }
 
 upng-variant-picker .option-selector {
@@ -236,9 +240,9 @@ upng-variant-picker .option-selector legend {
   overflow-y: hidden;
 }
 
-.quick-add__product-details .variant-table-container {
+/* .quick-add__product-details .variant-table-container {
   height: 460px;
-}
+} */
 
 .quick-add__product-details .variant-table {
   min-height: auto;

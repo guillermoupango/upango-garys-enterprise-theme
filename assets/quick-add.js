@@ -309,7 +309,7 @@ if (!customElements.get('quick-add-drawer')) {
             <div class="view-more-link text-theme-light text-sm">
               <a href="${this.productUrl}" class="link js-prod-link">
                 ${theme.strings.viewDetails}
-              </a>
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" style="vertical-align: middle"><path d="m9.693 4.5 7.5 7.5-7.5 7.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>              </a>
             </div>
           </div>
           <div class="quick-add-info__details md:hidden"></div>
