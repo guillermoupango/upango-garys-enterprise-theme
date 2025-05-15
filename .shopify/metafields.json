@@ -88,7 +88,7 @@
       "key": "menu_cliente",
       "namespace": "upng",
       "name": "Menu Cliente",
-      "description": "",
+      "description": "Menú cliente",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -526,16 +526,6 @@
       }
     },
     {
-      "key": "tratamiento",
-      "namespace": "upng",
-      "name": "Tratamiento",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
       "key": "pvp",
       "namespace": "upng",
       "name": "PVP",
@@ -543,6 +533,16 @@
       "type": {
         "name": "number_decimal",
         "category": "NUMBER"
+      }
+    },
+    {
+      "key": "galeria_imagenes",
+      "namespace": "upng",
+      "name": "Galería de imágenes",
+      "description": "",
+      "type": {
+        "name": "list.file_reference",
+        "category": "REFERENCE"
       }
     }
   ],
