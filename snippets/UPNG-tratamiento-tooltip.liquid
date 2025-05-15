@@ -49,23 +49,24 @@
     assign tratamiento_reference = product.selected_or_first_available_variant.metafields.upng.ref-tratamiento.value
   -%}
   
-  <div>
-    {% if product.selected_or_first_available_variant.metafields.upng.ref-tratamiento %}
-      {% if tratamiento_reference != blank %}
-        <div class="tratamiento-icons">
-          {% for tratamiento in tratamiento_reference %}
-            <div class="tratamiento-icon tooltip">
-              {% if tratamiento.icono %}
-                {{
-                  tratamiento.icono
-                  | image_url: width: 24
-                  | image_tag: height: null, loading: 'lazy', alt: tratamiento.tipo
-                }}
-                <span class="tooltiptext">{{ tratamiento.descripcion }}</span>
-              {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endif %}
+  {%- if product.has_only_default_variant == false -%}
+  <div class="tratamiento-icons-container">
+    {% for variant in product.variants %}
+      <div class="variant-treatment" data-variant-id="{{ variant.id }}" style="display: none;">
+        {% assign tratamiento_reference = variant.metafields.upng.ref-tratamiento.value %}
+        {% if tratamiento_reference != blank %}
+          <div class="tratamiento-icons">
+            {% for tratamiento in tratamiento_reference %}
+              <div class="tratamiento-icon tooltip">
+                {% if tratamiento.icono %}
+                  {{ tratamiento.icono | image_url: width: 24 | image_tag: height: null, loading: 'lazy', alt: tratamiento.tipo }}
+                  <span class="tooltiptext">{{ tratamiento.descripcion }}</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
+{%- endif -%}

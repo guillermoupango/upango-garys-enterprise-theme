@@ -1,0 +1,25 @@
+{% layout none %}
+
+{% assign current_variant = product.selected_variant %}
+{% assign tratamiento_reference = current_variant.metafields.upng.ref-tratamiento.value %}
+
+<!--
+{{  current_variant | json }}
+  -->
+
+{% if tratamiento_reference != blank %}
+  <div class="tratamiento-icons">
+    {% for tratamiento in tratamiento_reference %}
+      <div class="tratamiento-icon tooltip">
+        {% if tratamiento.icono %}
+          {{ tratamiento.icono | image_url: width: 24 | image_tag: height: null, loading: 'lazy', alt: tratamiento.tipo }}
+          <span class="tooltiptext">{{ tratamiento.descripcion }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="tratamiento-icons--empty">
+    <!-- Contenido a mostrar cuando no hay tratamientos definidos -->
+  </div>
+{% endif %}

@@ -53,6 +53,7 @@ if (!customElements.get('upng-variant-picker')) {
       setTimeout(() => {
         this.updateAvailability();
         this.updateAddToCartButton();
+        this.updateTratamientos(); // Fetch de tratamientos
       });
 
       // Inicializar nuestras nuevas funcionalidades después del timeout del tema
@@ -92,6 +93,7 @@ if (!customElements.get('upng-variant-picker')) {
       this.updatePickupAvailability();
       this.updateSku();
       this.updateMetafieldVisibility();
+      this.updateTratamientos(); // Actualizar de tratamientos
       // Solo llamamos a updateLabelText si el evento proviene de un selector de opciones
       if (evt.target.closest('.option-selector')) {
         VariantPicker.updateLabelText(evt);
@@ -112,6 +114,29 @@ if (!customElements.get('upng-variant-picker')) {
       }
     }
 
+    /**
+     * Ajax para actualizar iconos de tratamientos
+     */
+
+      async updateTratamientos() {
+      if (!this.variant) return;
+      
+      const treatmentContainer = this.section.querySelector('.tratamiento-icons-container');
+      if (!treatmentContainer) return;
+      
+      try {
+        // Hacer petición AJAX para obtener los tratamientos
+        const response = await fetch(`${window.location.pathname}?variant=${this.variant.id}&view=upng-tratamientos`);
+        if (!response.ok) throw new Error('Error loading treatment data');
+        
+        const html = await response.text();
+        
+        // Actualizar el contenedor con el HTML recibido
+        treatmentContainer.innerHTML = html;
+      } catch (error) {
+        console.error('Error updating treatment icons:', error);
+      }
+    }
 
     /**
      * Shows/hides variant metafield elements on the page as necessary
