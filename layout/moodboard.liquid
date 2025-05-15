@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="#INPUT.Language">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{Tipografias}</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <main>
+    <section id="moodboard-main" class="custom-main">
+        <div class="background fondo7"></div>
+        <div class="background fondo4"></div>
+        <div class="background fondo5"></div>
+        <div class="background fondo6"></div>
+        <div class="background fondo3"></div>
+        <!-- 
+        <img src="asset/Moodboard/algodon.jpg" alt="Algodon" />
+        <img src="asset/Moodboard/hilos.jpg" alt="Hilos" />
+        <img src="asset/Moodboard/moderna.jpg" alt="Hilos" />-->
+        <div class="page-width section-group ">
+            <!-- contenedor del inicio del test -->
+            <div id="moodboard-inicio"  class="home-hero bg-white">
+                <div class="hero-content">
+                    <img src="asset/Moodboard/logo-garys.svg"  width="130" alt="{LogoGarys}" />
+                  <h6 class="hero-subtitle">{TestInteractivo}</h6>
+                  <h1 class="hero-title">{ExperienciaPersonalizada}</h1>
+                  <p class="hero-description">{DescripcionMoodboard}</p>
+                  <button onclick="startSteps()" class="btn btn--primary">{Comenzar}</button>
+                </div>
+            </div>
+            <!-- contenedor del final de test-->
+            <div id="moodboard-fin"  class="home-hero bg-white">
+            <div class="hero-content">
+                <img src="asset/Moodboard/logo-garys.svg"  width="130" alt="{LogoGarys}" />
+                
+                <h1 class="hero-title">{GraciasPorTest}</h1>
+                <p class="hero-description">{PreferenciasRegistradas}</p>
+                <button onclick="resetSteps()" class="btn btn--primary">{VolverInicio}</button>
+            </div>
+            </div>
+        </div>
+    </section>
+    <section id="moodboard-content" class="custom-main">
+        <div class="background fondo1"></div>
+        <div class="background fondo2"></div>
+        <div class="page-width section-group">
+            <div class="section__header">
+                <div class="header-logo gid-2">
+                    <span class="text-center"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="111" height="37" viewBox="0 0 111 37" fill="none">
+                            <rect width="111" height="37" fill="url(#pattern0_83_634)"/>
+                            <defs>
+                            <pattern id="pattern0_83_634" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_83_634" transform="scale(0.00613497 0.0185185)"/>
+                            </pattern>
+                            <image id="image0_83_634" width="163" height="70" preserveAspectRatio="none" xlink:href="data:image/png;base64,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UYn/B4WwCPNkscxuAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA3LTE4VDA5OjUxOjQ2KzAyOjAw3/wqKgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wNy0xOFQwOTo1MTo0NiswMjowMK6hkpYAAABGdEVYdHNvZnR3YXJlAEltYWdlTWFnaWNrIDYuNy4zLTQgMjAxMS0xMS0wOCBRMTYgaHR0cDovL3d3dy5pbWFnZW1hZ2ljay5vcmcMe3pTAAAAGHRFWHRUaHVtYjo6RG9jdW1lbnQ6OlBhZ2VzADGn/7svAAAAF3RFWHRUaHVtYjo6SW1hZ2U6OmhlaWdodAA5ML7k8/EAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgAMjEw9z10dQAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjg5NjY2NzA21Czb1AAAABN0RVh0VGh1bWI6OlNpemUANi43OEtCQsZSSsAAAABydEVYdFRodW1iOjpVUkkAZmlsZTovLy9zcnYvZXBhZ2VzL2Vwcm9vdC9TaGFyZWQvV2ViUm9vdC9TdG9yZS9TaG9wcy9Vbmlmb3JtZXNHYXJ5cy9NZWRpYUdhbGxlcnkvSW1hZ2Utbm9hdmFpbGFibGUxLnBuZ3jRzuAAAAAASUVORK5CYII="/>
+                            </defs>
+                        </svg>
+                    </span>
+                    <button class="btn btn-close text-end" onclick="resetSteps();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+                            <path d="M19.0607 17.8536L26.7071 10.2071L26 9.5L18.3536 17.1464L10.7071 9.5L10 10.2071L17.6464 17.8536L10 25.5L10.7071 26.2071L18.3536 18.5607L26 26.2071L26.7071 25.5L19.0607 17.8536Z" fill="black"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="section__arrow gid-3 ">
+                    <button id="arrow_previousStep" onclick="previousStep();" class="disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect width="40" height="40" rx="20" fill="#F5F5F5"/>
+                            <path d="M10.6667 20H29.3334" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.6667 20L18.6667 28" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.6667 20L18.6667 12" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div> <span id="indicador-pasos">1/7</span></div>
+                    <button id="arrow_nextStep" onclick="nextStep();" class="disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="40" y="40" width="40" height="40" rx="20" transform="rotate(180 40 40)" fill="#F5F5F5"/>
+                            <path d="M29.3333 20L10.6666 20" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M29.3333 20L21.3333 12" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M29.3333 20L21.3333 28" stroke="#434343" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+    <!-- INICIO - CONTENIDO -->
+            <div id="section_1_color" class="section__content page-width">
+                <div>
+                    <h3 class="h3">{ColorCorporativoPregunta}</h3>
+                </div>
+                <div id="section_1_color-primary" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="h6">{ColoresCorporativosPrincipales}</span>
+                        <span class="my-subtitle">{SeleccionColor}</span>
+                        <div class="gid-10 my-subtitle principal-color-container">
+                        </div>
+                        <div class="color-inputs principal-color-inputs">
+                            <div class="field-group">
+                                <div class="field"> 
+                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <span class="field__button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                                            <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <div class="field"> 
+                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <span class="field__button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                                            <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="add-color ">
+                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{AnadirColor}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="section_2_color-primary" class="content-wrapper  mt-4 ">
+                    <div class="section__content-color">
+                        <span class="h6">{ColoresCorporativosSecundarios}</span>
+                        <span class="my-subtitle">{SeleccionColor}</span>
+                        <div class="gid-10 my-subtitle secundary-color-container">
+                        </div>
+                        <div class="color-inputs secundary-color-inputs">
+                            <div class="field-group">
+                                <div class="field"> 
+                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <span class="field__button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                                            <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <div class="field"> 
+                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <span class="field__button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                                            <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="add-color ">
+                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{AnadirColor}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="section_imagen_proyectar" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{ImagenProyectar}</h3>
+                </div>
+                <div id="content_imagen_proyectar" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div class="style-gallery">
+                    <label class="style-card">
+                        <input type="checkbox" name="imagen_proyectar" value="Profesional" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/profesional.jpg');"></div>
+                      <div class="style-label">{EstiloProfesional}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="imagen_proyectar" value="Elegante" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/elegantes.jpg');" alt="{EstiloElegante}"></div>
+                        <div class="style-label">{EstiloElegante}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="imagen_proyectar" value="Moderno" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/moderna.jpg');" alt="{EstiloModerno}" ></div>
+                        <div class="style-label">{EstiloModerno}</div>
+                    </label>
+                    
+                </div>
+            </div>
+            <div id="section_uniforme_estaciones" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{UniformeEstaciones}</h3>
+                </div>
+                <div id="content_uniforme_estaciones" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div  class="style-gallery">
+                    <label class="style-card">
+                        <input type="checkbox" name="uniforme_estaciones" value="Invierno" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Invierno.jpg');"></div>
+                      <div class="style-label">{Invierno}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="uniforme_estaciones" value="Entretiempo" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Entretiempo.jpg');" alt="{Entretiempo}"></div>
+                        <div class="style-label">{Entretiempo}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="uniforme_estaciones" value="Verano" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Verano.jpg');" alt="{Verano}" ></div>
+                        <div class="style-label">{Verano}</div>
+                    </label>
+                    
+                </div>
+            </div>
+            <div id="section_preferencia_materiales" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{PreferenciaMateriales}</h3>
+                </div>
+                <div id="content_preferencia_materiales" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div  class="style-gallery">
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencia_materiales" value="Naturales" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Naturales.jpg');"></div>
+                      <div class="style-label">{Naturales}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencia_materiales" value="Tecnicos" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Tecnicos.jpg');" alt="{Tecnicos}"></div>
+                        <div class="style-label">{Tecnicos}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencia_materiales" value="Sostenibles" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Sostenibles.jpg');" alt="{Sostenibles}" ></div>
+                        <div class="style-label">{Sostenibles}</div>
+                    </label>
+                    
+                </div>
+            </div>
+            <div id="section_estilo_marca" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{EstiloMarca}</h3>
+                </div>
+                <div id="content_estilo_marca" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div  class="style-gallery">
+                    <label class="style-card">
+                        <input type="checkbox" name="estilo_marca" value="Minimalista" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/minimalista.jpg');"></div>
+                      <div class="style-label">{Minimalista}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="estilo_marca" value="Llamativo" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/llamativo.jpg');" alt="{Llamativo}"></div>
+                        <div class="style-label">{Llamativo}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="estilo_marca" value="Corporativo" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/corporativo.jpg');" alt="{Corporativo}" ></div>
+                        <div class="style-label">{Corporativo}</div>
+                    </label>
+                    
+                </div>
+            </div>
+            <div id="section_departamentos_uniformes" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{DepartamentosUniformes}</h3>
+                </div>
+                <div id="content_departamentos_uniformes" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div  class="style-gallery-4">
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Recepcion" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/RECEPCION.jpg');"></div>
+                      <div class="style-label">{Recepcion}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="PorteroBotones" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/PORTERO_BOTONES.jpg');" alt="{PorteroBotones}"></div>
+                        <div class="style-label">{PorteroBotones}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="ResponsableSala" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/RESPONSABLE_DE_SALA.jpg');" alt="{ResponsableSala}" ></div>
+                        <div class="style-label">{ResponsableSala}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="CamareroInterior" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERO_INTERIOR.jpg');" alt="{CamareroInterior}" ></div>
+                        <div class="style-label">{CamareroInterior}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="CamareroTerraza" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERO_TERRAZA.jpg');" alt="{CamareroTerraza}" ></div>
+                        <div class="style-label">{CamareroTerraza}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="JefeCocina" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/JEFE_DE_COCINA.jpg');" alt="{JefeCocina}" ></div>
+                        <div class="style-label">{JefeCocina}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="PersonalCocina" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/PERSONAL_DE_COCINA.jpg');" alt="{PersonalCocina}" ></div>
+                        <div class="style-label">{PersonalCocina}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Friegaplatos" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/FRIEGAPLATOS.jpg');" alt="{Friegaplatos}" ></div>
+                        <div class="style-label">{Friegaplatos}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Spa" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/SPA.jpg');" alt="{Spa}" ></div>
+                        <div class="style-label">{Spa}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Gobernanta" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/GOBERNANTA.jpg');" alt="{Gobernanta}" ></div>
+                        <div class="style-label">{Gobernanta}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="CamareraPiso" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERA_DE_PISO.jpg');" alt="{CamareraPiso}" ></div>
+                        <div class="style-label">{CamareraPiso}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="ValetDePiso" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/VALET_DE_PISO.jpg');" alt="{ValetDePiso}" ></div>
+                        <div class="style-label">{ValetDePiso}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Mantenimiento" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/MANTENIMIENTO.jpg');" alt="{Mantenimiento}" ></div>
+                        <div class="style-label">{Mantenimiento}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="Lavanderia" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/LAVANDERIA.jpg');" alt="{Lavanderia}" ></div>
+                        <div class="style-label">{Lavanderia}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="departamentos_uniformes" value="TheCorner" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/THE_CORNER.jpg');" alt="{TheCorner}" ></div>
+                        <div class="style-label">{TheCorner}</div>
+                    </label>
+                </div>
+            </div>
+            <div id="section_preferencias_estilo" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{PreferenciasEstilo}</h3>
+                </div>
+                <div id="content_preferencias_estilo" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                    </div>
+                </div>
+                <div class="style-gallery">
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencias_estilo" value="Economica" class="style-checkbox" />
+                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Economica.jpg');"></div>
+                      <div class="style-label">{Economica}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencias_estilo" value="Intermedia" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Intermedia.jpg');" alt="{Intermedia}"></div>
+                        <div class="style-label">{Intermedia}</div>
+                    </label>
+                    <label class="style-card">
+                        <input type="checkbox" name="preferencias_estilo" value="Exclusiva" class="style-checkbox" />
+                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Exclusiva.jpg');" alt="{Exclusiva}" ></div>
+                        <div class="style-label">{Exclusiva}</div>
+                    </label>
+                </div>
+            </div>
+            <div id="section_datos_contacto" class="section__content page-width pt-4">
+                <div>
+                    <h3 class="h3">{DatosContacto}</h3>
+                </div>
+                <div id="content_datos_contacto" class="content-wrapper">
+                    <div class="section__content-color">
+                        <span class="my-subtitle text-center">{RellenaLosDatos}</span>
+                    </div>
+                </div>
+                <div class="style-gallery">
+                    <div class="form-group">
+                        <label for="nombre">{NombreDeContacto}</label>
+                        <input type="text" id="nombre" name="nombre" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{CorreoElectronico}</label>
+                        <input type="text" id="email" name="email" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">{TelefonoOpcional}</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-input">
+                    </div>
+                    <div id="PolicePrivacy" class="input-radiobox square">
+                        <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
+                        <label for="AceptarPoliticaPrivacidad">
+                            {PoliticaPrivacidad1}<a href="/politica-privacidad" target="_blank">{PoliticaPrivacidad2}</a>
+                        </label>
+                        <span class="checkmark"></span>
+                    </div>
+                </div>
+            </div>
+    <!-- FIN - CONTENIDO -->  
+            <div class="section__footer">
+                <div>
+                    <button id="btn_nextStep" class="btn btn--primary" disabled onclick="nextStep();"> {Siguiente} </button>
+                    <small class="alert-text">
+                        <span >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13" fill="none">
+                                <g clip-path="url(#clip0_360_1037)">
+                                <path d="M0 11.8693C0.32942 11.2864 0.649303 10.6979 0.989729 10.1217C2.87821 6.92358 4.77183 3.72804 6.66398 0.532131C6.96112 0.0306799 7.47396 -0.135972 7.93654 0.116622C8.12399 0.219005 8.24541 0.383041 8.3529 0.56464C9.96955 3.29796 11.588 6.03054 13.2062 8.76348C13.7498 9.68157 14.292 10.6004 14.8364 11.5177C15.0279 11.8402 15.0616 12.1701 14.883 12.5064C14.7157 12.8214 14.4424 12.972 14.0979 12.9978C14.0396 13.0023 13.9809 12.9997 13.9222 12.9997C9.65701 12.9997 5.39178 12.9997 1.12656 12.9997C0.472487 12.9997 0.241746 12.8416 0 12.2281C0 12.1081 0 11.9889 0 11.8693ZM6.86207 6.48677C6.8661 6.48677 6.87051 6.4864 6.87454 6.4864C6.89582 7.15189 6.91673 7.81738 6.93837 8.48287C6.94681 8.74929 7.10382 8.88604 7.43287 8.91482C7.72781 8.9406 8.00367 8.78889 8.05062 8.57441C8.05686 8.54564 8.05613 8.515 8.05723 8.48548C8.10382 7.18963 8.15114 5.8934 8.19626 4.59755C8.21277 4.12524 7.9978 3.88722 7.53485 3.85658C7.10088 3.82781 6.7909 4.08526 6.79861 4.49068C6.81218 5.15617 6.84043 5.82129 6.86207 6.48677ZM8.23954 10.3568C8.23588 9.94612 7.89472 9.59787 7.50367 9.60571C7.10015 9.61393 6.77036 9.95284 6.76816 10.3613C6.76596 10.7685 7.11849 11.1276 7.51577 11.1224C7.90829 11.1175 8.24321 10.7637 8.23954 10.3568Z" fill="#FF9900"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_360_1037">
+                                <rect width="15" height="13" fill="white"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </span> 
+                        <span id="alertColorObligatorio">{ColorObligatorio}</span>
+                        <span id="alertOpcionObligatoria" style="display: none;">{OpcionObligatoria}</span>
+                        <span id="alertContactoObligatorio" style="display: none;">{ContactoObligatorio}</span>
+                    </small>
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    const btnSiguiente = document.querySelector('#btn_nextStep');
+    const arrowSiguiente = document.querySelector('#arrow_nextStep');
+    const arrowAnterior = document.querySelector('#arrow_previousStep');
+    const contactoInputs = ['nombre', 'email'];
+
+    const getCurrentStep = () => parseInt(sessionStorage.getItem('currentStep')) || 0;
+    const setCurrentStep = (step) => sessionStorage.setItem('currentStep', step);
+    const tipos = {
+        2: 'imagen_proyectar',
+        3: 'uniforme_estaciones',
+        4: 'preferencia_materiales',
+        5: 'estilo_marca',
+        6: 'departamentos_uniformes',
+        7: 'preferencias_estilo'
+    };
+    const clavesMoodboard = [
+        'currentStep',
+        'selectedPrincipalColors',
+        'selectedSecundaryColors',
+        'imagen_proyectar',
+        'uniforme_estaciones',
+        'preferencia_materiales',
+        'estilo_marca',
+        'departamentos_uniformes',
+        'preferencias_estilo',
+        'datos_contacto'
+    ];
+
+    function validateColorInput(e) {
+        const input = e.target;
+        const checkIcon = input.nextElementSibling;
+        checkIcon.style.display =  input.value.trim() !== '' ? 'grid' : 'none';
+    }
+
+    function setActiveStep(stepNumber) {
+        setCurrentStep(stepNumber);
+        updateStepDisplay();
+    }
+
+    function updateStepDisplay() {
+        const currentStep = getCurrentStep();
+        const steps = document.querySelectorAll('.section__content');
+        
+        steps.forEach((step, index) => {
+            step.classList.toggle('active', index + 1 === currentStep);
+        });
+
+        const indicador = document.getElementById('indicador-pasos');
+        if (indicador) indicador.textContent = `${currentStep}/${steps.length}`;
+        if(currentStep === 0){
+            resetAll();
+        }else if (currentStep === 1){
+            arrowAnterior.classList.add('disabled');
+            document.querySelector('#alertOpcionObligatoria').style.display = 'none';
+            document.querySelector('#alertContactoObligatorio').style.display = 'none';
+            document.querySelector('#alertColorObligatorio').style.display = 'inherit';
+        }else if (currentStep === 8){
+            document.querySelector('#alertOpcionObligatoria').style.display = 'none';
+            document.querySelector('#alertColorObligatorio').style.display = 'none';
+            document.querySelector('#alertContactoObligatorio').style.display = 'inherit';
+        }else{
+            arrowAnterior.classList.remove('disabled');
+            document.querySelector('#alertColorObligatorio').style.display = 'none';
+            document.querySelector('#alertContactoObligatorio').style.display = 'none';
+            document.querySelector('#alertOpcionObligatoria').style.display = 'inherit';
+        }
+    }
+    function resetAll(){
+        btnSiguiente.disabled = true;
+        arrowSiguiente.classList.add('disabled');
+        arrowAnterior.classList.add('disabled');
+
+        const container = document.querySelector('#moodboard-content');
+        container.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+                checkbox.checked = false;
+                });
+        container.querySelectorAll('input[type="text"], input[type="color"]').forEach((input) => {
+            input.value = "";
+        });
+        container.querySelectorAll('.field__button').forEach((btn) => {
+            btn.style.display = 'none';
+        });
+        container.querySelectorAll('.additional_input').forEach((add_input) => {
+            add_input.remove();
+        });
+        clavesMoodboard.forEach(clave => sessionStorage.removeItem(clave));
+    }
+
+    function nextStep() {
+        const currentStep = getCurrentStep();
+        if (arrowSiguiente.classList.contains('disabled')) {
+            btnSiguiente.scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+        almacenarValores(currentStep);
+        const nextStep = currentStep < 9 ? currentStep + 1 : 9;
+        if (nextStep === 9){
+            finallySteps();
+        }else{
+            setActiveStep(nextStep);
+            actualizarBotonSiguiente();
+        }
+    }
+
+    function previousStep() {
+        const currentStep = getCurrentStep();
+        const prevStep = currentStep > 1 ? currentStep - 1 : 1;
+        setActiveStep(prevStep);
+        verificarSeleccionYHabilitarBoton();
+    }
+
+    function startSteps(){
+        setCurrentStep(1);
+        const moodboardMain = document.querySelector('#moodboard-main');
+        if (moodboardMain) {
+            moodboardMain.style.display = 'none';
+        }
+        const moodboardContent = document.querySelector('#moodboard-content');
+        if (moodboardContent) {
+            moodboardContent.style.display = 'grid';
+        }
+        updateStepDisplay();
+    }
+
+    function resetSteps(){
+        setCurrentStep(0);
+        const moodboardMain = document.querySelector('#moodboard-main');
+        if (moodboardMain) {
+            moodboardMain.style.display = 'grid';
+            const moodboardInicio = document.querySelector('#moodboard-inicio');
+            if (moodboardInicio) moodboardInicio.style.display = 'grid';
+            const moodboardFin = document.querySelector('#moodboard-fin');
+            if (moodboardFin) moodboardFin.style.display = 'none';
+        }
+        const moodboardContent = document.querySelector('#moodboard-content');
+        if (moodboardContent) {
+            moodboardContent.style.display = 'none';
+        }
+        updateStepDisplay();
+    }
+
+    function finallySteps(){
+
+        enviarDatosPorCorreo().then(envioDatosOk => {
+            if (envioDatosOk != true) return;
+        });
+
+        const moodboardMain = document.querySelector('#moodboard-main');
+        if (moodboardMain) {
+            moodboardMain.style.display = 'grid';
+            const moodboardInicio = document.querySelector('#moodboard-inicio');
+            if (moodboardInicio) moodboardInicio.style.display = 'none';
+            const moodboardFin = document.querySelector('#moodboard-fin');
+            if (moodboardFin) moodboardFin.style.display = 'grid';
+        }
+        const moodboardContent = document.querySelector('#moodboard-content');
+        if (moodboardContent) {
+            moodboardContent.style.display = 'none';
+        }
+    }
+
+    function getSessionData() {
+        let datos = {};
+        clavesMoodboard.forEach(clave => {
+            const valor = sessionStorage.getItem(clave);
+            if (valor) {
+                datos[clave] = valor;
+            }
+        });
+        return datos;
+    }
+
+    function enviarDatosPorCorreo() {
+        return new Promise((resolve, reject) => {  // Devolvemos una promesa
+            const datos = getSessionData();
+            const datosAEnviar = {
+                ChangeAction: 'SendMoodBoard',
+                ObjectID: '#Site.ID',
+                ...datos
+            };
+
+            if (typeof $ !== 'undefined') {
+                $.ajax({
+                    data: datosAEnviar,
+                    cache: false,
+                    type: "post",
+                    async: true,
+                    dataType: "json"
+                }).done(function(response) {
+                    resolve(true); 
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error:', textStatus, errorThrown);
+                    alert('Error al enviar los datos.');
+                    resolve(false); 
+                });
+            } else {
+                console.error('jQuery no está cargado.');
+                resolve(false); 
+            }
+        });
+    }
+
+    function actualizarBotonSiguiente() {
+        const currentStep = getCurrentStep();
+        if (!btnSiguiente) return;
+
+        let habilitar = false;
+        if (currentStep === 1) {
+            const principalChecked = document.querySelectorAll('.principal-color-container .style-checkbox:checked').length > 0;
+            const principalInputs = Array.from(document.querySelectorAll('.principal-color-inputs input'))
+                .some(input => input.value.trim() !== '');
+
+            const secundaryChecked = document.querySelectorAll('.secundary-color-container .style-checkbox:checked').length > 0;
+            const secundaryInputs = Array.from(document.querySelectorAll('.secundary-color-inputs input'))
+                .some(input => input.value.trim() !== '');
+
+            habilitar = (principalChecked || principalInputs) && (secundaryChecked || secundaryInputs);
+        } 
+        else if (currentStep === 8) {
+            const nombre = document.getElementById('nombre')?.value.trim();
+            const email = document.getElementById('email')?.value.trim();
+            const acepta = document.getElementById('AceptarPoliticaPrivacidad')?.checked;
+
+            const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            habilitar = !!(nombre && emailValido && acepta);
+
+        } else {
+            const tipo = tipos[currentStep];
+            if (tipo) {
+                habilitar = document.querySelectorAll(`input[name="${tipo}"]:checked`).length > 0;
+            }
+        }
+        btnSiguiente.disabled = !habilitar;
+        if (arrowSiguiente) arrowSiguiente.classList.toggle('disabled', !habilitar);
+        document.querySelector('.alert-text').style.display = habilitar ? 'none' : 'inherit';
+    }
+
+    function verificarSeleccionYHabilitarBoton() {
+        const currentStep = getCurrentStep();
+        let habilitar = false;
+        if (currentStep === 1) {
+            const coloresPrimarios = JSON.parse(sessionStorage.getItem('selectedPrincipalColors') || '[]');
+            const coloresSecundarios = JSON.parse(sessionStorage.getItem('selectedSecundaryColors') || '[]');
+            habilitar = coloresPrimarios.length > 0 && coloresSecundarios.length > 0;
+        } else {
+            const tipo = tipos[currentStep];
+            if (tipo) {
+                const valores = JSON.parse(sessionStorage.getItem(tipo) || '[]');
+                habilitar = valores.length > 0;
+            }
+        }
+
+        btnSiguiente.disabled = !habilitar;
+        if (arrowSiguiente) arrowSiguiente.classList.toggle('disabled', !habilitar);
+        document.querySelector('.alert-text').style.display = habilitar ? 'none' : 'inherit';
+    }
+
+
+    function almacenarValores(currentStep){
+        switch (currentStep) {
+            case 1: guardarColores(); break;
+            case 2: guardarSeleccionado('imagen_proyectar'); break;
+            case 3: guardarSeleccionado('uniforme_estaciones'); break;
+            case 4: guardarSeleccionado('preferencia_materiales'); break;
+            case 5: guardarSeleccionado('estilo_marca'); break;
+            case 6: guardarSeleccionado('departamentos_uniformes'); break;
+            case 7: guardarSeleccionado('preferencias_estilo'); break;
+            case 8: guardarContacto(); break;
+        }
+    }
+
+    function guardarContacto() {
+        const nombre = document.getElementById('nombre').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const datosContacto = {
+            nombre: nombre,
+            email: email,
+            telefono: telefono
+        };
+        sessionStorage.setItem('datos_contacto', JSON.stringify(datosContacto));
+        console.log('Datos de contacto guardados:', datosContacto);
+    }
+
+
+    function guardarSeleccionado(tipo){
+        const seleccionados = Array.from(document.querySelectorAll(`input[name="${tipo}"]:checked`))
+            .map(input => input.value);
+        sessionStorage.setItem(tipo, JSON.stringify(seleccionados));
+    }
+
+    function guardarColores(){
+        function isVisible(element) {
+            return getComputedStyle(element).display !== 'none';
+        }
+        const principalSelectedColors = Array.from(document.querySelectorAll('.principal-color-container .style-checkbox:checked'))
+        .map(input => input.value);
+        const principalColorInputs = Array.from(document.querySelectorAll('.principal-color-inputs .field-group'))
+        .filter(fieldGroup => {
+            const button = fieldGroup.querySelector('.field__button');
+            return isVisible(button);
+        })
+        .map(fieldGroup => fieldGroup.querySelector('input').value);
+        const secundarySelectedColors = Array.from(document.querySelectorAll('.secundary-color-container .style-checkbox:checked'))
+        .map(input => input.value);
+        const secundaryColorInputs = Array.from(document.querySelectorAll('.secundary-color-inputs .field-group'))
+        .filter(fieldGroup => {
+            const button = fieldGroup.querySelector('.field__button');
+            return isVisible(button);
+        })
+        .map(fieldGroup => fieldGroup.querySelector('input').value);;
+
+        const allPrincipalColors = [...principalSelectedColors, ...principalColorInputs].filter(color => color.trim() !== "");
+        const allSecundaryColors = [...secundarySelectedColors, ...secundaryColorInputs].filter(color => color.trim() !== "");
+
+        sessionStorage.setItem('selectedPrincipalColors', JSON.stringify(allPrincipalColors));
+        sessionStorage.setItem('selectedSecundaryColors', JSON.stringify(allSecundaryColors));
+    }
+    
+    function loadColorsText(e){
+        e.preventDefault();
+        const colorInputsContainer = e.target.closest('.color-inputs');
+        const newFieldGroup = colorInputsContainer.querySelector('.field-group').cloneNode(true);
+        const newInput = newFieldGroup.querySelector('input');
+        newInput.value = '';
+        const checkIcon = newInput.nextElementSibling;
+        checkIcon.style.display = 'none'; 
+        newFieldGroup.classList.add('additional_input');
+        colorInputsContainer.insertBefore(newFieldGroup, colorInputsContainer.querySelector('.add-color'));
+        newInput.addEventListener('input', validateColorInput);
+    }
+
+    function loadColors(){
+        const colors = [
+        "#ECEAE7", "#EDEBE4", "#F6E3D9", "#E7E5D0", "#93C8C5", "#FEB9B6",
+        "#DDCE12", "#C4EA10", "#F2ECDC", "#BFCEAD", "#E5D0B7", "#C1D8E2",
+        "#1E7FEE", "#BA0ECB", "#E89410", "#75F201", "#F1E5C3", "#BFC28B",
+        "#BFBB99", "#718FC4", "#0713C3", "#E21D0A", "#DF540B", "#A5B808",
+        "#EED68E", "#799566", "#8C916B", "#23425C", "#197387", "#890402",
+        "#4C1500", "#7CB418", "#C8B742", "#2C2F22", "#454D44", "#0D0C49",
+        "#0C2848", "#3E1522", "#573A0B", "#2B4217", "#836B0D", "#111117",
+        "#181714", "#10112E", "#131B19", "#140C31", "#1B1510", "#212300"
+        ];
+        const container = document.querySelector('.principal-color-container');
+        const container2 = document.querySelector('.secundary-color-container');
+        colors.forEach(color => {
+            const createColorLabel = () => {
+                const label = document.createElement('label');
+                label.className = 'color-box';
+                label.style.backgroundColor = color;
+
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.name = 'color';
+                input.value = color;
+                input.className = 'style-checkbox';
+
+                const checkIcon = document.createElement('div');
+                checkIcon.className = 'select-color-box';
+                checkIcon.innerHTML = `
+                    <svg class="color-icon" xmlns="http://www.w3.org/2000/svg" width="43" height="47" viewBox="0 0 43 47" fill="none">
+                        <path d="M29.4819 14.8872C29.8605 14.5059 30.3643 14.2952 30.887 14.2994C31.4097 14.3036 31.9104 14.5224 32.2835 14.9096C32.6566 15.2968 32.8728 15.8222 32.8866 16.3749C32.9005 16.9276 32.7107 17.4643 32.3575 17.8718L21.6344 32.0561C21.45 32.2662 21.2275 32.4348 20.9801 32.5518C20.7327 32.6688 20.4655 32.7318 20.1946 32.7372C19.9236 32.7425 19.6544 32.6899 19.4031 32.5827C19.1518 32.4754 18.9235 32.3157 18.7319 32.113L11.6208 24.5916C11.4227 24.3964 11.2639 24.1611 11.1537 23.8996C11.0436 23.6381 10.9843 23.3558 10.9796 23.0695C10.9748 22.7832 11.0246 22.4989 11.1259 22.2334C11.2273 21.968 11.3782 21.7268 11.5696 21.5244C11.761 21.322 11.989 21.1624 12.24 21.0551C12.491 20.9479 12.7598 20.8953 13.0304 20.9003C13.3011 20.9054 13.568 20.968 13.8152 21.0845C14.0625 21.2011 14.285 21.3691 14.4695 21.5785L20.0972 27.528L29.4308 14.9497L29.4819 14.8872Z" fill="white"/>
+                    </svg>
+                `;
+
+                label.appendChild(input);
+                label.appendChild(checkIcon);
+                return label;
+            };
+           container.appendChild(createColorLabel());
+           container2.appendChild(createColorLabel());
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        setCurrentStep(0);
+        updateStepDisplay();
+        loadColors();
+        document.querySelectorAll('.color-inputs input').forEach(input => {
+            input.addEventListener('input', validateColorInput);
+        });
+        const styleCards = document.querySelectorAll(".style-card-img");
+        styleCards.forEach(img => {
+            const checkDiv = document.createElement("div");
+            checkDiv.classList.add("style-card-active");
+            checkDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <path d="M68.5624 31.0625C69.4428 30.2243 70.6144 29.761 71.83 29.7702C73.0456 29.7794 74.21 30.2604 75.0777 31.1118C75.9453 31.9633 76.4483 33.1184 76.4804 34.3336C76.5125 35.5488 76.0713 36.729 75.2499 37.625L50.3124 68.8125C49.8836 69.2744 49.366 69.6451 48.7907 69.9023C48.2154 70.1596 47.5941 70.2982 46.964 70.3099C46.3338 70.3216 45.7078 70.206 45.1234 69.9702C44.5389 69.7344 44.008 69.3832 43.5624 68.9375L27.0249 52.4C26.5643 51.9709 26.195 51.4534 25.9388 50.8784C25.6826 50.3034 25.5448 49.6827 25.5337 49.0533C25.5226 48.4239 25.6384 47.7987 25.8741 47.2151C26.1099 46.6314 26.4608 46.1012 26.9059 45.656C27.351 45.2109 27.8812 44.86 28.4649 44.6243C29.0486 44.3885 29.6738 44.2727 30.3032 44.2838C30.9325 44.2949 31.5533 44.4327 32.1283 44.6889C32.7032 44.9451 33.2207 45.3145 33.6499 45.775L46.7374 58.8563L68.4436 31.2L68.5624 31.0625Z" fill="white"/>
+                </svg>
+            `;
+            img.appendChild(checkDiv);
+        });
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', actualizarBotonSiguiente);
+        });
+
+        document.querySelectorAll('.color-inputs input').forEach(input => {
+            input.addEventListener('input', function () {
+                validateColorInput(event);
+                actualizarBotonSiguiente();
+            });
+        });
+        contactoInputs.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', actualizarBotonSiguiente);
+            }
+        });
+
+        const checkbox = document.getElementById('AceptarPoliticaPrivacidad');
+        if (checkbox) {
+            checkbox.addEventListener('change', actualizarBotonSiguiente);
+        }
+        });
+</script>
