@@ -1,43 +1,43 @@
-<!DOCTYPE html>
-<html lang="#INPUT.Language">
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{Tipografias}</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'moodboard.tipografias' | t }}</title>
+  <link rel="stylesheet" href="{{ 'moodboard.css' | asset_url }}" />
+  {{ content_for_header }}
 </head>
 <body>
   <main>
+    {{ content_for_layout }}
     <section id="moodboard-main" class="custom-main">
-        <div class="background fondo7"></div>
+        <div class="background fondo7" style="background-image: url('{{ 'regla.svg' | asset_url }}');"></div>
         <div class="background fondo4"></div>
         <div class="background fondo5"></div>
         <div class="background fondo6"></div>
         <div class="background fondo3"></div>
         <!-- 
-        <img src="asset/Moodboard/algodon.jpg" alt="Algodon" />
-        <img src="asset/Moodboard/hilos.jpg" alt="Hilos" />
-        <img src="asset/Moodboard/moderna.jpg" alt="Hilos" />-->
+        <img src="https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-algodon.jpg?v=1747298121" alt="Algodon" />
+        <img src="https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-hilos.jpg?v=1747298588" alt="Hilos" />
+        <img src="https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Moderna.jpg?v=1747298806" alt="Moderna" />-->
         <div class="page-width section-group ">
             <!-- contenedor del inicio del test -->
             <div id="moodboard-inicio"  class="home-hero bg-white">
                 <div class="hero-content">
-                    <img src="asset/Moodboard/logo-garys.svg"  width="130" alt="{LogoGarys}" />
-                  <h6 class="hero-subtitle">{TestInteractivo}</h6>
-                  <h1 class="hero-title">{ExperienciaPersonalizada}</h1>
-                  <p class="hero-description">{DescripcionMoodboard}</p>
-                  <button onclick="startSteps()" class="btn btn--primary">{Comenzar}</button>
+                    <img src="{{ 'logo-garys.svg' | asset_url }}"  height="43" width="130" alt="{LogoGarys}" />
+                  <h6 class="hero-subtitle">{{ 'moodboard.testInteractivo' | t }}</h6>
+                  <h1 class="hero-title">{{ 'moodboard.experienciaPersonalizada' | t }}</h1>
+                  <p class="hero-description">{{ 'moodboard.descripcionMoodboard' | t }}</p>
+                  <button onclick="startSteps()" class="btn btn--primary">{{ 'moodboard.comenzar' | t }}</button>
                 </div>
             </div>
             <!-- contenedor del final de test-->
             <div id="moodboard-fin"  class="home-hero bg-white">
             <div class="hero-content">
-                <img src="asset/Moodboard/logo-garys.svg"  width="130" alt="{LogoGarys}" />
-                
-                <h1 class="hero-title">{GraciasPorTest}</h1>
-                <p class="hero-description">{PreferenciasRegistradas}</p>
-                <button onclick="resetSteps()" class="btn btn--primary">{VolverInicio}</button>
+                <img src="{{ 'logo-garys.svg' | asset_url }}"  height="43" width="130" alt="{LogoGarys}" />
+                <h1 class="hero-title">{{ 'moodboard.graciasPorTest' | t }}</h1>
+                <p class="hero-description">{{ 'moodboard.preferenciasRegistradas' | t }}</p>
+                <button onclick="resetSteps()" class="btn btn--primary">{{ 'moodboard.volverInicio' | t }}</button>
             </div>
             </div>
         </div>
@@ -88,18 +88,18 @@
     <!-- INICIO - CONTENIDO -->
             <div id="section_1_color" class="section__content page-width">
                 <div>
-                    <h3 class="h3">{ColorCorporativoPregunta}</h3>
+                    <h3 class="h3">{{ 'moodboard.colorCorporativoPregunta' | t }}</h3>
                 </div>
                 <div id="section_1_color-primary" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="h6">{ColoresCorporativosPrincipales}</span>
-                        <span class="my-subtitle">{SeleccionColor}</span>
+                        <span class="h6">{{ 'moodboard.coloresCorporativosPrincipales' | t }}</span>
+                        <span class="my-subtitle">{{ 'moodboard.seleccionColor' | t }}</span>
                         <div class="gid-10 my-subtitle principal-color-container">
                         </div>
                         <div class="color-inputs principal-color-inputs">
                             <div class="field-group">
                                 <div class="field"> 
-                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <input type="text" placeholder="{{ 'moodboard.codigoHexadecimalPantone' | t}}" />
                                     <span class="field__button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                                             <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="field-group">
                                 <div class="field"> 
-                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <input type="text" placeholder="{{ 'moodboard.codigoHexadecimalPantone' | t}}" />
                                     <span class="field__button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                                             <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
@@ -118,21 +118,21 @@
                                 </div>
                             </div>
                             <div class="add-color ">
-                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{AnadirColor}</a>
+                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{{ 'moodboard.anadirColor' | t }}</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="section_2_color-primary" class="content-wrapper  mt-4 ">
                     <div class="section__content-color">
-                        <span class="h6">{ColoresCorporativosSecundarios}</span>
-                        <span class="my-subtitle">{SeleccionColor}</span>
+                        <span class="h6">{{ 'moodboard.coloresCorporativosSecundarios' | t }}</span>
+                        <span class="my-subtitle">{{ 'moodboard.seleccionColor' | t }}</span>
                         <div class="gid-10 my-subtitle secundary-color-container">
                         </div>
                         <div class="color-inputs secundary-color-inputs">
                             <div class="field-group">
                                 <div class="field"> 
-                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <input type="text" placeholder="{{ 'moodboard.codigoHexadecimalPantone' | t}}" />
                                     <span class="field__button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                                             <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="field-group">
                                 <div class="field"> 
-                                    <input type="text" placeholder="{codigoHexadecimalPantone}" />
+                                    <input type="text" placeholder="{{ 'moodboard.codigoHexadecimalPantone' | t}}" />
                                     <span class="field__button">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
                                             <path d="M15.494 0.492258C15.811 0.17303 16.2329 -0.00345177 16.6706 5.11659e-05C17.1083 0.0035541 17.5276 0.186769 17.84 0.511034C18.1524 0.835299 18.3335 1.27525 18.3451 1.73806C18.3566 2.20087 18.1978 2.65033 17.902 2.9916L8.92254 14.8694C8.76814 15.0453 8.58178 15.1865 8.37462 15.2845C8.16745 15.3825 7.94374 15.4352 7.71684 15.4397C7.48995 15.4441 7.26453 15.4001 7.05408 15.3103C6.84363 15.2205 6.65246 15.0868 6.49201 14.917L0.537211 8.61869C0.37138 8.45525 0.238371 8.25816 0.146119 8.03917C0.0538666 7.82018 0.00426131 7.58378 0.000262677 7.34408C-0.00373596 7.10437 0.0379541 6.86627 0.122845 6.64398C0.207736 6.42168 0.334089 6.21975 0.494366 6.05023C0.654643 5.8807 0.84556 5.74706 1.05573 5.65727C1.2659 5.56748 1.49101 5.52339 1.71764 5.52762C1.94428 5.53185 2.16778 5.58431 2.37482 5.68189C2.58187 5.77946 2.76821 5.92015 2.92273 6.09554L7.63526 11.0776L15.4512 0.544626L15.494 0.492258Z" fill="#0085CA"/>
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="add-color ">
-                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{AnadirColor}</a>
+                                <a href="javascript:void(0);" onclick="loadColorsText(event);">{{ 'moodboard.anadirColor' | t }}</a>
                             </div>
                         </div>
                     </div>
@@ -159,256 +159,256 @@
             </div>
             <div id="section_imagen_proyectar" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{ImagenProyectar}</h3>
+                    <h3 class="h3">{{ 'moodboard.imagenProyectar' | t }}</h3>
                 </div>
                 <div id="content_imagen_proyectar" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div class="style-gallery">
                     <label class="style-card">
                         <input type="checkbox" name="imagen_proyectar" value="Profesional" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/profesional.jpg');"></div>
-                      <div class="style-label">{EstiloProfesional}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-profesional.jpg?v=1747298833');"></div>
+                      <div class="style-label">{{ 'moodboard.estiloProfesional' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="imagen_proyectar" value="Elegante" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/elegantes.jpg');" alt="{EstiloElegante}"></div>
-                        <div class="style-label">{EstiloElegante}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-elegantes.jpg?v=1747298280');" alt="{EstiloElegante}"></div>
+                        <div class="style-label">{{ 'moodboard.estiloElegante' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="imagen_proyectar" value="Moderno" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/moderna.jpg');" alt="{EstiloModerno}" ></div>
-                        <div class="style-label">{EstiloModerno}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Moderna.jpg?v=1747298806');" alt="{EstiloModerno}" ></div>
+                        <div class="style-label">{{ 'moodboard.estiloModerno' | t }}</div>
                     </label>
                     
                 </div>
             </div>
             <div id="section_uniforme_estaciones" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{UniformeEstaciones}</h3>
+                    <h3 class="h3">{{ 'moodboard.uniformeEstaciones' | t }}</h3>
                 </div>
                 <div id="content_uniforme_estaciones" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div  class="style-gallery">
                     <label class="style-card">
                         <input type="checkbox" name="uniforme_estaciones" value="Invierno" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Invierno.jpg');"></div>
-                      <div class="style-label">{Invierno}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Invierno.jpg?v=1747298638');"></div>
+                      <div class="style-label">{{ 'moodboard.invierno' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="uniforme_estaciones" value="Entretiempo" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Entretiempo.jpg');" alt="{Entretiempo}"></div>
-                        <div class="style-label">{Entretiempo}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Entretiempo.jpg?v=1747298384');" alt="{Entretiempo}"></div>
+                        <div class="style-label">{{ 'moodboard.entretiempo' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="uniforme_estaciones" value="Verano" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Verano.jpg');" alt="{Verano}" ></div>
-                        <div class="style-label">{Verano}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Verano.jpg?v=1747299012');" alt="{Verano}" ></div>
+                        <div class="style-label">{{ 'moodboard.verano' | t }}</div>
                     </label>
                     
                 </div>
             </div>
             <div id="section_preferencia_materiales" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{PreferenciaMateriales}</h3>
+                    <h3 class="h3">{{ 'moodboard.preferenciaMateriales' | t }}</h3>
                 </div>
                 <div id="content_preferencia_materiales" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div  class="style-gallery">
                     <label class="style-card">
                         <input type="checkbox" name="preferencia_materiales" value="Naturales" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Naturales.jpg');"></div>
-                      <div class="style-label">{Naturales}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Naturales.jpg?v=1747298921');"></div>
+                      <div class="style-label">{{ 'moodboard.naturales' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="preferencia_materiales" value="Tecnicos" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Tecnicos.jpg');" alt="{Tecnicos}"></div>
-                        <div class="style-label">{Tecnicos}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Tecnicos.jpg?v=1747299047');" alt="{Tecnicos}"></div>
+                        <div class="style-label">{{ 'moodboard.tecnicos' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="preferencia_materiales" value="Sostenibles" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Sostenibles.jpg');" alt="{Sostenibles}" ></div>
-                        <div class="style-label">{Sostenibles}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Sostenibles.jpg?v=1747298994');" alt="{Sostenibles}" ></div>
+                        <div class="style-label">{{ 'moodboard.sostenibles' | t }}</div>
                     </label>
                     
                 </div>
             </div>
             <div id="section_estilo_marca" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{EstiloMarca}</h3>
+                    <h3 class="h3">{{ 'moodboard.estiloMarca' | t }}</h3>
                 </div>
                 <div id="content_estilo_marca" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div  class="style-gallery">
                     <label class="style-card">
                         <input type="checkbox" name="estilo_marca" value="Minimalista" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/minimalista.jpg');"></div>
-                      <div class="style-label">{Minimalista}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-minimalista.jpg?v=1747298907');"></div>
+                      <div class="style-label">{{ 'moodboard.minimalista' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="estilo_marca" value="Llamativo" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/llamativo.jpg');" alt="{Llamativo}"></div>
-                        <div class="style-label">{Llamativo}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-llamativo.jpg?v=1747298615');" alt="{Llamativo}"></div>
+                        <div class="style-label">{{ 'moodboard.llamativo' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="estilo_marca" value="Corporativo" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/corporativo.jpg');" alt="{Corporativo}" ></div>
-                        <div class="style-label">{Corporativo}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-corporativo.jpg?v=1747298344');" alt="{Corporativo}" ></div>
+                        <div class="style-label">{{ 'moodboard.corporativo' | t }}</div>
                     </label>
                     
                 </div>
             </div>
             <div id="section_departamentos_uniformes" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{DepartamentosUniformes}</h3>
+                    <h3 class="h3">{{ 'moodboard.departamentosUniformes' | t }}</h3>
                 </div>
                 <div id="content_departamentos_uniformes" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div  class="style-gallery-4">
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Recepcion" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/RECEPCION.jpg');"></div>
-                      <div class="style-label">{Recepcion}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-RECEPCION.jpg?v=1747298782');"></div>
+                      <div class="style-label">{{ 'moodboard.recepcion' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="PorteroBotones" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/PORTERO_BOTONES.jpg');" alt="{PorteroBotones}"></div>
-                        <div class="style-label">{PorteroBotones}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-PORTERO_BOTONES.jpg?v=1747298885');" alt="{PorteroBotones}"></div>
+                        <div class="style-label">{{ 'moodboard.porteroBotones' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="ResponsableSala" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/RESPONSABLE_DE_SALA.jpg');" alt="{ResponsableSala}" ></div>
-                        <div class="style-label">{ResponsableSala}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-RESPONSABLE_DE_SALA.jpg?v=1747298939');" alt="{ResponsableSala}" ></div>
+                        <div class="style-label">{{ 'moodboard.responsableSala' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="CamareroInterior" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERO_INTERIOR.jpg');" alt="{CamareroInterior}" ></div>
-                        <div class="style-label">{CamareroInterior}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-CAMARERO_INTERIOR.jpg?v=1747298193');" alt="{CamareroInterior}" ></div>
+                        <div class="style-label">{{ 'moodboard.camareroInterior' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="CamareroTerraza" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERO_TERRAZA.jpg');" alt="{CamareroTerraza}" ></div>
-                        <div class="style-label">{CamareroTerraza}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-CAMARERO_TERRAZA.jpg?v=1747298261');" alt="{CamareroTerraza}" ></div>
+                        <div class="style-label">{{ 'moodboard.camareroTerraza' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="JefeCocina" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/JEFE_DE_COCINA.jpg');" alt="{JefeCocina}" ></div>
-                        <div class="style-label">{JefeCocina}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-JEFE_DE_COCINA.jpg?v=1747298728');" alt="{JefeCocina}" ></div>
+                        <div class="style-label">{{ 'moodboard.jefeCocina' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="PersonalCocina" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/PERSONAL_DE_COCINA.jpg');" alt="{PersonalCocina}" ></div>
-                        <div class="style-label">{PersonalCocina}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-PERSONAL_DE_COCINA.jpg?v=1747298862');" alt="{PersonalCocina}" ></div>
+                        <div class="style-label">{{ 'moodboard.personalCocina' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Friegaplatos" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/FRIEGAPLATOS.jpg');" alt="{Friegaplatos}" ></div>
-                        <div class="style-label">{Friegaplatos}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-FRIEGAPLATOS.jpg?v=1747298425');" alt="{Friegaplatos}" ></div>
+                        <div class="style-label">{{ 'moodboard.friegaplatos' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Spa" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/SPA.jpg');" alt="{Spa}" ></div>
-                        <div class="style-label">{Spa}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-SPA.jpg?v=1747298974');" alt="{Spa}" ></div>
+                        <div class="style-label">{{ 'moodboard.spa' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Gobernanta" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/GOBERNANTA.jpg');" alt="{Gobernanta}" ></div>
-                        <div class="style-label">{Gobernanta}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-GOBERNANTA.jpg?v=1747298401');" alt="{Gobernanta}" ></div>
+                        <div class="style-label">{{ 'moodboard.gobernanta' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="CamareraPiso" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/CAMARERA_DE_PISO.jpg');" alt="{CamareraPiso}" ></div>
-                        <div class="style-label">{CamareraPiso}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-CAMARERA_DE_PISO.jpg?v=1747298165');" alt="{CamareraPiso}" ></div>
+                        <div class="style-label">{{ 'moodboard.camareraPiso' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="ValetDePiso" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/VALET_DE_PISO.jpg');" alt="{ValetDePiso}" ></div>
-                        <div class="style-label">{ValetDePiso}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-VALET_DE_PISO.jpg?v=1747298957');" alt="{ValetDePiso}" ></div>
+                        <div class="style-label">{{ 'moodboard.valetDePiso' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Mantenimiento" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/MANTENIMIENTO.jpg');" alt="{Mantenimiento}" ></div>
-                        <div class="style-label">{Mantenimiento}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-MANTENIMIENTO.jpg?v=1747298765');" alt="{Mantenimiento}" ></div>
+                        <div class="style-label">{{ 'moodboard.mantenimiento' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="Lavanderia" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/LAVANDERIA.jpg');" alt="{Lavanderia}" ></div>
-                        <div class="style-label">{Lavanderia}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-LAVANDERIA.jpg?v=1747298748');" alt="{Lavanderia}" ></div>
+                        <div class="style-label">{{ 'moodboard.lavanderia' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="departamentos_uniformes" value="TheCorner" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/THE_CORNER.jpg');" alt="{TheCorner}" ></div>
-                        <div class="style-label">{TheCorner}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-THE_CORNER.jpg?v=1747299029');" alt="{TheCorner}" ></div>
+                        <div class="style-label">{{ 'moodboard.theCorner' | t }}</div>
                     </label>
                 </div>
             </div>
             <div id="section_preferencias_estilo" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{PreferenciasEstilo}</h3>
+                    <h3 class="h3">{{ 'moodboard.preferenciasEstilo' | t }}</h3>
                 </div>
                 <div id="content_preferencias_estilo" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{SeleccionMultiple}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.seleccionMultiple' | t }}</span>
                     </div>
                 </div>
                 <div class="style-gallery">
                     <label class="style-card">
                         <input type="checkbox" name="preferencias_estilo" value="Economica" class="style-checkbox" />
-                        <div class="style-card-img active"  style="background-image: url('asset/Moodboard/Economica.jpg');"></div>
-                      <div class="style-label">{Economica}</div>
+                        <div class="style-card-img active"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Economica.jpg?v=1747298364');"></div>
+                      <div class="style-label">{{ 'moodboard.economica' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="preferencias_estilo" value="Intermedia" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Intermedia.jpg');" alt="{Intermedia}"></div>
-                        <div class="style-label">{Intermedia}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Intermedia.jpg?v=1747298686');" alt="{Intermedia}"></div>
+                        <div class="style-label">{{ 'moodboard.intermedia' | t }}</div>
                     </label>
                     <label class="style-card">
                         <input type="checkbox" name="preferencias_estilo" value="Exclusiva" class="style-checkbox" />
-                        <div class="style-card-img"  style="background-image: url('asset/Moodboard/Exclusiva.jpg');" alt="{Exclusiva}" ></div>
-                        <div class="style-label">{Exclusiva}</div>
+                        <div class="style-card-img"  style="background-image: url('https://cdn.shopify.com/s/files/1/0641/7229/4300/files/mb-Exclusiva.jpg?v=1747298317');" alt="{Exclusiva}" ></div>
+                        <div class="style-label">{{ 'moodboard.exclusiva' | t }}</div>
                     </label>
                 </div>
             </div>
             <div id="section_datos_contacto" class="section__content page-width pt-4">
                 <div>
-                    <h3 class="h3">{DatosContacto}</h3>
+                    <h3 class="h3">{{ 'moodboard.datosContacto' | t }}</h3>
                 </div>
                 <div id="content_datos_contacto" class="content-wrapper">
                     <div class="section__content-color">
-                        <span class="my-subtitle text-center">{RellenaLosDatos}</span>
+                        <span class="my-subtitle text-center">{{ 'moodboard.rellenaLosDatos' | t }}</span>
                     </div>
                 </div>
                 <div class="style-gallery">
                     <div class="form-group">
-                        <label for="nombre">{NombreDeContacto}</label>
+                        <label for="nombre">{{ 'moodboard.nombreDeContacto' | t }}</label>
                         <input type="text" id="nombre" name="nombre" required class="form-input">
                     </div>
                     <div class="form-group">
-                        <label for="email">{CorreoElectronico}</label>
+                        <label for="email">{{ 'moodboard.correoElectronico' | t }}</label>
                         <input type="text" id="email" name="email" required class="form-input">
                     </div>
                     <div class="form-group">
-                        <label for="telefono">{TelefonoOpcional}</label>
+                        <label for="telefono">{{ 'moodboard.telefonoOpcional' | t }}</label>
                         <input type="tel" id="telefono" name="telefono" class="form-input">
                     </div>
                     <div id="PolicePrivacy" class="input-radiobox square">
                         <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
                         <label for="AceptarPoliticaPrivacidad">
-                            {PoliticaPrivacidad1}<a href="/politica-privacidad" target="_blank">{PoliticaPrivacidad2}</a>
+                            {{ 'moodboard.politicaPrivacidad1' | t }}<a href="/politica-privacidad" target="_blank">{{ 'moodboard.politicaPrivacidad2' | t }}</a>
                         </label>
                         <span class="checkmark"></span>
                     </div>
@@ -417,7 +417,7 @@
     <!-- FIN - CONTENIDO -->  
             <div class="section__footer">
                 <div>
-                    <button id="btn_nextStep" class="btn btn--primary" disabled onclick="nextStep();"> {Siguiente} </button>
+                    <button id="btn_nextStep" class="btn btn--primary" disabled onclick="nextStep();"> {{ 'moodboard.siguiente' | t }} </button>
                     <small class="alert-text">
                         <span >
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13" viewBox="0 0 15 13" fill="none">
@@ -431,9 +431,9 @@
                                 </defs>
                             </svg>
                         </span> 
-                        <span id="alertColorObligatorio">{ColorObligatorio}</span>
-                        <span id="alertOpcionObligatoria" style="display: none;">{OpcionObligatoria}</span>
-                        <span id="alertContactoObligatorio" style="display: none;">{ContactoObligatorio}</span>
+                        <span id="alertColorObligatorio">{{ 'moodboard.colorObligatorio' | t }}</span>
+                        <span id="alertOpcionObligatoria" style="display: none;">{{ 'moodboard.opcionObligatoria' | t }}</span>
+                        <span id="alertContactoObligatorio" style="display: none;">{{ 'moodboard.contactoObligatorio' | t }}</span>
                     </small>
                 </div>
                 
