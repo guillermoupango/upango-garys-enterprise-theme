@@ -31,6 +31,16 @@ if (!customElements.get('cart-items')) {
       this.addEventListener('click', this.handleClick.bind(this));
       this.addEventListener('change', debounce(this.handleChange.bind(this)));
 
+      // 
+      // Agregar event listener a 'Vaciar carrito'
+      const clearAllBtn = document.querySelector('.js-vaciar-carrito');
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', (evt) => {
+          evt.preventDefault();
+          this.clearCart();
+        });
+      }
+
       // Add event listeners for property changes
       this.querySelectorAll('textarea[id^="item-properties-"]').forEach((textarea) => {
         textarea.addEventListener('blur', debounce(this.handlePropertyChange.bind(this), 300));
@@ -38,13 +48,85 @@ if (!customElements.get('cart-items')) {
     }
 
     /**
-     * Handles 'click' events on the cart items element.
+     * Modificado
+     * Handler 'click' eventos en los cart-items.
      * @param {object} evt - Event object.
      */
     handleClick(evt) {
-      if (!evt.target.matches('.js-remove-item')) return;
-      evt.preventDefault();
-      this.updateQuantity(evt.target.dataset.index, 0);
+      if (evt.target.matches('.js-remove-item')) {
+        evt.preventDefault();
+        this.updateQuantity(evt.target.dataset.index, 0);
+      } else if (evt.target.matches('.js-vaciar-carrito')) {
+        evt.preventDefault();
+        this.clearCart();
+      }
+    }
+
+    /**
+     * Método para Vaciar el carrito
+     */
+    async clearCart() {
+      this.classList.add('pointer-events-none');
+      
+      const errors = document.getElementById('cart-errors');
+      if (errors) {
+        errors.innerHTML = '';
+        errors.hidden = true;
+      }
+      
+      try {
+        // Fetch a vaciar el carrito
+        const response = await fetch('/cart/clear.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.description || errorData.message || response.statusText);
+        }
+        
+        const clearData = await response.json();
+        
+        // Recargar UI
+        this.refresh();
+        
+        // Disparar evento de carrito vaciado
+        this.dispatchEvent(new CustomEvent('on:cart:clear', {
+          bubbles: true,
+          detail: {
+            cart: clearData
+          }
+        }));
+
+        // Pequeña espera para permitir que se completen las animaciones y eventos
+        setTimeout(() => {
+          // Recargar la página para mostrar el mensaje de carrito vacío
+          window.location.reload();
+        }, 100); // 100ms de espera para permitir animaciones
+        
+      } catch (error) {
+        console.error('Error clearing cart:', error);
+        
+        // Display error
+        if (errors) {
+          errors.textContent = error.message || theme.strings.cartError;
+          errors.hidden = false;
+        }
+        
+        // Disparar error de evento
+        this.dispatchEvent(new CustomEvent('on:cart:error', {
+          bubbles: true,
+          detail: {
+            error: error.message
+          }
+        }));
+      } finally {
+        this.classList.remove('pointer-events-none');
+      }
     }
 
     /**

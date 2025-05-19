@@ -16,7 +16,8 @@
       "delivery_placeholder": "Comment on the Delivery Note",
       "checkbox": "Customize this product",
       "placeholder": "Specify the customization you want for this product.",
-      "label": "Customization"
+      "label": "Customization",
+      "clear": "Clear cart"
     },
     "price": {
       "pvp": "WP from",

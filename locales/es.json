@@ -16,7 +16,8 @@
       "delivery_placeholder": "Comentario que aparece en el Albarán",
       "checkbox": "Personalizar este producto",
       "placeholder": "Indica la personalización que desees sobre este producto",
-      "label": "Personalizacion"
+      "label": "Personalizacion",
+      "clear": "Vaciar carrito"
     },
     "price": {
       "pvp": "PVP desde",

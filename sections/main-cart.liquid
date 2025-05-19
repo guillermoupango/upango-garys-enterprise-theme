@@ -173,6 +173,9 @@
               {%- endif -%}
               {{- 'cart.summary.checkout' | t -}}
             </button>
+            <a href="#" class="js-vaciar-carrito link block text-center text-error-text w-full mt-3 text-sm">
+              {{ 'custom.cart.clear' | t }}
+            </a>
           </div>
 
           {%- if additional_checkout_buttons
