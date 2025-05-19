@@ -110,18 +110,17 @@
         <td colspan="100%">
           <div class="flex justify-between">
             <div class="flex justify-start items-center gap-theme">
-              <a
+              <button
                 class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
-                href="#"
                 data-index="item.index | plus: 1 "
                 aria-label="{{- 'cart.items.remove' | t -}}"
               >
                 {% render 'icon-trash' %}
                 {{ 'custom.variant-table.clear-all' | t }}
-              </a>
+              </button>
               <div class="variant-table__loader is-loading hidden"></div>
 
-              <button class="btn btn--secondary variant-table__view-cart-button">{{ 'custom.variant-table.view-cart' | t }}</button>
+              <a href="{{ routes.cart_url }}" class="btn btn--secondary variant-table__view-cart-button">{{ 'custom.variant-table.view-cart' | t }}</a>
             </div>
             <div class="flex justify-end items-center gap-theme">
               <div class="upng-price-wrapper--pvd">
