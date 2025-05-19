@@ -791,6 +791,9 @@ if (!customElements.get('upng-variant-picker')) {
             bubbles: true
           }));
 
+          // Actualizar el ícono del carrito en Header
+          await this.updateCartIconBubble();
+
           // Disparar evento de adición al carrito según la documentación
           if (!existingItem) {
             document.dispatchEvent(new CustomEvent('on:cart:add', {
@@ -864,6 +867,9 @@ if (!customElements.get('upng-variant-picker')) {
           document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
             bubbles: true
           }));
+
+          // Actualizar el ícono del carrito en Header
+          await this.updateCartIconBubble();
         }
       } catch (error) {
         console.error('Error updating cart:', error);
@@ -1195,6 +1201,9 @@ if (!customElements.get('upng-variant-picker')) {
           bubbles: true
         }));
 
+        // Actualizar el ícono del carrito en Header
+        await this.updateCartIconBubble();
+
       } catch (error) {
         console.error('Error clearing items:', error);
         document.dispatchEvent(new CustomEvent('on:cart:error', {
@@ -1253,6 +1262,31 @@ if (!customElements.get('upng-variant-picker')) {
       }
     }
 
+    /**
+     * Obtiene la sección cart-icon-bubble y la actualiza en el encabezado
+     */
+    async updateCartIconBubble() {
+      try {
+        // Solicitar solo la sección del icono del carrito
+        const response = await fetch('/?sections=cart-icon-bubble');
+        if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
+        
+        const data = await response.json();
+        
+        // Verificar que tengamos la sección que necesitamos
+        if (!data || !data['cart-icon-bubble']) {
+          throw new Error('Missing cart-icon-bubble section in response');
+        }
+        
+        // Actualizar el HTML del icono del carrito
+        const cartIconBubble = document.getElementById('cart-icon-bubble');
+        if (cartIconBubble) {
+          cartIconBubble.innerHTML = data['cart-icon-bubble'];
+        }
+      } catch (error) {
+        console.error('Error updating cart icon:', error);
+      }
+    }
   }
   customElements.define('upng-variant-picker', VariantPicker);
 }
