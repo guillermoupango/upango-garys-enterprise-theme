@@ -1210,12 +1210,12 @@ if (!customElements.get('upng-variant-picker')) {
 
     // Manejo para el botón "Ver Cesta"
     handleViewCart(event) {
-      event.preventDefault();
+/*       event.preventDefault();
 
       // Abrir el drawer del carrito utilizando el evento del tema
       document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:open', {
         bubbles: true
-      }));
+      })); */
     }
 
     // Activar los loaders

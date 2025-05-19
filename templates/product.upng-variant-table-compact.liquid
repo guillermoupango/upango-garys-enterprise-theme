@@ -120,7 +120,10 @@
               </button>
               <div class="variant-table__loader is-loading hidden"></div>
 
-              <a href="{{ routes.cart_url }}" class="btn btn--secondary variant-table__view-cart-button">{{ 'custom.variant-table.view-cart' | t }}</a>
+              <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
+                class="btn btn--secondary variant-table__view-cart-button js-prod-link">
+                {{ 'custom.variant-table.view-cart' | t }}
+              </a>
             </div>
             <div class="flex justify-end items-center gap-theme">
               <div class="upng-price-wrapper--pvd">
