@@ -395,29 +395,26 @@
                 <div class="style-gallery">
                     <div class="form-group">
                         <div class="field">
-                            <label for="nombre">{{ 'moodboard.nombreDeContacto' | t }}</label>
-                            <input type="text" id="nombre" name="nombre" required class="form-input">
+                            <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="{{ 'moodboard.nombreDeContacto' | t }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field">
-                            <label for="email">{{ 'moodboard.correoElectronico' | t }}</label>
-                            <input type="text" id="email" name="email" required class="form-input">
+                            <input type="text" id="email" name="email" required class="form-input" placeholder="{{ 'moodboard.correoElectronico' | t }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="field">
-                            <label for="telefono">{{ 'moodboard.telefonoOpcional' | t }}</label>
-                            <input type="tel" id="telefono" name="telefono" class="form-input">
+                            <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="{{ 'moodboard.telefonoOpcional' | t }}">
                         </div>
                     </div>
-                    <div id="PolicePrivacy" class="input-radiobox square">
-                        <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
-                        <label for="AceptarPoliticaPrivacidad">
-                            {{ 'moodboard.politicaPrivacidad1' | t }}<a href="/politica-privacidad" target="_blank">{{ 'moodboard.politicaPrivacidad2' | t }}</a>
-                        </label>
-                        <span class="checkmark"></span>
-                    </div>
+                </div>
+                <div id="PolicePrivacy" class="input-radiobox square">
+                    <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
+                    <label for="AceptarPoliticaPrivacidad">
+                        {{ 'moodboard.politicaPrivacidad1' | t }}<a href="/politica-privacidad" target="_blank">{{ 'moodboard.politicaPrivacidad2' | t }}</a>
+                    </label>
+                    <span class="checkmark"></span>
                 </div>
             </div>
     <!-- FIN - CONTENIDO -->  

@@ -1003,3 +1003,14 @@
         padding: 2rem;
         max-width: var(--page-width);
     }
+
+  .style-gallery input {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.6rem;
+    border: 1px solid #000;
+    font-size: 0.95rem;
+    }
+    #PolicePrivacy input{
+      min-width: auto !important;
+    }
