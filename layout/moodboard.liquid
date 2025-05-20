@@ -592,11 +592,10 @@
         updateStepDisplay();
     }
 
-    function finallySteps(){
+    async function finallySteps(){
 
-        enviarDatosPorCorreo().then(envioDatosOk => {
-            if (envioDatosOk != true) return;
-        });
+        const envioDatosOk = await enviarDatosPorCorreo();
+        if (!envioDatosOk) return;
 
         const moodboardMain = document.querySelector('#moodboard-main');
         if (moodboardMain) {
@@ -623,34 +622,37 @@
         return datos;
     }
 
-    function enviarDatosPorCorreo() {
-        return new Promise((resolve, reject) => {  // Devolvemos una promesa
-            const datos = getSessionData();
-            const datosAEnviar = {
-                ChangeAction: 'SendMoodBoard',
-                ObjectID: '#Site.ID',
-                ...datos
-            };
-
-            if (typeof $ !== 'undefined') {
-                $.ajax({
-                    data: datosAEnviar,
-                    cache: false,
-                    type: "post",
-                    async: true,
-                    dataType: "json"
-                }).done(function(response) {
-                    resolve(true); 
-                }).fail(function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error:', textStatus, errorThrown);
-                    alert('Error al enviar los datos.');
-                    resolve(false); 
-                });
-            } else {
-                console.error('jQuery no está cargado.');
-                resolve(false); 
-            }
+    async function enviarDatosPorCorreo() {
+        try {
+        const datos = getSessionData();
+        const bodyData = JSON.stringify({
+            shop: Shopify.shop,
+            idioma: '{{ request.locale.iso_code }}',
+            datos_completos: datos
         });
+
+        const fetchOptions = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: bodyData,
+        };
+        console.log('Enviando datos...');
+        const response = await fetch('/apps/upango-app-template/moodboard/send/', fetchOptions);
+
+        if (!response.ok) {
+            throw new Error(`Error en la petición: ${response.status} ${response.statusText}`);
+        }
+
+        const jsonData = await response.json();
+        console.log('Resultado:', jsonData);
+
+        alert('Datos enviados correctamente');
+        } catch (error) {
+        console.error('Error en fetch:', error);
+        alert('Hubo un error al enviar los datos: ' + error.message);
+        }
     }
 
     function actualizarBotonSiguiente() {
