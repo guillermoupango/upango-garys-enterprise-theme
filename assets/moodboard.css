@@ -427,15 +427,18 @@
 
 /* fondo */
         .custom-main {
-            position: relative;
+            /* position: relative; */
             min-height: 100vh;
-            /* overflow-y: auto;*/
+            overflow-y: auto;
         }
-        .section-group{
-            
+         .section-group{
+          width: 100%;
+            /*
             max-width: var(--page-width);
+            
             margin: 0 auto;
             padding: 0 var(--margin-layout);
+            */
             z-index: 999;
             overflow: visible;
         }
@@ -575,9 +578,9 @@
             position: relative; /* o absolute si lo necesitas */
             z-index: 1;
           }
-          .section-group {
+          /* .section-group {
             margin-top: 10%;
-          }
+          } */
   
 
 /* FIN --- section general */
@@ -893,7 +896,7 @@
     flex-direction: column;
     justify-content: center;
     min-height: 90vh; /* ajusta si necesitas más o menos altura */
-    padding: 0 var(--margin-layout);
+    /* padding: 0 var(--margin-layout); */
   }
 
     /* tablet : dos columnas */
@@ -994,4 +997,9 @@
     }
     .disabled {
       opacity: 0.5;
+    }
+    #moodboard-content .section-group > div{
+        width: 100%;
+        padding: 2rem;
+        max-width: var(--page-width);
     }

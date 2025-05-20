@@ -86,7 +86,7 @@
                 </div>
             </div>
     <!-- INICIO - CONTENIDO -->
-            <div id="section_1_color" class="section__content page-width">
+            <div id="section_1_color" class="section__content">
                 <div>
                     <h3 class="h3">{{ 'moodboard.colorCorporativoPregunta' | t }}</h3>
                 </div>
@@ -157,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div id="section_imagen_proyectar" class="section__content page-width pt-4">
+            <div id="section_imagen_proyectar" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.imagenProyectar' | t }}</h3>
                 </div>
@@ -185,7 +185,7 @@
                     
                 </div>
             </div>
-            <div id="section_uniforme_estaciones" class="section__content page-width pt-4">
+            <div id="section_uniforme_estaciones" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.uniformeEstaciones' | t }}</h3>
                 </div>
@@ -213,7 +213,7 @@
                     
                 </div>
             </div>
-            <div id="section_preferencia_materiales" class="section__content page-width pt-4">
+            <div id="section_preferencia_materiales" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.preferenciaMateriales' | t }}</h3>
                 </div>
@@ -241,7 +241,7 @@
                     
                 </div>
             </div>
-            <div id="section_estilo_marca" class="section__content page-width pt-4">
+            <div id="section_estilo_marca" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.estiloMarca' | t }}</h3>
                 </div>
@@ -269,7 +269,7 @@
                     
                 </div>
             </div>
-            <div id="section_departamentos_uniformes" class="section__content page-width pt-4">
+            <div id="section_departamentos_uniformes" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.departamentosUniformes' | t }}</h3>
                 </div>
@@ -356,7 +356,7 @@
                     </label>
                 </div>
             </div>
-            <div id="section_preferencias_estilo" class="section__content page-width pt-4">
+            <div id="section_preferencias_estilo" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.preferenciasEstilo' | t }}</h3>
                 </div>
@@ -383,7 +383,7 @@
                     </label>
                 </div>
             </div>
-            <div id="section_datos_contacto" class="section__content page-width pt-4">
+            <div id="section_datos_contacto" class="section__content pt-4">
                 <div>
                     <h3 class="h3">{{ 'moodboard.datosContacto' | t }}</h3>
                 </div>
@@ -394,16 +394,22 @@
                 </div>
                 <div class="style-gallery">
                     <div class="form-group">
-                        <label for="nombre">{{ 'moodboard.nombreDeContacto' | t }}</label>
-                        <input type="text" id="nombre" name="nombre" required class="form-input">
+                        <div class="field">
+                            <label for="nombre">{{ 'moodboard.nombreDeContacto' | t }}</label>
+                            <input type="text" id="nombre" name="nombre" required class="form-input">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">{{ 'moodboard.correoElectronico' | t }}</label>
-                        <input type="text" id="email" name="email" required class="form-input">
+                        <div class="field">
+                            <label for="email">{{ 'moodboard.correoElectronico' | t }}</label>
+                            <input type="text" id="email" name="email" required class="form-input">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="telefono">{{ 'moodboard.telefonoOpcional' | t }}</label>
-                        <input type="tel" id="telefono" name="telefono" class="form-input">
+                        <div class="field">
+                            <label for="telefono">{{ 'moodboard.telefonoOpcional' | t }}</label>
+                            <input type="tel" id="telefono" name="telefono" class="form-input">
+                        </div>
                     </div>
                     <div id="PolicePrivacy" class="input-radiobox square">
                         <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
