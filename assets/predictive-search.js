@@ -13,6 +13,7 @@ if (!customElements.get('predictive-search')) {
       this.overlay = this.querySelector('.js-search-overlay');
       this.statusEl = this.querySelector('.js-search-status');
       this.loadingText = this.getAttribute('data-loading-text');
+      this.searchBtn = this.querySelector('.search__submit');
       this.addListeners();
     }
 
@@ -30,7 +31,24 @@ if (!customElements.get('predictive-search')) {
         this.productTypeSelect.addEventListener('change', this.handleProductTypeChange.bind(this));
       }
       this.querySelector('.search').addEventListener('submit', this.handleSubmit.bind(this));
+      if (this.searchBtn) {
+      this.searchBtn.addEventListener('click', this.handleSearchButtonClick.bind(this));
     }
+    }
+
+    /**
+     * Maneja el clic en el botón de búsqueda
+     * @param {object} evt - Event object.
+     */
+    handleSearchButtonClick(evt) {
+      // Si el campo de entrada está vacío, evitar el envío del formulario y dar foco al input
+      if (!this.getQuery().length) {
+        evt.preventDefault();
+        this.input.focus();
+      }
+      // Si hay contenido, el formulario se enviará normalmente
+    }
+
 
     /**
      * Gets the value of the search input field.
