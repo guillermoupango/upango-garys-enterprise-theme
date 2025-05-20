@@ -420,7 +420,7 @@
         .section__footer .btn, .home-hero  .btn{
             width: calc(100%/4);
         }
-        button[disabled="disabled"]{
+        button[disabled]{
             color: white;
             background: #B8B8B8;
             border: transparent;
