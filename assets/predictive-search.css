@@ -133,7 +133,7 @@ predictive-search .search__input {
 }
 
 .header__grid--centered-logo .search__input:not(.search__input--dirty) {
-  padding-inline-end: 54px;
+  padding-inline-end: 32px;
 }
 
 .predictive-search__scroller {
