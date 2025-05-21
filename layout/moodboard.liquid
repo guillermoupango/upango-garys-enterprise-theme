@@ -412,7 +412,7 @@
                 <div id="PolicePrivacy" class="input-radiobox square">
                     <input id="AceptarPoliticaPrivacidad" name="AceptarPoliticaPrivacidad" type="checkbox" required>
                     <label for="AceptarPoliticaPrivacidad">
-                        {{ 'moodboard.politicaPrivacidad1' | t }}<a href="/politica-privacidad" target="_blank">{{ 'moodboard.politicaPrivacidad2' | t }}</a>
+                        {{ 'moodboard.politicaPrivacidad1' | t }}<a href="{{ shop.privacy_policy.url }}" target="_blank">{{ 'moodboard.politicaPrivacidad2' | t }}</a>
                     </label>
                     <span class="checkmark"></span>
                 </div>
@@ -616,7 +616,11 @@
         clavesMoodboard.forEach(clave => {
             const valor = sessionStorage.getItem(clave);
             if (valor) {
-                datos[clave] = valor;
+                try {
+                    datos[clave] = JSON.parse(valor);
+                } catch (e) {
+                    datos[clave] = valor; 
+                }
             }
         });
         return datos;
@@ -625,9 +629,9 @@
     async function enviarDatosPorCorreo() {
         try {
         const datos = getSessionData();
+        datos.idioma = '{{ request.locale.iso_code }}';
         const bodyData = JSON.stringify({
             shop: Shopify.shop,
-            idioma: '{{ request.locale.iso_code }}',
             datos_completos: datos
         });
 
@@ -639,19 +643,21 @@
             body: bodyData,
         };
         console.log('Enviando datos...');
-        const response = await fetch('/apps/upango-app-template/moodboard/send/', fetchOptions);
+        btnSiguiente.disabled = true;
+        const response = await fetch('/apps/upango-b2b/moodboard/send/', fetchOptions);
 
         if (!response.ok) {
             throw new Error(`Error en la petición: ${response.status} ${response.statusText}`);
         }
 
         const jsonData = await response.json();
-        console.log('Resultado:', jsonData);
+        btnSiguiente.disabled = false;
+        return true;
 
-        alert('Datos enviados correctamente');
         } catch (error) {
         console.error('Error en fetch:', error);
         alert('Hubo un error al enviar los datos: ' + error.message);
+        return false;
         }
     }
 
