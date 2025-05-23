@@ -1,3 +1,76 @@
+{% liquid
+  assign iframe_link = page.metafields.upng.link_catalogo
+  assign download_link = page.metafields.upng.descarga_catalogo
+%}
+
+<style>
+  .catalogo-title {
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+      color: rgb(var(--text-color));
+  }
+
+  {% comment %}   Igualar degradado header de iframe a color de fondo {% endcomment %}
+  .catalogo-container {
+    background-color: #253139 !important;
+  }
+  .catalogo-iframe {
+      width: 100%;
+    }
+
+  .catalogo-iframe iframe {
+      width: 100%;
+      height: 768px;
+    }
+</style>
+
+<div class="section reading-width rte mx-auto">
+  <h1 class="catalogo-title">{{ page.title | escape }}</h1>
+</div>
+
+<div class="catalogo-container" id="catalogo-container">
+
+  <div class="container relative">
+    {{ page.content }}
+
+    <div class="catalogo-iframe">
+      <iframe
+        allowfullscreen="true"
+        frameborder="0"
+        src="{{ iframe_link }}"
+      >
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<div class="section reading-width flex flex-col gap-y-10 justify-center items-center">
+
+  <a
+    type="button"
+    class="btn btn--primary"
+    href="{{ download_link }}"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <div class="flex items-center justify-center gap-3">
+      <span>Descarga Catalogo</span>
+      {% render 'icon', icon: 'upng-descarga', height: 18, width: 18 %}
+    </div>
+  </a>
+
 <div>
-    Hablame Mundo!
+  <a
+    class="link"
+    href="#"
+  >
+    <div class="flex items-center justify-center gap-3">
+      <span>Ir a Catalogo</span>
+      {% render 'icon-arrow-right' height: 20, width: 20 %}
+    </div>
+  </a>
+  </div>
+
 </div>

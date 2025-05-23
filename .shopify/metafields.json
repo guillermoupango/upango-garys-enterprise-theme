@@ -140,6 +140,26 @@
         "name": "single_line_text_field",
         "category": "TEXT"
       }
+    },
+    {
+      "key": "link_catalogo",
+      "namespace": "upng",
+      "name": "link_catalogo",
+      "description": "URL del catalogo a mostrar dentro del <iframe>",
+      "type": {
+        "name": "url",
+        "category": "URL"
+      }
+    },
+    {
+      "key": "descarga_catalogo",
+      "namespace": "upng",
+      "name": "descarga_catalogo",
+      "description": "Link de Descarga de Dropbox (Cliente)",
+      "type": {
+        "name": "url",
+        "category": "URL"
+      }
     }
   ],
   "product": [
@@ -210,46 +230,6 @@
       "description": "Define el patrón o color primario, como las rayas o el azul.",
       "type": {
         "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "queries",
-      "namespace": "shopify--discovery--product_search_boost",
-      "name": "Buscar impulsos de productos",
-      "description": "Lista de consultas de búsqueda que posicionan mejor un producto en los resultados",
-      "type": {
-        "name": "list.single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "related_products",
-      "namespace": "shopify--discovery--product_recommendation",
-      "name": "Productos relacionados",
-      "description": "Lista de productos relacionados",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "related_products_display",
-      "namespace": "shopify--discovery--product_recommendation",
-      "name": "Configuración de productos relacionados",
-      "description": "Determina cómo se muestran los productos relacionados junto con las recomendaciones de productos algorítmicas.",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "complementary_products",
-      "namespace": "shopify--discovery--product_recommendation",
-      "name": "Productos complementarios",
-      "description": "Lista de productos complementarios",
-      "type": {
-        "name": "list.product_reference",
         "category": "REFERENCE"
       }
     },
