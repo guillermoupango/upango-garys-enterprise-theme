@@ -11,9 +11,75 @@
   "sections": {
     "main": {
       "type": "main-contact",
-      "disabled": true,
       "settings": {
-        "show_contact_title": false
+        "show_contact_title": true,
+        "heading_align": "text-center"
+      }
+    },
+    "custom_liquid_dxG8tg": {
+      "type": "custom-liquid",
+      "name": "Custom HTML/Liquid",
+      "settings": {
+        "custom_liquid": "<p><iframe allowfullscreen=\"\" height=\"600\" loading=\"lazy\" src=\"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12939984.214847501!2d-2.100084!3d37.64507!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcf3ade0c53102db3!2sUniformes%20Gary's!5e0!3m2!1ses!2ses!4v1624977831226!5m2!1ses!2ses\" style=\"border:0;\" width=\"100%\"></iframe></p>",
+        "section_height": "xsmall",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "rich_text_TteVap": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_w63pXk": {
+          "type": "subheading",
+          "settings": {
+            "text": "Protección de datos personales"
+          }
+        },
+        "heading_Dekpti": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Rich text headline",
+            "heading_size": "h6",
+            "heading_h1": true
+          }
+        },
+        "text_cBNjrp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Utilizaremos sus datos para responder consultas y realizar análisis estadísticos. Para más información sobre el tratamiento y sus derechos, consulte la política de privacidad.</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_xcjAAA": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_w63pXk",
+        "heading_Dekpti",
+        "text_cBNjrp",
+        "button_xcjAAA"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "wide": true,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
       }
     },
     "image-banner": {
@@ -30,7 +96,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Please visit our help pages for answers to some of the most commonly asked questions.<\/p>",
+            "text": "<p>Please visit our help pages for answers to some of the most commonly asked questions.</p>",
             "enlarge_text": true
           }
         }
@@ -39,7 +105,9 @@
         "heading",
         "text"
       ],
+      "disabled": true,
       "settings": {
+        "url": "",
         "height_mode": "fixed",
         "fixed_height_desktop": 560,
         "fixed_height_mobile": 440,
@@ -48,7 +116,11 @@
         "mob_center_text": true,
         "mobile_stacked": false,
         "color_scheme": "white",
-        "full_width": true
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 40,
+        "prevent_animation": false
       }
     },
     "form": {
@@ -72,6 +144,7 @@
           "type": "dropdown",
           "settings": {
             "title": "How can we help?",
+            "options": "Option 1\nOption 2\nOption 3",
             "half_width": false
           }
         },
@@ -90,7 +163,7 @@
         "contact-body-5"
       ],
       "settings": {
-        "heading": "Drop us an email",
+        "heading": "Cuéntanos en que podemos ayudarte",
         "heading_align": "text-center",
         "image_position": "top",
         "color_scheme": "1",
@@ -111,6 +184,7 @@
         "newsletter-text-1": {
           "type": "text",
           "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>",
             "enlarge_text": false
           }
         },
@@ -128,12 +202,17 @@
         "overlay_position": "justify-center",
         "text_align": "text-center",
         "color_scheme": "default",
-        "full_width": true
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 20
       }
     }
   },
   "order": [
     "main",
+    "custom_liquid_dxG8tg",
+    "rich_text_TteVap",
     "image-banner",
     "form",
     "newsletter"
