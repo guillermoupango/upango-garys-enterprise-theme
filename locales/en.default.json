@@ -49,6 +49,10 @@
       "next-arrival": "Upcoming Arrival",
       "outlet": "OUTLET Last Units",
       "not-available": "Not Available",
+    },
+    "catalog": {
+      "download": "Download Catalog",
+      "products": "Check all products from"
     }
   },
   "general": {

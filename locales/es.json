@@ -49,6 +49,10 @@
       "next-arrival": "Sin stock, próxima llegada",
       "outlet": "OUTLET, últimas unidades",
       "not-available": "No Disponible"
+    },
+    "catalog": {
+      "download": "Descagar catálogo",
+      "products": "Ver los productos del"
     }
   },
   "general": {

@@ -14,7 +14,7 @@
 
   {% comment %}   Igualar degradado header de iframe a color de fondo {% endcomment %}
   .catalogo-container {
-    background-color: #253139 !important;
+    background-color: #253139;
   }
   .catalogo-iframe {
       width: 100%;
@@ -56,7 +56,7 @@
     rel="noopener noreferrer"
   >
     <div class="flex items-center justify-center gap-3">
-      <span>Descarga Catalogo</span>
+      <span>{{ 'custom.catalog.download' | t }}</span>
       {% render 'icon', icon: 'upng-descarga', height: 18, width: 18 %}
     </div>
   </a>
@@ -67,7 +67,7 @@
     href="#"
   >
     <div class="flex items-center justify-center gap-3">
-      <span>Ir a Catalogo</span>
+      <span>{{ 'custom.catalog.products' | t }} {{ page.title | escape }}</span>
       {% render 'icon-arrow-right' height: 20, width: 20 %}
     </div>
   </a>
