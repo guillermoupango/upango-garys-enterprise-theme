@@ -14,11 +14,15 @@
     assign timestamp_fecha_proxima_llegada = variant.metafields.upng.fecha_proxima_llegada | date: '%s'
     assign timestamp_fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%s'
     
+    #Fecha en Metacampo
     assign fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%d-%m-%Y'
     assign fecha_disponibilidad_mas_adicion = timestamp_fecha_disponibilidad | plus: adicion_en_segundos
     assign mostrar_disponibilidad_con_adicion = fecha_disponibilidad_mas_adicion | date: '%d-%m-%Y'
   
     assign stock_upango = variant.metafields.upng.stock_disponible
+
+    assign vSku = variant.sku
+    assign vId = variant.id
   -%}
   
   {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
@@ -33,3 +37,7 @@
       {{ fecha_disponibilidad }}
     {%- endif -%}
   {%- endif -%}
+
+  <script>
+    console.log('### SKU: {{ vId }}');
+  </script>
