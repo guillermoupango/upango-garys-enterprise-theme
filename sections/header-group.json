@@ -38,7 +38,7 @@
       }
     },
     "header": {
-      "type": "header",
+      "type": "UPNG-header",
       "settings": {
         "enable_sticky": true,
         "mobile_menu_position": "burger-left",
@@ -51,7 +51,8 @@
         "enable_search": true,
         "minimise_search_mobile": false,
         "minimise_search_desktop": false,
-        "menu": "main-menu",
+        "sidebar_menu": "main-menu",
+        "menu": "highlight-menu",
         "menu_center": true,
         "repeat_links": false,
         "menu_featured_link": "Outlet",

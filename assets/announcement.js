@@ -128,13 +128,17 @@ if (!customElements.get('announcement-bar')) {
       this.localization = this.querySelector('.announcement__localization');
       this.links = this.querySelectorAll('.js-announcement-link');
       this.menu = document.querySelector('.main-menu__content');
+      // * Mover al nuevo  Sidebar Menu
+      this.sidebarFooter = document.querySelector('.sidebar-menu__footer');
+      
       const menuLocalization = document.querySelector('.mob__localization');
       if (!theme.mediaMatches.md && !menuLocalization) {
         // Move localization to mobile
         const mobLocalizationElem = document.createElement('div');
         mobLocalizationElem.classList.add('mob__localization');
         mobLocalizationElem.appendChild(this.localization.firstElementChild);
-        this.menu.appendChild(mobLocalizationElem);
+        // this.menu.appendChild(mobLocalizationElem);
+        this.sidebarFooter.appendChild(mobLocalizationElem);
       } else if (theme.mediaMatches.md && menuLocalization) {
         // Move localization back to announcement bar
         this.localization.appendChild(menuLocalization.firstElementChild);
