@@ -20,8 +20,8 @@
       "clear": "Vaciar carrito"
     },
     "price": {
-      "pvp": "PVP desde",
-      "pvd": "PVD desde"
+      "pvp": "PVR desde",
+      "pvd": "Desde"
     },
     "variant-table": {
       "color": "Color",
