@@ -195,7 +195,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/REDLINE.jpg",
-            "link_url": "shopify://collections/redline",
+            "link_url": "shopify://pages/catalogo-red-line",
             "columns": 1,
             "rows": 2,
             "subheading": "",
