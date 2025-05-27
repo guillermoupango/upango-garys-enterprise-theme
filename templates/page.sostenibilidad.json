@@ -18,63 +18,6 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "rich_text_Eg6Qra": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_6tjgMm": {
-          "type": "subheading",
-          "disabled": true,
-          "settings": {
-            "text": "Subheading"
-          }
-        },
-        "heading_EP6Ha4": {
-          "type": "heading",
-          "settings": {
-            "heading": "Sostenibilidad",
-            "heading_size": "h2",
-            "heading_h1": true
-          }
-        },
-        "text_gWLLnT": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "<p>Amplia variedad de sectores de uniformidad laboral. Hostelería, sanidad, limpieza, centros de belleza, colegio,...</p>",
-            "enlarge_text": true
-          }
-        },
-        "button_bKqFAp": {
-          "type": "button",
-          "disabled": true,
-          "settings": {
-            "button_1_label": "Optional button",
-            "button_1_link": "",
-            "button_1_style": "btn--primary",
-            "button_2_label": "Optional button",
-            "button_2_link": "",
-            "button_2_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_6tjgMm",
-        "heading_EP6Ha4",
-        "text_gWLLnT",
-        "button_bKqFAp"
-      ],
-      "disabled": true,
-      "name": "Rich text",
-      "settings": {
-        "text_position": "justify-center",
-        "text_align": "text-center",
-        "mob_center_text": true,
-        "wide": false,
-        "color_scheme": "none",
-        "full_width": true,
-        "prevent_animation": false
-      }
-    },
     "media_grid_9MiPiq": {
       "type": "media-grid",
       "blocks": {
@@ -360,7 +303,6 @@
   },
   "order": [
     "main",
-    "rich_text_Eg6Qra",
     "media_grid_9MiPiq"
   ]
 }
