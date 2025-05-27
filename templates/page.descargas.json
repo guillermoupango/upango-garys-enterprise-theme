@@ -1,0 +1,425 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_page_title": true,
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
+      }
+    },
+    "rich_text_Eg6Qra": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_6tjgMm": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "Subheading"
+          }
+        },
+        "heading_EP6Ha4": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nuestros catálogos",
+            "heading_size": "h2",
+            "heading_h1": true
+          }
+        },
+        "text_gWLLnT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Amplia variedad de sectores de uniformidad laboral. Hostelería, sanidad, limpieza, centros de belleza, colegio,...</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_bKqFAp": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_6tjgMm",
+        "heading_EP6Ha4",
+        "text_gWLLnT",
+        "button_bKqFAp"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "wide": false,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
+    "media_grid_9MiPiq": {
+      "type": "media-grid",
+      "blocks": {
+        "media_C39t3m": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/NUESTROS_CATALOGOS.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "",
+            "heading_size": "h3",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-center items-center",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_GD6hra": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/BARCO_GARYS.jpg",
+            "link_url": "shopify://collections/barco-stock",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>BARCO CON STOCK</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_iBNwXy": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/PORTADA_IMAGEN.jpg",
+            "link_url": "shopify://pages/catalogo-camisas",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>CAMISAS</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_fFrcXe": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/IMAGEN_PORTADA.jpg",
+            "link_url": "shopify://pages/catalogo-beauty-retail",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>BEAUTY & RETAIL</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_MYiFQp": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/AGATHA_PORTADA.jpg",
+            "link_url": "shopify://pages/catalogo-agatha-ruiz-de-la-prada",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>AGATHA RUIZ DE LA PRADA</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_K4WgAh": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/CAPSULA_23.jpg",
+            "link_url": "shopify://pages/catalogo-horeca-novedades",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>HORECA NOVEDADES</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_nTTPmH": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/REDLINE.jpg",
+            "link_url": "shopify://pages/catalogo-red-line",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>RED LINE</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_WWGyYM": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/GASTRO23.jpg",
+            "link_url": "shopify://pages/catalogo-gastrochef",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>GASTROCHEF</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_MaJtUQ": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/REDIMENSIONADA_800x750_eb70e213-e08e-4608-994a-9655389fdefe.jpg",
+            "link_url": "shopify://pages/catalogo-sastreria",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>SASTRERÍA</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_UxtjGK": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/portada_sanidad.jpg",
+            "link_url": "shopify://pages/catalogo-sanidad-limpieza-alimentacion-y-trabajo",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>SANIDAD</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_hXbmiR": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/portada_hosteleria.jpg",
+            "link_url": "shopify://pages/catalogo-hosteleria-y-cocina",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>HOSTELERÍA Y COCINA</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_qkj34r": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/portada_urban_design.jpg",
+            "link_url": "shopify://pages/catalogo-urban-design",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>URBAN DESIGN</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_CN3bmN": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/SKECHERS.jpg",
+            "link_url": "shopify://pages/catalogo-skechers",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>SKECHERS</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_6cWpHy": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/portada_colegial.jpg",
+            "link_url": "shopify://pages/catalogo-colegial",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>COLEGIO</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_4QpBf7": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/DELANTALES.jpg",
+            "link_url": "shopify://pages/catalogo",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>DELANTALES Y COMPLEMENTOS</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_WQ7Tkc": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/portada_denim.jpg",
+            "link_url": "shopify://pages/catalogo-denim",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>DENIM</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        }
+      },
+      "block_order": [
+        "media_C39t3m",
+        "media_GD6hra",
+        "media_iBNwXy",
+        "media_fFrcXe",
+        "media_MYiFQp",
+        "media_K4WgAh",
+        "media_nTTPmH",
+        "media_WWGyYM",
+        "media_MaJtUQ",
+        "media_UxtjGK",
+        "media_hXbmiR",
+        "media_qkj34r",
+        "media_CN3bmN",
+        "media_6cWpHy",
+        "media_4QpBf7",
+        "media_WQ7Tkc"
+      ],
+      "name": "Media grid",
+      "settings": {
+        "title": "",
+        "heading_align": "text-start",
+        "button_label": "",
+        "button_link": "",
+        "gallery_cols_max": 2,
+        "mobile_carousel": false,
+        "gallery_cols_min": "1",
+        "fixed_height_desktop": 180,
+        "fixed_height_mobile": 300,
+        "section_color_scheme": "none",
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_Eg6Qra",
+    "media_grid_9MiPiq"
+  ]
+}
