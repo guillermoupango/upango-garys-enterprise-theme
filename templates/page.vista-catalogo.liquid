@@ -43,6 +43,34 @@
       width: 100%;
       height: 768px;
     }
+
+    .collection-link_text{
+        max-width: 500px
+      }
+
+    @media (max-width: 1023.98px) {
+      .catalogo-iframe iframe {
+        height: 600px;
+      }
+    }
+
+    @media (max-width: 768.98px) {
+      .catalogo-iframe iframe {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 425px) {
+      .catalogo-iframe iframe {
+        height: 300px;
+      }
+      .collection-link{
+        font-size: 14px;
+      }
+      .collection-link_text{
+        max-width: 250px
+      }
+    }
 </style>
 
 <div class="section reading-width rte mx-auto">
@@ -51,22 +79,27 @@
 
 <!-- Contenedor del Iframe (solo si existe link) -->
 {% if has_iframe %}
-  <section class="catalogo-container" id="catalogo-container" role="region" aria-label="Visualizador de catálogo">
+  <section
+    class="catalogo-container"
+    id="catalogo-container"
+    role="region"
+    aria-label="{{ 'custom.catalog.visualizer' | t }}"
+  >
     <div class="container relative">
       <div class="catalogo-iframe">
         <iframe
           src="{{ iframe_link | escape }}"
-          title="Catálogo {{ page.title | escape }}"
+          title="{{ page.title | escape }}"
           allowfullscreen="true"
           loading="lazy"
-          aria-label="Visualizador {{ page.title | escape }}"
+          aria-label="{{ 'custom.catalog.visualizer' | t }} {{ page.title | escape }}"
           frameborder="0"
         >
           <p>
-            Error de navegador.
+            {{ 'custom.catalog.download' | t }}
             {% if has_download %}
               <a href="{{ download_link | escape }}" target="_blank" rel="noopener noreferrer">
-                {{ 'custom.catalog.download' | t }}
+                {{ 'custom.catalog.iframe_error' | t }}
               </a>
             {% endif %}
           </p>
@@ -77,9 +110,9 @@
 {% endif %}
 
 <div
-  class="section reading-width flex flex-col gap-y-10 justify-center items-center"
+  class="section container reading-width flex flex-col gap-y-10 justify-center items-center"
   role="region"
-  aria-label="Acciones del catálogo"
+  aria-label="{{ 'custom.catalog.actions' | t }}"
 >
   <!-- Botón de Descarga (solo si existe link) -->
   {% if has_download %}
@@ -89,7 +122,7 @@
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn--primary"
-        aria-label="Descargar catálogo {{ page.title | escape }}"
+        aria-label="{{ 'custom.catalog.download' | t }} {{ page.title | escape }}"
         download
       >
         <span class="flex items-center justify-center gap-3">
@@ -102,14 +135,14 @@
 
   <!-- Enlace a Colección (solo si existe) -->
   {% if has_collection %}
-    <div>
+    <div class="container">
       <a
         href="{{ collection_link.url | escape }}"
         class="link collection-link"
-        aria-label="Ver productos de {{ page.title | escape }}"
+        aria-label="{{ 'custom.catalog.products' | t }} {{ page.title | escape }}"
       >
         <span class="flex items-center justify-center gap-3">
-          <span>
+          <span class="collection-link_text">
             {{ 'custom.catalog.products' | t }}
             {{ page.title | escape }}
           </span>

@@ -52,7 +52,10 @@
     },
     "catalog": {
       "download": "Download Catalog",
-      "products": "Check all products from"
+      "products": "Check all products from",
+      "visualizer": "Catalog visualizer",
+      "actions": "Catalog Actions",
+      "iframe_error": "Your web browser does not support this content. Please use a different browser to view the catalog.",
     }
   },
   "general": {

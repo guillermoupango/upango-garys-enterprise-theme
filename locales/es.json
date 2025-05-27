@@ -52,7 +52,10 @@
     },
     "catalog": {
       "download": "Descagar catálogo",
-      "products": "Ver los productos del"
+      "products": "Ver los productos del",
+      "visualizer": "Visualizador de catalogo",
+      "actions": "Acciones de Catalogo",
+      "iframe_error": "Este navegador no a podido cargar el catálogo. Por favor, inténtelo desde otro navegador."
     }
   },
   "general": {
