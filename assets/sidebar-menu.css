@@ -202,10 +202,13 @@ details[open] .sidebar-nav__item-content .icon {
   transition: opacity 0.3s;
 }
 
+/* Limitar altura y crear Scroll para menus de tercer nivel */
 .sidebar-child-nav {
   list-style: none;
   margin: 0;
   padding: 0;
+  max-height: 30vh;
+  overflow-y: scroll;
 }
 
 .sidebar-child-nav>li {
