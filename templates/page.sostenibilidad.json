@@ -32,13 +32,14 @@
         "heading_EP6Ha4": {
           "type": "heading",
           "settings": {
-            "heading": "Nuestros catálogos",
+            "heading": "Sostenibilidad",
             "heading_size": "h2",
             "heading_h1": true
           }
         },
         "text_gWLLnT": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>Amplia variedad de sectores de uniformidad laboral. Hostelería, sanidad, limpieza, centros de belleza, colegio,...</p>",
             "enlarge_text": true
@@ -63,7 +64,6 @@
         "text_gWLLnT",
         "button_bKqFAp"
       ],
-      "disabled": true,
       "name": "Rich text",
       "settings": {
         "text_position": "justify-center",
