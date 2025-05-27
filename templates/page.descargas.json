@@ -158,9 +158,9 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/AGATHA_PORTADA.jpg",
-            "link_url": "shopify://pages/catalogo-agatha-ruiz-de-la-prada",
+            "link_url": "https://www.dropbox.com/scl/fo/3ywn9ljykaq0q412cezd0/AHUNnlWy4lp1HJEAWkqJuoI?rlkey=bdm5lrsmlso7zty31dk4tb844&e=1&st=zgnfykip&dl=0",
             "columns": 1,
-            "rows": 2,
+            "rows": 1,
             "subheading": "",
             "title": "<p>AGATHA RUIZ DE LA PRADA</p>",
             "heading_size": "h4",
