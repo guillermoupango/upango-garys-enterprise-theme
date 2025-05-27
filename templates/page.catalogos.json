@@ -290,7 +290,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/portada_urban_design.jpg",
-            "link_url": "shopify://collections/urban-design",
+            "link_url": "shopify://pages/catalogo-urban-design",
             "columns": 1,
             "rows": 2,
             "subheading": "",
