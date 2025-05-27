@@ -176,7 +176,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/CAPSULA_23.jpg",
-            "link_url": "shopify://collections/horeca2025",
+            "link_url": "shopify://pages/catalogo-horeca-novedades",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -195,7 +195,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/REDLINE.jpg",
-            "link_url": "shopify://collections/redline",
+            "link_url": "shopify://pages/catalogo-red-line",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -271,7 +271,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/portada_hosteleria.jpg",
-            "link_url": "shopify://collections/hosteleria-y-cocina",
+            "link_url": "shopify://pages/catalogo-hosteleria-y-cocina",
             "columns": 1,
             "rows": 2,
             "subheading": "",
