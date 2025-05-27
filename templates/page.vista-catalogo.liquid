@@ -1,5 +1,5 @@
 {% liquid
-  assign iframe_link = page.metafields.upng.link_catalogo
+  assign iframe_link = page.metafields.upng.iframe_catalogo
   assign download_link = page.metafields.upng.descarga_catalogo
   assign collection_link = page.metafields.upng.collection_catalogo.value
 
@@ -23,11 +23,12 @@
 
 <style>
   .catalogo-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       text-align: center;
       font-weight: 500;
       font-family: 'Roboto', sans-serif;
-      color: rgb(var(--text-color));
+      color: rgb(var(--text-color)) !important;
+      margin: 0;
   }
 
   {% comment %}   Igualar degradado header de iframe a color de fondo {% endcomment %}
