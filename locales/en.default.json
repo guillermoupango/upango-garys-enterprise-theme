@@ -56,6 +56,9 @@
       "visualizer": "Catalog visualizer",
       "actions": "Catalog Actions",
       "iframe_error": "Your web browser does not support this content. Please use a different browser to view the catalog.",
+    },
+    "menu":{
+      "got_to": "Go to",
     }
   },
   "general": {

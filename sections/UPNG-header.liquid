@@ -1113,14 +1113,17 @@
                       <div class="sidebar-nav__child{% if mega_nav %} sidebar-mega-nav sidebar-mega-nav--{{ mega_nav.type }}{% endif %} has-motion">
                         <ul class="sidebar-child-nav">
                           {%- comment -%} Botón "Atrás" {%- endcomment -%}
-{% comment %}                           <li class="sidebar-nav__back-item">
+
+                          {% comment %}
+                          <li class="sidebar-nav__back-item">
                             <button type="button" class="sidebar-nav__item sidebar-nav__item--back js-back">
                               <div class="sidebar-nav__item-content">
                                 {% render 'icon-chevron-left' %}
                                 {{ 'general.navigation.back' | t }}
                               </div>
                             </button>
-                          </li> {% endcomment %}
+                          </li>
+                          {% endcomment %}
 
                           {%- comment -%} Header del submenú {%- endcomment -%}
                           <li class="sidebar-nav__header-item">
@@ -1128,7 +1131,7 @@
                               href="{{ link.url }}"
                               class="sidebar-nav__item sidebar-child-nav__item sidebar-nav__item-header"
                             >
-                              <span>{{ link.title | escape }}</span>
+                              <span>{{ 'custom.menu.got_to' | t }} {{ link.title | escape }}</span>
                               <span class="sidebar-child-nav__item_icon"> {% render 'icon-arrow-right' %} </span>
                             </a>
                           </li>
