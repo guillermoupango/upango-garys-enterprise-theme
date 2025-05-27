@@ -51,11 +51,11 @@
       "not-available": "No Disponible"
     },
     "catalog": {
-      "download": "Descagar catálogo",
+      "download": "Descargar catálogo",
       "products": "Ver los productos del",
-      "visualizer": "Visualizador de catalogo",
-      "actions": "Acciones de Catalogo",
-      "iframe_error": "Este navegador no a podido cargar el catálogo. Por favor, inténtelo desde otro navegador."
+      "visualizer": "Visualizador de catálogo",
+      "actions": "Acciones de catálogo",
+      "iframe_error": "Este navegador no soporta el catálogo. Por favor, inténtelo desde otro navegador."
     }
   },
   "general": {
