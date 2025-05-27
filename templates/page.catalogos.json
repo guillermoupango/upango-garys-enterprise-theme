@@ -252,7 +252,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/portada_sanidad.jpg",
-            "link_url": "shopify://collections/sanidad-limpieza-alimentacion-y-trabajo",
+            "link_url": "shopify://pages/catalogo-sanidad-limpieza-alimentacion-y-trabajo",
             "columns": 1,
             "rows": 2,
             "subheading": "",
