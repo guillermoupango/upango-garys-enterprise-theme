@@ -1,6 +1,24 @@
 {% liquid
   assign iframe_link = page.metafields.upng.link_catalogo
   assign download_link = page.metafields.upng.descarga_catalogo
+  assign collection_link = page.metafields.upng.collection_catalogo.value
+
+  # Verificar si hay contenido válido
+  assign has_iframe = false
+  assign has_download = false
+  assign has_collection = false
+
+  if iframe_link != blank and iframe_link != empty
+    assign has_iframe = true
+  endif
+
+  if download_link != blank and download_link != empty
+    assign has_download = true
+  endif
+
+  if collection_link != blank and collection_link != empty and collection_link.url != blank
+    assign has_collection = true
+  endif
 %}
 
 <style>
@@ -30,47 +48,73 @@
   <h1 class="catalogo-title">{{ page.title | escape }}</h1>
 </div>
 
-<div class="catalogo-container" id="catalogo-container">
+<!-- Contenedor del Iframe (solo si existe link) -->
+{% if has_iframe %}
+  <section class="catalogo-container" id="catalogo-container" role="region" aria-label="Visualizador de catálogo">
+    <div class="container relative">
+      <div class="catalogo-iframe">
+        <iframe
+          src="{{ iframe_link | escape }}"
+          title="Catálogo {{ page.title | escape }}"
+          allowfullscreen="true"
+          loading="lazy"
+          aria-label="Visualizador {{ page.title | escape }}"
+          frameborder="0"
+        >
+          <p>
+            Error de navegador.
+            {% if has_download %}
+              <a href="{{ download_link | escape }}" target="_blank" rel="noopener noreferrer">
+                {{ 'custom.catalog.download' | t }}
+              </a>
+            {% endif %}
+          </p>
+        </iframe>
+      </div>
+    </div>
+  </section>
+{% endif %}
 
-  <div class="container relative">
-    {{ page.content }}
-
-    <div class="catalogo-iframe">
-      <iframe
-        allowfullscreen="true"
-        frameborder="0"
-        src="{{ iframe_link }}"
+<div
+  class="section reading-width flex flex-col gap-y-10 justify-center items-center"
+  role="region"
+  aria-label="Acciones del catálogo"
+>
+  <!-- Botón de Descarga (solo si existe link) -->
+  {% if has_download %}
+    <div>
+      <a
+        href="{{ download_link | escape }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--primary"
+        aria-label="Descargar catálogo {{ page.title | escape }}"
+        download
       >
-      </iframe>
+        <span class="flex items-center justify-center gap-3">
+          <span>{{ 'custom.catalog.download' | t }}</span>
+          {% render 'icon', icon: 'upng-descarga', height: 20, width: 20 %}
+        </span>
+      </a>
     </div>
-  </div>
-</div>
+  {% endif %}
 
-<div class="section reading-width flex flex-col gap-y-10 justify-center items-center">
-
-  <a
-    type="button"
-    class="btn btn--primary"
-    href="{{ download_link }}"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <div class="flex items-center justify-center gap-3">
-      <span>{{ 'custom.catalog.download' | t }}</span>
-      {% render 'icon', icon: 'upng-descarga', height: 18, width: 18 %}
+  <!-- Enlace a Colección (solo si existe) -->
+  {% if has_collection %}
+    <div>
+      <a
+        href="{{ collection_link.url | escape }}"
+        class="link collection-link"
+        aria-label="Ver productos de {{ page.title | escape }}"
+      >
+        <span class="flex items-center justify-center gap-3">
+          <span>
+            {{ 'custom.catalog.products' | t }}
+            {{ page.title | escape }}
+          </span>
+          {% render 'icon-arrow-right' %}
+        </span>
+      </a>
     </div>
-  </a>
-
-<div>
-  <a
-    class="link"
-    href="#"
-  >
-    <div class="flex items-center justify-center gap-3">
-      <span>{{ 'custom.catalog.products' | t }} {{ page.title | escape }}</span>
-      {% render 'icon-arrow-right' height: 20, width: 20 %}
-    </div>
-  </a>
-  </div>
-
+  {% endif %}
 </div>
