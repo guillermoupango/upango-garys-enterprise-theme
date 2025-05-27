@@ -119,7 +119,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/PORTADA_IMAGEN.jpg",
-            "link_url": "shopify://collections/camisas",
+            "link_url": "shopify://pages/catalogo-camisas",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -138,7 +138,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/IMAGEN_PORTADA.jpg",
-            "link_url": "shopify://collections/beauty-retail",
+            "link_url": "shopify://pages/catalogo-beauty-retail",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -157,7 +157,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/AGATHA_PORTADA.jpg",
-            "link_url": "shopify://collections/agatha-ruiz-de-la-prada",
+            "link_url": "shopify://pages/catalogo-agatha-ruiz-de-la-prada",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -214,7 +214,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/GASTRO23.jpg",
-            "link_url": "shopify://collections/gastrochef",
+            "link_url": "shopify://pages/catalogo-gastrochef",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -328,7 +328,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/portada_colegial.jpg",
-            "link_url": "shopify://collections/colegial",
+            "link_url": "shopify://pages/catalogo-colegial",
             "columns": 1,
             "rows": 2,
             "subheading": "",
@@ -366,7 +366,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/portada_denim.jpg",
-            "link_url": "shopify://collections/denim",
+            "link_url": "shopify://pages/catalogo-denim",
             "columns": 1,
             "rows": 2,
             "subheading": "",
