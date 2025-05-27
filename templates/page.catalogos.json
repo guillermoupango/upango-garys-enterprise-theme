@@ -309,7 +309,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/SKECHERS.jpg",
-            "link_url": "shopify://collections/skechers",
+            "link_url": "shopify://pages/catalogo-skechers",
             "columns": 1,
             "rows": 2,
             "subheading": "",
