@@ -233,7 +233,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/REDIMENSIONADA_800x750_eb70e213-e08e-4608-994a-9655389fdefe.jpg",
-            "link_url": "shopify://collections/sastreria",
+            "link_url": "shopify://pages/catalogo-sastreria",
             "columns": 1,
             "rows": 2,
             "subheading": "",
