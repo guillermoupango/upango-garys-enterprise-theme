@@ -241,10 +241,17 @@
             "text_button": "Descarga imágenes",
             "equal_color": "Color"
           }
+        },
+        "upango_b2b_garys_upng_product_details_Uf8TK8": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-product-details/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "mostrar_datos": "crm"
+          }
         }
       },
       "block_order": [
-        "upango_b2b_garys_upng_download_images_ejQKMW"
+        "upango_b2b_garys_upng_download_images_ejQKMW",
+        "upango_b2b_garys_upng_product_details_Uf8TK8"
       ],
       "settings": {
         "full_width": false
