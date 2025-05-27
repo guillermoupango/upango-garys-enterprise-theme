@@ -299,10 +299,110 @@
         "color_scheme": "white",
         "transparent_content_color": "#ffffff"
       }
+    },
+    "media_grid_jcCeAq": {
+      "type": "media-grid",
+      "blocks": {
+        "media_d47iwP": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/naturewear.jpg",
+            "link_url": "",
+            "columns": 2,
+            "rows": 2,
+            "subheading": "Nuestra línea utiliza tejidos sostenibles como algodones orgánicos y poliéster 100% reciclado.Prendas fabricadas en una mezcla de tejidos naturales y reciclados.",
+            "title": "<p><strong>NATUREWEAR: POR UNA MODA MÁS SOSTENIBLE</strong></p>",
+            "heading_size": "h3",
+            "button_label": "HAZ CLICK AQUÍ PARA VER LOS PRODUCTOS DE NATUREWEAR",
+            "button_link": "shopify://collections/naturewear",
+            "overlay_position": "justify-end items-center",
+            "text_alignment": "text-center",
+            "button_style": "link",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_UWTDWJ": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>Media heading</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_gFqrJ3": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>Media heading</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        },
+        "media_7P7xDi": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 2,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>Media heading</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 25
+          }
+        }
+      },
+      "block_order": [
+        "media_d47iwP",
+        "media_UWTDWJ",
+        "media_gFqrJ3",
+        "media_7P7xDi"
+      ],
+      "name": "Media grid",
+      "settings": {
+        "title": "Media grid",
+        "heading_align": "text-start",
+        "button_label": "",
+        "button_link": "",
+        "gallery_cols_max": 2,
+        "mobile_carousel": false,
+        "gallery_cols_min": "1",
+        "fixed_height_desktop": 180,
+        "fixed_height_mobile": 300,
+        "section_color_scheme": "none",
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
-    "media_grid_9MiPiq"
+    "media_grid_9MiPiq",
+    "media_grid_jcCeAq"
   ]
 }
