@@ -18,288 +18,6 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "media_grid_9MiPiq": {
-      "type": "media-grid",
-      "blocks": {
-        "media_C39t3m": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/NUESTROS_CATALOGOS.jpg",
-            "link_url": "https://www.dropbox.com/scl/fi/skkj6hcg9q4alrg01mn3g/cat-logos.espa-ol.zip?rlkey=42v0ngqg4wde4xj4gv5mfll1u&e=1&st=zi8j2xs7&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>CATÁLOGOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_GD6hra": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/BARCO_GARYS.jpg",
-            "link_url": "shopify://collections/barco-stock",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>EXCEL CON EAN + DESCRIPCIONES + IMÁGENES + STOCK, ETC</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 25
-          }
-        },
-        "media_iBNwXy": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/PORTADA_IMAGEN.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/0vwtlvc1xui9ffm4sgqw9/h?rlkey=kwzr3azuicfuvsarsn0r8ihfs&e=1&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>TARIFAS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 25
-          }
-        },
-        "media_fFrcXe": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/IMAGEN_PORTADA.jpg",
-            "link_url": "https://www.dropbox.com/scl/fi/20m4d34q25ngu02v0qpq6/Condiciones-de-venta.pdf?rlkey=tflp5w0temr3u74pjqkcd02pr&e=1&st=ffpmips0&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>CONDICIONES DE VENTA</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 25
-          }
-        },
-        "media_MYiFQp": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/AGATHA_PORTADA.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/3ywn9ljykaq0q412cezd0/AHUNnlWy4lp1HJEAWkqJuoI?rlkey=bdm5lrsmlso7zty31dk4tb844&e=1&st=zgnfykip&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>DECLARACIÓN DE CONFORMIDAD + CERTIFICADOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 25
-          }
-        },
-        "media_K4WgAh": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/CAPSULA_23.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/9va2dqc16xzguieyiqqjs/AHX7xN7L2H7rY6I53-DMvsM?rlkey=4z0ce43yi9i9ke6z2d2icqi44&e=1&st=7w9vvppp&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>ÚLTIMOS DESCATALOGADOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_nTTPmH": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/REDLINE.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/dexf0rmcf44abrg65gkyd/AIFTqSPE1mYyEYqCiEp4bjo?rlkey=ah7o0uhndvbw4rq9rhnlwpnfk&e=1&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>VÍDEOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_WWGyYM": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/GASTRO23.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/esn0ko32p77plzp28d4x5/AOt9jY7zCVxLeGfd8QfOX8I?rlkey=j4bvn1f90n3zfd0moh5gkgbfn&e=1&st=1whsyu4u&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>IMÁGENES WEB</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_MaJtUQ": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/REDIMENSIONADA_800x750_eb70e213-e08e-4608-994a-9655389fdefe.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/l9mhf4rz4j8rslgo76rqe/h?rlkey=nh6il5gstyhpbvmls9li08gew&e=1&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>IMÁGENES CATÁLOGO</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_UxtjGK": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/portada_sanidad.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/ylimmdbr6kubetv3qne1w/APo9wim4HyqhBKldJCXw3Os?rlkey=apzy9dqfq158fy8yoandlupan&e=1&st=pnlv3hor&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>IMÁGENES RRSS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_hXbmiR": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/portada_hosteleria.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/63l6m4n1j6w28vhuhpcl5/h?rlkey=j6xrpq6a6cs0x9qt2c6sbfanp&e=1&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>LOGOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_qkj34r": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/portada_urban_design.jpg",
-            "link_url": "https://www.dropbox.com/scl/fo/e5z830kzkqfn1ce4edrb6/AAYd_HMEhVxXmUGgxOgVVME?rlkey=mkxvtg3outaftqmlvrma4u675&e=1&st=tqfl7uxd&dl=0",
-            "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>BANNERS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_CN3bmN": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/SKECHERS.jpg",
-            "link_url": "https://www.dropbox.com/scl/fi/k236bzs80vgd550tbmd27/Eurotoques-y-Garys.pdf?rlkey=axqdtjyy5becwkjuxg1s8v5le&e=1&st=fyf3lsyd&dl=0",
-            "columns": 1,
-            "rows": 2,
-            "subheading": "",
-            "title": "<p>ACUERDO EUROTOQUES + PRECIOS</p>",
-            "heading_size": "h3",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-center items-center",
-            "text_alignment": "text-center",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        }
-      },
-      "block_order": [
-        "media_C39t3m",
-        "media_GD6hra",
-        "media_iBNwXy",
-        "media_fFrcXe",
-        "media_MYiFQp",
-        "media_K4WgAh",
-        "media_nTTPmH",
-        "media_WWGyYM",
-        "media_MaJtUQ",
-        "media_UxtjGK",
-        "media_hXbmiR",
-        "media_qkj34r",
-        "media_CN3bmN"
-      ],
-      "name": "Media grid",
-      "settings": {
-        "title": "",
-        "heading_align": "text-start",
-        "button_label": "",
-        "button_link": "",
-        "gallery_cols_max": 2,
-        "mobile_carousel": false,
-        "gallery_cols_min": "1",
-        "fixed_height_desktop": 180,
-        "fixed_height_mobile": 300,
-        "section_color_scheme": "none",
-        "color_scheme": "white",
-        "transparent_content_color": "#ffffff"
-      }
-    },
     "media_grid_jcCeAq": {
       "type": "media-grid",
       "blocks": {
@@ -375,13 +93,32 @@
             "tint_color": "#000000",
             "tint_opacity": 25
           }
+        },
+        "media_BdcBQx": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<p>Media heading</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
         }
       },
       "block_order": [
         "media_d47iwP",
         "media_UWTDWJ",
         "media_gFqrJ3",
-        "media_7P7xDi"
+        "media_7P7xDi",
+        "media_BdcBQx"
       ],
       "name": "Media grid",
       "settings": {
@@ -398,11 +135,58 @@
         "color_scheme": "white",
         "transparent_content_color": "#ffffff"
       }
+    },
+    "media_with_text_QGYAtj": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_Br4LYy": {
+          "type": "heading",
+          "settings": {
+            "heading": "Media with text",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "text_Xr7exC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_WPw6CR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Optional button",
+            "button_link": "",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Br4LYy",
+        "text_Xr7exC",
+        "button_WPw6CR"
+      ],
+      "disabled": true,
+      "name": "Media with text",
+      "settings": {
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "left",
+        "image_fit": "contain",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-center",
+        "color_scheme": "none",
+        "only_content_color_scheme": false
+      }
     }
   },
   "order": [
     "main",
-    "media_grid_9MiPiq",
-    "media_grid_jcCeAq"
+    "media_grid_jcCeAq",
+    "media_with_text_QGYAtj"
   ]
 }
