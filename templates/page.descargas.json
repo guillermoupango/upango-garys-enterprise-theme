@@ -324,63 +324,6 @@
             "tint_color": "#000000",
             "tint_opacity": 40
           }
-        },
-        "media_6cWpHy": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/portada_colegial.jpg",
-            "link_url": "shopify://pages/catalogo-colegial",
-            "columns": 1,
-            "rows": 2,
-            "subheading": "",
-            "title": "<p>COLEGIO</p>",
-            "heading_size": "h4",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-start items-start",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_4QpBf7": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/DELANTALES.jpg",
-            "link_url": "shopify://pages/catalogo",
-            "columns": 1,
-            "rows": 2,
-            "subheading": "",
-            "title": "<p>DELANTALES Y COMPLEMENTOS</p>",
-            "heading_size": "h4",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-start items-start",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
-        },
-        "media_WQ7Tkc": {
-          "type": "media",
-          "settings": {
-            "image": "shopify://shop_images/portada_denim.jpg",
-            "link_url": "shopify://pages/catalogo-denim",
-            "columns": 1,
-            "rows": 2,
-            "subheading": "",
-            "title": "<p>DENIM</p>",
-            "heading_size": "h4",
-            "button_label": "",
-            "button_link": "",
-            "overlay_position": "justify-start items-start",
-            "text_alignment": "text-start",
-            "button_style": "btn btn--primary",
-            "tint_color": "#000000",
-            "tint_opacity": 40
-          }
         }
       },
       "block_order": [
@@ -396,10 +339,7 @@
         "media_UxtjGK",
         "media_hXbmiR",
         "media_qkj34r",
-        "media_CN3bmN",
-        "media_6cWpHy",
-        "media_4QpBf7",
-        "media_WQ7Tkc"
+        "media_CN3bmN"
       ],
       "name": "Media grid",
       "settings": {
