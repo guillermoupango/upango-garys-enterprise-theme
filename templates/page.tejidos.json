@@ -221,6 +221,7 @@
       "blocks": {
         "category_wrrDnp": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "text": "Shipping"
           }
@@ -274,7 +275,7 @@
       ],
       "name": "Collapsible content",
       "settings": {
-        "heading": "UPNG Frequently Asked Questions",
+        "heading": "",
         "heading_align": "text-center",
         "color_scheme": "1",
         "full_width": true
