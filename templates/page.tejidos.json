@@ -103,16 +103,16 @@
           "type": "question",
           "settings": {
             "icon": "none",
-            "heading": "How do I return a product?",
-            "text": "<p>Items must be returned within 30 days after receiving your order. Items must be returned in the same condition in which they were received, be unworn/unused, have any tags still attached, and include all the original packaging.</p>"
+            "heading": "ALGODÓN ORGÁNICO",
+            "text": "<p>Tejido premium de alta calidad y confort. La fibra larga y el hilo delgado permite una mayor densidad del tejido.</p>\n\n<p>El algodón egipcio se recolecta a mano, por lo que se reduce la presión sobre la fibra y la protege mejor.</p>\n\n<p>Por este motivo, las prendas confeccionadas en este tejido son suaves, resistentes y duraderas.</p>\n\n<p>Otra virtud del algodón egipcio es su fácil cuidado y planchado.</p>\n\n<p>&nbsp;</p>\n\n<table class=\"default\" width=\"100%\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>Composición</th>\n\t\t\t<th>Gramaje</th>\n\t\t\t<th>Características</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>65% PES 35% CO</td>\n\t\t\t<td>170 gr/m<sup>2</sup></td>\n\t\t\t<td>Máximo comfort. Gran durabilidad..<br>\n\t\t\tFácil cuidado y planchado.</td>\n\t\t</tr>\n\t</tbody>\n</table>"
           }
         },
         "question_pzkdaW": {
           "type": "question",
           "settings": {
             "icon": "none",
-            "heading": "How long will it take to receive my refund?",
-            "text": "<p>Refunds are processed within 7 days from when we receive the item(s).</p>"
+            "heading": "ARPILLERA",
+            "text": "<p>La arpillera, también reconocida como “tela de saco”, es un material resistente y áspero producido de manera convencional utilizando fibras naturales como yute, cáñamo o lino.</p>\n\n<p>Gracias a su característica textura de tejido abierto, presenta propiedades notables que la hacen apropiada para diversas aplicaciones.</p>\n\n<p>La tela de arpillera se caracteriza por su tejido de ligamento tafetán, presentando una textura fina lograda mediante la disposición ordenada de hilos delgados en urdimbre y trama.</p>\n\n<p>&nbsp;</p>\n\n<table class=\"default\" width=\"100%\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>Composición</th>\n\t\t\t<th>Gramaje</th>\n\t\t\t<th>Características</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>100% PES</td>\n\t\t\t<td>250 gr/m<sup>2</sup></td>\n\t\t\t<td>Textura rugosa. Transpirable y resistente al desgaste. Durable. Lavable a máquina 40º. Planchar a baja temperatura.&nbsp;</td>\n\t\t</tr>\n\t</tbody>\n</table>"
           }
         }
       },
