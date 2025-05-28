@@ -59,6 +59,9 @@
     },
     "menu":{
       "got_to": "Ir a",
+    },
+    "customer":{
+      "not_allowed": "No permitido",
     }
   },
   "general": {

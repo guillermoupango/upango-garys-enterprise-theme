@@ -355,7 +355,7 @@
 
 {% else %}
   <div class="cart-empty flex flex-col justify-center items-center h-full">
-    <p> No permitido </p>
+    <p> {{ 'custom.customer.not_allowed' | t }} </p>
     <a class="btn btn--secondary" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
   </div>
 {% endif %}
