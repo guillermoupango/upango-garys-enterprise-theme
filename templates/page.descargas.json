@@ -64,7 +64,6 @@
         "button_bKqFAp"
       ],
       "disabled": true,
-      "name": "Rich text",
       "settings": {
         "text_position": "justify-center",
         "text_align": "text-center",
@@ -81,7 +80,7 @@
         "media_C39t3m": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/NUESTROS_CATALOGOS.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fi/skkj6hcg9q4alrg01mn3g/cat-logos.espa-ol.zip?rlkey=42v0ngqg4wde4xj4gv5mfll1u&e=1&st=zi8j2xs7&dl=0",
             "columns": 1,
             "rows": 1,
@@ -100,7 +99,7 @@
         "media_GD6hra": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/BARCO_GARYS.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "shopify://collections/barco-stock",
             "columns": 1,
             "rows": 1,
@@ -119,7 +118,7 @@
         "media_iBNwXy": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/PORTADA_IMAGEN.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/0vwtlvc1xui9ffm4sgqw9/h?rlkey=kwzr3azuicfuvsarsn0r8ihfs&e=1&dl=0",
             "columns": 1,
             "rows": 1,
@@ -138,7 +137,7 @@
         "media_fFrcXe": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/IMAGEN_PORTADA.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fi/20m4d34q25ngu02v0qpq6/Condiciones-de-venta.pdf?rlkey=tflp5w0temr3u74pjqkcd02pr&e=1&st=ffpmips0&dl=0",
             "columns": 1,
             "rows": 1,
@@ -157,7 +156,7 @@
         "media_MYiFQp": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/AGATHA_PORTADA.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/3ywn9ljykaq0q412cezd0/AHUNnlWy4lp1HJEAWkqJuoI?rlkey=bdm5lrsmlso7zty31dk4tb844&e=1&st=zgnfykip&dl=0",
             "columns": 1,
             "rows": 1,
@@ -176,7 +175,7 @@
         "media_K4WgAh": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/CAPSULA_23.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/9va2dqc16xzguieyiqqjs/AHX7xN7L2H7rY6I53-DMvsM?rlkey=4z0ce43yi9i9ke6z2d2icqi44&e=1&st=7w9vvppp&dl=0",
             "columns": 1,
             "rows": 1,
@@ -195,7 +194,7 @@
         "media_nTTPmH": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/REDLINE.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/dexf0rmcf44abrg65gkyd/AIFTqSPE1mYyEYqCiEp4bjo?rlkey=ah7o0uhndvbw4rq9rhnlwpnfk&e=1&dl=0",
             "columns": 1,
             "rows": 1,
@@ -214,7 +213,7 @@
         "media_WWGyYM": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/GASTRO23.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/esn0ko32p77plzp28d4x5/AOt9jY7zCVxLeGfd8QfOX8I?rlkey=j4bvn1f90n3zfd0moh5gkgbfn&e=1&st=1whsyu4u&dl=0",
             "columns": 1,
             "rows": 1,
@@ -233,7 +232,7 @@
         "media_MaJtUQ": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/REDIMENSIONADA_800x750_eb70e213-e08e-4608-994a-9655389fdefe.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/l9mhf4rz4j8rslgo76rqe/h?rlkey=nh6il5gstyhpbvmls9li08gew&e=1&dl=0",
             "columns": 1,
             "rows": 1,
@@ -252,7 +251,7 @@
         "media_UxtjGK": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/portada_sanidad.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/ylimmdbr6kubetv3qne1w/APo9wim4HyqhBKldJCXw3Os?rlkey=apzy9dqfq158fy8yoandlupan&e=1&st=pnlv3hor&dl=0",
             "columns": 1,
             "rows": 1,
@@ -271,7 +270,7 @@
         "media_hXbmiR": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/portada_hosteleria.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/63l6m4n1j6w28vhuhpcl5/h?rlkey=j6xrpq6a6cs0x9qt2c6sbfanp&e=1&dl=0",
             "columns": 1,
             "rows": 1,
@@ -290,7 +289,7 @@
         "media_qkj34r": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/portada_urban_design.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/e5z830kzkqfn1ce4edrb6/AAYd_HMEhVxXmUGgxOgVVME?rlkey=mkxvtg3outaftqmlvrma4u675&e=1&st=tqfl7uxd&dl=0",
             "columns": 1,
             "rows": 1,
@@ -309,7 +308,7 @@
         "media_CN3bmN": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/SKECHERS.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fi/k236bzs80vgd550tbmd27/Eurotoques-y-Garys.pdf?rlkey=axqdtjyy5becwkjuxg1s8v5le&e=1&st=fyf3lsyd&dl=0",
             "columns": 1,
             "rows": 2,
@@ -341,7 +340,6 @@
         "media_qkj34r",
         "media_CN3bmN"
       ],
-      "name": "Media grid",
       "settings": {
         "title": "",
         "heading_align": "text-start",
