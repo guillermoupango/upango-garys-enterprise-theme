@@ -138,6 +138,7 @@
         "media_dcanKA": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/3.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 2,
@@ -159,7 +160,7 @@
             "link_url": "",
             "columns": 1,
             "rows": 2,
-            "subheading": "",
+            "subheading": "En Uniformes Gary’s, entendemos que nuestras acciones tienen un impacto en el medio ambiente. Por eso, nos hemos comprometido a ser proveedores sostenibles a través del programa de capacitación del Pacto Mundial, adoptando prácticas que minimizan nuestro impacto en el medio ambiente y promoviendo un futuro más verde.",
             "title": "<p><strong>PROGRAMA DE PROVEEDORES SOSTENIBLES</strong></p>",
             "heading_size": "h4",
             "button_label": "",
