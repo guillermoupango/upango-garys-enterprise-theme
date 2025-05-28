@@ -39,6 +39,50 @@
     },
     "header": {
       "type": "UPNG-header",
+      "blocks": {
+        "columns_xqEqR9": {
+          "type": "columns",
+          "settings": {
+            "title": "Catálogos",
+            "collection_images": "none",
+            "collection_use_product_image": false,
+            "collection_circle_image": false,
+            "show_underline": true,
+            "promo_position": "bottom",
+            "promo_min_height": 200,
+            "promo_text_color": "#ffffff",
+            "promo_tint_color": "#000000",
+            "promo_tint_opacity": 20,
+            "promo1_content": "",
+            "promo1_link_url": "",
+            "promo1_text_size": 16,
+            "promo1_text_width": 100,
+            "promo1_text_alignment": "justify-center items-center text-center",
+            "promo2_content": "",
+            "promo2_link_url": "",
+            "promo2_text_size": 16,
+            "promo2_text_width": 100,
+            "promo2_text_alignment": "justify-center items-center text-center",
+            "promo3_content": "",
+            "promo3_link_url": "",
+            "promo3_text_size": 16,
+            "promo3_text_width": 100,
+            "promo3_text_alignment": "justify-center items-center text-center",
+            "badge1_color": "#000000",
+            "badge1_link": "",
+            "badge1_text": "",
+            "badge2_color": "#000000",
+            "badge2_link": "",
+            "badge2_text": "",
+            "badge3_color": "#000000",
+            "badge3_link": "",
+            "badge3_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "columns_xqEqR9"
+      ],
       "settings": {
         "enable_sticky": true,
         "mobile_menu_position": "burger-left",
