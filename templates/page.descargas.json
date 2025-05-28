@@ -64,7 +64,6 @@
         "button_bKqFAp"
       ],
       "disabled": true,
-      "name": "Rich text",
       "settings": {
         "text_position": "justify-center",
         "text_align": "text-center",
@@ -81,7 +80,7 @@
         "media_C39t3m": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/NUESTROS_CATALOGOS.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fi/skkj6hcg9q4alrg01mn3g/cat-logos.espa-ol.zip?rlkey=42v0ngqg4wde4xj4gv5mfll1u&e=1&st=zi8j2xs7&dl=0",
             "columns": 1,
             "rows": 1,
@@ -100,7 +99,7 @@
         "media_GD6hra": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/BARCO_GARYS.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "shopify://collections/barco-stock",
             "columns": 1,
             "rows": 1,
@@ -119,7 +118,7 @@
         "media_iBNwXy": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/PORTADA_IMAGEN.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fo/0vwtlvc1xui9ffm4sgqw9/h?rlkey=kwzr3azuicfuvsarsn0r8ihfs&e=1&dl=0",
             "columns": 1,
             "rows": 1,
@@ -138,7 +137,7 @@
         "media_fFrcXe": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/IMAGEN_PORTADA.jpg",
+            "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
             "link_url": "https://www.dropbox.com/scl/fi/20m4d34q25ngu02v0qpq6/Condiciones-de-venta.pdf?rlkey=tflp5w0temr3u74pjqkcd02pr&e=1&st=ffpmips0&dl=0",
             "columns": 1,
             "rows": 1,
@@ -341,7 +340,6 @@
         "media_qkj34r",
         "media_CN3bmN"
       ],
-      "name": "Media grid",
       "settings": {
         "title": "",
         "heading_align": "text-start",
