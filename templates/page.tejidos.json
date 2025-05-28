@@ -208,7 +208,6 @@
         "question_mdJd78",
         "question_Rh8KeC"
       ],
-      "name": "Collapsible content",
       "settings": {
         "heading": "Frequently Asked Questions",
         "heading_align": "text-center",
@@ -238,8 +237,8 @@
           "type": "question",
           "settings": {
             "icon": "none",
-            "heading": "How long will it take to receive my order?",
-            "text": "<p>Standard shipping normally takes 3-5 days. Next day shipping is available on all domestic orders (for an additional charge). International shipping times depend on the products and destination (estimated at checkout).</p>"
+            "heading": "AIR DRY",
+            "text": "<p>Tejido elástico reciclado con con propiedades antimicrobianas y preventivas del olor. Proporciona alta transpirabilidad y es de fácil planchado y secado rápido.</p>\n\n<p>&nbsp;</p>\n\n<table class=\"default\" width=\"100%\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>Composición</th>\n\t\t\t<th>Gramaje</th>\n\t\t\t<th>Características</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>50% PES 50% PES RECYCLED</td>\n\t\t\t<td>170 gr/m<sup>2</sup></td>\n\t\t\t<td>Elástico. Anti-olor. Antimicrobiano. Transpirable<br>\n\t\t\tFácil planchado. Secado rápido. Reciclado.</td>\n\t\t</tr>\n\t</tbody>\n</table>"
           }
         },
         "category_KbWTwb": {
@@ -273,7 +272,6 @@
         "question_WBDRzA",
         "question_pzkdaW"
       ],
-      "name": "Collapsible content",
       "settings": {
         "heading": "",
         "heading_align": "text-center",
