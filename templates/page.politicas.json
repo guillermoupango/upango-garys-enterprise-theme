@@ -104,12 +104,13 @@
           "type": "question",
           "settings": {
             "icon": "none",
-            "heading": "How long will it take to receive my order?",
+            "heading": "Aviso Legal",
             "text": "<p>Standard shipping normally takes 3-5 days. Next day shipping is available on all domestic orders (for an additional charge). International shipping times depend on the products and destination (estimated at checkout).</p>"
           }
         },
         "category_4PW4NQ": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "text": "Returns and Refunds"
           }
