@@ -140,9 +140,9 @@
           "settings": {
             "link_url": "",
             "columns": 1,
-            "rows": 1,
-            "subheading": "",
-            "title": "<p>Media heading</p>",
+            "rows": 2,
+            "subheading": "En nuestras colecciones, apostamos por materiales que respetan el medioambiente, incluyendo opciones recicladas y tejidos innovadores que combinan funcionalidad y sostenibilidad. Todo ello se ve reflejado en nuestra colección Naturewear, nuestra línea más verde que utiliza entre sus materiales tejidos sostenibles como el algodón orgánico.",
+            "title": "<p><strong>MATERIALES Y PRODUCCIÓN SOSTENIBLE</strong></p>",
             "heading_size": "h4",
             "button_label": "",
             "button_link": "",
