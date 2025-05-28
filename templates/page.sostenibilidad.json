@@ -82,7 +82,7 @@
           "type": "media",
           "settings": {
             "link_url": "",
-            "columns": 2,
+            "columns": 1,
             "rows": 1,
             "subheading": "",
             "title": "<p>Media heading</p>",
