@@ -157,6 +157,7 @@
         "media_DkEy8W": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/3.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 2,
