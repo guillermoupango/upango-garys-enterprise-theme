@@ -63,7 +63,6 @@
         "text_dQ7jjY",
         "button_FRjPwJ"
       ],
-      "name": "Rich text",
       "settings": {
         "text_position": "justify-center",
         "text_align": "text-center",
@@ -140,7 +139,6 @@
         "column_xD4BtA",
         "column_TR8Vqk"
       ],
-      "name": "Link lists",
       "settings": {
         "title": "Índice",
         "heading_align": "text-center",
@@ -153,11 +151,141 @@
         "image_ratio": "1.77",
         "button_style": "btn--primary"
       }
+    },
+    "faq_HyJtRA": {
+      "type": "faq",
+      "blocks": {
+        "category_DpDnzK": {
+          "type": "category",
+          "settings": {
+            "text": "Shipping"
+          }
+        },
+        "question_rJUf9J": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "AEROSILVER",
+            "text": "<p>Tejido técnico con propiedades antimicrobianas y preventivas del olor. Proporciona alta transpirabilidad y secado rápido.</p><p> </p><p>ComposiciónGramajeCaracterísticas100% PES140 gr/m2Asistencia sanitaria. Absorción del sudorSecado rápido. Antibacteriano and antimicrobiano.</p><p> </p>"
+          }
+        },
+        "question_hEif7n": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How long will it take to receive my order?",
+            "text": "<p>Standard shipping normally takes 3-5 days. Next day shipping is available on all domestic orders (for an additional charge). International shipping times depend on the products and destination (estimated at checkout).</p>"
+          }
+        },
+        "category_4QYBCB": {
+          "type": "category",
+          "settings": {
+            "text": "Returns and Refunds"
+          }
+        },
+        "question_mdJd78": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How do I return a product?",
+            "text": "<p>Items must be returned within 30 days after receiving your order. Items must be returned in the same condition in which they were received, be unworn/unused, have any tags still attached, and include all the original packaging.</p>"
+          }
+        },
+        "question_Rh8KeC": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How long will it take to receive my refund?",
+            "text": "<p>Refunds are processed within 7 days from when we receive the item(s).</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_DpDnzK",
+        "question_rJUf9J",
+        "question_hEif7n",
+        "category_4QYBCB",
+        "question_mdJd78",
+        "question_Rh8KeC"
+      ],
+      "name": "Collapsible content",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "heading_align": "text-center",
+        "color_scheme": "1",
+        "full_width": true
+      }
+    },
+    "upng_collapsible_PCQiqr": {
+      "type": "UPNG_collapsible",
+      "blocks": {
+        "category_wrrDnp": {
+          "type": "category",
+          "settings": {
+            "text": "Shipping"
+          }
+        },
+        "question_wd6Hn3": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "AEROSILVER",
+            "text": "<p>Tejido técnico con propiedades antimicrobianas y preventivas del olor. Proporciona alta transpirabilidad y secado rápido.</p>\n\n<p>&nbsp;</p>\n\n<table class=\"default\" width=\"100%\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>Composición</th>\n\t\t\t<th>Gramaje</th>\n\t\t\t<th>Características</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>100% PES</td>\n\t\t\t<td>140 gr/m<sup>2</sup></td>\n\t\t\t<td>Asistencia sanitaria. Absorción del sudor<br>\n\t\t\tSecado rápido. Antibacteriano and antimicrobiano.</td>\n\t\t</tr>\n\t</tbody>\n</table>"
+          }
+        },
+        "question_Y8pYLJ": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How long will it take to receive my order?",
+            "text": "<p>Standard shipping normally takes 3-5 days. Next day shipping is available on all domestic orders (for an additional charge). International shipping times depend on the products and destination (estimated at checkout).</p>"
+          }
+        },
+        "category_KbWTwb": {
+          "type": "category",
+          "settings": {
+            "text": "Returns and Refunds"
+          }
+        },
+        "question_WBDRzA": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How do I return a product?",
+            "text": "<p>Items must be returned within 30 days after receiving your order. Items must be returned in the same condition in which they were received, be unworn/unused, have any tags still attached, and include all the original packaging.</p>"
+          }
+        },
+        "question_pzkdaW": {
+          "type": "question",
+          "settings": {
+            "icon": "none",
+            "heading": "How long will it take to receive my refund?",
+            "text": "<p>Refunds are processed within 7 days from when we receive the item(s).</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_wrrDnp",
+        "question_wd6Hn3",
+        "question_Y8pYLJ",
+        "category_KbWTwb",
+        "question_WBDRzA",
+        "question_pzkdaW"
+      ],
+      "name": "Collapsible content",
+      "settings": {
+        "heading": "UPNG Frequently Asked Questions",
+        "heading_align": "text-center",
+        "color_scheme": "1",
+        "full_width": true
+      }
     }
   },
   "order": [
     "main",
     "rich_text_PHrPqU",
-    "link_lists_ARhjEK"
+    "link_lists_ARhjEK",
+    "faq_HyJtRA",
+    "upng_collapsible_PCQiqr"
   ]
 }
