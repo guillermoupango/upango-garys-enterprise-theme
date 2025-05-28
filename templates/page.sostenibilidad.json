@@ -89,8 +89,8 @@
             "heading_size": "h3",
             "button_label": "",
             "button_link": "",
-            "overlay_position": "justify-start items-end",
-            "text_alignment": "text-start",
+            "overlay_position": "justify-center items-center",
+            "text_alignment": "text-center",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
             "tint_opacity": 25
