@@ -229,6 +229,25 @@
             "tint_color": "#000000",
             "tint_opacity": 40
           }
+        },
+        "media_CkwaEq": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/6.fondo.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p>Media heading</p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
         }
       },
       "block_order": [
@@ -242,7 +261,8 @@
         "media_DkEy8W",
         "media_WQ6cmJ",
         "media_FLTUUK",
-        "media_qgNWwR"
+        "media_qgNWwR",
+        "media_CkwaEq"
       ],
       "settings": {
         "title": "",
