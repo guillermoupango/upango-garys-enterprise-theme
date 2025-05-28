@@ -364,6 +364,7 @@
     "slider_button_style": "btn--primary",
     "drawer_border_radius": 16,
     "overlay_border_radius": 0,
+    "disclosure_toggle": "plus",
     "show_breadcrumbs_collection": true,
     "show_breadcrumbs_collection_list": true,
     "show_breadcrumbs_article": true,
