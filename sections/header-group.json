@@ -56,6 +56,7 @@
         "menu_center": true,
         "repeat_links": false,
         "menu_featured_link": "Outlet",
+        "menu_private_link": "Outlet,Descargas",
         "quicklinks_menu": "",
         "cta_show": false,
         "cta_icon": "phone",
