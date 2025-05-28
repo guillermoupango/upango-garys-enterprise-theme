@@ -142,20 +142,30 @@
       }
     },
     {
-      "key": "link_catalogo",
+      "key": "descarga_catalogo",
       "namespace": "upng",
-      "name": "link_catalogo",
-      "description": "URL del catalogo a mostrar dentro del <iframe>",
+      "name": "descarga_catalogo",
+      "description": "Link de Descarga de Dropbox (Cliente)",
       "type": {
         "name": "url",
         "category": "URL"
       }
     },
     {
-      "key": "descarga_catalogo",
+      "key": "collection_catalogo",
       "namespace": "upng",
-      "name": "descarga_catalogo",
-      "description": "Link de Descarga de Dropbox (Cliente)",
+      "name": "collection_catalogo",
+      "description": "Navegar a la colección del Catalogo",
+      "type": {
+        "name": "collection_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "iframe_catalogo",
+      "namespace": "upng",
+      "name": "iframe_catalogo",
+      "description": "URL del catalogo a mostrar dentro del <iframe>",
       "type": {
         "name": "url",
         "category": "URL"

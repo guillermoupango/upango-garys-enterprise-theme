@@ -2,6 +2,10 @@
 
 {% if customer.b2b? %}
   <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+  {% comment %} Bandera para ocultar Botón de navegacion a usarios NO logueados {% endcomment %}
+  {% assign ocultar_link_privado = false %}
+{% else %}
+  {% assign ocultar_link_privado = true %}
 {% endif %}
 
 {%- liquid
@@ -338,6 +342,13 @@
         | replace: ' ,', ','
         | split: ','
       -%}
+      {%- assign private_links = section.settings.menu_private_link
+        | downcase
+        | replace: ', ', ','
+        | replace: ' ,', ','
+        | split: ','
+      -%}
+
         {% comment %} BOTON MENU HAMBURGUESA - Mobile {% endcomment %}
 
         <div class="sidebar-menu-trigger">
@@ -373,6 +384,7 @@
                     {%- if link.links == blank -%}
                       <a
                         class="main-nav__item main-nav__item--primary{% if link.current %} is-active{% endif %}{% if featured_links contains link_title_downcase %} main-nav__link--featured{% endif %}"
+                        style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                         href="{{ link.url }}"
                         {% if link.current %}
                           aria-current="page"
@@ -401,6 +413,7 @@
                         <summary class="main-nav__item--toggle relative js-nav-hover js-toggle">
                           <a
                             class="main-nav__item main-nav__item--primary main-nav__item-content{% if link.current %} is-active{% endif %}{% if featured_links contains link_title_downcase %} main-nav__link--featured{% endif %}"
+                            style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                             href="{{ link.url }}"
                             {% if link.current %}
                               aria-current="page"
@@ -618,6 +631,7 @@
                                           {%- endif -%}
                                           <a
                                             class="child-nav__item main-nav__item main-nav__item-content{% if child_link.current %} is-active{% endif %}{% if featured_links contains child_link_title_downcase %} main-nav__link--featured{% endif %}"
+                                            style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                                             href="{{ child_link.url }}"
                                             {% if settings.preload_links %}
                                               data-no-instant
@@ -678,6 +692,7 @@
                                               -%}
                                               <a
                                                 class="grandchild-nav__item main-nav__item relative{% if featured_links contains grandchild_link_title_downcase %} main-nav__link--featured{% endif %}"
+                                                style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                                                 href="{{ grandchild_link.url }}"
                                                 {% if grandchild_link.current %}
                                                   aria-current="page"
@@ -1075,6 +1090,7 @@
                     {% comment %} Enlaces simples - Primer nivel {% endcomment %}
                     <a
                       class="sidebar-nav__item sidebar-nav__item--primary{% if link.current %} is-active{% endif %}{% if featured_links contains link_title_downcase %} sidebar-nav__link--featured{% endif %}"
+                      style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                       href="{{ link.url }}"
                       {% if link.current %}
                         aria-current="page"
@@ -1103,7 +1119,8 @@
                       {% endif %}
                     >
                       <summary class="sidebar-nav__item--toggle js-sidebar-toggle">
-                        <div class="sidebar-nav__item sidebar-nav__item--primary sidebar-nav__item-content{% if link.current %} is-active{% endif %}{% if featured_links contains link_title_downcase %} sidebar-nav__link--featured{% endif %}">
+                        <div class="sidebar-nav__item sidebar-nav__item--primary sidebar-nav__item-content{% if link.current %} is-active{% endif %}{% if featured_links contains link_title_downcase %} sidebar-nav__link--featured{% endif %}"
+                        style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}">
                           {{ link.title | escape }}
                           {% render 'icon-chevron-down' %}
                         </div>
@@ -1230,6 +1247,7 @@
                                         <li>
                                           <a
                                             class="sidebar-grandchild-nav__item{% if grandchild_link.current %} is-active{% endif %}{% if featured_links contains grandchild_link_title_downcase %} sidebar-nav__link--featured{% endif %}"
+                                            style="{% if private_links contains link_title_downcase and ocultar_link_privado %}display:none{% endif %}"
                                             href="{{ grandchild_link.url }}"
                                             {% if grandchild_link.current %}
                                               aria-current="page"
@@ -1502,11 +1520,23 @@
       "default": true
     },
     {
+      "type": "header",
+      "content": "Navigation Control",
+      "info": "Navigation Options."
+    },
+    {
       "type": "text",
       "id": "menu_featured_link",
       "label": "Featured link",
       "info": "Enter links to highlight in the Accent color. Separate multiple links with commas. e.g. \"Shop,Sale\".",
       "default": "Sale"
+    },
+    {
+      "type": "text",
+      "id": "menu_private_link",
+      "label": "Private link",
+      "info": "Enter links to NOT show when client is not b2b. Separate multiple links with commas. e.g. \"Outlet,Downloads\".",
+      "default": "Outlet"
     },
     {
       "type": "header",
