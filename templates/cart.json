@@ -24,9 +24,28 @@
         "show_shipping_calculator": false,
         "shipping_calculator_default_country": "United States"
       }
+    },
+    "1748432947b831f6ce": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_checkout_button_block_EKHCJP": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-checkout-button-block/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "button_text": "Finalizar Compra",
+            "button_class": "shopify-payment-button__button shopify-payment-button__button--unbranded"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_checkout_button_block_EKHCJP"
+      ],
+      "settings": {
+        "full_width": false
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1748432947b831f6ce"
   ]
 }
