@@ -53,7 +53,7 @@
             "button_label": "",
             "button_link": "",
             "overlay_position": "justify-start items-end",
-            "text_alignment": "text-center",
+            "text_alignment": "text-start",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
             "tint_opacity": 25
@@ -72,7 +72,7 @@
             "button_label": "",
             "button_link": "",
             "overlay_position": "justify-end items-start",
-            "text_alignment": "text-center",
+            "text_alignment": "text-start",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
             "tint_opacity": 25
@@ -186,7 +186,7 @@
             "button_label": "",
             "button_link": "",
             "overlay_position": "justify-start items-center",
-            "text_alignment": "text-center",
+            "text_alignment": "text-start",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
             "tint_opacity": 40
@@ -200,12 +200,12 @@
             "columns": 1,
             "rows": 2,
             "subheading": "",
-            "title": "<h2><strong>MIRANDO AL FUTURO</strong></h2><p>El compromiso de Uniformes Gary’s con la responsabilidad ecológica es un camino constante. Estamos enfocados en seguir innovando y adoptando prácticas aún más sostenibles para contribuir a un futuro mejor. Nuestro objetivo es ofrecer soluciones que no solo beneficien a nuestros clientes, sino que también respeten y protejan el entorno natural que todos compartimos. En Uniformes Gary’s, creemos que la sostenibilidad es una responsabilidad compartida. Trabajamos cada día para ser una empresa que inspire confianza, calidad y respeto por el medioambiente. Juntos, podemos construir un futuro más verde.</p><h6>JUNTOS PODEMOS CONSTRUIR UN FUTURO MÁS VERDE<br/><br/></h6>",
+            "title": "<h2><strong>MIRANDO AL FUTURO</strong></h2><p>El compromiso de Uniformes Gary’s con la responsabilidad ecológica es un camino constante. Estamos enfocados en seguir innovando y adoptando prácticas aún más sostenibles para contribuir a un futuro mejor. Nuestro objetivo es ofrecer soluciones que no solo beneficien a nuestros clientes, sino que también respeten y protejan el entorno natural que todos compartimos. En Uniformes Gary’s, creemos que la sostenibilidad es una responsabilidad compartida. Trabajamos cada día para ser una empresa que inspire confianza, calidad y respeto por el medioambiente. Juntos, podemos construir un futuro más verde.</p><p><strong>JUNTOS PODEMOS CONSTRUIR UN FUTURO MÁS VERDE</strong><br/><br/></p>",
             "heading_size": "h3",
             "button_label": "",
             "button_link": "",
             "overlay_position": "justify-end items-start",
-            "text_alignment": "text-center",
+            "text_alignment": "text-start",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
             "tint_opacity": 40
