@@ -83,7 +83,7 @@
             "heading_bg_color": "#2e2e2e",
             "heading_text_color": "#ffffff",
             "menu": "",
-            "button_label": "Optional button",
+            "button_label": "",
             "button_link": "/"
           }
         },
@@ -119,25 +119,13 @@
             "button_label": "Optional button",
             "button_link": "/"
           }
-        },
-        "column_TR8Vqk": {
-          "type": "column",
-          "settings": {
-            "heading": "Column",
-            "heading_bg_color": "#2e2e2e",
-            "heading_text_color": "#ffffff",
-            "menu": "",
-            "button_label": "Optional button",
-            "button_link": ""
-          }
         }
       },
       "block_order": [
         "column_XbpNEe",
         "column_RpUf6z",
         "column_qGjBJY",
-        "column_xD4BtA",
-        "column_TR8Vqk"
+        "column_xD4BtA"
       ],
       "settings": {
         "title": "Índice",
