@@ -73,73 +73,6 @@
         "prevent_animation": false
       }
     },
-    "link_lists_ARhjEK": {
-      "type": "link-lists",
-      "blocks": {
-        "column_XbpNEe": {
-          "type": "column",
-          "settings": {
-            "heading": "",
-            "heading_bg_color": "#2e2e2e",
-            "heading_text_color": "#ffffff",
-            "menu": "",
-            "button_label": "",
-            "button_link": "/"
-          }
-        },
-        "column_RpUf6z": {
-          "type": "column",
-          "settings": {
-            "heading": "Column",
-            "heading_bg_color": "#484848",
-            "heading_text_color": "#ffffff",
-            "menu": "",
-            "button_label": "Optional button",
-            "button_link": "/"
-          }
-        },
-        "column_qGjBJY": {
-          "type": "column",
-          "settings": {
-            "heading": "Column",
-            "heading_bg_color": "#6e6e6e",
-            "heading_text_color": "#ffffff",
-            "menu": "",
-            "button_label": "Optional button",
-            "button_link": "/"
-          }
-        },
-        "column_xD4BtA": {
-          "type": "column",
-          "settings": {
-            "heading": "Column",
-            "heading_bg_color": "#9f9f9f",
-            "heading_text_color": "#ffffff",
-            "menu": "",
-            "button_label": "Optional button",
-            "button_link": "/"
-          }
-        }
-      },
-      "block_order": [
-        "column_XbpNEe",
-        "column_RpUf6z",
-        "column_qGjBJY",
-        "column_xD4BtA"
-      ],
-      "settings": {
-        "title": "Índice",
-        "heading_align": "text-center",
-        "button_label": "",
-        "button_link": "",
-        "layout": "carousel",
-        "column_size": "small",
-        "column_align": "left",
-        "color_scheme": "1",
-        "image_ratio": "1.77",
-        "button_style": "btn--primary"
-      }
-    },
     "upng_collapsible_PCQiqr": {
       "type": "UPNG_collapsible",
       "blocks": {
@@ -166,12 +99,6 @@
             "text": "<p>Tejido elástico reciclado con con propiedades antimicrobianas y preventivas del olor. Proporciona alta transpirabilidad y es de fácil planchado y secado rápido.</p>\n\n<p>&nbsp;</p>\n\n<table class=\"default\" width=\"100%\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th>Composición</th>\n\t\t\t<th>Gramaje</th>\n\t\t\t<th>Características</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>50% PES 50% PES RECYCLED</td>\n\t\t\t<td>170 gr/m<sup>2</sup></td>\n\t\t\t<td>Elástico. Anti-olor. Antimicrobiano. Transpirable<br>\n\t\t\tFácil planchado. Secado rápido. Reciclado.</td>\n\t\t</tr>\n\t</tbody>\n</table>"
           }
         },
-        "category_KbWTwb": {
-          "type": "category",
-          "settings": {
-            "text": "Returns and Refunds"
-          }
-        },
         "question_WBDRzA": {
           "type": "question",
           "settings": {
@@ -193,7 +120,6 @@
         "category_wrrDnp",
         "question_wd6Hn3",
         "question_Y8pYLJ",
-        "category_KbWTwb",
         "question_WBDRzA",
         "question_pzkdaW"
       ],
@@ -208,7 +134,6 @@
   "order": [
     "main",
     "rich_text_PHrPqU",
-    "link_lists_ARhjEK",
     "upng_collapsible_PCQiqr"
   ]
 }
