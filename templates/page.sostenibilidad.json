@@ -252,6 +252,7 @@
         "media_wPrRAN": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/6.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
