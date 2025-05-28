@@ -109,7 +109,7 @@
             "heading_size": "h3",
             "button_label": "",
             "button_link": "",
-            "overlay_position": "justify-start items-end",
+            "overlay_position": "justify-center items-center",
             "text_alignment": "text-center",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
@@ -119,6 +119,7 @@
         "media_BdcBQx": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/2.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -127,7 +128,7 @@
             "heading_size": "h3",
             "button_label": "",
             "button_link": "",
-            "overlay_position": "justify-start items-end",
+            "overlay_position": "justify-center items-center",
             "text_alignment": "text-center",
             "button_style": "btn btn--primary",
             "tint_color": "#000000",
