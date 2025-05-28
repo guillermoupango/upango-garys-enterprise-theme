@@ -18,70 +18,6 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "faq_rRPBCx": {
-      "type": "faq",
-      "blocks": {
-        "category_Mk6c7t": {
-          "type": "category",
-          "settings": {
-            "text": "Shipping"
-          }
-        },
-        "question_QjNGzN": {
-          "type": "question",
-          "settings": {
-            "icon": "none",
-            "heading": "What countries do you ship to?",
-            "text": "<p>We currently ship to the United States, Canada, Australia and the UK. To enquire about shipping to a different destination, please contact us.</p>"
-          }
-        },
-        "question_KDrLtc": {
-          "type": "question",
-          "settings": {
-            "icon": "none",
-            "heading": "How long will it take to receive my order?",
-            "text": "<p>Standard shipping normally takes 3-5 days. Next day shipping is available on all domestic orders (for an additional charge). International shipping times depend on the products and destination (estimated at checkout).</p>"
-          }
-        },
-        "category_bMqpKq": {
-          "type": "category",
-          "settings": {
-            "text": "Returns and Refunds"
-          }
-        },
-        "question_nVMyEx": {
-          "type": "question",
-          "settings": {
-            "icon": "none",
-            "heading": "How do I return a product?",
-            "text": "<p>Items must be returned within 30 days after receiving your order. Items must be returned in the same condition in which they were received, be unworn/unused, have any tags still attached, and include all the original packaging.</p>"
-          }
-        },
-        "question_CtNiqj": {
-          "type": "question",
-          "settings": {
-            "icon": "none",
-            "heading": "How long will it take to receive my refund?",
-            "text": "<p>Refunds are processed within 7 days from when we receive the item(s).</p>"
-          }
-        }
-      },
-      "block_order": [
-        "category_Mk6c7t",
-        "question_QjNGzN",
-        "question_KDrLtc",
-        "category_bMqpKq",
-        "question_nVMyEx",
-        "question_CtNiqj"
-      ],
-      "name": "Collapsible content",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "heading_align": "text-center",
-        "color_scheme": "1",
-        "full_width": true
-      }
-    },
     "upng_collapsible_hjAJGx": {
       "type": "UPNG_collapsible",
       "blocks": {
@@ -151,7 +87,6 @@
   },
   "order": [
     "main",
-    "faq_rRPBCx",
     "upng_collapsible_hjAJGx"
   ]
 }
