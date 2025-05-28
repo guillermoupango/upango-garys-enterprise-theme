@@ -248,6 +248,43 @@
             "tint_color": "#000000",
             "tint_opacity": 40
           }
+        },
+        "media_wPrRAN": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h2>ACCIONES SOCIALES:</h2><ul><li>Donaciones de productos a iniciativas como la cena de la Asociación Contra el Cáncer, Chef for Children…</li><li>Donaciones de prendas descatalogadas o fuera de cumplimiento de requisitos de calidad a asociaciones como Cáritas o Tu Casa Azul.</li></ul>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
+        },
+        "media_mte7n6": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/6.fondo.jpg",
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "subheading": "",
+            "title": "<h2>ACCIONES GOBERNANZA:</h2><ul><li>Cumplimiento de Compliance.</li></ul>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
         }
       },
       "block_order": [
@@ -262,7 +299,9 @@
         "media_WQ6cmJ",
         "media_FLTUUK",
         "media_qgNWwR",
-        "media_CkwaEq"
+        "media_CkwaEq",
+        "media_wPrRAN",
+        "media_mte7n6"
       ],
       "settings": {
         "title": "",
