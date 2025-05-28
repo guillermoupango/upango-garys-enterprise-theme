@@ -140,7 +140,7 @@
         {%- endif -%}
 
         {%- if section.settings.show_checkout_button -%}
-          <button type="submit" class="btn btn--primary btn--icon-with-text w-full" name="checkout" form="cart-drawer-form"{% if cart == empty %} disabled{% endif %}>
+          <button type="submit" class="btn btn--primary btn--icon-with-text w-full checkout-button" name="checkout" form="cart-drawer-form"{% if cart == empty %} disabled{% endif %}>
             {{ icon }}{{ 'cart.summary.checkout' | t }} - {% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}
           </button>
         {%- else -%}
