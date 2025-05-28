@@ -152,6 +152,24 @@
             "tint_color": "#000000",
             "tint_opacity": 40
           }
+        },
+        "media_DkEy8W": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 2,
+            "subheading": "",
+            "title": "<p><strong>PROGRAMA DE PROVEEDORES SOSTENIBLES</strong></p>",
+            "heading_size": "h4",
+            "button_label": "",
+            "button_link": "",
+            "overlay_position": "justify-start items-end",
+            "text_alignment": "text-start",
+            "button_style": "btn btn--primary",
+            "tint_color": "#000000",
+            "tint_opacity": 40
+          }
         }
       },
       "block_order": [
@@ -161,7 +179,8 @@
         "media_7P7xDi",
         "media_EWF8WN",
         "media_BdcBQx",
-        "media_dcanKA"
+        "media_dcanKA",
+        "media_DkEy8W"
       ],
       "settings": {
         "title": "",
