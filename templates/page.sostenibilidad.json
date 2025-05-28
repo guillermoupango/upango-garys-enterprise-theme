@@ -81,6 +81,7 @@
         "media_7P7xDi": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/2.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 2,
@@ -99,6 +100,7 @@
         "media_EWF8WN": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/2.fondo.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
