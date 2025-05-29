@@ -59,7 +59,7 @@
           <td class="variant-table__cell">{{ variant.option2 }}</td>
           {% if customer.metafields['upng-permission'].verStock %}
             <td class="variant-table__cell variant-table__cell--stock">
-              {% render 'UPNG-stock-indicator', variant: variant %}
+              {% render 'UPNG-stock-indicator', variant: variant, descatalogado: descatalogado %}
             </td>
           {% endif %}
           <td class="variant-table__cell variant-table__cell--date">

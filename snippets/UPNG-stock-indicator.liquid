@@ -1,17 +1,15 @@
 {%- comment -%}
-  Muestra el estado del inventario basado en la cantidad disponible y si el producto está descatalogado
+  Muestra y da estilos base al inventario
   - Usa 'inventory_threshold' propios del tema Enterprise
   - Usa clases existentes (data-inventory-level="very_low") para estilos propios del tema Enterprise
 
   Uso: {% render 'UPNG-stock-indicator', variant: product_variant %}
 {%- endcomment -%}
 
-{%- liquid
-  assign stock_de_variante = variant.inventory_quantity
-  assign descatalogado = variant.metafields.upng.descatalogado
-  assign stock_upango = variant.metafields.upng.stock_disponible
+{% comment %}
+ PENDIENTE: reglas de Colores
 
-  if descatalogado == false and stock_de_variante <= settings.inventory_threshold_very_low
+   if descatalogado == false and stock_de_variante <= settings.inventory_threshold_very_low
     assign nivel_stock = 'backordered'
   elsif stock_de_variante <= settings.inventory_threshold_very_low
     assign nivel_stock = 'very_low'
@@ -19,12 +17,31 @@
     assign nivel_stock = 'low'
   else
     assign nivel_stock = 'normal'
-  endif
+  endif 
+ 
+ {% endcomment %}
+
+{%- liquid
+  assign stock_shopify = variant.inventory_quantity
+  assign stock_upango = variant.metafields.upng.stock_disponible
 -%}
 
 {% if customer.b2b? and customer.metafields['upng-permission'].verStock %}
-  <div class="text-xs product-inventory__status" data-inventory-level="{{ nivel_stock }}">
-    {%- if descatalogado == true -%}
+
+  <div class="text-xs product-inventory__status js-stock-indicator"
+    data-quantity="{{  }}pndt_sync_carrito"
+    data-stock-shopify="{{ stock_shopify }}"
+    data-stock-upango="{{ stock_upango }}"
+    data-inventory-level="{{ nivel_stock }}"
+    data-descatalogado="{{ descatalogado }}"
+  >
+
+    <pre>
+
+    </pre>
+
+{% comment %}     {%- if descatalogado == true -%}
+
       {%- if stock_de_variante < 1 -%}
         {{ 'custom.stock-indicator.not-available' | t }}
       {%- elsif stock_de_variante <= 10 -%}
@@ -32,6 +49,7 @@
       {%- else -%}
         +10
       {%- endif -%}
+
     {%- else -%}
       {%- if stock_de_variante < 1 -%}
         0
@@ -40,8 +58,12 @@
       {%- else -%}
         +10
       {%- endif -%}
-    {%- endif -%}
+
+    {%- endif -%} {% endcomment %}
+
+    
   </div>
+
 
 {% else %}
   <div class="product-inventory__status" hidden></div>

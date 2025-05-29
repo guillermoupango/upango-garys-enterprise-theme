@@ -567,6 +567,7 @@ if (!customElements.get('upng-variant-picker')) {
         this.viewCartButton = tableContainer.querySelector('.variant-table__view-cart-button');
         this.totalsLoader = tableContainer.querySelector('.variant-table__loader');
         this.prices = tableContainer.querySelectorAll('.upng-price-wrapper--pvd');
+        this.stockIndicator = tableContainer.querySelectorAll('.js-stock-indicator');
 
         //console.log(this.prices);
         
@@ -681,6 +682,9 @@ if (!customElements.get('upng-variant-picker')) {
           });
         }
 
+        // Sincronizar indicadores de stock
+        this.updateAllStockIndicators(this.cartItems);
+
         // Sólo marcar como sincronizado si todo se inicializó correctamente
         this._state.isCartSynced = true;
 
@@ -784,6 +788,10 @@ if (!customElements.get('upng-variant-picker')) {
 
         // Verificamos que cart.items exista antes de usarlo
         if (updatedCart && updatedCart.items) {
+
+          // Guardar los items actualizados
+          this.cartItems = updatedCart.items;
+
           this.updateQuantityInputs(updatedCart.items);
 
           // Refrescar drawer del carrito usando el sistema de eventos del tema
@@ -817,6 +825,9 @@ if (!customElements.get('upng-variant-picker')) {
         } else {
           throw new Error('Invalid cart response');
         }
+
+        // Actualizar solo el indicador de esta variante
+        this.updateStockIndicator(variantId, this.cartItems);
 
       } catch (error) {
         console.error('Error updating cart:', error);
@@ -927,17 +938,84 @@ if (!customElements.get('upng-variant-picker')) {
 
     updateQuantityInputs(cartItems) {
       if (!this.quantityInputs) return;
+
+      // Actualizar también this.cartItems
+      this.cartItems = cartItems;
+
       this.quantityInputs.forEach(input => {
         const variantId = input.getAttribute('data-variant-id');
         const cartItem = cartItems.find(item => item.variant_id === parseInt(variantId));
-        input.value = cartItem ? cartItem.quantity : 0;
+        const newQuantity = cartItem ? cartItem.quantity : 0;
+    
+      // Solo actualizar si cambió
+      if (input.value != newQuantity) {
+        input.value = newQuantity;
+        
+        // Actualizar SOLO este indicador de stock
+        this.updateStockIndicator(variantId, cartItems);
+      }
       });
 
-      // Actualizar visibilidad de botones de eliminar
       this.updateRemoveButtonsVisibility(cartItems);
+      this.updateTableTotals(cartItems);;
+    }
 
-      // Actualizar los totales de la tabla
-      this.updateTableTotals(cartItems);
+    // Función para actualizar TODOS los indicadores (sin console.log individual)
+    updateAllStockIndicators(cartItems = null) {
+      const items = cartItems || this.cartItems || [];
+      const stockIndicators = this.querySelectorAll('.js-stock-indicator');
+      
+      stockIndicators.forEach(indicator => {
+        const row = indicator.closest('[data-variant-row]');
+        if (!row) return;
+        
+        const variantId = row.dataset.variantRow;
+        const cartItem = items.find(item => item.variant_id == variantId);
+        const quantity = cartItem ? cartItem.quantity : 0;
+        
+        indicator.dataset.quantity = quantity;
+        this.updateStockDisplay(indicator, quantity);
+      });
+    }
+
+    // Función para actualizar UN SOLO indicador específico
+    updateStockIndicator(variantId, cartItems = null) {
+      const items = cartItems || this.cartItems || [];
+      
+      // Buscar el indicador específico para esta variante
+      const row = this.querySelector(`[data-variant-row="${variantId}"]`);
+      if (!row) return;
+      
+      const indicator = row.querySelector('.js-stock-indicator');
+      if (!indicator) return;
+      
+      // Buscar la cantidad en el carrito
+      const cartItem = items.find(item => item.variant_id == variantId);
+      const quantity = cartItem ? cartItem.quantity : 0;
+      
+      // Actualizar el atributo data-quantity
+      indicator.dataset.quantity = quantity;
+      
+      // Actualizar el contenido visible
+      this.updateStockDisplay(indicator, quantity);
+      
+      // Console.log SOLO para este indicador
+      console.log(`INDICATOR: ${variantId}, Quantity in cart: ${quantity}`);
+    }
+
+    // Función auxiliar para actualizar la visualización
+    updateStockDisplay(indicator, cartQuantity) {
+      const stockShopify = parseInt(indicator.dataset.stockShopify) || 0;
+      const stockUpango = parseInt(indicator.dataset.stockUpango) || 0;
+      const descatalogado = indicator.dataset.descatalogado === 'true';
+      
+      // Aquí puedes agregar la lógica de cómo mostrar el stock
+      // Por ejemplo, restar la cantidad del carrito del stock disponible
+      const availableStock = stockShopify - cartQuantity;
+      
+      // Actualizar el contenido del indicador según tu lógica de negocio
+      // Por ahora solo mostramos el stock disponible
+      indicator.textContent = availableStock >= 0 ? availableStock : 0;
     }
 
     async updateFromCart() {
@@ -951,6 +1029,10 @@ if (!customElements.get('upng-variant-picker')) {
         const cart = await response.json();
 
         if (cart && cart.items) {
+
+          // IMPORTANTE: Guardar los items del carrito
+          this.cartItems = cart.items;
+
           this.updateQuantityInputs(cart.items);
         } else {
           console.warn('Cart response does not contain items array');
