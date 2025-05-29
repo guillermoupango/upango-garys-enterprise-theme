@@ -52,25 +52,57 @@
         {% for option2_value in option2_values %}
           {% assign current_variant = null %}
           {% for variant in product.variants %}
+
             {% if variant.option1 == option1_value and variant.option2 == option2_value %}
               {% assign current_variant = variant %}
               {% break %}
             {% endif %}
+
+            
+            {% liquid
+              # Metacampos de variante para validaciones de Input
+
+              assign disponible = current_variant.metafields.upng.stock_disponible
+              # Fallback: por si el metacampo esta vacío, Asuma que Stock Disponible = 0
+              if current_variant.metafields.upng.stock_disponible == blank
+              assign disponible = 0
+              endif
+
+              assign descatalogado = current_variant.metafields.upng.descatalogado.value
+              # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
+              if current_variant.metafields.upng.descatalogado.value == blank
+              assign descatalogado = false
+            endif
+            %}
+
           {% endfor %}
           <td class="variant-table__cell variant-table__cell--quantity">
+
+          {% comment %}
+              Deshabilitar input en caso:
+                - Si el Precio es igual a $0
+                - Si está descatalogado y el Stock disponible es 0
+          {% endcomment %}
+
             <div
               class="qty-input qty-input--combined inline-flex items-center"
-              {% unless current_variant.available %}
-                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% unless current_variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
             >
               <button
                 type="button"
                 class="qty-input__btn btn btn--minus no-js-hidden"
                 name="minus"
-                {% unless current_variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless current_variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
               >
                 <span class="visually-hidden">-</span>
               </button>
@@ -82,18 +114,24 @@
                 data-variant-id="{{ current_variant.id }}"
                 data-inventory-quantity="{% if current_variant.inventory_management == 'shopify' %}{{ current_variant.inventory_quantity }}{% else %}null{% endif %}"
                 data-variant-title="{{ current_variant.title }}"
-                {% unless current_variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless current_variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
                 aria-label="{{ 'custom.variant-table.quantity-for' | t: title: current_variant.title }}"
               >
               <button
                 type="button"
                 class="qty-input__btn btn btn--plus no-js-hidden"
                 name="plus"
-                {% unless current_variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless current_variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
               >
                 <span class="visually-hidden">+</span>
               </button>

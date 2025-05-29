@@ -20,6 +20,24 @@
     </thead>
     <tbody>
       {% for variant in product.variants %}
+
+        {% liquid
+          # Metacampos de variante para validaciones de Input
+
+          assign disponible = variant.metafields.upng.stock_disponible
+          # Fallback: por si el metacampo esta vacío, Asuma que Stock Disponible = 0
+          if variant.metafields.upng.stock_disponible == blank
+           assign disponible = 0
+          endif
+
+          assign descatalogado = variant.metafields.upng.descatalogado.value
+          # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
+          if variant.metafields.upng.descatalogado.value == blank
+           assign descatalogado = false
+          endif
+
+        %}
+
         <tr class="variant-table__row" data-variant-row="{{ variant.id }}">
           <td class="variant-table__cell">
             {% if variant.featured_image %}
@@ -59,19 +77,33 @@
             {% render 'price', product: product, use_variant: true %}
           </td>
           <td class="variant-table__cell variant-table__cell--quantity">
+
+          {% comment %}
+              Deshabilitar input en caso:
+                - Si el Precio es igual a $0
+                - Si está descatalogado y el Stock disponible es 0
+          {% endcomment %}
+
             <div
               class="qty-input qty-input--combined inline-flex items-center"
-              {% unless variant.available %}
-                style="background-color: rgb(239, 239, 239); pointer-events: none"
+
+              {% unless variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
             >
               <button
                 type="button"
                 class="qty-input__btn btn btn--minus no-js-hidden"
                 name="minus"
-                {% unless variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
               >
                 <span class="visually-hidden">-</span>
               </button>
@@ -83,18 +115,24 @@
                 data-variant-id="{{ variant.id }}"
                 data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
                 data-variant-title="{{ variant.title }}"
-                {% unless variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
                 aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
               >
               <button
                 type="button"
                 class="qty-input__btn btn btn--plus no-js-hidden"
                 name="plus"
-                {% unless variant.available %}
-                  disabled
-                {% endunless %}
+              {% unless variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endunless %}
+              {% if descatalogado and disponible == 0 %}
+                style="background-color: rgb(239, 239, 239); pointer-events: none"
+              {% endif %}
               >
                 <span class="visually-hidden">+</span>
               </button>
