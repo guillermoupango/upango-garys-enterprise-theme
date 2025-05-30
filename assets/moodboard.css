@@ -1046,3 +1046,18 @@
        div#PolicePrivacy {
            padding: 2rem 1rem;
        }
+
+        #section_1_color-primary .color-box .select-color-box,
+       #section_2_color-primary .color-box .select-color-box
+       {
+         background-color: transparent !important;
+       }
+      #section_1_color-primary .color-box .color-icon,
+      #section_2_color-primary .color-box .color-icon
+      {
+        width: 50% !important;
+        height: 50%;
+        border-radius: 34px;
+        height: 50% !important;
+        background: #21b3ff !important;
+       }
