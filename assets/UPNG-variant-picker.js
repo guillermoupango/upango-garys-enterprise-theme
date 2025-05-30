@@ -989,7 +989,6 @@ if (!customElements.get('upng-variant-picker')) {
       const indicator = row.querySelector('.js-stock-indicator');
       if (!indicator) return;
       
-      // Buscar la cantidad en el carrito
       const cartItem = items.find(item => item.variant_id == variantId);
       const quantity = cartItem ? cartItem.quantity : 0;
       
@@ -998,16 +997,53 @@ if (!customElements.get('upng-variant-picker')) {
       
       // Actualizar el contenido visible
       this.updateStockDisplay(indicator, quantity);
-      
-      // Console.log SOLO para este indicador
-      console.log(`INDICATOR: ${variantId}, Quantity in cart: ${quantity}`);
     }
 
     // Función auxiliar para actualizar la visualización
-    updateStockDisplay(indicator, cartQuantity) {
+    async updateStockDisplay(indicator, cartQuantity) {
       const stockShopify = parseInt(indicator.dataset.stockShopify) || 0;
       const stockUpango = parseInt(indicator.dataset.stockUpango) || 0;
       const descatalogado = indicator.dataset.descatalogado === 'true';
+      const id_erp = indicator.dataset.id_erp ;
+
+      const MENSAJE_INICIAL = `${stockShopify} uds. disp. inmediatas.`;
+      let MENSAJE_DISP = ``;
+      let MENSAJE_RESTO = ``;
+
+      if (cartQuantity <= stockShopify){
+
+        if (stockShopify - cartQuantity > 10) {
+          indicator.textContent = `+10`;
+        } else{
+          indicator.textContent = `${stockShopify - cartQuantity}`;
+        };
+
+      } else {
+
+        if (stockUpango != 0){
+          MENSAJE_DISP = `${stockUpango}uds. disp. + 2 días`;
+        }
+
+        if (!descatalogado){
+
+          let dateStock = await getDateStock(id_erp,cartQuantity);
+
+          if (dateStock.status !== 'success') {
+            console.error(`Error fetching for: ${id_erp}:`, dateStock.message);
+            MENSAJE_RESTO = `Resto consultar`;
+          } else{
+            MENSAJE_RESTO = `Resto ${dateStock.date}`;
+          }
+          
+        }
+
+      
+      
+        
+        indicator.innerHTML = `${MENSAJE_INICIAL}<br>${MENSAJE_DISP}<br>${MENSAJE_RESTO}`;
+      }
+
+      //indicator.textContent = `${MENSAJE_INICIAL} ${MENSAJE_DISP} ${MENSAJE_RESTO}`;
       
       // Aquí puedes agregar la lógica de cómo mostrar el stock
       // Por ejemplo, restar la cantidad del carrito del stock disponible
@@ -1015,7 +1051,11 @@ if (!customElements.get('upng-variant-picker')) {
       
       // Actualizar el contenido del indicador según tu lógica de negocio
       // Por ahora solo mostramos el stock disponible
-      indicator.textContent = availableStock >= 0 ? availableStock : 0;
+
+      //indicator.textContent = availableStock >= 0 ? availableStock : 0;
+
+      //indicator.textContent = `${MENSAJE_INICIAL} - ${MENSAJE_DISP}: ${availableStock} - ${MENSAJE_RESTO}: ${stockUpango}`;
+
     }
 
     async updateFromCart() {

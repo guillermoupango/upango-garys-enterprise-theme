@@ -24,6 +24,7 @@
 {%- liquid
   assign stock_shopify = variant.inventory_quantity
   assign stock_upango = variant.metafields.upng.stock_disponible
+  assign id_erp = variant.metafields.upng.id_erp
 -%}
 
 {% if customer.b2b? and customer.metafields['upng-permission'].verStock %}
@@ -34,11 +35,9 @@
     data-stock-upango="{{ stock_upango }}"
     data-inventory-level="{{ nivel_stock }}"
     data-descatalogado="{{ descatalogado }}"
+    data-id_erp="{{ id_erp }}"
+    data-inventory-level="PNDT"
   >
-
-    <pre>
-
-    </pre>
 
 {% comment %}     {%- if descatalogado == true -%}
 
@@ -63,7 +62,6 @@
 
     
   </div>
-
 
 {% else %}
   <div class="product-inventory__status" hidden></div>
