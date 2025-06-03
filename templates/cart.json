@@ -28,16 +28,16 @@
     "1748432947b831f6ce": {
       "type": "apps",
       "blocks": {
-        "upango_b2b_garys_upng_checkout_button_block_EKHCJP": {
-          "type": "shopify://apps/upango-b2b-garys/blocks/upng-checkout-button-block/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+        "upango_b2b_garys_upng_control_credit_7MKriX": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-control-credit/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
-            "button_text": "Finalizar Compra",
-            "button_class": "shopify-payment-button__button shopify-payment-button__button--unbranded"
+            "button_class": "checkout-button",
+            "message_class": "upng-credit-control-message"
           }
         }
       },
       "block_order": [
-        "upango_b2b_garys_upng_checkout_button_block_EKHCJP"
+        "upango_b2b_garys_upng_control_credit_7MKriX"
       ],
       "settings": {
         "full_width": false
