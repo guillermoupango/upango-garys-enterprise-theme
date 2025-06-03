@@ -72,7 +72,7 @@
       <p>{{ 'customer.recover_password.subtext' | t }}</p>
     </div>
 
-    {%- assign return_url = routes.account_login_url | append: '#recover' -%}
+    {%- assign return_url = routes.storefront_login_url | append: '#recover' -%}
     {%- form 'recover_customer_password', class: 'form form-width mx-auto', return_to: return_url -%}
       {%- assign recover_success = form.posted_successfully? -%}
 
