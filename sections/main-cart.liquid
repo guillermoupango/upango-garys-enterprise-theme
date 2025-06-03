@@ -176,6 +176,8 @@
             <a href="#" class="js-vaciar-carrito link block text-center text-error-text w-full mt-3 text-sm">
               {{ 'custom.cart.clear' | t }}
             </a>
+            {%# Este div lo añadimos para que la app de control de crédito pueda añadir aquí un mensaje en caso de crédito excedido %}
+            <div class="upng-credit-control-message"></div>
           </div>
 
           {%- if additional_checkout_buttons
