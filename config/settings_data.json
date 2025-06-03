@@ -482,6 +482,13 @@
           "tel_text": "",
           "email_text": ""
         }
+      },
+      "13396536547038335341": {
+        "type": "shopify://apps/upango-b2b-garys/blocks/upng-re-remove/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+        "disabled": false,
+        "settings": {
+          "cart_bubble_selector": ".cart-count-bubble span"
+        }
       }
     }
   }
