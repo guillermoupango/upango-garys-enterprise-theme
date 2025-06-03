@@ -605,7 +605,7 @@ if (!customElements.get('upng-variant-picker')) {
 
         const isPvdVisible = localStorage.getItem('pvdVisible') !== 'false';
 
-        console.log(isPvdVisible);
+        //console.log(isPvdVisible);
 
         if (isPvdVisible) {
           this.prices.forEach(el => {
@@ -960,7 +960,7 @@ if (!customElements.get('upng-variant-picker')) {
       this.updateTableTotals(cartItems);;
     }
 
-    // Función para actualizar TODOS los indicadores (sin console.log individual)
+    // Función para actualizar TODOS los indicadores
     updateAllStockIndicators(cartItems = null) {
       const items = cartItems || this.cartItems || [];
       const stockIndicators = this.querySelectorAll('.js-stock-indicator');
@@ -1004,58 +1004,68 @@ if (!customElements.get('upng-variant-picker')) {
       const stockShopify = parseInt(indicator.dataset.stockShopify) || 0;
       const stockUpango = parseInt(indicator.dataset.stockUpango) || 0;
       const descatalogado = indicator.dataset.descatalogado === 'true';
-      const id_erp = indicator.dataset.id_erp ;
+      const id_erp = indicator.dataset.id_erp;
 
-      const MENSAJE_INICIAL = `${stockShopify} uds. disp. inmediatas.`;
-      let MENSAJE_DISP = ``;
-      let MENSAJE_RESTO = ``;
+     //  Cargar traducciones por objeto 
+      const availableText = window.translations.availableText || 'Disponibles';
+      const backorderText = window.translations.backorderText || 'en 2 días';
+      const remainingText = window.translations.remainingText || 'Restante';
+      const askText = window.translations.askText || 'Contáctanos';
 
-      if (cartQuantity <= stockShopify){
-
-        if (stockShopify - cartQuantity > 10) {
-          indicator.textContent = `+10`;
+      // Calcular cifra stock normal
+      const stockDisponible = stockShopify - cartQuantity;
+      const stockMostrar = stockDisponible > 10 ? '+10' : stockDisponible < 0 ? '0' : stockDisponible.toString();   
+      
+      if (descatalogado) {
+        if (stockUpango == 0) {
+          // Estilo en ROJO de No Disponible
+          indicator.dataset.inventoryLevel = 'very_low';
         } else{
-          indicator.textContent = `${stockShopify - cartQuantity}`;
-        };
-
+          // Estilo en Amarillo Outlet
+          indicator.dataset.inventoryLevel = 'low';
+        }
       } else {
-
-        if (stockUpango != 0){
-          MENSAJE_DISP = `${stockUpango}uds. disp. + 2 días`;
+         if (stockDisponible <= 0) {
+          // Estilo en AZUL de Proxima llegada
+          indicator.dataset.inventoryLevel = 'backordered';
+        } else{
+          // Estilo en VERDE de disponible
+          indicator.dataset.inventoryLevel = 'normal';
         }
-
-        if (!descatalogado){
-
-          let dateStock = await getDateStock(id_erp,cartQuantity);
-
-          if (dateStock.status !== 'success') {
-            console.error(`Error fetching for: ${id_erp}:`, dateStock.message);
-            MENSAJE_RESTO = `Resto consultar`;
-          } else{
-            MENSAJE_RESTO = `Resto ${dateStock.date}`;
-          }
-          
-        }
-
-      
-      
-        
-        indicator.innerHTML = `${MENSAJE_INICIAL}<br>${MENSAJE_DISP}<br>${MENSAJE_RESTO}`;
       }
 
-      //indicator.textContent = `${MENSAJE_INICIAL} ${MENSAJE_DISP} ${MENSAJE_RESTO}`;
-      
-      // Aquí puedes agregar la lógica de cómo mostrar el stock
-      // Por ejemplo, restar la cantidad del carrito del stock disponible
-      const availableStock = stockShopify - cartQuantity;
-      
-      // Actualizar el contenido del indicador según tu lógica de negocio
-      // Por ahora solo mostramos el stock disponible
-
-      //indicator.textContent = availableStock >= 0 ? availableStock : 0;
-
-      //indicator.textContent = `${MENSAJE_INICIAL} - ${MENSAJE_DISP}: ${availableStock} - ${MENSAJE_RESTO}: ${stockUpango}`;
-
+      if (cartQuantity <= stockShopify) {
+        indicator.textContent = stockMostrar;
+      } else {
+        const mensajes = [];
+        
+        // MENSAJE_INICIAL con cifra stock normal
+        mensajes.push(`${stockMostrar} ${availableText}`);
+        
+        // MENSAJE_DISP
+        if (stockUpango !== 0) {
+          mensajes.push(`${stockUpango} ${backorderText}`);
+        }
+        
+        // MENSAJE_RESTO
+        if (!descatalogado) {
+          try {
+            const dateStock = await getDateStock(id_erp, cartQuantity);
+            
+            if (dateStock.status === 'success' && dateStock.date) {
+              mensajes.push(`${remainingText} ${dateStock.date}`);
+            } else {
+              mensajes.push(`${remainingText} ${askText}`);
+            }
+          } catch (error) {
+            console.error(`Error fetching date for ${id_erp}:`, error);
+            mensajes.push(`Resto consultar`);
+          }
+        }
+        
+        // Unir mensajes con saltos de línea
+        indicator.innerHTML = mensajes.join('<br>');
+      }
     }
 
     async updateFromCart() {

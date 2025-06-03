@@ -6,20 +6,6 @@
   Uso: {% render 'UPNG-stock-indicator', variant: product_variant %}
 {%- endcomment -%}
 
-{% comment %}
- PENDIENTE: reglas de Colores
-
-   if descatalogado == false and stock_de_variante <= settings.inventory_threshold_very_low
-    assign nivel_stock = 'backordered'
-  elsif stock_de_variante <= settings.inventory_threshold_very_low
-    assign nivel_stock = 'very_low'
-  elsif stock_de_variante <= settings.inventory_threshold_low
-    assign nivel_stock = 'low'
-  else
-    assign nivel_stock = 'normal'
-  endif 
- 
- {% endcomment %}
 
 {%- liquid
   assign stock_shopify = variant.inventory_quantity
@@ -29,38 +15,15 @@
 
 {% if customer.b2b? and customer.metafields['upng-permission'].verStock %}
 
-  <div class="text-xs product-inventory__status js-stock-indicator"
-    data-quantity="{{  }}pndt_sync_carrito"
+  <div class="text-xs text-start product-inventory__status js-stock-indicator"
+    data-quantity=""
     data-stock-shopify="{{ stock_shopify }}"
     data-stock-upango="{{ stock_upango }}"
-    data-inventory-level="{{ nivel_stock }}"
+    data-inventory-level=""
     data-descatalogado="{{ descatalogado }}"
     data-id_erp="{{ id_erp }}"
-    data-inventory-level="PNDT"
   >
 
-{% comment %}     {%- if descatalogado == true -%}
-
-      {%- if stock_de_variante < 1 -%}
-        {{ 'custom.stock-indicator.not-available' | t }}
-      {%- elsif stock_de_variante <= 10 -%}
-        {{ 'custom.stock-indicator.last-units' | t }}
-      {%- else -%}
-        +10
-      {%- endif -%}
-
-    {%- else -%}
-      {%- if stock_de_variante < 1 -%}
-        0
-      {%- elsif stock_de_variante <= 10 -%}
-        {{ stock_de_variante }}
-      {%- else -%}
-        +10
-      {%- endif -%}
-
-    {%- endif -%} {% endcomment %}
-
-    
   </div>
 
 {% else %}

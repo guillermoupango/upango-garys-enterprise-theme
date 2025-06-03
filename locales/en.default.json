@@ -37,7 +37,11 @@
       "subtotal": "Subtotal",
       "total-items": "Total Items",
       "request-access": "Sign up",
-      "quantity-for": "Quantity for %{title}"
+      "quantity-for": "Quantity for %{title}",
+      "available-text": "available now",
+      "backorder-text": "available in +2 days",
+      "remaining-text": "Remaining",
+      "ask-text": "please ask",
     },
     "stock-indicator": {
       "not-available": "Not available",

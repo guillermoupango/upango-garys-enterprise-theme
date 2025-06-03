@@ -37,7 +37,11 @@
       "subtotal": "Subtotal",
       "total-items": "Total Items",
       "request-access": "Solicitar alta",
-      "quantity-for": "Cantidad para %{title}"
+      "quantity-for": "Cantidad para %{title}",
+      "available-text": "uds. disp. inmediatas.",
+      "backorder-text": "uds. disp. +2 días",
+      "remaining-text": "Resto",
+      "ask-text": "consultar",
     },
     "stock-indicator": {
       "not-available": "No disponible",
