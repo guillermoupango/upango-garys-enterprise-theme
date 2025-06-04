@@ -718,14 +718,15 @@ if (!customElements.get('upng-variant-picker')) {
       let timeout;
       return (event) => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => this.handleQuantityChange(event), 300);
+        // ESPERAR 1 SEGUNDOS ANTES DE ACTUALIZAR EL CARRITO
+        timeout = setTimeout(() => this.handleQuantityChange(event), 1000);
       };
     })();
 
     async handleQuantityChange(event) {
       if (this._state.isUpdating) return;
 
-      this.enableLoader();
+      this.enableLoader();  
 
       const input = event.target;
       const variantId = input.getAttribute('data-variant-id');
