@@ -131,6 +131,16 @@
             "required": true,
             "half_width": false
           }
+        },
+        "checkbox_JzwMiV": {
+          "type": "checkbox",
+          "settings": {
+            "title": "He leído y aceptado la política de privacidad",
+            "value_no": "No",
+            "value_yes": "Yes",
+            "half_width": false,
+            "required": false
+          }
         }
       },
       "block_order": [
@@ -140,7 +150,8 @@
         "custom_gwLNL9",
         "custom_nXEb48",
         "dropdown_RNqcrL",
-        "body_cEgkVy"
+        "body_cEgkVy",
+        "checkbox_JzwMiV"
       ],
       "name": "Contact form",
       "settings": {
