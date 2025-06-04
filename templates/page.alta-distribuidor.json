@@ -139,7 +139,7 @@
             "value_no": "No",
             "value_yes": "Yes",
             "half_width": false,
-            "required": false
+            "required": true
           }
         }
       },
@@ -162,11 +162,65 @@
         "full_width": true,
         "button_style": "btn btn--primary"
       }
+    },
+    "rich_text_mwExpB": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_4J8NWN": {
+          "type": "subheading",
+          "settings": {
+            "text": "Subheading"
+          }
+        },
+        "heading_bHTzWn": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rich text headline",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "text_EcCcXh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Utilizaremos sus datos para gestionar la cuenta de usuario. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"https://uniformesgarys.com/informacion/politica-de-privacidad\" target=\"_blank\">política de privacidad</a>.<br/><br/></p>",
+            "enlarge_text": true
+          }
+        },
+        "button_6aN3tV": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_4J8NWN",
+        "heading_bHTzWn",
+        "text_EcCcXh",
+        "button_6aN3tV"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "wide": false,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
     }
   },
   "order": [
     "main",
     "image_banner_LTipYP",
-    "contact_form_NHLLbU"
+    "contact_form_NHLLbU",
+    "rich_text_mwExpB"
   ]
 }
