@@ -168,7 +168,14 @@
             "title": "Página web",
             "type": "text",
             "required": false,
-            "half_width": true
+            "half_width": false
+          }
+        },
+        "body_BCzjQp": {
+          "type": "body",
+          "settings": {
+            "required": true,
+            "half_width": false
           }
         },
         "checkbox_JzwMiV": {
@@ -188,6 +195,7 @@
         "phone_TJQ6cg",
         "custom_gwLNL9",
         "custom_nXEb48",
+        "body_BCzjQp",
         "checkbox_JzwMiV"
       ],
       "name": "Contact form",
