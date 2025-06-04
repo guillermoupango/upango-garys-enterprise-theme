@@ -24,12 +24,6 @@
         {% liquid
           # Metacampos de variante para validaciones de Input
 
-          assign disponible = variant.metafields.upng.stock_disponible
-          # Fallback: por si el metacampo esta vacío, Asuma que Stock Disponible = 0
-          if variant.metafields.upng.stock_disponible == blank
-           assign disponible = 0
-          endif
-
           assign descatalogado = variant.metafields.upng.descatalogado.value
           # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
           if variant.metafields.upng.descatalogado.value == blank
@@ -90,7 +84,7 @@
               {% unless variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and disponible == 0 %}
+              {% if descatalogado and variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
             >
@@ -101,7 +95,7 @@
               {% unless variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and disponible == 0 %}
+              {% if descatalogado and variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
               >
@@ -111,14 +105,16 @@
                 type="number"
                 class="quantity-input variant-table__quantity"
                 min="0"
+                {% if descatalogado %} max="{{ variant.inventory_quantity }}" {% endif %}
                 value="0"
                 data-variant-id="{{ variant.id }}"
                 data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
                 data-variant-title="{{ variant.title }}"
+                id="{{ variant.id }}"
               {% unless variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and disponible == 0 %}
+              {% if descatalogado and variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
                 aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
@@ -130,7 +126,7 @@
               {% unless variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and disponible == 0 %}
+              {% if descatalogado and variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
               >
