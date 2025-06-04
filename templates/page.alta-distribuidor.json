@@ -1,0 +1,228 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_page_title": true,
+        "heading_align": "text-center",
+        "boton_exit_web": false,
+        "div_over_column_text_color_web": "#ffffff"
+      }
+    },
+    "image_banner_LTipYP": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_FHW7Wc": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1",
+            "heading_h1": false
+          }
+        },
+        "text_Fa6QnG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Si eres distribuidor de ropa laboral  y quieres darte de alta como cliente nuestro, completa el siguiente formulario y uno de nuestros agentes comerciales se pondrá en contacto contigo lo antes posible.</p><p></p><p>Si ya eres cliente accede aquí a tu cuenta profesional.<br/><br/><br/><br/></p>",
+            "enlarge_text": true
+          }
+        },
+        "button_dDWTFh": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FHW7Wc",
+        "text_Fa6QnG",
+        "button_dDWTFh"
+      ],
+      "name": "Image banner",
+      "settings": {
+        "image_desktop": "shopify://shop_images/denim_cerca.jpg",
+        "url": "",
+        "height_mode": "fixed",
+        "fixed_height_desktop": 600,
+        "fixed_height_mobile": 350,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": false,
+        "mobile_stacked": false,
+        "color_scheme": "white",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 40,
+        "prevent_animation": false
+      }
+    },
+    "rich_text_mwExpB": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_4J8NWN": {
+          "type": "subheading",
+          "settings": {
+            "text": "Protección de datos personales"
+          }
+        },
+        "heading_bHTzWn": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Rich text headline",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "text_EcCcXh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Utilizaremos sus datos para gestionar la cuenta de usuario. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"https://uniformesgarys.com/informacion/politica-de-privacidad\" target=\"_blank\">política de privacidad</a>.<br/><br/></p>",
+            "enlarge_text": true
+          }
+        },
+        "button_6aN3tV": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_4J8NWN",
+        "heading_bHTzWn",
+        "text_EcCcXh",
+        "button_6aN3tV"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "wide": false,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
+    "contact_form_NHLLbU": {
+      "type": "contact-form",
+      "blocks": {
+        "name_VWRGjR": {
+          "type": "name",
+          "settings": {
+            "required": true,
+            "half_width": true
+          }
+        },
+        "email_bRANjW": {
+          "type": "email",
+          "settings": {
+            "required": true,
+            "half_width": true
+          }
+        },
+        "phone_nHVBxP": {
+          "type": "phone",
+          "settings": {
+            "required": false,
+            "half_width": true
+          }
+        },
+        "custom_gwLNL9": {
+          "type": "custom",
+          "settings": {
+            "title": "Empresa",
+            "type": "text",
+            "required": true,
+            "half_width": true
+          }
+        },
+        "custom_nXEb48": {
+          "type": "custom",
+          "settings": {
+            "title": "Página web",
+            "type": "text",
+            "required": false,
+            "half_width": false
+          }
+        },
+        "dropdown_RNqcrL": {
+          "type": "dropdown",
+          "disabled": true,
+          "settings": {
+            "title": "Dropdown",
+            "options": "Option 1\nOption 2\nOption 3",
+            "half_width": true
+          }
+        },
+        "body_cEgkVy": {
+          "type": "body",
+          "settings": {
+            "required": true,
+            "half_width": false
+          }
+        },
+        "checkbox_JzwMiV": {
+          "type": "checkbox",
+          "settings": {
+            "title": "He leído y aceptado la política de privacidad",
+            "value_no": "No",
+            "value_yes": "Yes",
+            "half_width": false,
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "name_VWRGjR",
+        "email_bRANjW",
+        "phone_nHVBxP",
+        "custom_gwLNL9",
+        "custom_nXEb48",
+        "dropdown_RNqcrL",
+        "body_cEgkVy",
+        "checkbox_JzwMiV"
+      ],
+      "name": "Contact form",
+      "settings": {
+        "heading": "",
+        "heading_align": "text-center",
+        "image_position": "top",
+        "color_scheme": "none",
+        "full_width": true,
+        "button_style": "btn btn--primary"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_LTipYP",
+    "rich_text_mwExpB",
+    "contact_form_NHLLbU"
+  ]
+}
