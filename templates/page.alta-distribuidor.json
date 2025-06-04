@@ -139,6 +139,13 @@
             "half_width": true
           }
         },
+        "phone_TJQ6cg": {
+          "type": "phone",
+          "settings": {
+            "required": true,
+            "half_width": true
+          }
+        },
         "email_bRANjW": {
           "type": "email",
           "settings": {
@@ -177,6 +184,7 @@
       },
       "block_order": [
         "name_VWRGjR",
+        "phone_TJQ6cg",
         "email_bRANjW",
         "custom_gwLNL9",
         "custom_nXEb48",
