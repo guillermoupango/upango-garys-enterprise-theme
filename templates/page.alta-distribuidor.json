@@ -146,17 +146,10 @@
             "half_width": true
           }
         },
-        "phone_nHVBxP": {
-          "type": "phone",
-          "settings": {
-            "required": true,
-            "half_width": true
-          }
-        },
         "custom_gwLNL9": {
           "type": "custom",
           "settings": {
-            "title": "Empresa",
+            "title": "Ciudad",
             "type": "text",
             "required": true,
             "half_width": true
@@ -201,7 +194,6 @@
       "block_order": [
         "name_VWRGjR",
         "email_bRANjW",
-        "phone_nHVBxP",
         "custom_gwLNL9",
         "custom_nXEb48",
         "dropdown_RNqcrL",
