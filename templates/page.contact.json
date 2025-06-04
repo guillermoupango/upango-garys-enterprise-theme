@@ -198,6 +198,7 @@
         "newsletter-text-1",
         "newsletter-form-2"
       ],
+      "disabled": true,
       "settings": {
         "overlay_position": "justify-center",
         "text_align": "text-center",

@@ -17,9 +17,67 @@
         "boton_exit_web": false,
         "div_over_column_text_color_web": "#ffffff"
       }
+    },
+    "multi_column_WznrQC": {
+      "type": "multi-column",
+      "blocks": {
+        "column_3aARQh": {
+          "type": "column",
+          "settings": {
+            "enable_media": true,
+            "media_scale": 100,
+            "heading": "Column",
+            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "column_VXhtyf": {
+          "type": "column",
+          "settings": {
+            "enable_media": true,
+            "media_scale": 100,
+            "heading": "Column",
+            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "column_hY8Yrr": {
+          "type": "column",
+          "settings": {
+            "enable_media": true,
+            "media_scale": 100,
+            "heading": "Column",
+            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_3aARQh",
+        "column_VXhtyf",
+        "column_hY8Yrr"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "title": "Multi-column",
+        "heading_align": "text-start",
+        "button_label": "",
+        "button_link": "",
+        "layout": "carousel",
+        "column_size": "medium",
+        "column_align": "left",
+        "media_align": "text-center",
+        "image_ratio": "1",
+        "color_scheme": "1",
+        "button_style": "btn btn--secondary"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "multi_column_WznrQC"
   ]
 }
