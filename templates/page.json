@@ -17,9 +17,67 @@
         "boton_exit_web": false,
         "div_over_column_text_color_web": "#ffffff"
       }
+    },
+    "contact_form_9AEYV9": {
+      "type": "contact-form",
+      "blocks": {
+        "name_7LqcPT": {
+          "type": "name",
+          "settings": {
+            "required": true,
+            "half_width": true
+          }
+        },
+        "email_H6tecH": {
+          "type": "email",
+          "settings": {
+            "required": true,
+            "half_width": true
+          }
+        },
+        "phone_mrpJqn": {
+          "type": "phone",
+          "settings": {
+            "required": false,
+            "half_width": true
+          }
+        },
+        "dropdown_keRadP": {
+          "type": "dropdown",
+          "settings": {
+            "title": "Dropdown",
+            "options": "Option 1\nOption 2\nOption 3",
+            "half_width": true
+          }
+        },
+        "body_G9tUzJ": {
+          "type": "body",
+          "settings": {
+            "required": true,
+            "half_width": false
+          }
+        }
+      },
+      "block_order": [
+        "name_7LqcPT",
+        "email_H6tecH",
+        "phone_mrpJqn",
+        "dropdown_keRadP",
+        "body_G9tUzJ"
+      ],
+      "name": "Contact form",
+      "settings": {
+        "heading": "Contact form",
+        "heading_align": "text-center",
+        "image_position": "top",
+        "color_scheme": "none",
+        "full_width": true,
+        "button_style": "btn btn--primary"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "contact_form_9AEYV9"
   ]
 }

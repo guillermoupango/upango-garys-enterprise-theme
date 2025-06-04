@@ -133,15 +133,23 @@
             "half_width": true
           }
         },
+        "phone_6pp6f3": {
+          "type": "phone",
+          "settings": {
+            "required": false,
+            "half_width": false
+          }
+        },
         "contact-email-3": {
           "type": "email",
           "settings": {
-            "required": true,
+            "required": false,
             "half_width": true
           }
         },
         "contact-dropdown-4": {
           "type": "dropdown",
+          "disabled": true,
           "settings": {
             "title": "How can we help?",
             "options": "Option 1\nOption 2\nOption 3",
@@ -154,13 +162,25 @@
             "required": true,
             "half_width": false
           }
+        },
+        "checkbox_cpdhw3": {
+          "type": "checkbox",
+          "settings": {
+            "title": "He leído y aceptado la política de privacidad",
+            "value_no": "No",
+            "value_yes": "Yes",
+            "half_width": false,
+            "required": true
+          }
         }
       },
       "block_order": [
         "contact-name-2",
+        "phone_6pp6f3",
         "contact-email-3",
         "contact-dropdown-4",
-        "contact-body-5"
+        "contact-body-5",
+        "checkbox_cpdhw3"
       ],
       "settings": {
         "heading": "Cuéntanos en que podemos ayudarte",
