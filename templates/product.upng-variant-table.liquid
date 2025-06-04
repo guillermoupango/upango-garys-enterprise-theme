@@ -187,11 +187,12 @@
     </tfoot>
   </table>
 {% else %}
-  <table class="w-full">
+  <a class="btn btn--secondary w-full mt-8" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
+
+{% comment %}   <table class="w-full">
     <tr class="variant-table__last-row">
       <td colspan="100%" class="text-center border-none">
-        <a class="btn btn--secondary" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
       </td>
     </tr>
-  </table>
+  </table> {% endcomment %}
 {% endif %}

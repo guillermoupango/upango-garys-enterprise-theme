@@ -354,6 +354,7 @@
                       {% endcomment %}
 
                     <button type="button"
+                            {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
                             class="btn btn--primary w-full js-quick-add"
                             aria-haspopup="dialog"
                             data-product-url="{{ product.url }}"
@@ -367,7 +368,17 @@
                         {{- 'products.product.choose_options' | t -}}
                       </span>
                     </button>
-                
+
+                    {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
+                    
+                    <a href="{{settings.where_to_buy_page.url }}"
+                      {% if customer.b2b? %} style="display: none" {% endif %}
+                      class="btn btn--tertiary mt-2 w-full">
+                      <span class="quick-add-btn-text block pointer-events-none">
+                        {{- 'custom.customer.where_to_buy' | t -}}
+                      </span>
+                    </a>
+                  
                     </div>
                   </div>
 

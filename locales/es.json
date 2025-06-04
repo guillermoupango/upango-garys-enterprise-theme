@@ -66,6 +66,7 @@
     },
     "customer":{
       "not_allowed": "No permitido",
+      "where_to_buy": "Dónde comprar",
     }
   },
   "general": {

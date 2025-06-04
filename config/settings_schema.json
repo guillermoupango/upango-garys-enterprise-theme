@@ -3081,13 +3081,19 @@
     "settings": [
       {
         "type": "header",
-        "content": "Página de alta"
+        "content": "Enlaces a Páginas Custom"
       },
       {
         "type": "page",
         "id": "signup_page",
         "label": "Pagina de alta",
-        "info": "Info de pagina de alta"
+        "info": "Enlace de botones 'Solicitar Alta'"
+      },
+      {
+        "type": "page",
+        "id": "where_to_buy_page",
+        "label": "Dónde comprar",
+        "info": "Enlace de botones 'Dónde comprar'"
       }
     ]
   }
