@@ -104,11 +104,21 @@
             "title": "Empresa",
             "type": "text",
             "required": true,
+            "half_width": true
+          }
+        },
+        "custom_nXEb48": {
+          "type": "custom",
+          "settings": {
+            "title": "Página web",
+            "type": "text",
+            "required": false,
             "half_width": false
           }
         },
         "dropdown_RNqcrL": {
           "type": "dropdown",
+          "disabled": true,
           "settings": {
             "title": "Dropdown",
             "options": "Option 1\nOption 2\nOption 3",
@@ -128,6 +138,7 @@
         "email_bRANjW",
         "phone_nHVBxP",
         "custom_gwLNL9",
+        "custom_nXEb48",
         "dropdown_RNqcrL",
         "body_cEgkVy"
       ],
