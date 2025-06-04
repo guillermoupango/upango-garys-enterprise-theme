@@ -164,22 +164,6 @@
             "half_width": true
           }
         },
-        "dropdown_RNqcrL": {
-          "type": "dropdown",
-          "disabled": true,
-          "settings": {
-            "title": "Dropdown",
-            "options": "Option 1\nOption 2\nOption 3",
-            "half_width": true
-          }
-        },
-        "body_cEgkVy": {
-          "type": "body",
-          "settings": {
-            "required": true,
-            "half_width": false
-          }
-        },
         "checkbox_JzwMiV": {
           "type": "checkbox",
           "settings": {
@@ -196,8 +180,6 @@
         "email_bRANjW",
         "custom_gwLNL9",
         "custom_nXEb48",
-        "dropdown_RNqcrL",
-        "body_cEgkVy",
         "checkbox_JzwMiV"
       ],
       "name": "Contact form",
