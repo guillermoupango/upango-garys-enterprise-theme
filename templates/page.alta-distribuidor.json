@@ -142,7 +142,7 @@
         "email_bRANjW": {
           "type": "email",
           "settings": {
-            "required": true,
+            "required": false,
             "half_width": true
           }
         },
@@ -158,7 +158,7 @@
           "settings": {
             "title": "Empresa",
             "type": "text",
-            "required": false,
+            "required": true,
             "half_width": true
           }
         },
