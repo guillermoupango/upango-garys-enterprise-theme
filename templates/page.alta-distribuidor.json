@@ -158,10 +158,10 @@
         "custom_nXEb48": {
           "type": "custom",
           "settings": {
-            "title": "Página web",
+            "title": "País",
             "type": "text",
-            "required": false,
-            "half_width": false
+            "required": true,
+            "half_width": true
           }
         },
         "dropdown_RNqcrL": {
