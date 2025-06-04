@@ -9,6 +9,59 @@
  */
 {
   "sections": {
+    "image_banner_mkhKY9": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_AmPAJ8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1",
+            "heading_h1": false
+          }
+        },
+        "text_tnKhc3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_zEchL7": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AmPAJ8",
+        "text_tnKhc3",
+        "button_zEchL7"
+      ],
+      "name": "Image banner",
+      "settings": {
+        "url": "",
+        "height_mode": "auto",
+        "fixed_height_desktop": 600,
+        "fixed_height_mobile": 350,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": false,
+        "mobile_stacked": false,
+        "color_scheme": "white",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 40,
+        "prevent_animation": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -18,66 +71,67 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "multi_column_WznrQC": {
-      "type": "multi-column",
+    "contact_form_NHLLbU": {
+      "type": "contact-form",
       "blocks": {
-        "column_3aARQh": {
-          "type": "column",
+        "name_VWRGjR": {
+          "type": "name",
           "settings": {
-            "enable_media": true,
-            "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "",
-            "button_link": ""
+            "required": true,
+            "half_width": true
           }
         },
-        "column_VXhtyf": {
-          "type": "column",
+        "email_bRANjW": {
+          "type": "email",
           "settings": {
-            "enable_media": true,
-            "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "",
-            "button_link": ""
+            "required": true,
+            "half_width": true
           }
         },
-        "column_hY8Yrr": {
-          "type": "column",
+        "phone_nHVBxP": {
+          "type": "phone",
           "settings": {
-            "enable_media": true,
-            "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "",
-            "button_link": ""
+            "required": false,
+            "half_width": true
+          }
+        },
+        "dropdown_RNqcrL": {
+          "type": "dropdown",
+          "settings": {
+            "title": "Dropdown",
+            "options": "Option 1\nOption 2\nOption 3",
+            "half_width": true
+          }
+        },
+        "body_cEgkVy": {
+          "type": "body",
+          "settings": {
+            "required": true,
+            "half_width": false
           }
         }
       },
       "block_order": [
-        "column_3aARQh",
-        "column_VXhtyf",
-        "column_hY8Yrr"
+        "name_VWRGjR",
+        "email_bRANjW",
+        "phone_nHVBxP",
+        "dropdown_RNqcrL",
+        "body_cEgkVy"
       ],
-      "name": "Multi-column",
+      "name": "Contact form",
       "settings": {
-        "title": "Multi-column",
-        "heading_align": "text-start",
-        "button_label": "",
-        "button_link": "",
-        "layout": "carousel",
-        "column_size": "medium",
-        "column_align": "left",
-        "media_align": "text-center",
-        "image_ratio": "1",
-        "color_scheme": "1",
-        "button_style": "btn btn--secondary"
+        "heading": "",
+        "heading_align": "text-center",
+        "image_position": "top",
+        "color_scheme": "none",
+        "full_width": true,
+        "button_style": "btn btn--primary"
       }
     }
   },
   "order": [
+    "image_banner_mkhKY9",
     "main",
-    "multi_column_WznrQC"
+    "contact_form_NHLLbU"
   ]
 }
