@@ -438,6 +438,7 @@
     "blur_message_delay": 4,
     "vibrate_on_atc": true,
     "signup_page": "pagina-de-alta",
+    "where_to_buy_page": "donde-comprar",
     "heading_type_scale": "1.3",
     "content_for_index": [],
     "blocks": {
