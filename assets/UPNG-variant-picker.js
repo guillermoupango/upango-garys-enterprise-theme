@@ -1018,7 +1018,7 @@ if (!customElements.get('upng-variant-picker')) {
       const stockMostrar = stockRestante > 10 ? '+10' : stockRestante <= 0 ? '0' : stockRestante.toString();   
       
       if (descatalogado) {
-        if (stockDisponible == 0) {
+        if (stockShopify == 0) {
           // Estilo en ROJO de No Disponible
           indicator.dataset.inventoryLevel = 'very_low';
         } else{
@@ -1026,7 +1026,7 @@ if (!customElements.get('upng-variant-picker')) {
           indicator.dataset.inventoryLevel = 'low';
         }
       } else {
-         if (stockDisponible <= 0) {
+         if (stockShopify <= 0) {
           // Estilo en AZUL de Proxima llegada
           indicator.dataset.inventoryLevel = 'backordered';
         } else{
