@@ -58,18 +58,13 @@
               {% break %}
             {% endif %}
 
-            
-            {% liquid
-              # Metacampos de variante para validaciones de Input
-
-              assign descatalogado = current_variant.metafields.upng.descatalogado.value
-              # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
-              if current_variant.metafields.upng.descatalogado.value == blank
-              assign descatalogado = false
-            endif
-            %}
-
           {% endfor %}
+
+          {% assign descatalogado = current_variant.metafields.upng.descatalogado.value %}
+          {% if current_variant.metafields.upng.descatalogado.value == blank %}
+          {% assign descatalogado = false %}
+          {% endif %}
+
           <td class="variant-table__cell variant-table__cell--quantity">
 
           {% comment %}
@@ -80,6 +75,7 @@
 
             <div
               class="qty-input qty-input--combined inline-flex items-center"
+
               {% unless current_variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
@@ -133,7 +129,7 @@
               </button>
             </div>
             {% render 'price', product: product, use_variant: true %}
-            {% render 'UPNG-stock-indicator', variant: current_variant %}
+            {% render 'UPNG-stock-indicator', variant: current_variant, descatalogado: descatalogado %}
           </td>
         {% endfor %}
       </tr>

@@ -963,42 +963,66 @@ if (!customElements.get('upng-variant-picker')) {
 
     // Función para actualizar TODOS los indicadores
     updateAllStockIndicators(cartItems = null) {
-      const items = cartItems || this.cartItems || [];
-      const stockIndicators = this.querySelectorAll('.js-stock-indicator');
-      
-      stockIndicators.forEach(indicator => {
-        const row = indicator.closest('[data-variant-row]');
-        if (!row) return;
-        
-        const variantId = row.dataset.variantRow;
-        const cartItem = items.find(item => item.variant_id == variantId);
-        const quantity = cartItem ? cartItem.quantity : 0;
-        
-        indicator.dataset.quantity = quantity;
-        this.updateStockDisplay(indicator, quantity);
-      });
+  const items = cartItems || this.cartItems || [];
+  const stockIndicators = this.querySelectorAll('.js-stock-indicator');
+  
+  stockIndicators.forEach(indicator => {
+    let variantId;
+    
+    // Intentar obtener variantId desde data-variant-row (tabla normal)
+    const row = indicator.closest('[data-variant-row]');
+    if (row) {
+      variantId = row.dataset.variantRow;
+    } else {
+      // Si no hay row, buscar en la misma celda (tabla compacta)
+      const cell = indicator.closest('.variant-table__cell');
+      if (cell) {
+        const input = cell.querySelector('.variant-table__quantity[data-variant-id]');
+        if (input) {
+          variantId = input.dataset.variantId;
+        }
+      }
     }
+    
+    if (!variantId) return;
+    
+    const cartItem = items.find(item => item.variant_id == variantId);
+    const quantity = cartItem ? cartItem.quantity : 0;
+    
+    indicator.dataset.quantity = quantity;
+    this.updateStockDisplay(indicator, quantity);
+  });
+}
 
     // Función para actualizar UN SOLO indicador específico
     updateStockIndicator(variantId, cartItems = null) {
-      const items = cartItems || this.cartItems || [];
-      
-      // Buscar el indicador específico para esta variante
-      const row = this.querySelector(`[data-variant-row="${variantId}"]`);
-      if (!row) return;
-      
-      const indicator = row.querySelector('.js-stock-indicator');
-      if (!indicator) return;
-      
-      const cartItem = items.find(item => item.variant_id == variantId);
-      const quantity = cartItem ? cartItem.quantity : 0;
-      
-      // Actualizar el atributo data-quantity
-      indicator.dataset.quantity = quantity;
-      
-      // Actualizar el contenido visible
-      this.updateStockDisplay(indicator, quantity);
+  const items = cartItems || this.cartItems || [];
+  
+  // Primero intentar buscar por data-variant-row (tabla normal)
+  let indicator = this.querySelector(`[data-variant-row="${variantId}"] .js-stock-indicator`);
+  
+  // Si no se encuentra, buscar en tabla compacta
+  if (!indicator) {
+    const input = this.querySelector(`.variant-table__quantity[data-variant-id="${variantId}"]`);
+    if (input) {
+      const cell = input.closest('.variant-table__cell');
+      if (cell) {
+        indicator = cell.querySelector('.js-stock-indicator');
+      }
     }
+  }
+  
+  if (!indicator) return;
+  
+  const cartItem = items.find(item => item.variant_id == variantId);
+  const quantity = cartItem ? cartItem.quantity : 0;
+  
+  // Actualizar el atributo data-quantity
+  indicator.dataset.quantity = quantity;
+  
+  // Actualizar el contenido visible
+  this.updateStockDisplay(indicator, quantity);
+}
 
     // Función auxiliar para actualizar la visualización
     async updateStockDisplay(indicator, cartQuantity) {

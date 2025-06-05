@@ -289,16 +289,6 @@
       </fieldset>
     {%- endif -%}
   {%- endfor -%}
-
-  <script>
-    window.translations = {
-      availableText: {{ 'custom.variant-table.available-text' | t | json }},
-      backorderText: {{ 'custom.variant-table.backorder-text' | t | json }},
-      remainingText: {{ 'custom.variant-table.remaining-text' | t | json }},
-      askText: {{ 'custom.variant-table.ask-text' | t | json }},
-    };
-  </script>
-
   <script type="application/json">
     {
       "product": {{- product | json -}},

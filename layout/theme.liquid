@@ -259,6 +259,14 @@
 
   <link rel="stylesheet" href="{{ 'main.css' | asset_url }}">
   <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
+    <script>
+    window.translations = {
+      availableText: {{ 'custom.variant-table.available-text' | t | json }},
+      backorderText: {{ 'custom.variant-table.backorder-text' | t | json }},
+      remainingText: {{ 'custom.variant-table.remaining-text' | t | json }},
+      askText: {{ 'custom.variant-table.ask-text' | t | json }},
+    };
+  </script>
 
   {%- unless settings.body_font.system? -%}
     <link rel="preload" href="{{ settings.body_font | font_url }}" as="font" type="font/woff2" crossorigin fetchpriority="high">

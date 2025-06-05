@@ -309,3 +309,6 @@ upng-variant-picker .option-selector legend {
 .quick-add__product-details .variant-table__cell--quantity .price__current {
   font-size: 14px;
 }
+.quick-add__product-details .variant-table__cell--quantity .product-inventory__status {
+  text-align: center;
+}
