@@ -947,18 +947,18 @@ if (!customElements.get('upng-variant-picker')) {
         const variantId = input.getAttribute('data-variant-id');
         const cartItem = cartItems.find(item => item.variant_id === parseInt(variantId));
         const newQuantity = cartItem ? cartItem.quantity : 0;
-    
-      // Solo actualizar si cambió
-      if (input.value != newQuantity) {
-        input.value = newQuantity;
+
+        // Actualizar el valor del input solo si es diferente
+        if (input.value != newQuantity) {
+          input.value = newQuantity;
+        }
         
-        // Actualizar SOLO este indicador de stock
+        // SIEMPRE actualizar el indicador de stock
         this.updateStockIndicator(variantId, cartItems);
-      }
       });
 
       this.updateRemoveButtonsVisibility(cartItems);
-      this.updateTableTotals(cartItems);;
+      this.updateTableTotals(cartItems);
     }
 
     // Función para actualizar TODOS los indicadores
@@ -1003,7 +1003,7 @@ if (!customElements.get('upng-variant-picker')) {
     // Función auxiliar para actualizar la visualización
     async updateStockDisplay(indicator, cartQuantity) {
       const stockShopify = parseInt(indicator.dataset.stockShopify) || 0;
-      const stockUpango = parseInt(indicator.dataset.stockUpango) || 0;
+      const stockDisponible = parseInt(indicator.dataset.stockDisponible) || 0;
       const descatalogado = indicator.dataset.descatalogado === 'true';
       const id_erp = indicator.dataset.id_erp;
 
@@ -1014,11 +1014,11 @@ if (!customElements.get('upng-variant-picker')) {
       const askText = window.translations.askText || 'Contáctanos';
 
       // Calcular cifra stock normal
-      const stockDisponible = stockShopify - cartQuantity;
-      const stockMostrar = stockDisponible > 10 ? '+10' : stockDisponible < 0 ? '0' : stockDisponible.toString();   
+      const stockRestante = stockShopify - cartQuantity;
+      const stockMostrar = stockRestante > 10 ? '+10' : stockRestante <= 0 ? '0' : stockRestante.toString();   
       
       if (descatalogado) {
-        if (stockUpango == 0) {
+        if (stockDisponible == 0) {
           // Estilo en ROJO de No Disponible
           indicator.dataset.inventoryLevel = 'very_low';
         } else{
@@ -1044,8 +1044,8 @@ if (!customElements.get('upng-variant-picker')) {
         mensajes.push(`${stockMostrar} ${availableText}`);
         
         // MENSAJE_DISP
-        if (stockUpango !== 0) {
-          mensajes.push(`${stockUpango} ${backorderText}`);
+        if (stockDisponible !== 0) {
+          mensajes.push(`${stockDisponible} ${backorderText}`);
         }
         
         // MENSAJE_RESTO

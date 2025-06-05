@@ -9,7 +9,7 @@
 
 {%- liquid
   assign stock_shopify = variant.inventory_quantity
-  assign stock_upango = variant.metafields.upng.stock_disponible
+  assign stock_disponible = variant.metafields.upng.stock_disponible
   assign id_erp = variant.metafields.upng.id_erp
 -%}
 
@@ -18,7 +18,7 @@
   <div class="text-xs text-start product-inventory__status js-stock-indicator"
     data-quantity=""
     data-stock-shopify="{{ stock_shopify }}"
-    data-stock-upango="{{ stock_upango }}"
+    data-stock-disponible="{{ stock_disponible }}"
     data-inventory-level=""
     data-descatalogado="{{ descatalogado }}"
     data-id_erp="{{ id_erp }}"
