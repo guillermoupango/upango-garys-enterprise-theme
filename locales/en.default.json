@@ -46,7 +46,7 @@
     "stock-indicator": {
       "not-available": "Not available",
       "last-units": "Last units",
-      "notify": "Notify me"
+      "notify": "Ask"
     },
     "availability": {
       "available": "Immediate Availability",

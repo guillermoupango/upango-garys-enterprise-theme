@@ -5,6 +5,22 @@
   Uso: {% render 'UPNG-date-indicator', variant: product_variant %}
 {%- endcomment -%}
 
+{% comment %} 
+
+CAMBIO:
+
+  Si upng.key_fecha_proxima_llegada='date
+  mostrar el valor de upng.fecha_proxima_llegada
+
+  o Si upng.key_fecha_proxima_llegada='ask'
+  mostrar "Consultar"
+
+  Si ninguno de los anteriores
+  No mostrar nada
+
+
+{% endcomment %}
+
 {%- liquid
     # Variable Global correspondiente a 2 días en segundos
     assign adicion_en_segundos = 172800
@@ -14,26 +30,35 @@
     assign timestamp_fecha_proxima_llegada = variant.metafields.upng.fecha_proxima_llegada | date: '%s'
     assign timestamp_fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%s'
     
-    #Fecha en Metacampo
+    #Anterior
     assign fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%d-%m-%Y'
     assign fecha_disponibilidad_mas_adicion = timestamp_fecha_disponibilidad | plus: adicion_en_segundos
     assign mostrar_disponibilidad_con_adicion = fecha_disponibilidad_mas_adicion | date: '%d-%m-%Y'
-  
     assign stock_upango = variant.metafields.upng.stock_disponible
 
-    assign vSku = variant.sku
-    assign vId = variant.id
+    # NUEVO CAMBIO
+    assign key_fecha = variant.metafields.upng.key_fecha_proxima_llegada
+    assign fecha_mostrar = variant.metafields.upng.fecha_proxima_llegada
   -%}
+
+  {% if key_fecha == 'ask' %}
+    {{ 'custom.stock-indicator.notify' | t }}
+  {%  elsif key_fecha == 'date' %}
+    {{ fecha_mostrar }}
+  {% endif %}
   
-  {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
-    {% comment %} Pendiente Acción "Consultar" {% endcomment %}
-    <span class="" style="">
+{% comment %}   {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
+
       {{ 'custom.stock-indicator.notify' | t }}
-    </span>
+
   {%- else -%}
     {%- if variant.inventory_quantity <= 0 and stock_upango <= 0 -%}
+
       {{ mostrar_disponibilidad_con_adicion }}
+
     {%- else -%}
+
       {{ fecha_disponibilidad }}
+
     {%- endif -%}
-  {%- endif -%}
+  {%- endif -%} {% endcomment %}
