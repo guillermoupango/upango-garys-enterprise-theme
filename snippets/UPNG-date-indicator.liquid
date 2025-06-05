@@ -30,7 +30,7 @@ CAMBIO:
     assign timestamp_fecha_proxima_llegada = variant.metafields.upng.fecha_proxima_llegada | date: '%s'
     assign timestamp_fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%s'
     
-    #Anterior
+    #Logica anteriro, ya no se usa
     assign fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%d-%m-%Y'
     assign fecha_disponibilidad_mas_adicion = timestamp_fecha_disponibilidad | plus: adicion_en_segundos
     assign mostrar_disponibilidad_con_adicion = fecha_disponibilidad_mas_adicion | date: '%d-%m-%Y'
@@ -46,19 +46,3 @@ CAMBIO:
   {%  elsif key_fecha == 'date' %}
     {{ fecha_mostrar }}
   {% endif %}
-  
-{% comment %}   {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
-
-      {{ 'custom.stock-indicator.notify' | t }}
-
-  {%- else -%}
-    {%- if variant.inventory_quantity <= 0 and stock_upango <= 0 -%}
-
-      {{ mostrar_disponibilidad_con_adicion }}
-
-    {%- else -%}
-
-      {{ fecha_disponibilidad }}
-
-    {%- endif -%}
-  {%- endif -%} {% endcomment %}

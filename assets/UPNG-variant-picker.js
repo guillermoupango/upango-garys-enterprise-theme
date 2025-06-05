@@ -1014,8 +1014,7 @@ if (!customElements.get('upng-variant-picker')) {
       const askText = window.translations.askText || 'Contáctanos';
 
       // Calcular cifra stock normal
-      const stockRestante = stockShopify - cartQuantity;
-      const stockMostrar = stockRestante > 10 ? '+10' : stockRestante <= 0 ? '0' : stockRestante.toString();   
+      const stockMostrar = stockShopify > 10 ? '+10' : stockShopify.toString();   
       
       if (descatalogado) {
         if (stockShopify == 0) {
