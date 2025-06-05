@@ -180,14 +180,16 @@
                 {%- if is_last_position -%}
                   {%- unless rendered_product_ids contains product.id -%}
                     {%- assign rendered_product_ids = rendered_product_ids | append: product.id | append: "," -%}
-                      {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
-                      {% if mostrar_privado %}
-                          <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
-                        {%  else %}
-                          {%  if product.metafields.upng.privado != true %}
+                      {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B & Ocultar los productos con seo.hidden  {% endcomment %}
+                    {% if mostrar_privado %}
+                        {% unless product.metafields.seo.hidden == 1 %}
+                            <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
+                        {% endunless %}
+                    {%  else %}
+                        {%  if product.metafields.upng.privado != true and product.metafields.seo.hidden != 1 %}
                             <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
                         {% endif %}
-                      {% endif %}
+                    {% endif %}
                   {%- endunless -%}
                 {%- endif -%}
 
@@ -228,14 +230,16 @@
 
               {%- unless is_last_position and rendered_product_ids contains product.id -%}
                 {%- assign rendered_product_ids = rendered_product_ids | append: product.id | append: "," -%}
-                  {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B {% endcomment %}
-                  {% if mostrar_privado %}
-                      <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
-                    {%  else %}
-                      {%  if product.metafields.upng.privado != true %}
-                      <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>       
+                  {% comment %} OCULTAR PRODUCTO PRIVADO A USUARIOS NO B2B  & Ocultar los productos con seo.hidden {% endcomment %}
+                {% if mostrar_privado %}
+                    {% unless product.metafields.seo.hidden == 1 %}
+                        <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
+                    {% endunless %}
+                {%  else %}
+                    {%  if product.metafields.upng.privado != true and product.metafields.seo.hidden != 1 %}
+                        <li class="js-pagination-result">{% render 'product-card', product: product, collection: collection, image_ratio: image_ratio, show_compare: settings.enable_compare %}</li>
                     {% endif %}
-                  {% endif %}
+                {% endif %}
               {%- endunless -%}
             {%- endfor -%}
 
