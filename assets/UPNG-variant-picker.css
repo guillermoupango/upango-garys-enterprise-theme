@@ -68,6 +68,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   text-align: center;
   padding-bottom: 3rem !important;
   opacity: 0.7;
+  line-height: 1;
 }
 
 .table-header-left {
@@ -87,16 +88,22 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   left: 0;
 }
 
+.variant-table__cell--size{
+  min-width: 54px;
+}
+
 .variant-table__cell {
   padding: 0.3rem 0.3rem 0.3rem 0 !important;
 }
 
 .variant-table__cell--date {
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: -0.01em;
 }
 .variant-table__cell--stock {
-  width: 156px;
+  width: 152px;
+  padding-left: 3px !important;
+  letter-spacing: -0.01em
 }
 
 .variant-table__cell--quantity {
@@ -105,7 +112,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   align-items: center;
   margin-top: 5px;
   gap: 6px;
-  width: 130px;
+  width: 120px;
 }
 
 .variant-table__cell--quantity a {

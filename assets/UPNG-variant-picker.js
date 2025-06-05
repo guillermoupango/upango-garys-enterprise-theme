@@ -1041,9 +1041,9 @@ if (!customElements.get('upng-variant-picker')) {
         const mensajes = [];
         
         // MENSAJE_INICIAL con cifra stock normal
-        mensajes.push(`${stockMostrar} ${availableText}`);
+        mensajes.push(`${stockShopify} ${availableText}`);
         
-        // MENSAJE_DISP
+        // MENSAJE_DISP 2 DIAS
         if (stockDisponible !== 0) {
           mensajes.push(`${stockDisponible} ${backorderText}`);
         }

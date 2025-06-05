@@ -10,10 +10,10 @@
         {% if customer.metafields['upng-permission'].verStock %}
           <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
         {% endif %}
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival' | t }}</th>
+        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
         <th scope="col" class="variant-table__header">
-          <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price' | t }}</span>
+          <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
         </th>
         <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
       </tr>
@@ -48,9 +48,10 @@
               }}
             {% endif %}
           </td>
+          <!-- Oculto - logica de mostrar / ocultar filas -->
           <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
           <!-- Oculto - logica de mostrar / ocultar filas -->
-          <td class="variant-table__cell">{{ variant.option2 }}</td>
+          <td class="variant-table__cell variant-table__cell--size">{{ variant.option2 }}</td>
           {% if customer.metafields['upng-permission'].verStock %}
             <td class="variant-table__cell variant-table__cell--stock">
               {% render 'UPNG-stock-indicator', variant: variant, descatalogado: descatalogado %}
@@ -184,11 +185,4 @@
   </table>
 {% else %}
   <a class="btn btn--secondary w-full mt-8" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
-
-{% comment %}   <table class="w-full">
-    <tr class="variant-table__last-row">
-      <td colspan="100%" class="text-center border-none">
-      </td>
-    </tr>
-  </table> {% endcomment %}
 {% endif %}

@@ -27,7 +27,7 @@
   
   {%- if timestamp_fecha_proxima_llegada < timestamp_fecha_actual -%}
     {% comment %} Pendiente Acción "Consultar" {% endcomment %}
-    <span class="hover:underline hover:lighten" style="cursor: pointer">
+    <span class="" style="">
       {{ 'custom.stock-indicator.notify' | t }}
     </span>
   {%- else -%}
@@ -37,7 +37,3 @@
       {{ fecha_disponibilidad }}
     {%- endif -%}
   {%- endif -%}
-
-  <script>
-    console.log('### SKU: {{ vId }}');
-  </script>

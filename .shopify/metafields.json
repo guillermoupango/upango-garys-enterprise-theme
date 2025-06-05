@@ -466,16 +466,6 @@
       }
     },
     {
-      "key": "fecha_disponibilidad",
-      "namespace": "upng",
-      "name": "Fecha disponibilidad",
-      "description": "",
-      "type": {
-        "name": "date",
-        "category": "DATE_TIME"
-      }
-    },
-    {
       "key": "fecha_proxima_llegada",
       "namespace": "upng",
       "name": "Fecha próxima llegada",
@@ -533,6 +523,16 @@
       "type": {
         "name": "list.file_reference",
         "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "key_fecha_proxima_llegada",
+      "namespace": "upng",
+      "name": "Key Fecha Próxima llegada",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     }
   ],
