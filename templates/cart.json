@@ -33,7 +33,7 @@
           "settings": {
             "button_class": "checkout-button",
             "message_class": "upng-credit-control-message",
-            "message_no_credit": "No tienes crédito suficiente para finalizar la compra"
+            "message_no_credit": "Pongase en contacto con el departamento de ventas para completar su pedido"
           }
         }
       },
