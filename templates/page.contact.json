@@ -204,7 +204,7 @@
           "type": "text",
           "settings": {
             "text": "<p>Utilizaremos sus datos para responder consultas y realizar análisis estadísticos. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\">política de privacidad</a>.</p>",
-            "enlarge_text": true
+            "enlarge_text": false
           }
         },
         "button_xcjAAA": {
