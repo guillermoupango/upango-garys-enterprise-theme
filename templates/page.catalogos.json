@@ -324,15 +324,15 @@
             "tint_opacity": 40
           }
         },
-        "media_4QpBf7": {
+        "media_WQ7Tkc": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/DELANTALES.jpg",
-            "link_url": "shopify://pages/catalogo",
+            "image": "shopify://shop_images/portada_denim.jpg",
+            "link_url": "shopify://pages/catalogo-denim",
             "columns": 1,
             "rows": 2,
             "subheading": "",
-            "title": "<p>DELANTALES Y COMPLEMENTOS</p>",
+            "title": "<p>DENIM</p>",
             "heading_size": "h4",
             "button_label": "",
             "button_link": "",
@@ -343,15 +343,15 @@
             "tint_opacity": 40
           }
         },
-        "media_WQ7Tkc": {
+        "media_4QpBf7": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/portada_denim.jpg",
-            "link_url": "shopify://pages/catalogo-denim",
+            "image": "shopify://shop_images/DELANTALES.jpg",
+            "link_url": "shopify://pages/catalogo",
             "columns": 1,
             "rows": 2,
             "subheading": "",
-            "title": "<p>DENIM</p>",
+            "title": "<p>DELANTALES Y COMPLEMENTOS</p>",
             "heading_size": "h4",
             "button_label": "",
             "button_link": "",
@@ -377,8 +377,8 @@
         "media_hXbmiR",
         "media_qkj34r",
         "media_CN3bmN",
-        "media_4QpBf7",
-        "media_WQ7Tkc"
+        "media_WQ7Tkc",
+        "media_4QpBf7"
       ],
       "name": "Media grid",
       "settings": {
