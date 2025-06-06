@@ -111,14 +111,6 @@
             "text": "Protección de datos personales"
           }
         },
-        "heading_Dekpti": {
-          "type": "heading",
-          "settings": {
-            "heading": "Rich text headline",
-            "heading_size": "h6",
-            "heading_h1": true
-          }
-        },
         "text_cBNjrp": {
           "type": "text",
           "settings": {
@@ -140,7 +132,6 @@
       },
       "block_order": [
         "subheading_w63pXk",
-        "heading_Dekpti",
         "text_cBNjrp",
         "button_xcjAAA"
       ],
