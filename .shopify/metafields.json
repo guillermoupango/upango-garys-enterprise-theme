@@ -109,7 +109,38 @@
     }
   ],
   "market": [],
-  "order": [],
+  "order": [
+    {
+      "key": "albaran_logotipo",
+      "namespace": "checkoutblocks",
+      "name": "Propio albarán",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "enviar_pedido_completo",
+      "namespace": "upng",
+      "name": "Enviar pedido completo",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "albaran_valorado",
+      "namespace": "upng",
+      "name": "Albarán valorado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    }
+  ],
   "page": [
     {
       "key": "icono",
@@ -545,6 +576,16 @@
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
+      }
+    },
+    {
+      "key": "blocks_list_checkout_custom_field",
+      "namespace": "checkoutblocks",
+      "name": "Checkout Blocks: Blocks List for: checkout_custom_field",
+      "description": null,
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     }
   ]

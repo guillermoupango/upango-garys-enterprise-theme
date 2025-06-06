@@ -3,12 +3,8 @@
 {% assign current_variant = product.selected_variant %}
 {% assign tratamiento_reference = current_variant.metafields.upng.ref-tratamiento.value %}
 
-<!--
-{{  current_variant | json }}
-  -->
-
 {% if tratamiento_reference != blank %}
-  <div class="tratamiento-icons">
+  <div class="tratamiento-icons pr-6">
     {% for tratamiento in tratamiento_reference %}
       <div class="tratamiento-icon tooltip">
         {% if tratamiento.icono %}
@@ -19,7 +15,7 @@
     {% endfor %}
   </div>
 {% else %}
-  <div class="tratamiento-icons--empty">
+{% comment %}   <div class="tratamiento-icons--empty">
     <!-- Contenido a mostrar cuando no hay tratamientos definidos -->
-  </div>
+  </div> {% endcomment %}
 {% endif %}

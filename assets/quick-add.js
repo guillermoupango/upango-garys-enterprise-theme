@@ -134,7 +134,7 @@ if (!customElements.get('quick-add-drawer')) {
      * Handles 'on:variant:change' events on the Quick Add drawer.
      * @param {object} evt - Event object.
      */
-    handleVariantChange(evt) {
+    async handleVariantChange(evt) {
       let url = this.productUrl;
 
       if (evt.detail.variant) {
@@ -145,6 +145,26 @@ if (!customElements.get('quick-add-drawer')) {
       this.querySelectorAll('.js-prod-link').forEach((link) => {
         link.href = url;
       });
+
+      // UPANGO - Ampliar Funcionalidad
+      // Hacer fetch para actualizar tratamientos
+      const tratamientosModal = document.querySelector('.tratamientos-modal');
+      //console.log(url);
+      //console.log(`${url}&view=upng-tratamientos`);
+
+      try {
+        // Hacer petición AJAX para obtener los tratamientos
+        const response = await fetch(`${url}&view=upng-tratamientos`);
+        if (!response.ok) throw new Error('Error loading treatment data');
+        
+        const html = await response.text();
+        
+        // Actualizar el contenedor con el HTML recibido
+        tratamientosModal.innerHTML = html;
+      } catch (error) {
+        console.error('Error updating treatment icons:', error);
+      }
+      
     }
 
     /**
@@ -221,7 +241,7 @@ if (!customElements.get('quick-add-drawer')) {
       const upngVariantPicker = this.productEl.querySelector('upng-variant-picker');
       if (upngVariantPicker) {
         upngVariantPicker.dataset.context = 'quick-add-drawer';
-        console.log('UPNG Variant Picker context set to quick-add-drawer');
+        //console.log('UPNG Variant Picker context set to quick-add-drawer');
       }
 
       // Remove size chart modal and link (if they exist).
@@ -286,6 +306,8 @@ if (!customElements.get('quick-add-drawer')) {
      */
     updateContent() {
       let weightElem = this.getElementHtml('.product-info__weight');
+      let productComposicion = this.getElementHtml('.product-composicion');
+      //let productTratamientos = this.getElementHtml('.tratamiento-icons');
       if (weightElem && weightElem.length > 0) {
         weightElem = `<div class="product-info__weight text-sm mt-2">${weightElem}</div>`;
       }
@@ -296,6 +318,9 @@ if (!customElements.get('quick-add-drawer')) {
           <div class="quick-add-info__details">
             <div class="product-vendor-sku mb-2 text-sm">
               ${this.getElementHtml('.product-vendor-sku')}
+            </div>
+            <div class="product-info__product-bar flex justify-start">
+              <div class="tratamientos-modal"></div><span>${productComposicion}</span>
             </div>
             <div class="product-title">
               <a class="h6 js-prod-link" href="${this.productUrl}">
@@ -322,8 +347,30 @@ if (!customElements.get('quick-add-drawer')) {
         </div>
       `;
 
+      // Obtener variant ID desde aqui para fetchear y actualizar tratamientos
+      const variantId = document.querySelector('form#instalments-form-quickadd input[name="id"]').value;
+      console.log('OPEN MODAL con:', variantId);
+      this.fetchTratamientos(variantId);
+
       this.classList.remove('is-loading');
       this.content.classList.remove('drawer__content--out');
+    }
+
+    async fetchTratamientos(variantId) {
+      let url = this.productUrl;
+      const tratamientosModal = document.querySelector('.tratamientos-modal');
+      try {
+        // Hacer petición AJAX para obtener los tratamientos
+        const response = await fetch(`${url}?variant=${variantId}&view=upng-tratamientos`);
+        if (!response.ok) throw new Error('Error loading treatment data');
+        
+        const html = await response.text();
+        
+        // Actualizar el contenedor con el HTML recibido
+        tratamientosModal.innerHTML = html;
+      } catch (error) {
+        console.error('Error updating treatment icons:', error);
+      }
     }
 
     /**
