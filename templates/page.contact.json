@@ -117,23 +117,11 @@
             "text": "<p>Utilizaremos sus datos para responder consultas y realizar análisis estadísticos. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\">política de privacidad</a>.</p>",
             "enlarge_text": false
           }
-        },
-        "button_xcjAAA": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Optional button",
-            "button_1_link": "",
-            "button_1_style": "btn--primary",
-            "button_2_label": "Optional button",
-            "button_2_link": "",
-            "button_2_style": "btn btn--primary"
-          }
         }
       },
       "block_order": [
         "subheading_w63pXk",
-        "text_cBNjrp",
-        "button_xcjAAA"
+        "text_cBNjrp"
       ],
       "name": "Rich text",
       "settings": {
