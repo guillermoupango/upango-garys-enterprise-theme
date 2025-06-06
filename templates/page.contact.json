@@ -27,47 +27,6 @@
         "prevent_animation": false
       }
     },
-    "image-banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Contact Us",
-            "heading_size": "h1",
-            "heading_h1": true
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Please visit our help pages for answers to some of the most commonly asked questions.</p>",
-            "enlarge_text": true
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "disabled": true,
-      "settings": {
-        "url": "",
-        "height_mode": "fixed",
-        "fixed_height_desktop": 560,
-        "fixed_height_mobile": 440,
-        "overlay_position": "justify-start items-center",
-        "overlay_text_align": "text-start",
-        "mob_center_text": true,
-        "mobile_stacked": false,
-        "color_scheme": "white",
-        "full_width": true,
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_opacity": 40,
-        "prevent_animation": false
-      }
-    },
     "form": {
       "type": "contact-form",
       "blocks": {
@@ -101,7 +60,6 @@
         },
         "contact-dropdown-4": {
           "type": "dropdown",
-          "disabled": true,
           "settings": {
             "title": "How can we help?",
             "options": "Option 1\nOption 2\nOption 3",
@@ -144,44 +102,6 @@
         "button_style": "btn btn--primary"
       }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "newsletter-heading-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Sign up to our Newsletter",
-            "heading_size": "h5"
-          }
-        },
-        "newsletter-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Be the first to know about new collections and exclusive offers.</p>",
-            "enlarge_text": false
-          }
-        },
-        "newsletter-form-2": {
-          "type": "form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "newsletter-heading-0",
-        "newsletter-text-1",
-        "newsletter-form-2"
-      ],
-      "disabled": true,
-      "settings": {
-        "overlay_position": "justify-center",
-        "text_align": "text-center",
-        "color_scheme": "default",
-        "full_width": true,
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_opacity": 20
-      }
-    },
     "rich_text_TteVap": {
       "type": "rich-text",
       "blocks": {
@@ -193,7 +113,6 @@
         },
         "heading_Dekpti": {
           "type": "heading",
-          "disabled": true,
           "settings": {
             "heading": "Rich text headline",
             "heading_size": "h6",
@@ -209,7 +128,6 @@
         },
         "button_xcjAAA": {
           "type": "button",
-          "disabled": true,
           "settings": {
             "button_1_label": "Optional button",
             "button_1_link": "",
@@ -241,9 +159,7 @@
   "order": [
     "main",
     "custom_liquid_dxG8tg",
-    "image-banner",
     "form",
-    "newsletter",
     "rich_text_TteVap"
   ]
 }
