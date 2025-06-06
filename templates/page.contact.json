@@ -33,7 +33,7 @@
         "text_qki7jD": {
           "type": "text",
           "settings": {
-            "text": "<p>Te responderemos lo antes posible</p><p>+34 950 410 651</p>",
+            "text": "<p>Te responderemos lo antes posible</p><p><a href=\"tel:+34950410651\" target=\"_blank\" title=\"tel:+34950410651\">+34 950 410 651</a></p>",
             "half_width": false
           }
         },
