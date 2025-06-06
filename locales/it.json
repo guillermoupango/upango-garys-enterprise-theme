@@ -682,6 +682,14 @@
     "siguiente": "Seguente",
     "colorObligatorio": "È necessario selezionare o immettere il numero esadecimale o Pantone.",
     "colorObligatorioOP": "Inserisci o scegli un colore esadecimale o Pantone per continuare.",
-    "opcionObligatoria": "Seleziona un'opzione per continuare."
+    "opcionObligatoria": "Seleziona un'opzione per continuare.",
+    "contactoObligatorio": "Per continuare, completa i tuoi dati di contatto e accetta l'informativa sulla privacy.",
+    "datosContacto": "Ultimo passo",
+    "rellenaLosDatos": "Lasciaci i tuoi dati così potremo inviarti la tua proposta personalizzata.",
+    "nombreDeContacto": "Nome del contatto",
+    "correoElectronico": "E-mail",
+    "telefonoOpcional": "Telefono (facoltativo)",
+    "politicaPrivacidad1": "Ho letto e accetto l' ",
+    "politicaPrivacidad2": "politica sulla riservatezza"
   }
 }
