@@ -10,7 +10,7 @@
 {
   "general": {
     "localization": {
-      "country_label": "Paese\/Regione",
+      "country_label": "Paese/Regione",
       "countries_error": "Errore durante il recupero dei Paesi, riprova.",
       "language_label": "Lingua",
       "update": "Aggiorna"
@@ -36,7 +36,7 @@
       "label": "Paginazione",
       "next": "Avanti",
       "previous": "Indietro",
-      "position": "Pagina {{ current_page }} \/ {{ total_pages }}",
+      "position": "Pagina {{ current_page }} / {{ total_pages }}",
       "position_results": "Mostrando {{ visible_results }} di {{ total_results }}",
       "show_more": "Mostra altro"
     },
@@ -121,9 +121,9 @@
       "pickup_availability": {
         "check_other_stores": "Verifica la disponibilità presso altri negozi",
         "pick_up_available": "Ritiro disponibile",
-        "pick_up_available_at_html": "Ritiro disponibile presso <strong>{{ location_name }}<\/strong>",
+        "pick_up_available_at_html": "Ritiro disponibile presso <strong>{{ location_name }}</strong>",
         "pick_up_unavailable": "Ritiro al momento non disponibile",
-        "pick_up_unavailable_at_html": "Pickup attualmente non disponibile presso <strong>{{ location_name }}<\/strong>",
+        "pick_up_unavailable_at_html": "Pickup attualmente non disponibile presso <strong>{{ location_name }}</strong>",
         "refresh": "Aggiorna",
         "unavailable": "Non è stato possibile caricare la disponibilità per il ritiro",
         "view_store_info": "Visualizza informazioni sul negozio"
@@ -135,14 +135,14 @@
         "regular_price": "Prezzo normale",
         "sale_price": "Prezzo di vendita",
         "unit_price": "Prezzo unitario",
-        "unit_price_separator": " \/ "
+        "unit_price_separator": " / "
       },
       "product_variants": "Varianti del prodotto",
       "qty": "Q.tà",
       "rating": "Valutazione",
       "reviews": "Recensioni",
       "sale": "Vendita",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Spedizione<\/a> calcolata al momento del checkout.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Spedizione</a> calcolata al momento del checkout.",
       "size_chart": "Guida alle taglie",
       "sku": "SKU:",
       "sold_out": "Esaurito",
@@ -235,7 +235,7 @@
     },
     "footer": {
       "payment_methods": "Metodi di pagamento accettati",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
       "back_to_top": "Torna all’inizio"
     },
     "collection": {
@@ -292,7 +292,7 @@
         "powered_by": "Questo negozio è basato su"
       },
       "login_form": {
-        "admin_link_html": "Sei il proprietario del negozio? <a href=\"\/admin\">Accedi qui<\/a>",
+        "admin_link_html": "Sei il proprietario del negozio? <a href=\"/admin\">Accedi qui</a>",
         "error": "Password errata",
         "heading": "Accedi al negozio con la password",
         "password_label": "Password",
@@ -372,11 +372,11 @@
       "backorder": "Il prodotto è stato ordinato al fornitore e verrà spedito non appena sarà di nuovo disponibile.",
       "view_cart": "Visualizza carrello",
       "free_shipping": "Il tuo ordine è idoneo per la spedizione gratuita!",
-      "free_shipping_deficit_html": "Spendi <strong>{{ amount }}<\/strong> in più per ottenere la <strong>spedizione gratuita<\/strong>!",
+      "free_shipping_deficit_html": "Spendi <strong>{{ amount }}</strong> in più per ottenere la <strong>spedizione gratuita</strong>!",
       "taxes_and_shipping_at_checkout": "Imposte, sconti e spedizione calcolati al check-out.",
-      "taxes_and_shipping_at_checkout_html": "Imposte, sconti e <a href=\"{{ link }}\">spedizione<\/a> calcolati al check-out.",
+      "taxes_and_shipping_at_checkout_html": "Imposte, sconti e <a href=\"{{ link }}\">spedizione</a> calcolati al check-out.",
       "taxes_included_shipping_at_checkout": "Imposte incluse e spedizione e sconti calcolati al check-out.",
-      "taxes_included_shipping_at_checkout_html": "Imposte incluse. <a href=\"{{ link }}\">Spedizione<\/a> e sconti calcolati al check-out.",
+      "taxes_included_shipping_at_checkout_html": "Imposte incluse. <a href=\"{{ link }}\">Spedizione</a> e sconti calcolati al check-out.",
       "error": "Si è verificato un errore nell’aggiornamento del carrello. Prova di nuovo."
     },
     "items": {
@@ -411,7 +411,7 @@
       "continue_shopping": "Prosegui con gli acquisti"
     },
     "terms": {
-      "agreement_html": "Accetto le <a href=\"{{ terms_url }}\" target=\"_blank\">condizioni e la politica di reso<\/a>",
+      "agreement_html": "Accetto le <a href=\"{{ terms_url }}\" target=\"_blank\">condizioni e la politica di reso</a>",
       "confirmation": "Prima di proseguire devi accettare i termini e le condizioni."
     }
   },
@@ -561,5 +561,127 @@
       "sku": "SKU1234",
       "description": "Una descrizione del prodotto, inclusi dettagli come la qualità costruttiva, i materiali utilizzati e le motivazioni di acquisto."
     }
+  },
+  "custom": {
+    "cart": {
+      "info": "Puoi esprimere qualsiasi commento sul tuo ordine o fornirci le informazioni che ritieni importanti.",
+      "delivery": "Commenti sulla bolla di consegna",
+      "label_placeholder": "Commento al reparto vendite uniformi di Gary",
+      "delivery_placeholder": "Commento che appare sulla bolla di consegna",
+      "checkbox": "Personalizza questo prodotto",
+      "placeholder": "Indica la personalizzazione che desideri su questo prodotto",
+      "label": "Personalizzazione",
+      "clear": "Carrello vuoto"
+    },
+    "price": {
+      "pvp": "PVR da",
+      "pvd": "Da"
+    },
+    "variant-table": {
+      "color": "Colore",
+      "variant-name": "Nome variante",
+      "size": "Misurare",
+      "stock": "Azione",
+      "next-arrival_html": "Prossimamente<br> arrivo",
+      "notify-me": "Fammi sapere",
+      "discounted-price_html": "Prezzo<br> con DTO.",
+      "quantity": "Quantità",
+      "clear-all": "Elimina tutto",
+      "view-cart": "Visualizza carrello",
+      "subtotal": "Subtotale",
+      "total-items": "Totale articoli",
+      "request-access": "Richiedi la registrazione",
+      "quantity-for": "Quantità per %{title}",
+      "available-text": "unità disponibili immediatamente",
+      "backorder-text": "unità disponibili +2 giorni",
+      "remaining-text": "Riposo",
+      "ask-text": "consultare"
+    },
+    "stock-indicator": {
+      "not-available": "Non disponibile",
+      "last-units": "Ultime unità",
+      "notify": "Consultare"
+    },
+    "availability": {
+      "available": "Unità disponibili",
+      "next-arrival": "Esaurito, prossimo arrivo",
+      "outlet": "OUTLET, ultime unità",
+      "not-available": "Non disponibile"
+    },
+    "catalog": {
+      "download": "Scarica il catalogo",
+      "products": "Vedi i prodotti della",
+      "visualizer": "Visualizzatore di catalogo",
+      "actions": "Azioni del catalogo",
+      "iframe_error": "Questo browser non supporta il catalogo. Riprova da un altro browser."
+    },
+    "menu": {
+      "got_to": "Andando"
+    },
+    "customer": {
+      "not_allowed": "Non consentito",
+      "where_to_buy": "Dove acquistare"
+    }
+  },
+  "upango": {
+    "customer": {
+      "log_out": "ESCI"
+    }
+  },
+  "moodboard": {
+    "tipografias": "Caratteri Oswald e Roboto",
+    "logoGarys": "Logo di Gary",
+    "testInteractivo": "TEST INTERATTIVO",
+    "experienciaPersonalizada": "Goditi un'esperienza personalizzata",
+    "descripcionMoodboard": "In pochi minuti puoi progettare una mood board unica e visualizzare lo stile ideale per le divise del tuo team.",
+    "comenzar": "Inizio",
+    "graciasPorTest": "Grazie per aver completato il test interattivo.",
+    "preferenciasRegistradas": "Le tue preferenze sono state registrate e, con queste informazioni, il nostro team sarà in grado di fornirti una proposta più efficiente.",
+    "volverInicio": "Torna all'inizio",
+    "colorCorporativoPregunta": "Quali sono il colore aziendale primario e secondario (se applicabile)?",
+    "coloresCorporativosPrincipales": "1. PRINCIPALI COLORI AZIENDALI",
+    "seleccionColor": "Seleziona un colore, inserisci il numero esadecimale o Pantone. Puoi selezionare più opzioni.",
+    "anadirColor": "+ Aggiungi un altro colore",
+    "coloresCorporativosSecundarios": "2. COLORI AZIENDALI SECONDARI",
+    "imagenProyectar": "Quale immagine vuoi trasmettere attraverso le tue uniformi?",
+    "seleccionMultiple": "Puoi selezionare più opzioni",
+    "preferenciaMateriales": "Hai qualche preferenza per quanto riguarda i materiali?",
+    "codigoHexadecimalPantone": "codice esadecimale o pantone",
+    "estiloProfesional": "PROFESSIONALE",
+    "estiloElegante": "ELEGANTE",
+    "estiloModerno": "MODERNO",
+    "uniformeEstaciones": "I dipendenti avranno bisogno di uniformi diverse a seconda della stagione dell'anno?",
+    "invierno": "Inverno",
+    "naturales": "Naturale",
+    "entretiempo": "Intervallo",
+    "verano": "Estate",
+    "tecnicos": "Tecnici",
+    "sostenibles": "Sostenibile",
+    "estiloMarca": "Come descriveresti lo stile generale del tuo marchio?",
+    "minimalista": "minimalist",
+    "llamativo": "sorprendente",
+    "corporativo": "aziendale",
+    "departamentosUniformes": "Quali aree o dipartimenti necessitano di uniformi?",
+    "recepcion": "RECEPTION",
+    "porteroBotones": "PORTIERE/PORTIERE",
+    "responsableSala": "DIRETTORE DI SALA",
+    "camareroInterior": "CAMERIERE INTERNO",
+    "camareroTerraza": "CAMERIERE DELLA TERRAZZA",
+    "jefeCocina": "CHEF",
+    "personalCocina": "PERSONALE DI CUCINA",
+    "friegaplatos": "LAVASTOVIGLIE",
+    "gobernanta": "GOVERNANTE",
+    "camareraPiso": "PULIZIE DOMESTICHE",
+    "valetDePiso": "VALET DA PIANO",
+    "mantenimiento": "MANUTENZIONE",
+    "lavanderia": "LAVANDERIA",
+    "theCorner": "L'ANGOLO",
+    "preferenciasEstilo": "Quale di queste opzioni si adatta meglio alle tue preferenze?",
+    "economica": "Economico",
+    "exclusiva": "Esclusivo",
+    "siguiente": "Seguente",
+    "colorObligatorio": "È necessario selezionare o immettere il numero esadecimale o Pantone.",
+    "colorObligatorioOP": "Inserisci o scegli un colore esadecimale o Pantone per continuare.",
+    "opcionObligatoria": "Seleziona un'opzione per continuare."
   }
 }
