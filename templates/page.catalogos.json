@@ -80,12 +80,12 @@
         "media_C39t3m": {
           "type": "media",
           "settings": {
-            "image": "shopify://shop_images/NUESTROS_CATALOGOS.jpg",
-            "link_url": "",
+            "image": "shopify://shop_images/colegial.2025.jpg",
+            "link_url": "shopify://pages/catalogo-colegial",
             "columns": 1,
             "rows": 2,
             "subheading": "",
-            "title": "",
+            "title": "<p>COELGIAL</p>",
             "heading_size": "h3",
             "button_label": "",
             "button_link": "",
