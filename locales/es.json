@@ -688,9 +688,10 @@
     "contactoObligatorio": "Complete los datos de contacto y acepte la política de privacidad para continuar.",
     "datosContacto": "Último paso",
     "rellenaLosDatos": "Déjanos tus datos para enviarte tu propuesta personalizada",
+    "nombreEmpresa": "Nombre de empresa",
     "nombreDeContacto": "Nombre de contacto",
     "correoElectronico": "Correo electrónico",
-    "telefonoOpcional": "Teléfono (opcional)",
+    "telefonoOpcional": "Teléfono",
     "politicaPrivacidad1": "He leído y acepto la ",
     "politicaPrivacidad2": "política de privacidad"
   }

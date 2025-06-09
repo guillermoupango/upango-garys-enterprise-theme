@@ -688,9 +688,10 @@
     "contactoObligatorio": "Complete the contact details and accept the privacy policy to continue.",
     "datosContacto": "Last step",
     "rellenaLosDatos": "Leave us your details to send you your personalized proposal",
+    "nombreEmpresa": "Company name",
     "nombreDeContacto": "Contact name",
     "correoElectronico": "Email",
-    "telefonoOpcional": "Phone (optional)",
+    "telefonoOpcional": "Phone",
     "politicaPrivacidad1": "I have read and accept the ",
     "politicaPrivacidad2": "privacy policy"
   }

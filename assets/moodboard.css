@@ -756,6 +756,9 @@
     padding: 2rem 1rem;
     background-color: #f8f8f8;
   }
+  #section_datos_contacto .style-gallery{
+    grid-template-columns: repeat(2, 1fr);
+  }
   .style-gallery-4 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));;

@@ -670,6 +670,7 @@
     "jefeCocina": "CHEF",
     "personalCocina": "PERSONALE DI CUCINA",
     "friegaplatos": "LAVASTOVIGLIE",
+    "spa": "SPA",
     "gobernanta": "GOVERNANTE",
     "camareraPiso": "PULIZIE DOMESTICHE",
     "valetDePiso": "VALET DA PIANO",
@@ -678,6 +679,7 @@
     "theCorner": "L'ANGOLO",
     "preferenciasEstilo": "Quale di queste opzioni si adatta meglio alle tue preferenze?",
     "economica": "Economico",
+    "intermedia": "Intermedia",
     "exclusiva": "Esclusivo",
     "siguiente": "Seguente",
     "colorObligatorio": "È necessario selezionare o immettere il numero esadecimale o Pantone.",
@@ -686,9 +688,10 @@
     "contactoObligatorio": "Per continuare, completa i tuoi dati di contatto e accetta l'informativa sulla privacy.",
     "datosContacto": "Ultimo passo",
     "rellenaLosDatos": "Lasciaci i tuoi dati così potremo inviarti la tua proposta personalizzata.",
+    "nombreEmpresa": "Nome della società",
     "nombreDeContacto": "Nome del contatto",
     "correoElectronico": "E-mail",
-    "telefonoOpcional": "Telefono (facoltativo)",
+    "telefonoOpcional": "Telefono",
     "politicaPrivacidad1": "Ho letto e accetto l' ",
     "politicaPrivacidad2": "politica sulla riservatezza"
   }

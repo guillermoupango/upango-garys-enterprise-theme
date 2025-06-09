@@ -391,6 +391,11 @@
                 <div class="style-gallery">
                     <div class="form-group">
                         <div class="field">
+                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" required class="form-input" placeholder="{{ 'moodboard.nombreEmpresa' | t }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field">
                             <input type="text" id="nombre" name="nombre" required class="form-input" placeholder="{{ 'moodboard.nombreDeContacto' | t }}">
                         </div>
                     </div>
@@ -450,7 +455,7 @@
     const btnSiguiente = document.querySelector('#btn_nextStep');
     const arrowSiguiente = document.querySelector('#arrow_nextStep');
     const arrowAnterior = document.querySelector('#arrow_previousStep');
-    const contactoInputs = ['nombre', 'email'];
+    const contactoInputs = ['nombreEmpresa', 'nombre', 'email', 'telefono'];
 
     const getCurrentStep = () => parseInt(sessionStorage.getItem('currentStep')) || 0;
     const setCurrentStep = (step) => sessionStorage.setItem('currentStep', step);
@@ -674,13 +679,17 @@
             habilitar = (principalChecked || principalInputs) && (secundaryChecked || secundaryInputs);
         } 
         else if (currentStep === 8) {
+            const nombreEmpresa = document.getElementById('nombreEmpresa')?.value.trim();
             const nombre = document.getElementById('nombre')?.value.trim();
             const email = document.getElementById('email')?.value.trim();
+            const telefono = document.getElementById('telefono')?.value.trim();
             const acepta = document.getElementById('AceptarPoliticaPrivacidad')?.checked;
 
             const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-            habilitar = !!(nombre && emailValido && acepta);
+            const telefonoLimpio = telefono?.replace(/\D/g, '').trim(); // solo números
+            const telefonoValido = telefonoLimpio.length >= 9;
+            
+            habilitar = !!(nombreEmpresa && nombre && emailValido && telefonoValido && acepta);
 
         } else {
             const tipo = tipos[currentStep];
@@ -728,10 +737,12 @@
     }
 
     function guardarContacto() {
+        const nombreEmpresa = document.getElementById('nombreEmpresa').value.trim();
         const nombre = document.getElementById('nombre').value.trim();
         const email = document.getElementById('email').value.trim();
         const telefono = document.getElementById('telefono').value.trim();
         const datosContacto = {
+            nombreEmpresa: nombreEmpresa,
             nombre: nombre,
             email: email,
             telefono: telefono
