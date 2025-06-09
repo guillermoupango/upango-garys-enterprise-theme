@@ -45,6 +45,7 @@ if (!customElements.get('upng-variant-picker')) {
 
       // Bind de eventos de INPUT Quantity
       this.boundHandleQuantityButtonClick = this.handleQuantityButtonClick.bind(this);
+      this.boundUpdateLimitState = (event) => this.updateLimitState(event.target);
       this.boundHandleInputFocus = this.handleInputFocus.bind(this);
       this.boundHandleInputKeydown = this.handleInputKeydown.bind(this);
       this.boundHandleRemoveButtonClick = this.handleRemoveButtonClick.bind(this);
@@ -668,6 +669,18 @@ if (!customElements.get('upng-variant-picker')) {
         // Primero cargar el estado inicial del carrito
         await this.updateFromCart();
 
+        // CLAMP de valores iniciales de Input solo si tienen max   
+        this.quantityInputs.forEach(input => {
+          if (input.hasAttribute('max')) {
+            const max = parseInt(input.max, 10);
+            const current = parseInt(input.value, 10);
+            if (current > max) {
+              input.value = max;
+            }
+            this.updateLimitState(input); // Actualizar estado de Input Limit
+          }
+        });
+
         // Inicializar event listeners del carrito
         document.addEventListener('on:cart:add', this.boundHandleCartAdd);
         document.addEventListener('on:line-item:change', this.boundHandleLineItemChange);
@@ -684,6 +697,9 @@ if (!customElements.get('upng-variant-picker')) {
 
             // Evento keydown
             input.addEventListener('keydown', this.boundHandleInputKeydown);
+
+            // Escanear el max del input
+            input.addEventListener('input', this.boundUpdateLimitState);
           });
         }
 
@@ -742,13 +758,27 @@ if (!customElements.get('upng-variant-picker')) {
 
       const input = event.target;
       const variantId = input.getAttribute('data-variant-id');
-      const newQuantity = parseInt(input.value);
+      let newQuantity = parseInt(input.value);
 
       // Validamos que tengamos un variantId válido
       if (!variantId) {
         console.error('Error: No variant ID found on input');
         return;
       }
+
+    // NUEVO: Validar límite máximo si el input tiene atributo max
+      if (input.hasAttribute('max')) {
+        const maxQuantity = parseInt(input.max, 10);
+        if (newQuantity > maxQuantity) {
+          console.warn(`Quantity ${newQuantity} exceeds maximum ${maxQuantity} for variant ${variantId}. Adjusting to maximum.`);
+          // Ajustar la cantidad al máximo permitido
+          newQuantity = maxQuantity;
+          input.value = maxQuantity;
+          this.updateLimitState(input);
+          // CONTINUAR procesando con la cantidad Max ajustada
+        }
+      }
+
       // Si la cantidad es 0, simplemente eliminamos del carrito
       if (newQuantity === 0) {
         await this.updateCartItem(variantId, 0);
@@ -852,6 +882,8 @@ if (!customElements.get('upng-variant-picker')) {
           },
           bubbles: true
         }));
+
+        this.updateLimitState(input);
 
         // Recuperar estado inicial
         this.updateFromCart();
@@ -963,6 +995,7 @@ if (!customElements.get('upng-variant-picker')) {
         // Actualizar el valor del input solo si es diferente
         if (input.value != newQuantity) {
           input.value = newQuantity;
+          this.updateLimitState(input); // Actualizar estado de Input Limit
         }
         
         // SIEMPRE actualizar el indicador de stock
@@ -1182,6 +1215,9 @@ if (!customElements.get('upng-variant-picker')) {
         input.stepDown();
       }
 
+      // Actualizar estado de Input Limit
+      this.updateLimitState(input);
+
       // Solo disparar el evento change si la cantidad cambió
       if (input.value !== currentQty) {
         input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -1269,6 +1305,8 @@ if (!customElements.get('upng-variant-picker')) {
         const input = row.querySelector('.variant-table__quantity');
         if (input) {
           input.value = 0;
+          // NUEVO: Invocar updateLimitState para reiniciar el estilo
+          this.updateLimitState(input);
         }
       }
     }
@@ -1364,6 +1402,14 @@ if (!customElements.get('upng-variant-picker')) {
         // Actualizar la interfaz
         this.updateQuantityInputs(updatedCart.items);
 
+        // NUEVO: Actualizar estado de límite en todos los inputs que se han puesto a 0
+        this.quantityInputs.forEach(input => {
+          const inputVariantId = input.getAttribute('data-variant-id');
+          if (productVariantIds.includes(parseInt(inputVariantId))) {
+            this.updateLimitState(input);
+          }
+        });
+
         // Refrescar drawer del carrito
         document.dispatchEvent(new CustomEvent('dispatch:cart-drawer:refresh', {
           bubbles: true
@@ -1429,6 +1475,33 @@ if (!customElements.get('upng-variant-picker')) {
         this.variantTable.classList.remove('pointer-events-none');
       }
     }
+
+    /**
+     * Marca o desmarca la clase `limit-reached` en el contenedor .qty-input--combined
+     * @param {HTMLInputElement} input 
+     */
+    updateLimitState(input) {
+      // Si no hay atributo max, salimos sin hacer nada
+      if (!input.hasAttribute('max')) return;
+
+      const max = parseInt(input.max, 10);
+      const value = parseInt(input.value, 10);
+      const wrapper = input.closest('.qty-input--combined');
+      if (!wrapper) return;
+
+      // Remover ambas clases primero
+      wrapper.classList.remove('at-limit', 'over-limit');
+
+      // Aplicar la clase apropiada
+      if (value > max) {
+        wrapper.classList.add('over-limit');        // Excede el máximo
+      } else if (value === max) {
+        wrapper.classList.add('at-limit');          // Está en el tope exacto
+      }
+      // Si value < max, no se agrega ninguna clase (estado normal)
+    }
+
+
 
     /**
      * Obtiene la sección cart-icon-bubble y la actualiza en el encabezado
