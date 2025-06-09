@@ -371,8 +371,8 @@
   left: 50%;
   transform: translate(-50%, -50%) !important;
   min-width: 80vw;
-  min-height: 728px;
-  height: 728px;
+  min-height: 724px;
+  height: 724px;
   max-height: 80vh;
   border-radius: 0 !important;
   overflow-y: hidden;

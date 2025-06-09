@@ -119,24 +119,36 @@ if (!customElements.get('upng-variant-picker')) {
      */
 
       async updateTratamientos() {
-      if (!this.variant) return;
-      
-      const treatmentContainer = this.section.querySelector('.tratamiento-icons-container');
-      if (!treatmentContainer) return;
-      
-      try {
-        // Hacer petición AJAX para obtener los tratamientos
-        const response = await fetch(`${window.location.pathname}?variant=${this.variant.id}&view=upng-tratamientos`);
-        if (!response.ok) throw new Error('Error loading treatment data');
-        
-        const html = await response.text();
-        
-        // Actualizar el contenedor con el HTML recibido
-        treatmentContainer.innerHTML = html;
-      } catch (error) {
-        console.error('Error updating treatment icons:', error);
-      }
+  if (!this.variant) return;
+  
+  // Buscar ambos contenedores
+  const treatmentContainer = this.section.querySelector('.tratamiento-icons-container');
+  const descripcionContainer = document.querySelector('.tratamientos-collapsible');
+  
+  // Si no existe ninguno de los contenedores, salir
+  if (!treatmentContainer && !descripcionContainer) return;
+  
+  try {
+    // Hacer petición AJAX para obtener los tratamientos
+    const response = await fetch(`${window.location.pathname}?variant=${this.variant.id}&view=upng-tratamientos`);
+    if (!response.ok) throw new Error('Error loading treatment data');
+    
+    const html = await response.text();
+    
+    // Actualizar en Ficha producto si lo encuentra
+    if (treatmentContainer) {
+      treatmentContainer.innerHTML = html;
     }
+    
+    // Actualizar en Collapsible si lo encuentra
+    if (descripcionContainer) {
+      descripcionContainer.innerHTML = html;
+    }
+    
+  } catch (error) {
+    console.error('Error updating treatment icons:', error);
+  }
+}
 
     /**
      * Shows/hides variant metafield elements on the page as necessary
