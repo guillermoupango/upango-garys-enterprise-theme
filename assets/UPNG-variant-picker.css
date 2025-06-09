@@ -139,21 +139,24 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .qty-input--combined.at-limit {
-  border: 1px var(--btn-border-width) rgb(var(--low-stock-text-color));;
+  border: var(--btn-border-width) solid rgb(var(--low-stock-text-color));
+  background-color: rgba(var(--low-stock-text-color)/ 0.1);
 }
 
 .qty-input--combined.at-limit .quantity-input {
   color: rgb(var(--low-stock-text-color));
+  background-color: transparent;
 }
 .qty-input--combined.at-limit .btn--plus:after,
 .qty-input--combined.at-limit .btn--plus:before {
-  background-color: rgb(var(--low-stock-text-color));
+  background-color: rgba(var(--input-text-color)/ 0.6);
+  cursor: not-allowed;
 }
 
 
 .qty-input--combined.over-limit {
   background-color: rgb(var(--error-bg-color));
-  border: 1px var(--btn-border-width) rgb(var(--error-text-color));
+  border: var(--btn-border-width) solid rgb(var(--error-text-color));
 }
 
 .qty-input--combined.over-limit .quantity-input {

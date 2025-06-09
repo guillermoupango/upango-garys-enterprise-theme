@@ -83,10 +83,10 @@
               class="qty-input qty-input--combined inline-flex items-center"
 
               {% unless variant.price != 0 %}
-                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+                  style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200)"
               {% endunless %}
               {% if descatalogado and variant.inventory_quantity == 0 %}
-                style="background-color: rgb(239, 239, 239); pointer-events: none"
+                style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200)"
               {% endif %}
             >
               <button
@@ -113,10 +113,10 @@
                 data-variant-title="{{ variant.title }}"
                 id="{{ variant.id }}"
               {% unless variant.price != 0 %}
-                  style="background-color: rgb(239, 239, 239); pointer-events: none"
+                  style="background-color: rgb(239, 239, 239); pointer-events: none; color: rgb(var(--input-text-color))"
               {% endunless %}
               {% if descatalogado and variant.inventory_quantity == 0 %}
-                style="background-color: rgb(239, 239, 239); pointer-events: none"
+                style="background-color: rgb(239, 239, 239); pointer-events: none; color: rgb(var(--input-text-color))"
               {% endif %}
                 aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
               >
