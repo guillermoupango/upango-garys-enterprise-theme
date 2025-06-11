@@ -1067,3 +1067,5 @@
        
        .style-card .style-label{ 
     hyphens: auto; overflow-wrap: break-word; word-break: normal; }
+
+    .section-group .home-hero.bg-white{ background-color: transparent !important;}
