@@ -5665,6 +5665,7 @@ cart-items .disclosure > summary label{
   gap: calc(2 * var(--space-unit));
 }
 cart-items .disclosure > summary input[type=checkbox]{
+  z-index: -1;
   cursor: pointer;
   padding: 1px;
   padding-right: 6px;
