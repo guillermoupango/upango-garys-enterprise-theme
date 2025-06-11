@@ -5658,7 +5658,16 @@ cart-items .disclosure--row{
   border: none;
 }
 cart-items .disclosure > summary{
+  padding: 0;
+}
+cart-items .disclosure > summary label{
   padding: calc(2 * var(--space-unit)) 0;
+  gap: calc(2 * var(--space-unit));
+}
+cart-items .disclosure > summary input[type=checkbox]{
+  cursor: pointer;
+  padding: 1px;
+  padding-right: 6px;
 }
 
 .upng-agente-info-container .upng-agente-info-section a,
