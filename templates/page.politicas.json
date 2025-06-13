@@ -83,7 +83,7 @@
           "settings": {
             "icon": "none",
             "heading": "Certificados y Logos",
-            "text": "<p style=\"font-size: 16px; font-family: Arial, Verdana, Helvetica; text-align: center;\"><strong>ISO 900.1</strong></p>\n\n<p style=\"font-size: 16px; font-family: Arial, Verdana, Helvetica; text-align: center;\"><strong>&nbsp;</strong></p>\n\n<p style=\"font-size: 16px; font-family: Arial, Verdana, Helvetica; text-align: center;\"><strong><img alt=\"9001\" src=\"https://cdn.shopify.com/s/files/1/0641/7229/4300/files/9001.png?v=1740069690\" style=\"font-size: 16px;\" title=\"\" />&nbsp; &nbsp;</strong></p>\n\n<p style=\"font-size: 16px; font-family: Arial, Verdana, Helvetica; text-align: center;\"><strong>&nbsp;</strong></p>\n\n<p style=\"font-size: 16px; font-family: Arial, Verdana, Helvetica; text-align: center;\"><strong>ISO 1400.1</strong></p>\n\n<p style=\"text-align: center;\"><strong><img alt=\"14001\" src=\"https://cdn.shopify.com/s/files/1/0641/7229/4300/files/14001.png?v=1740069690\" style=\"max-width: 900px;\" /></strong></p>"
+            "text": "{{metaobjects.contenido.certificados-y-logos.contenido}}"
           }
         },
         "question_iqFeAY": {
