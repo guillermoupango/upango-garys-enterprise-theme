@@ -91,7 +91,7 @@
           "settings": {
             "icon": "none",
             "heading": "Condiciones generales de contratación",
-            "text": "{{metaobjects.condiciones-generales-de-contratacion.contenido}}"
+            "text": "{{metaobjects.contenido.condiciones-generales-de-contratacion.contenido}}"
           }
         }
       },
