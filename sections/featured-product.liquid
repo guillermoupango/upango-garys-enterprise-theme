@@ -73,11 +73,38 @@
   if bg_color == settings.bg_color or bg_color == 'rgba(0,0,0,0)'
     assign bg_color = false
   endif
+
+  comment
+    Verificar si el cliente tiene permisos para realizar órdenes
+    Asumiendo que el metafield es booleano o string 'true'/'false'
+  endcomment
+  assign allow_order = true
+  if customer and customer.metafields['upng-permission']['allowOrder'] != blank
+    assign allow_order_value = customer.metafields['upng-permission']['allowOrder']
+    if allow_order_value == false or allow_order_value == 'false' or allow_order_value == '0'
+      assign allow_order = false
+    endif
+  endif
 -%}
 
 {%- style -%}
   #{{ section.id }} .media-gallery__main .media-xr-button { display: none; }
   #{{ section.id }} .active .media-xr-button:not([data-shopify-xr-hidden]) { display: block; }
+  
+  .order-disabled .product-info__add-to-cart,
+  .order-disabled .product-info__dynamic-checkout-button {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  .order-disabled-message {
+    background: #fef3cd;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: #92400e;
+  }
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -88,7 +115,7 @@
 
 <div class="section{% if bg_color %} section--padded section--full-width{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
   <div class="container overflow-hidden">
-    <div class="product media-with-text js-product" data-section="{{ section.id }}" style="--media-width: {{ section.settings.media_width }}%">
+    <div class="product media-with-text js-product{% unless allow_order %} order-disabled{% endunless %}" data-section="{{ section.id }}" style="--media-width: {{ section.settings.media_width }}%">
       <div class="product-media mb-4 md:mb-0 product-media--slider media-with-text__media">
         {%- if product != blank -%}
           {%- if featured_media -%}
@@ -118,6 +145,15 @@
       </div>
 
       <div class="product-info media-with-text__text w-full">
+        {%- comment -%}
+          Mostrar mensaje de permisos insuficientes si no se permite ordenar
+        {%- endcomment -%}
+        {%- unless allow_order -%}
+          <div class="order-disabled-message">
+            <strong>Permisos insuficientes:</strong> No tienes autorización para realizar pedidos en este momento. Contacta con el administrador para más información.
+          </div>
+        {%- endunless -%}
+
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -333,7 +369,7 @@
                         endif
 
                         assign enable_dynamic_checkout = false
-                        if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false
+                        if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false and allow_order
                           unless product.template_suffix contains 'preorder'
                             assign enable_dynamic_checkout = true
                           endunless
@@ -363,8 +399,10 @@
                             {%- endif -%}
                           {%- endcapture -%}
 
-                          <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.selected_or_first_available_variant.available == false %} disabled{% endif %}>
-                            {%- if current_variant.available -%}
+                          <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.selected_or_first_available_variant.available == false or allow_order == false %} disabled{% endif %}>
+                            {%- if allow_order == false -%}
+                              {{- 'Sin permisos para ordenar' -}}
+                            {%- elsif current_variant.available -%}
                               {{- add_to_cart_text -}}
                             {%- else -%}
                               {{- 'products.product.sold_out' | t -}}
@@ -373,7 +411,7 @@
                         </div>
                       </div>
 
-                      {%- if enable_dynamic_checkout -%}
+                      {%- if enable_dynamic_checkout and allow_order -%}
                         <div class="product-info__dynamic-checkout-button mt-4">
                           {{ form | payment_button }}
                         </div>
