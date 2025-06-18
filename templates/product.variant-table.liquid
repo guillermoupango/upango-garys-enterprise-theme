@@ -9,7 +9,9 @@
       <th scope="col" class="variant-table__header">Prox. llegada</th>
       <th scope="col" class="variant-table__header">Avísame</th>
       <th scope="col" class="variant-table__header">Precio con DTO.</th>
-      <th scope="col" class="variant-table__header">Cantidad</th>
+      {% if customer.metafields.upng-permission.allowOrder != false %}
+        <th scope="col" class="variant-table__header">Cantidad</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -55,29 +57,49 @@
         <td class="variant-table__cell variant-table__cell--price">
           {% render 'price', product: product, use_variant: true %}
         </td>
-        <td class="variant-table__cell variant-table__cell--quantity">
-          <div class="qty-input qty-input--combined inline-flex items-center">
-            <button type="button" class="qty-input__btn btn btn--minus no-js-hidden" name="minus">
-              <span class="visually-hidden">-</span>
-            </button>
-            <input
-              type="number"
-              class="quantity-input variant-table__quantity"
-              min="0"
-              value="0"
-              data-variant-id="{{ variant.id }}"
-              data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
-              data-variant-title="{{ variant.title }}"
-              {% unless variant.available %}
-                disabled
-              {% endunless %}
-              aria-label="Cantidad para {{ variant.title }}"
+        
+        {% comment %} Solo mostrar controles de cantidad si el cliente puede hacer pedidos {% endcomment %}
+        {% if customer.metafields.upng-permission.allowOrder != false %}
+          <td class="variant-table__cell variant-table__cell--quantity">
+            <div class="qty-input qty-input--combined inline-flex items-center">
+              <button type="button" class="qty-input__btn btn btn--minus no-js-hidden" name="minus">
+                <span class="visually-hidden">-</span>
+              </button>
+              <input
+                type="number"
+                class="quantity-input variant-table__quantity"
+                min="0"
+                value="0"
+                data-variant-id="{{ variant.id }}"
+                data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
+                data-variant-title="{{ variant.title }}"
+                {% unless variant.available %}
+                  disabled
+                {% endunless %}
+                aria-label="Cantidad para {{ variant.title }}"
+              >
+              <button type="button" class="qty-input__btn btn btn--plus no-js-hidden" name="plus">
+                <span class="visually-hidden">+</span>
+              </button>
+            </div>
+            {% comment %} PENDIENTE LOGICA DE ELIMINAR LINEA CARRITO {% endcomment %}
+            <a
+              class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
+              href="#item.url_to_remove"
+              data-index="item.index | plus: 1 "
+              aria-label="{{- 'cart.items.remove' | t -}}"
             >
-            <button type="button" class="qty-input__btn btn btn--plus no-js-hidden" name="plus">
-              <span class="visually-hidden">+</span>
-            </button>
-          </div>
-          {% comment %} PENDIENTE LOGICA DE ELIMINAR LINEA CARRITO {% endcomment %}
+              {% render 'icon-trash' %}
+            </a>
+          </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    
+    {% comment %} PENDIENTE LOGICA TOTALES TABLA - Solo mostrar si el cliente puede hacer pedidos {% endcomment %}
+    {% if customer.metafields.upng-permission.allowOrder != false %}
+      <tr>
+        <td colspan="3">
           <a
             class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
             href="#item.url_to_remove"
@@ -85,26 +107,20 @@
             aria-label="{{- 'cart.items.remove' | t -}}"
           >
             {% render 'icon-trash' %}
+            Borrar Todo
           </a>
         </td>
+        <td colspan="2"><button class="btn btn-lg btn--secondary">Ver Cesta</button></td>
+        <td colspan="2">Subtotal: <b>$$$$</b></td>
+        <td colspan="1">Total Items: <b>29</b></td>
       </tr>
-    {% endfor %}
-    {% comment %} PENDIENTE LOGICA TOTALES TABLA {% endcomment %}
-    <tr>
-      <td colspan="3">
-        <a
-          class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
-          href="#item.url_to_remove"
-          data-index="item.index | plus: 1 "
-          aria-label="{{- 'cart.items.remove' | t -}}"
-        >
-          {% render 'icon-trash' %}
-          Borrar Todo
-        </a>
-      </td>
-      <td colspan="2"><button class="btn btn-lg btn--secondary">Ver Cesta</button></td>
-      <td colspan="2">Subtotal: <b>$$$$</b></td>
-      <td colspan="1">Total Items: <b>29</b></td>
-    </tr>
+    {% else %}
+      {% comment %} Fila alternativa cuando no se permite hacer pedidos {% endcomment %}
+      <tr>
+        <td colspan="7" class="text-center">
+          <p class="text-muted">No tienes permisos para realizar pedidos en este momento.</p>
+        </td>
+      </tr>
+    {% endif %}
   </tbody>
 </table>
