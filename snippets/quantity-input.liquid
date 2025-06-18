@@ -38,8 +38,15 @@
   else
     assign can_increase = true
   endif
+
+  # Verificar permisos del cliente para mostrar/ocultar controles de cantidad
+  assign can_order = true
+  if customer and customer.metafields.upng-permission.allowOrder == false
+    assign can_order = false
+  endif
 -%}
 
+{% if can_order %}
 <quantity-input class="inline-block">
   <label class="label{% if hide_label %} visually-hidden{% endif %}" for="{{ id }}">
     {{- 'products.product.qty' | t -}}
@@ -73,3 +80,5 @@
     </button>
   </div>
 </quantity-input>
+{% else %}
+{% endif %}
