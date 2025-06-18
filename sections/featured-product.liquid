@@ -1,12 +1,4 @@
-{%- comment -%}
-  Verificar si el cliente tiene permisos para hacer pedidos
-{%- endcomment -%}
-{%- liquid
-  assign can_order = true
-  if customer and customer.metafields.upng-permission.allowOrder == false
-    assign can_order = false
-  endif
--%}
+{%- comment -%}theme-check-disable NestedSnippet{%- endcomment -%}
 
 {%- if section.index > 2 -%}
   <link rel="stylesheet" href="{{ 'media-with-text.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -86,16 +78,6 @@
 {%- style -%}
   #{{ section.id }} .media-gallery__main .media-xr-button { display: none; }
   #{{ section.id }} .active .media-xr-button:not([data-shopify-xr-hidden]) { display: block; }
-  
-  {%- comment -%} Ocultar elementos de carrito si no tiene permisos {%- endcomment -%}
-  {%- unless can_order -%}
-    #{{ section.id }} .product-info__add-to-cart,
-    #{{ section.id }} .product-info__dynamic-checkout-button,
-    #{{ section.id }} .quantity-input,
-    #{{ section.id }} .js-product-form {
-      display: none !important;
-    }
-  {%- endunless -%}
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -136,12 +118,6 @@
       </div>
 
       <div class="product-info media-with-text__text w-full">
-        {%- comment -%} Mostrar mensaje si no tiene permisos para hacer pedidos {%- endcomment -%}
-        {%- unless can_order -%}
-          <div class="product-info__block product-info__no-order-permission">
-          </div>
-        {%- endunless -%}
-
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when '@app' -%}
@@ -342,83 +318,80 @@
               {%- endif -%}
 
             {%- when 'buy-buttons' -%}
-              {%- comment -%} Solo mostrar botones de compra si tiene permisos {%- endcomment -%}
-              {%- if can_order -%}
-                <div class="product-info__block" {{ block.shopify_attributes }}>
-                  <product-form>
-                    {%- if product != blank -%}
-                      {% form 'product', product,
-                        class: 'js-product-form js-product-form-main',
-                        id: product_form_id,
-                        novalidate: 'novalidate'
+              <div class="product-info__block" {{ block.shopify_attributes }}>
+                <product-form>
+                  {%- if product != blank -%}
+                    {% form 'product', product,
+                      class: 'js-product-form js-product-form-main',
+                      id: product_form_id,
+                      novalidate: 'novalidate'
+                    -%}
+                      {%- liquid
+                        assign gift_card_recipient_feature_active = false
+                        if block.settings.show_gift_card_recipient and product.gift_card?
+                          assign gift_card_recipient_feature_active = true
+                        endif
+
+                        assign enable_dynamic_checkout = false
+                        if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false
+                          unless product.template_suffix contains 'preorder'
+                            assign enable_dynamic_checkout = true
+                          endunless
+                        endif
                       -%}
-                        {%- liquid
-                          assign gift_card_recipient_feature_active = false
-                          if block.settings.show_gift_card_recipient and product.gift_card?
-                            assign gift_card_recipient_feature_active = true
-                          endif
 
-                          assign enable_dynamic_checkout = false
-                          if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false
-                            unless product.template_suffix contains 'preorder'
-                              assign enable_dynamic_checkout = true
-                            endunless
-                          endif
-                        -%}
+                      {%- if gift_card_recipient_feature_active -%}
+                        {% render 'gift-card-recipient', section: section %}
+                      {%- endif -%}
 
-                        {%- if gift_card_recipient_feature_active -%}
-                          {% render 'gift-card-recipient', section: section %}
+                      <div class="alert mb-8 bg-error-bg text-error-text js-form-error text-start" role="alert" hidden></div>
+
+                      <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
+                      <div class="product-info__add-to-cart flex{% if enable_dynamic_checkout %} qty-input--secondary-btn{% endif %}">
+                        {%- if block.settings.show_qty_selector -%}
+                          {% render 'quantity-input', layout_style: 'combined' %}
+                        {%- else -%}
+                          <input type="hidden" name="quantity" value="1">
                         {%- endif -%}
 
-                        <div class="alert mb-8 bg-error-bg text-error-text js-form-error text-start" role="alert" hidden></div>
-
-                        <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
-                        <div class="product-info__add-to-cart flex{% if enable_dynamic_checkout %} qty-input--secondary-btn{% endif %}">
-                          {%- if block.settings.show_qty_selector -%}
-                            {% render 'quantity-input', layout_style: 'combined' %}
-                          {%- else -%}
-                            <input type="hidden" name="quantity" value="1">
-                          {%- endif -%}
-
-                          <div class="product-info__add-button">
-                            {%- capture add_to_cart_text -%}
-                              {%- if product.template_suffix contains 'preorder' -%}
-                                {{- 'products.product.preorder' | t -}}
-                              {%- else -%}
-                                {{- 'products.product.add_to_cart' | t -}}
-                              {%- endif -%}
-                            {%- endcapture -%}
-
-                            <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.selected_or_first_available_variant.available == false %} disabled{% endif %}>
-                              {%- if current_variant.available -%}
-                                {{- add_to_cart_text -}}
-                              {%- else -%}
-                                {{- 'products.product.sold_out' | t -}}
-                              {%- endif -%}
-                            </button>
-                          </div>
-                        </div>
-
-                        {%- if enable_dynamic_checkout -%}
-                          <div class="product-info__dynamic-checkout-button mt-4">
-                            {{ form | payment_button }}
-                          </div>
-                        {%- endif -%}
-
-                      {%- endform -%}
-                    {%- else -%}
-                      <div class="product-info__add-to-cart flex">
-                        {% render 'quantity-input', layout_style: 'combined' %}
                         <div class="product-info__add-button">
-                          <button class="btn btn--primary w-full" disabled>
-                            {{- 'products.product.add_to_cart' | t -}}
+                          {%- capture add_to_cart_text -%}
+                            {%- if product.template_suffix contains 'preorder' -%}
+                              {{- 'products.product.preorder' | t -}}
+                            {%- else -%}
+                              {{- 'products.product.add_to_cart' | t -}}
+                            {%- endif -%}
+                          {%- endcapture -%}
+
+                          <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.selected_or_first_available_variant.available == false %} disabled{% endif %}>
+                            {%- if current_variant.available -%}
+                              {{- add_to_cart_text -}}
+                            {%- else -%}
+                              {{- 'products.product.sold_out' | t -}}
+                            {%- endif -%}
                           </button>
                         </div>
                       </div>
-                    {%- endif -%}
-                  </product-form>
-                </div>
-              {%- endif -%}
+
+                      {%- if enable_dynamic_checkout -%}
+                        <div class="product-info__dynamic-checkout-button mt-4">
+                          {{ form | payment_button }}
+                        </div>
+                      {%- endif -%}
+
+                    {%- endform -%}
+                  {%- else -%}
+                    <div class="product-info__add-to-cart flex">
+                      {% render 'quantity-input', layout_style: 'combined' %}
+                      <div class="product-info__add-button">
+                        <button class="btn btn--primary w-full" disabled>
+                          {{- 'products.product.add_to_cart' | t -}}
+                        </button>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </product-form>
+              </div>
 
           {%- when 'share' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>
