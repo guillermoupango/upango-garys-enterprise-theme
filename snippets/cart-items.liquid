@@ -52,6 +52,7 @@
       </thead>
       <tbody>
         {%- for item in cart.items -%}
+          {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
           {%- liquid
             if item.variant.compare_at_price > item.variant.price
               assign variant_price_reduced = true
@@ -59,6 +60,7 @@
               assign variant_price_reduced = false
             endif
           -%}
+        {%- endif -%}
           <tr class="cart-item grid gap-x-6" id="cart-item-{{ item.index | plus: 1 }}" data-product-id="{{ item.product_id }}" data-variant-id="{{ item.variant_id }}">
             <td class="cart-item__image">
               <a href="{{ item.url }}" class="block {% if settings.blend_product_images %} image-blend{% endif %}">
