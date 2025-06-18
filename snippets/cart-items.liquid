@@ -44,7 +44,9 @@
       <thead class="visually-hidden">
         <tr>
           <th colspan="2">{{ 'cart.items.product' | t }}</th>
+          {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
           <th>{{ 'cart.items.price' | t }}</th>
+          {%- endif -%}
           <th>{{ 'cart.items.quantity' | t }}</th>
         </tr>
       </thead>
@@ -90,6 +92,7 @@
               {%- endif -%}
 
               <div class="cart-item__info">
+                {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
                 {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
                   <dl class="m-0">
                     <dt class="visually-hidden">
@@ -127,6 +130,7 @@
                       {{ item.unit_price_measurement.reference_unit }}
                     </span>
                   </div>
+                {%- endif -%}
                 {%- endif -%}
 
                 {%- if item.product.template_suffix contains 'preorder' -%}
@@ -208,6 +212,7 @@
               <div class="text-theme-light text-sm mb-2 md:hidden">
                 {{ 'cart.items.total' | t }}
               </div>
+              {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
               {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
                 <dl class="m-0 flex md:block">
                   <dt class="visually-hidden">
@@ -236,6 +241,7 @@
                 <strong class="price__current">
                   {%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}
                 </strong>
+              {%- endif -%}
               {%- endif -%}
             </td>
           </tr>
