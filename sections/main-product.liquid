@@ -1,5 +1,6 @@
 {%- comment -%}theme-check-disable LiquidTag, NestedSnippet, TemplateLength{%- endcomment -%}
 {%- comment -%}Build: bg-info-bg text-info-text{%- endcomment -%}
+
 {{ 'product.css' | asset_url | stylesheet_tag }}
 {{ 'product-page.css' | asset_url | stylesheet_tag }}
 
@@ -52,6 +53,12 @@
   assign media_ratio = section.settings.media_ratio
   assign thumb_ratio = section.settings.thumb_ratio
 
+  # Verificar si el cliente puede hacer pedidos
+  assign allow_order = true
+  if customer and customer.metafields.upng-permission.allowOrder != blank
+    assign allow_order = customer.metafields.upng-permission.allowOrder
+  endif
+
   if media_ratio == 'natural'
     assign media_ratio = 99
     for media in product.media
@@ -87,6 +94,16 @@
       :root { --product-info-width: 400px !important; }
     }
   {%- endif -%}
+
+  /* Estilos para mensaje de restricción */
+  .order-restriction-message {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+  }
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -297,6 +314,10 @@
 
           {%- when 'buy-buttons' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>
+              
+              {%- unless allow_order -%}
+              {%- endunless -%}
+
               <product-form>
                 {%- form 'product', product,
                   class: 'js-product-form js-product-form-main',
@@ -309,7 +330,7 @@
                     endif
 
                     assign enable_dynamic_checkout = false
-                    if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false
+                    if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false and allow_order
                       unless product.template_suffix contains 'preorder'
                         assign enable_dynamic_checkout = true
                       endunless
@@ -324,7 +345,7 @@
 
                   <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
                   <div class="product-info__add-to-cart flex{% if enable_dynamic_checkout %} qty-input--secondary-btn{% endif %}">
-                    {%- if block.settings.show_qty_selector -%}
+                    {%- if block.settings.show_qty_selector and allow_order -%}
                       {% render 'quantity-input', layout_style: "combined" %}
                     {%- else -%}
                       <input type="hidden" name="quantity" value="1">
@@ -339,45 +360,38 @@
                         {%- endif -%}
                       {%- endcapture -%}
 
-                      {% comment %} Reemplazo de Boton de Tema por 'Quick Add' {% endcomment %}
+                      {%- if allow_order -%}
+                        <button type="button"
+                                {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
+                                class="btn btn--primary w-full js-quick-add"
+                                aria-haspopup="dialog"
+                                data-product-url="{{ product.url }}"
+                                data-product-default-variant="{{ product.has_only_default_variant }}"
+                                {% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
+                          <span class="quick-add-btn-icon block pointer-events-none">
+                            <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
+                            {% render 'icon-add-to-cart' %}
+                          </span>
+                          <span class="quick-add-btn-text block pointer-events-none">
+                            {%- if section.settings.select_first_variant == false and product.variants.size > 1 -%}
+                              {{ "products.variant.not_selected" | t }}
+                            {%- elsif product.available -%}
+                              {{- 'products.product.choose_options' | t -}}
+                            {%- else -%}
+                              {{- 'products.product.sold_out' | t -}}
+                            {%- endif -%}
+                          </span>
+                        </button>
+                      {%- endif -%}
 
-                      {% comment %}
-                      <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
-                        {% if section.settings.select_first_variant == false and product.variants.size > 1 -%}
-                          {{ "products.variant.not_selected" | t }}
-                        {%- elsif product.available -%}
-                          {{- add_to_cart_text -}}
-                        {%- else -%}
-                          {{- 'products.product.sold_out' | t -}}
-                        {%- endif -%}
-                      </button>
-                      {% endcomment %}
-
-                    <button type="button"
-                            {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
-                            class="btn btn--primary w-full js-quick-add"
-                            aria-haspopup="dialog"
-                            data-product-url="{{ product.url }}"
-                            data-product-default-variant="{{ product.has_only_default_variant }}"
-                            >
-                      <span class="quick-add-btn-icon block pointer-events-none">
-                        <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
-                        {% render 'icon-add-to-cart' %}
-                      </span>
-                      <span class="quick-add-btn-text block pointer-events-none">
-                        {{- 'products.product.choose_options' | t -}}
-                      </span>
-                    </button>
-
-                    {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
-                    
-                    <a href="{{settings.where_to_buy_page.url }}"
-                      {% if customer.b2b? %} style="display: none" {% endif %}
-                      class="btn btn--tertiary mt-2 w-full">
-                      <span class="quick-add-btn-text block pointer-events-none">
-                        {{- 'custom.customer.where_to_buy' | t -}}
-                      </span>
-                    </a>
+                      {%- comment -%} Botón 'Donde Comprar' - siempre visible para clientes NO b2b {%- endcomment -%}
+                      <a href="{{settings.where_to_buy_page.url }}"
+                        {% if customer.b2b? %} style="display: none" {% endif %}
+                        class="btn btn--tertiary{% if allow_order == false %} mt-0{% else %} mt-2{% endif %} w-full">
+                        <span class="quick-add-btn-text block pointer-events-none">
+                          {{- 'custom.customer.where_to_buy' | t -}}
+                        </span>
+                      </a>
                   
                     </div>
                   </div>
@@ -390,7 +404,7 @@
                 {%- endform -%}
               </product-form>
 
-              {%- if block.settings.show_pickup_availability -%}
+              {%- if block.settings.show_pickup_availability and allow_order -%}
                 {% render 'pickup-availability', current_variant: current_variant %}
               {%- endif -%}
             </div>
@@ -580,7 +594,7 @@
           {%- when 'pop-up' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>
               <modal-opener class="no-js-hidden" data-modal="modal-{{ block.id }}">
-                <button type="button" class="{{ block.settings.link_style }}" aria-haspopup="dialog">
+                <button type="button" class="{{ block.settings.link_style }}" aria-haspopup="dialog" >
                   {{- block.settings.link_text -}}
                 </button>
               </modal-opener>
