@@ -1,87 +1,77 @@
-
 {% layout none %}
 
-{% if customer.b2b? %}
-  {% liquid
-    assign can_order = true
-    if customer and customer.metafields.upng-permission.allowOrder == false
-      assign can_order = false
-    endif
-  %}
+{% assign option1_name = product.options_with_values[0].name %}
+{% assign option2_name = product.options_with_values[1].name %}
 
-  <table class="variant-table">
-    <thead>
-      <tr>
-        <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.color' | t }}</th>
-        <th scope="col" class="variant-table__header visually-hidden">{{ 'custom.variant-table.variant-name' | t }}</th>
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.size' | t }}</th>
-        {% if customer.metafields['upng-permission'].verStock %}
-          <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
-        {% endif %}
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
-        <th scope="col" class="variant-table__header">
-          <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
-        </th>
-        {% if can_order %}
-          <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
-        {% else %}
-        {% endif %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for variant in product.variants %}
+{% comment %} Usando options_with_values para obtener los valores de opciones de manera más confiable {% endcomment %}
+{% assign option1_values = product.options_with_values[0].values %}
+{% assign option2_values = product.options_with_values[1].values %}
 
-        {% liquid
-          # Metacampos de variante para validaciones de Input
+{% liquid
+  assign can_order = true
+  if customer and customer.metafields.upng-permission.allowOrder == false
+    assign can_order = false
+  endif
+%}
 
-          assign descatalogado = variant.metafields.upng.descatalogado.value
-          # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
-          if variant.metafields.upng.descatalogado.value == blank
-           assign descatalogado = false
-          endif
-
-        %}
-
-        <tr class="variant-table__row" data-variant-row="{{ variant.id }}">
-          <td class="variant-table__cell">
-            {% if variant.featured_image %}
-              {{
-                variant
-                | image_url: width: 50
-                | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: variant.title
-              }}
-            {% else %}
-              {{
-                product.featured_image
-                | image_url: width: 50
-                | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: product.title
-              }}
+<table class="variant-table">
+  <thead>
+    <tr class="variant-table__row" style="width: 98%">
+      <th class="variant-table__header" style="width: 100px">{{ option1_name }}</th>
+      {% for option2_value in option2_values %}
+        <th class="variant-table__header w-full">{{ option2_value }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for option1_value in option1_values %}
+      <tr class="variant-table__row">
+        {% comment %} Primera celda con imagen del color {% endcomment %}
+        <td class="variant-table__cell" style="width: 100px">
+          {% assign first_variant_of_color = null %}
+          {% for variant in product.variants %}
+            {% if variant.option1 == option1_value %}
+              {% assign first_variant_of_color = variant %}
+              {% break %}
             {% endif %}
-          </td>
-          <!-- Oculto - logica de mostrar / ocultar filas -->
-          <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
-          <!-- Oculto - logica de mostrar / ocultar filas -->
-          <td class="variant-table__cell variant-table__cell--size">{{ variant.option2 }}</td>
-          {% if customer.metafields['upng-permission'].verStock %}
-            <td class="variant-table__cell variant-table__cell--stock">
-              {% render 'UPNG-stock-indicator', variant: variant, descatalogado: descatalogado %}
-            </td>
+          {% endfor %}
+
+          {% if first_variant_of_color.featured_image != blank %}
+            {{
+              first_variant_of_color.featured_image
+              | image_url: width: 64
+              | image_tag:
+                class: 'variant-table__image',
+                height: null,
+                loading: 'lazy',
+                alt: first_variant_of_color.title
+            }}
+          {% else %}
+            {{
+              product.featured_image
+              | image_url: width: 64
+              | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: product.title
+            }}
           {% endif %}
-          <td class="variant-table__cell variant-table__cell--date">
-            {% render 'UPNG-date-indicator', variant: variant %}
-          </td>
-          <td class="variant-table__cell variant-table__cell--status">
-            {% if variant.available %}
-            {% else %}
-              <button class="variant-table__button" variant-id="{{ variant.id }}">
-                {% render 'icon', icon: 'upng-avisame', height: 24, width: 24, class: 'variant-table__icon' %}
-              </button>
+        </td>
+
+        {% comment %} Celdas para cada combinación de color/talla {% endcomment %}
+        {% for option2_value in option2_values %}
+          {% assign current_variant = null %}
+          {% for variant in product.variants %}
+
+            {% if variant.option1 == option1_value and variant.option2 == option2_value %}
+              {% assign current_variant = variant %}
+              {% break %}
             {% endif %}
-          </td>
-          <td class="variant-table__cell variant-table__cell--price">
-            {% render 'price', product: product, use_variant: true %}
-          </td>
+
+          {% endfor %}
+
+          {% assign descatalogado = current_variant.metafields.upng.descatalogado.value %}
+          {% if current_variant.metafields.upng.descatalogado.value == blank %}
+          {% assign descatalogado = false %}
+          {% endif %}
+
           <td class="variant-table__cell variant-table__cell--quantity">
 
           {% comment %}
@@ -95,21 +85,21 @@
             <div
               class="qty-input qty-input--combined inline-flex items-center"
 
-              {% unless variant.price != 0 %}
-                  style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200)"
+              {% unless current_variant.price != 0 %}
+                  style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200);"
               {% endunless %}
-              {% if descatalogado and variant.inventory_quantity == 0 %}
-                style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200)"
+              {% if descatalogado and current_variant.inventory_quantity == 0 %}
+                style="background-color: rgb(239, 239, 239); border: 1px solid rgb(200, 200, 200);"
               {% endif %}
             >
               <button
                 type="button"
                 class="qty-input__btn btn btn--minus no-js-hidden"
                 name="minus"
-              {% unless variant.price != 0 %}
+              {% unless current_variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and variant.inventory_quantity == 0 %}
+              {% if descatalogado and current_variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
               >
@@ -119,89 +109,81 @@
                 type="number"
                 class="quantity-input variant-table__quantity"
                 min="0"
-                {% if descatalogado %} max="{{ variant.inventory_quantity }}" {% endif %}
+                {% if descatalogado %} max="{{ current_variant.inventory_quantity }}" {% endif %}
                 value="0"
-                data-variant-id="{{ variant.id }}"
-                data-inventory-quantity="{% if variant.inventory_management == 'shopify' %}{{ variant.inventory_quantity }}{% else %}null{% endif %}"
-                data-variant-title="{{ variant.title }}"
-                id="{{ variant.id }}"
-              {% unless variant.price != 0 %}
+                data-variant-id="{{ current_variant.id }}"
+                data-inventory-quantity="{% if current_variant.inventory_management == 'shopify' %}{{ current_variant.inventory_quantity }}{% else %}null{% endif %}"
+                data-variant-title="{{ current_variant.title }}"
+                id="{{ current_variant.id }}"
+              {% unless current_variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none; color: rgb(var(--input-text-color))"
               {% endunless %}
-              {% if descatalogado and variant.inventory_quantity == 0 %}
+              {% if descatalogado and current_variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none; color: rgb(var(--input-text-color))"
               {% endif %}
-                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: variant.title }}"
+                aria-label="{{ 'custom.variant-table.quantity-for' | t: title: current_variant.title }}"
               >
               <button
                 type="button"
                 class="qty-input__btn btn btn--plus no-js-hidden"
                 name="plus"
-              {% unless variant.price != 0 %}
+              {% unless current_variant.price != 0 %}
                   style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endunless %}
-              {% if descatalogado and variant.inventory_quantity == 0 %}
+              {% if descatalogado and current_variant.inventory_quantity == 0 %}
                 style="background-color: rgb(239, 239, 239); pointer-events: none"
               {% endif %}
               >
                 <span class="visually-hidden">+</span>
               </button>
             </div>
-            <div class="variant-table__remove-container hidden">
-              <a
-                class="cart-item__remove btn btn--icon text-current tap-target js-remove-item"
-                href="javascript:void(0);"
-                aria-label="{{- 'cart.items.remove' | t -}}"
-              >
-                {% render 'icon-trash', height: 16, width: 16 %}
-              </a>
-            </div>
           {% else %}
           {% endif %}
+            
+            {% render 'price', product: product, use_variant: true %}
+            {% render 'UPNG-stock-indicator', variant: current_variant, descatalogado: descatalogado %}
           </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-      <tfoot>
-        <tr class="variant-table__last-row">
-          <td colspan="100%">
-            <div class="flex justify-between">
-              <div class="flex justify-start items-center gap-theme">
-                {% if can_order %}
-                  <button
-                    class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
-                    data-index="item.index | plus: 1 "
-                    aria-label="{{- 'cart.items.remove' | t -}}"
-                  >
-                    {% render 'icon-trash' %}
-                    {{ 'custom.variant-table.clear-all' | t }}
-                  </button>
-                  <div class="variant-table__loader is-loading hidden"></div>
-    
-                  <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
-                    class="btn btn--secondary variant-table__view-cart-button js-prod-link">
-                    {{ 'custom.variant-table.view-cart' | t }}
-                  </a>
-                {% else %}
-                {% endif %}
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+      <tr class="variant-table__last-row">
+        <td colspan="100%">
+          <div class="flex justify-between">
+            <div class="flex justify-start items-center gap-theme">
+              {% if can_order %}
+                <button
+                  class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
+                  data-index="item.index | plus: 1 "
+                  aria-label="{{- 'cart.items.remove' | t -}}"
+                >
+                  {% render 'icon-trash' %}
+                  {{ 'custom.variant-table.clear-all' | t }}
+                </button>
+                <div class="variant-table__loader is-loading hidden"></div>
+
+                <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
+                  class="btn btn--secondary variant-table__view-cart-button js-prod-link">
+                  {{ 'custom.variant-table.view-cart' | t }}
+                </a>
+              {% else %}
+              {% endif %}
+            </div>
+            <div class="flex justify-end items-center gap-theme">
+              <div class="upng-price-wrapper--pvd">
+                <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
+                <span class="variant-table__subtotal-value"
+                  ><strong>{{ 0 | money }}</strong></span
+                >
               </div>
-              <div class="flex justify-end items-center gap-theme">
-                <div class="upng-price-wrapper--pvd">
-                  <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
-                  <span class="variant-table__subtotal-value"
-                    ><strong>{{ 0 | money }}</strong></span
-                  >
-                </div>
-                <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
-                  <span class="variant-table__total-items-value"><strong>0</strong></span>
-                  <span class="variant-table__total">{{ 'custom.variant-table.total-items' | t }}</span>
-                </div>
+              <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
+                <span class="variant-table__total-items-value"><strong>0</strong></span>
+                <span class="variant-table__total">{{ 'custom.variant-table.total-items' | t }}</span>
               </div>
             </div>
-          </td>
-        </tr>
-    </tfoot>
-  </table>
-{% else %}
-  <a class="btn btn--secondary w-full mt-8" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
-{% endif %}
+          </div>
+        </td>
+      </tr>
+  </tfoot>
+</table>
