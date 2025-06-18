@@ -31,6 +31,12 @@
   if product_not_for_sale and product.has_only_default_variant
     assign always_open_quickbuy = true
   endif
+  
+  # Verificar si el cliente tiene permiso para realizar pedidos
+  assign customer_can_order = true
+  if customer and customer.metafields.upng-permission.allowOrder == false
+    assign customer_can_order = false
+  endif
 -%}
 
 <div
@@ -70,7 +76,7 @@
 
     {%- render 'price', product: product -%}
 
-    {%- unless disable_quickbuy or settings.enable_quick_add == false -%}
+    {%- unless disable_quickbuy or settings.enable_quick_add == false or customer_can_order == false -%}
       {%- if product.has_only_default_variant and always_open_quickbuy != true -%}
         {%- assign item_form_id = 'related-product' | append: product.id -%}
         <product-form>
@@ -126,6 +132,9 @@
             <a class="btn btn--secondary w-full" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
           {% endif %}
         {%- endif -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- if customer_can_order == false -%}
       {%- endif -%}
     {%- endunless -%}
 
