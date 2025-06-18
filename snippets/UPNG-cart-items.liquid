@@ -108,13 +108,16 @@
                   {{ item.variant.weight | weight_with_unit: item.variant.weight_unit }}
                 </div>
               {%- endif -%}
-              {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
+
               <div class="cart-item__info">
+                {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
                 {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
                   <dl class="m-0">
+
                     <dt class="visually-hidden">
                       {{- 'products.product.price.sale_price' | t -}}
                     </dt>
+                    
                     <dd class="price__current inline m-0 font-bold">
                       {%- render 'price-as-money', price: item.final_price, show_money_with_currency: false -%}
                     </dd>
@@ -156,6 +159,7 @@
                       {{ item.unit_price_measurement.reference_unit }}
                     </span>
                   </div>
+                {%- endif -%}
                 {%- endif -%}
 
                 {%- if item.product.template_suffix contains 'preorder' -%}
@@ -272,7 +276,6 @@
                   </details-disclosure>
                 </div>
               </div>
-              {%- endif -%}
             </td>
 
             <td class="cart-item__qty">
