@@ -25,6 +25,12 @@
   assign current_variant = product.selected_or_first_available_variant
   assign product_images = product.media | where: 'media_type', 'image'
 
+  # NUEVA LÓGICA: Verificar permisos del cliente para hacer pedidos
+  assign allow_order = true
+  if customer and customer.metafields['upng-permission']['allowOrder'] != blank
+    assign allow_order = customer.metafields['upng-permission']['allowOrder']
+  endif
+
   if settings.card_hover_action == 'second_image' and product_images.size > 1
     assign show_hover_image = true
 
@@ -105,22 +111,15 @@
   if product.metafields.theme.highlight == true and show_highlight_product != false
     assign is_highlighted = true
   endif
-
-  # NUEVA LÓGICA: Verificar si el producto permite pedidos
-  assign allow_order = true
-  if product.metafields.upng-permission.allowOrder == false
-    assign allow_order = false
-    assign product_not_for_sale = true
-  endif
 -%}
 
 {%- if product and product != empty -%}
-  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex{% if is_highlighted %} card--highlight-product{% endif %}{% unless allow_order %} card--order-restricted{% endunless %}">
+  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex{% if is_highlighted %} card--highlight-product{% endif %}{% unless allow_order %} card--no-purchase{% endunless %}">
 
     {%- if show_compare -%}
       <div class="card__compare no-js-hidden text-sm">
         <input type="checkbox" class="checkbox checkbox--compare js-compare-checkbox" id="compare-{{ product.id }}"
-               data-product-id="{{ product.id }}" data-product-url="{{ product_url }}" {% unless allow_order %}disabled{% endunless %}>
+               data-product-id="{{ product.id }}" data-product-url="{{ product_url }}">
         <label for="compare-{{ product.id }}">{{ 'products.compare.switch_label' | t }}</label>
       </div>
     {%- endif -%}
@@ -199,6 +198,10 @@
       -%}
 
       {%- unless allow_order -%}
+        <div class="card__permission-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+          <div class="text-white text-center p-4">
+          </div>
+        </div>
       {%- endunless -%}
     </div>
 
@@ -279,7 +282,7 @@
                       <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}" value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"{% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}{% if option.selected_value == value and settings.card_hover_action == 'slideshow' %} checked{% endif %}{% unless allow_order %} disabled{% endunless %}>
                       {%- if is_native_swatch -%}
                         {%- if value.swatch.image -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} disabled{% endunless %}" for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch>
+                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}" for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch>
                             <span class="visually-hidden js-value">{{ value }}</span>
                             {%- if settings.card_swatch_shape == 'natural' -%}
                               <div class="opt-label__native-media media">
@@ -295,7 +298,7 @@
                           </label>
 
                         {%- elsif value.swatch.color -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} disabled{% endunless %}"
+                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}"
                                  data-swatch="{{ value | replace: '"', '' | downcase }}"
                                  for="{{ option_id }}-opt-{{ forloop.index0 }}"
                                  style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;">
@@ -303,7 +306,7 @@
                           </label>
                         {%- endif -%}
                       {%- else -%}
-                        <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}{% unless allow_order %} disabled{% endunless %}" title="{{ value | replace: '"', '`' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}">
+                        <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}" title="{{ value | replace: '"', '' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}">
                           {%- if settings.card_colors_style == 'variant-images' and variant_value.featured_media -%}
                             {%- if settings.card_swatch_shape == "natural" -%}
                               <img loading="lazy" class="bg-theme-bg" src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}" height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
@@ -408,9 +411,6 @@
             {%- endunless -%}
           {%- endif -%}
 
-          {%- unless allow_order -%}
-          {%- endunless -%}
-
           {%- if settings.card_price_bottom -%}
             <div class="flex grow items-end">
               {%- render 'price', product: product, class: "price--bottom" -%}
@@ -446,7 +446,7 @@
                         data-add-to-cart-text="{{- button_text | escape -}}"
                         name="add"
                         aria-haspopup="dialog"
-                        {%- if current_variant.available == false or allow_order == false %}disabled{% endif %}>
+                        {%- if current_variant.available == false %}disabled{% endif %}>
                   <span class="quick-add-btn-icon">
                     <span class="visually-hidden">{{- button_text -}}</span>
                     {% render 'icon-add-to-cart' %}
@@ -468,8 +468,7 @@
                         aria-haspopup="dialog"
                         data-product-url="{{ product_url }}"
                         data-product-default-variant="{{ product.has_only_default_variant }}"
-                        {% if selected_color %}data-selected-color="{{ selected_color }}"{% endif %}
-                        {% unless allow_order %}disabled{% endunless %}>
+                        {% if selected_color %}data-selected-color="{{ selected_color }}"{% endif %}>
                   <span class="quick-add-btn-icon block pointer-events-none">
                     <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
                     {% render 'icon-add-to-cart' %}
@@ -488,8 +487,8 @@
           {%- endif -%}
         </div>
       {%- elsif settings.enable_quick_add and disable_quickbuy != true and allow_order == false -%}
-        <div class="card__quick-add">
-          <a href="{{ product_url }}" class="btn btn--secondary quick-add-view-btn">
+        <div class="card__no-permission text-center py-4">
+          <a href="{{ product_url }}" class="btn btn--secondary mt-2">
             {{- 'products.product.view_details' | t -}}
           </a>
         </div>
