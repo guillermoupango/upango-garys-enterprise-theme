@@ -1,14 +1,6 @@
-
 {% layout none %}
 
 {% if customer.b2b? %}
-  {% liquid
-    assign can_order = true
-    if customer and customer.metafields.upng-permission.allowOrder == false
-      assign can_order = false
-    endif
-  %}
-
   <table class="variant-table">
     <thead>
       <tr>
@@ -23,10 +15,7 @@
         <th scope="col" class="variant-table__header">
           <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
         </th>
-        {% if can_order %}
-          <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
-        {% else %}
-        {% endif %}
+        <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
       </tr>
     </thead>
     <tbody>
@@ -88,10 +77,8 @@
               Deshabilitar input en caso:
                 - Si el Precio es igual a $0
                 - Si está descatalogado y el Stock disponible es 0
-                - Si el cliente no tiene permisos para ordenar
           {% endcomment %}
 
-          {% if can_order %}
             <div
               class="qty-input qty-input--combined inline-flex items-center"
 
@@ -156,8 +143,6 @@
                 {% render 'icon-trash', height: 16, width: 16 %}
               </a>
             </div>
-          {% else %}
-          {% endif %}
           </td>
         </tr>
       {% endfor %}
@@ -167,24 +152,20 @@
           <td colspan="100%">
             <div class="flex justify-between">
               <div class="flex justify-start items-center gap-theme">
-                {% if can_order %}
-                  <button
-                    class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
-                    data-index="item.index | plus: 1 "
-                    aria-label="{{- 'cart.items.remove' | t -}}"
-                  >
-                    {% render 'icon-trash' %}
-                    {{ 'custom.variant-table.clear-all' | t }}
-                  </button>
-                  <div class="variant-table__loader is-loading hidden"></div>
-    
-                  <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
-                    class="btn btn--secondary variant-table__view-cart-button js-prod-link">
-                    {{ 'custom.variant-table.view-cart' | t }}
-                  </a>
-                {% else %}
-                {% endif %}
-              </div>
+                <button
+                  class="cart-item__remove btn btn--sm btn--icon text-current tap-target js-remove-item text-error-text variant-table__clear-button"
+                  data-index="item.index | plus: 1 "
+                  aria-label="{{- 'cart.items.remove' | t -}}"
+                >
+                  {% render 'icon-trash' %}
+                  {{ 'custom.variant-table.clear-all' | t }}
+                </button>
+                <div class="variant-table__loader is-loading hidden"></div>
+  
+              <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
+                class="btn btn--secondary variant-table__view-cart-button js-prod-link">
+                {{ 'custom.variant-table.view-cart' | t }}
+              </a>              </div>
               <div class="flex justify-end items-center gap-theme">
                 <div class="upng-price-wrapper--pvd">
                   <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
