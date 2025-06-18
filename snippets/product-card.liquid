@@ -25,12 +25,6 @@
   assign current_variant = product.selected_or_first_available_variant
   assign product_images = product.media | where: 'media_type', 'image'
 
-  # NUEVA LÓGICA: Verificar permisos del cliente para hacer pedidos
-  assign allow_order = true
-  if customer and customer.metafields['upng-permission']['allowOrder'] != blank
-    assign allow_order = customer.metafields['upng-permission']['allowOrder']
-  endif
-
   if settings.card_hover_action == 'second_image' and product_images.size > 1
     assign show_hover_image = true
 
@@ -114,7 +108,7 @@
 -%}
 
 {%- if product and product != empty -%}
-  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex{% if is_highlighted %} card--highlight-product{% endif %}{% unless allow_order %} card--no-purchase{% endunless %}">
+  <product-card class="card card--product{{ card_class }} h-full{% if settings.card_contain %} card--product-contained{% endif %}{% unless settings.show_dividers %} card--no-lines{% endunless %}{% if show_compare %} card--product-compare{% endif %} relative flex{% if is_highlighted %} card--highlight-product{% endif %}">
 
     {%- if show_compare -%}
       <div class="card__compare no-js-hidden text-sm">
@@ -196,13 +190,6 @@
           render 'product-label', product: product, position: settings.product_label_card_position, is_product_card: true, limit: 2
         endif
       -%}
-
-      {%- unless allow_order -%}
-        <div class="card__permission-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
-          <div class="text-white text-center p-4">
-          </div>
-        </div>
-      {%- endunless -%}
     </div>
 
     <div class="card__info-container flex flex-col flex-auto relative">
@@ -279,10 +266,10 @@
                           assign selected_color = value
                         endif
                       -%}
-                      <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}" value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"{% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}{% if option.selected_value == value and settings.card_hover_action == 'slideshow' %} checked{% endif %}{% unless allow_order %} disabled{% endunless %}>
+                      <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}" value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"{% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}{% if option.selected_value == value and settings.card_hover_action == 'slideshow' %} checked{% endif %}>
                       {%- if is_native_swatch -%}
                         {%- if value.swatch.image -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}" for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch>
+                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch>
                             <span class="visually-hidden js-value">{{ value }}</span>
                             {%- if settings.card_swatch_shape == 'natural' -%}
                               <div class="opt-label__native-media media">
@@ -298,7 +285,7 @@
                           </label>
 
                         {%- elsif value.swatch.color -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}"
+                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
                                  data-swatch="{{ value | replace: '"', '' | downcase }}"
                                  for="{{ option_id }}-opt-{{ forloop.index0 }}"
                                  style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;">
@@ -306,7 +293,7 @@
                           </label>
                         {%- endif -%}
                       {%- else -%}
-                        <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}{% unless allow_order %} opacity-50 pointer-events-none{% endunless %}" title="{{ value | replace: '"', '' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}">
+                        <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}" title="{{ value | replace: '"', '`' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}">
                           {%- if settings.card_colors_style == 'variant-images' and variant_value.featured_media -%}
                             {%- if settings.card_swatch_shape == "natural" -%}
                               <img loading="lazy" class="bg-theme-bg" src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}" height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
@@ -419,7 +406,7 @@
         </div>
       </div>
 
-      {%- if settings.enable_quick_add and disable_quickbuy != true and allow_order -%}
+      {%- if settings.enable_quick_add and disable_quickbuy != true -%}
         <div class="card__quick-add
           {% if settings.card_atc_mobile == "text_button_bottom" %}mob:card__quick-add--below{% endif %}
           {% if settings.card_atc_mobile == "icon" %}mob:card__quick-add--icon{% endif %}
@@ -485,12 +472,6 @@
                   <a class="btn btn--secondary w-full" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
             {% endif %}
           {%- endif -%}
-        </div>
-      {%- elsif settings.enable_quick_add and disable_quickbuy != true and allow_order == false -%}
-        <div class="card__no-permission text-center py-4">
-          <a href="{{ product_url }}" class="btn btn--secondary mt-2">
-            {{- 'products.product.view_details' | t -}}
-          </a>
         </div>
       {%- endif -%}
     </div>
