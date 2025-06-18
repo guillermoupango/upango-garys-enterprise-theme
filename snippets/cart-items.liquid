@@ -244,9 +244,11 @@
     </table>
   {%- endif -%}
 
+  {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
   <p class="visually-hidden" id="cart-live-region-text" role="status" aria-live="polite">
     {{ 'cart.summary.subtotal' | t }}: {%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}
   </p>
+  {%- endif -%}
   <p class="visually-hidden" id="cart-line-item-status" role="status" aria-live="polite" aria-hidden="true">
     {{- 'accessibility.loading' | t -}}
   </p>

@@ -241,6 +241,7 @@
         {%- endfor -%}
         </tbody>
         <tfoot>
+        {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
         <tr>
           <td colspan="2"></td>
           <td colspan="2">{{ 'customer.order.subtotal' | t }}:</td>
@@ -248,7 +249,7 @@
             {{ order.line_items_subtotal_price | money }}
           </td>
         </tr>
-
+        {%- endif -%}
         {%- if order.cart_level_discount_applications != blank -%}
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>

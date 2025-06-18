@@ -37,6 +37,12 @@
   assign breakpoint_md = 769
   assign breakpoint_lg = 1024
 
+  # NUEVA VARIABLE: Verificar permisos de pedidos del cliente
+  assign allow_order = true
+  if customer and customer.metafields.upng-permission.allowOrder == false
+    assign allow_order = false
+  endif
+
   assign current_variant = product.selected_or_first_available_variant
   assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
 
@@ -87,6 +93,13 @@
       :root { --product-info-width: 400px !important; }
     }
   {%- endif -%}
+
+  /* NUEVO CSS: Ocultar elementos del carrito cuando no se permite ordenar */
+  {%- unless allow_order -%}
+    .cart-restricted {
+      display: none !important;
+    }
+  {%- endunless -%}
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -140,9 +153,7 @@
             </div>
 
           {%- when 'upng-product-details-bar' -%}
-
             {% comment %} PENDIENTE: DEFINIR METODO Y CONEXION DE METACAMPO / Ref o String a Metaobjeto {% endcomment %}
-             
             <div class="product-info__product-bar flex gap-3 justify-between">
             {% render 'upng-product-bar-info' %}
             </div>
@@ -296,7 +307,7 @@
             {%- endif -%}
 
           {%- when 'buy-buttons' -%}
-            <div class="product-info__block" {{ block.shopify_attributes }}>
+            <div class="product-info__block{% unless allow_order %} cart-restricted{% endunless %}" {{ block.shopify_attributes }}>
               <product-form>
                 {%- form 'product', product,
                   class: 'js-product-form js-product-form-main',
@@ -325,7 +336,10 @@
                   <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
                   <div class="product-info__add-to-cart flex{% if enable_dynamic_checkout %} qty-input--secondary-btn{% endif %}">
                     {%- if block.settings.show_qty_selector -%}
-                      {% render 'quantity-input', layout_style: "combined" %}
+                      {% comment %} MODIFICADO: Agregar clase para ocultar selector de cantidad {% endcomment %}
+                      <div class="{% unless allow_order %}cart-restricted{% endunless %}">
+                        {% render 'quantity-input', layout_style: "combined" %}
+                      </div>
                     {%- else -%}
                       <input type="hidden" name="quantity" value="1">
                     {%- endif -%}
@@ -340,49 +354,38 @@
                       {%- endcapture -%}
 
                       {% comment %} Reemplazo de Boton de Tema por 'Quick Add' {% endcomment %}
+                      {% comment %} MODIFICADO: Agregar condición para ocultar botón de Quick Add {% endcomment %}
+                      {%- if allow_order -%}
+                        <button type="button"
+                                {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
+                                class="btn btn--primary w-full js-quick-add"
+                                aria-haspopup="dialog"
+                                data-product-url="{{ product.url }}"
+                                data-product-default-variant="{{ product.has_only_default_variant }}"
+                                >
+                          <span class="quick-add-btn-icon block pointer-events-none">
+                            <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
+                            {% render 'icon-add-to-cart' %}
+                          </span>
+                          <span class="quick-add-btn-text block pointer-events-none">
+                            {{- 'products.product.choose_options' | t -}}
+                          </span>
+                        </button>
+                      {%- endif -%}
 
-                      {% comment %}
-                      <button type="submit" data-add-to-cart-text="{{ add_to_cart_text | escape }}" class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full" name="add"{% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
-                        {% if section.settings.select_first_variant == false and product.variants.size > 1 -%}
-                          {{ "products.variant.not_selected" | t }}
-                        {%- elsif product.available -%}
-                          {{- add_to_cart_text -}}
-                        {%- else -%}
-                          {{- 'products.product.sold_out' | t -}}
-                        {%- endif -%}
-                      </button>
-                      {% endcomment %}
-
-                    <button type="button"
-                            {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
-                            class="btn btn--primary w-full js-quick-add"
-                            aria-haspopup="dialog"
-                            data-product-url="{{ product.url }}"
-                            data-product-default-variant="{{ product.has_only_default_variant }}"
-                            >
-                      <span class="quick-add-btn-icon block pointer-events-none">
-                        <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
-                        {% render 'icon-add-to-cart' %}
-                      </span>
-                      <span class="quick-add-btn-text block pointer-events-none">
-                        {{- 'products.product.choose_options' | t -}}
-                      </span>
-                    </button>
-
-                    {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
-                    
-                    <a href="{{settings.where_to_buy_page.url }}"
-                      {% if customer.b2b? %} style="display: none" {% endif %}
-                      class="btn btn--tertiary mt-2 w-full">
-                      <span class="quick-add-btn-text block pointer-events-none">
-                        {{- 'custom.customer.where_to_buy' | t -}}
-                      </span>
-                    </a>
+                      {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
+                      <a href="{{settings.where_to_buy_page.url }}"
+                        {% if customer.b2b? %} style="display: none" {% endif %}
+                        class="btn btn--tertiary mt-2 w-full">
+                        <span class="quick-add-btn-text block pointer-events-none">
+                          {{- 'custom.customer.where_to_buy' | t -}}
+                        </span>
+                      </a>
                   
                     </div>
                   </div>
 
-                  {%- if enable_dynamic_checkout -%}
+                  {%- if enable_dynamic_checkout and allow_order -%}
                     <div class="product-info__dynamic-checkout-button mt-4">
                       {{ form | payment_button }}
                     </div>
@@ -394,6 +397,12 @@
                 {% render 'pickup-availability', current_variant: current_variant %}
               {%- endif -%}
             </div>
+
+            {% comment %} NUEVO: Mensaje alternativo cuando no se permite ordenar {% endcomment %}
+            {%- unless allow_order -%}
+              <div class="product-info__block">
+              </div>
+            {%- endunless -%}
 
           {%- when 'complementary' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>

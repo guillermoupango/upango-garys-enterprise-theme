@@ -105,6 +105,11 @@
   if product.metafields.theme.highlight == true and show_highlight_product != false
     assign is_highlighted = true
   endif
+
+  assign allow_order = true
+  if customer.metafields.upng-permission.allowOrder == false
+    assign allow_order = false
+  endif
 -%}
 
 {%- if product and product != empty -%}
@@ -406,7 +411,7 @@
         </div>
       </div>
 
-      {%- if settings.enable_quick_add and disable_quickbuy != true -%}
+      {%- if settings.enable_quick_add and disable_quickbuy != true and allow_order -%}
         <div class="card__quick-add
           {% if settings.card_atc_mobile == "text_button_bottom" %}mob:card__quick-add--below{% endif %}
           {% if settings.card_atc_mobile == "icon" %}mob:card__quick-add--icon{% endif %}
