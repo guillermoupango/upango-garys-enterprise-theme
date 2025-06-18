@@ -1,6 +1,5 @@
 {%- comment -%}theme-check-disable LiquidTag, NestedSnippet, TemplateLength{%- endcomment -%}
 {%- comment -%}Build: bg-info-bg text-info-text{%- endcomment -%}
-
 {{ 'product.css' | asset_url | stylesheet_tag }}
 {{ 'product-page.css' | asset_url | stylesheet_tag }}
 
@@ -38,6 +37,12 @@
   assign breakpoint_md = 769
   assign breakpoint_lg = 1024
 
+  # NUEVA VARIABLE: Verificar permisos de pedidos del cliente
+  assign allow_order = true
+  if customer and customer.metafields.upng-permission.allowOrder == false
+    assign allow_order = false
+  endif
+
   assign current_variant = product.selected_or_first_available_variant
   assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
 
@@ -52,12 +57,6 @@
   assign first_3d_model = product.media | where: 'media_type', 'model' | first
   assign media_ratio = section.settings.media_ratio
   assign thumb_ratio = section.settings.thumb_ratio
-
-  # Verificar si el cliente puede hacer pedidos
-  assign allow_order = true
-  if customer and customer.metafields.upng-permission.allowOrder != blank
-    assign allow_order = customer.metafields.upng-permission.allowOrder
-  endif
 
   if media_ratio == 'natural'
     assign media_ratio = 99
@@ -95,15 +94,12 @@
     }
   {%- endif -%}
 
-  /* Estilos para mensaje de restricción */
-  .order-restriction-message {
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #b91c1c;
-    padding: 1rem;
-    border-radius: 0.375rem;
-    margin-bottom: 1rem;
-  }
+  /* NUEVO CSS: Ocultar elementos del carrito cuando no se permite ordenar */
+  {%- unless allow_order -%}
+    .cart-restricted {
+      display: none !important;
+    }
+  {%- endunless -%}
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -157,9 +153,7 @@
             </div>
 
           {%- when 'upng-product-details-bar' -%}
-
             {% comment %} PENDIENTE: DEFINIR METODO Y CONEXION DE METACAMPO / Ref o String a Metaobjeto {% endcomment %}
-             
             <div class="product-info__product-bar flex gap-3 justify-between">
             {% render 'upng-product-bar-info' %}
             </div>
@@ -313,11 +307,7 @@
             {%- endif -%}
 
           {%- when 'buy-buttons' -%}
-            <div class="product-info__block" {{ block.shopify_attributes }}>
-              
-              {%- unless allow_order -%}
-              {%- endunless -%}
-
+            <div class="product-info__block{% unless allow_order %} cart-restricted{% endunless %}" {{ block.shopify_attributes }}>
               <product-form>
                 {%- form 'product', product,
                   class: 'js-product-form js-product-form-main',
@@ -330,7 +320,7 @@
                     endif
 
                     assign enable_dynamic_checkout = false
-                    if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false and allow_order
+                    if block.settings.enable_dynamic_checkout and product.selling_plan_groups == empty and gift_card_recipient_feature_active == false
                       unless product.template_suffix contains 'preorder'
                         assign enable_dynamic_checkout = true
                       endunless
@@ -345,8 +335,11 @@
 
                   <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
                   <div class="product-info__add-to-cart flex{% if enable_dynamic_checkout %} qty-input--secondary-btn{% endif %}">
-                    {%- if block.settings.show_qty_selector and allow_order -%}
-                      {% render 'quantity-input', layout_style: "combined" %}
+                    {%- if block.settings.show_qty_selector -%}
+                      {% comment %} MODIFICADO: Agregar clase para ocultar selector de cantidad {% endcomment %}
+                      <div class="{% unless allow_order %}cart-restricted{% endunless %}">
+                        {% render 'quantity-input', layout_style: "combined" %}
+                      </div>
                     {%- else -%}
                       <input type="hidden" name="quantity" value="1">
                     {%- endif -%}
@@ -360,6 +353,8 @@
                         {%- endif -%}
                       {%- endcapture -%}
 
+                      {% comment %} Reemplazo de Boton de Tema por 'Quick Add' {% endcomment %}
+                      {% comment %} MODIFICADO: Agregar condición para ocultar botón de Quick Add {% endcomment %}
                       {%- if allow_order -%}
                         <button type="button"
                                 {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
@@ -367,27 +362,21 @@
                                 aria-haspopup="dialog"
                                 data-product-url="{{ product.url }}"
                                 data-product-default-variant="{{ product.has_only_default_variant }}"
-                                {% if product.available == false or section.settings.select_first_variant == false and product.variants.size > 1 %} disabled{% endif %}>
+                                >
                           <span class="quick-add-btn-icon block pointer-events-none">
                             <span class="visually-hidden">{{- 'products.product.choose_options' | t -}}</span>
                             {% render 'icon-add-to-cart' %}
                           </span>
                           <span class="quick-add-btn-text block pointer-events-none">
-                            {%- if section.settings.select_first_variant == false and product.variants.size > 1 -%}
-                              {{ "products.variant.not_selected" | t }}
-                            {%- elsif product.available -%}
-                              {{- 'products.product.choose_options' | t -}}
-                            {%- else -%}
-                              {{- 'products.product.sold_out' | t -}}
-                            {%- endif -%}
+                            {{- 'products.product.choose_options' | t -}}
                           </span>
                         </button>
                       {%- endif -%}
 
-                      {%- comment -%} Botón 'Donde Comprar' - siempre visible para clientes NO b2b {%- endcomment -%}
+                      {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
                       <a href="{{settings.where_to_buy_page.url }}"
                         {% if customer.b2b? %} style="display: none" {% endif %}
-                        class="btn btn--tertiary{% if allow_order == false %} mt-0{% else %} mt-2{% endif %} w-full">
+                        class="btn btn--tertiary mt-2 w-full">
                         <span class="quick-add-btn-text block pointer-events-none">
                           {{- 'custom.customer.where_to_buy' | t -}}
                         </span>
@@ -396,7 +385,7 @@
                     </div>
                   </div>
 
-                  {%- if enable_dynamic_checkout -%}
+                  {%- if enable_dynamic_checkout and allow_order -%}
                     <div class="product-info__dynamic-checkout-button mt-4">
                       {{ form | payment_button }}
                     </div>
@@ -404,10 +393,16 @@
                 {%- endform -%}
               </product-form>
 
-              {%- if block.settings.show_pickup_availability and allow_order -%}
+              {%- if block.settings.show_pickup_availability -%}
                 {% render 'pickup-availability', current_variant: current_variant %}
               {%- endif -%}
             </div>
+
+            {% comment %} NUEVO: Mensaje alternativo cuando no se permite ordenar {% endcomment %}
+            {%- unless allow_order -%}
+              <div class="product-info__block">
+              </div>
+            {%- endunless -%}
 
           {%- when 'complementary' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>
@@ -594,7 +589,7 @@
           {%- when 'pop-up' -%}
             <div class="product-info__block" {{ block.shopify_attributes }}>
               <modal-opener class="no-js-hidden" data-modal="modal-{{ block.id }}">
-                <button type="button" class="{{ block.settings.link_style }}" aria-haspopup="dialog" >
+                <button type="button" class="{{ block.settings.link_style }}" aria-haspopup="dialog">
                   {{- block.settings.link_text -}}
                 </button>
               </modal-opener>
