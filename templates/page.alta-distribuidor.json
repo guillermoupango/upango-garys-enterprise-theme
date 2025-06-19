@@ -95,7 +95,7 @@
         "text_EcCcXh": {
           "type": "text",
           "settings": {
-            "text": "<p>Utilizaremos sus datos para gestionar la cuenta de usuario. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"https://uniformesgarys.com/informacion/politica-de-privacidad\" target=\"_blank\">política de privacidad</a>.<br/><br/></p>",
+            "text": "<p>Utilizaremos sus datos para gestionar la cuenta de usuario. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"/policies/privacy-policy\">política de privacidad</a>.<br/><br/></p>",
             "enlarge_text": false
           }
         },
