@@ -43,7 +43,7 @@
         "columns_chpK8x": {
           "type": "columns",
           "settings": {
-            "title": "Productos,Products",
+            "title": "Productos,Products,Prodotti,Produits,Produtos",
             "collection_images": "none",
             "collection_use_product_image": false,
             "collection_circle_image": false,
