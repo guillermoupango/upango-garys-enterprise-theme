@@ -96,7 +96,7 @@
           "type": "text",
           "settings": {
             "text": "<p>Utilizaremos sus datos para gestionar la cuenta de usuario. Para más información sobre el tratamiento y sus derechos, consulte la <a href=\"https://uniformesgarys.com/informacion/politica-de-privacidad\" target=\"_blank\">política de privacidad</a>.<br/><br/></p>",
-            "enlarge_text": true
+            "enlarge_text": false
           }
         },
         "button_6aN3tV": {
