@@ -3,9 +3,12 @@
 {%- endcomment -%}
 {%- liquid
   assign can_order = true
-  if customer and customer.metafields.upng-permission.allowOrder == false
+  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+    assign can_order = true
+  else
     assign can_order = false
   endif
+    
 -%}
 
 {%- if section.index > 2 -%}

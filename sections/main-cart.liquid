@@ -143,7 +143,7 @@
               {%- endfor -%}
             </ul>
           {%- endif -%}
-          {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
+          {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
           <div class="flex justify-between items-center mt-6">
             <h3 class="mb-0 h6">{{ 'cart.summary.subtotal' | t }}:</h3>
             <p class="mb-0 h6">

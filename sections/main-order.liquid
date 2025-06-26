@@ -128,7 +128,7 @@
                   {%- endif -%}
 
                   {%- if line_item.unit_price_measurement -%}
-                            {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
+                            {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
                     <dt>
                       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
                     </dt>
@@ -243,7 +243,7 @@
         {%- endfor -%}
         </tbody>
         <tfoot>
-        {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
+        {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
         <tr>
           <td colspan="2"></td>
           <td colspan="2">{{ 'customer.order.subtotal' | t }}:</td>

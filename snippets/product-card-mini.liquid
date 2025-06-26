@@ -34,7 +34,9 @@
 
   # Verificar si el cliente tiene permiso para hacer pedidos
   assign allow_order = true
-  if customer.metafields.upng-permission.allowOrder == false
+  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+    assign allow_order = true
+  else
     assign allow_order = false
   endif
 -%}

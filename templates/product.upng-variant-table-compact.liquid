@@ -7,12 +7,15 @@
 {% assign option1_values = product.options_with_values[0].values %}
 {% assign option2_values = product.options_with_values[1].values %}
 
-{% liquid
+{%- liquid
   assign can_order = true
-  if customer and customer.metafields.upng-permission.allowOrder == false
+  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+    assign can_order = true
+  else
     assign can_order = false
   endif
-%}
+    
+-%}
 
 <table class="variant-table">
   <thead>
@@ -171,7 +174,7 @@
               {% endif %}
             </div>
             <div class="flex justify-end items-center gap-theme">
-              {% if customer.b2b? and customer.metafields.upng-permission.verPrecios == true %}
+              {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
               <div class="upng-price-wrapper--pvd">
                 <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
                 <span class="variant-table__subtotal-value"

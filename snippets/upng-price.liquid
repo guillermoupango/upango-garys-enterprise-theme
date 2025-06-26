@@ -20,7 +20,7 @@
   assign compare_at_price = variant.compare_at_price
   assign price = variant.price | default: 1999
 -%}
-{% if customer.metafields['upng-permission'].verPrecios %}
+{% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
   <div
   class="
     price{%- if compare_at_price > price %} price--on-sale{% endif -%}

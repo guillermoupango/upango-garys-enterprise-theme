@@ -38,10 +38,14 @@
   assign breakpoint_lg = 1024
 
   # NUEVA VARIABLE: Verificar permisos de pedidos del cliente
+
   assign allow_order = true
-  if customer and customer.metafields.upng-permission.allowOrder == false
+  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+    assign allow_order = true
+  else
     assign allow_order = false
   endif
+
 
   assign current_variant = product.selected_or_first_available_variant
   assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
