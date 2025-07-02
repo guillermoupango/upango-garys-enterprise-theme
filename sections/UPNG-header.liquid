@@ -332,6 +332,25 @@
 
     {%- liquid
       assign menu_to_use = section.settings.menu
+
+      #Comprobamos si hay un menu personalizado para el cliente y en ese caso reemplazamos el menu principal por ese
+      if customer and customer.current_company.metafields.upng.menu_cliente != blank
+        assign custom_menu_handle = customer.current_company.metafields.upng.menu_cliente | strip
+        assign custom_menu = linklists[custom_menu_handle]
+        if custom_menu != blank
+          assign menu_to_use = custom_menu
+        else
+          assign custom_menu_handle_downcase = custom_menu_handle | downcase
+          for linklist in linklists
+            assign current_handle_downcase = linklist.handle | downcase
+            if current_handle_downcase == custom_menu_handle_downcase
+              assign menu_to_use = linklist
+              break
+            endif
+          endfor
+        endif
+      endif
+      
       assign sidebar_menu_to_use = section.settings.sidebar_menu
     -%}
 
@@ -1064,25 +1083,6 @@
         <div class="sidebar-menu__content">
           <nav aria-label="{{ 'accessibility.sidebar_navigation' | t }}">
             <ul class="sidebar-nav">
-              {%- liquid
-                if customer and customer.current_company.metafields.upng.menu_cliente != blank
-                  assign custom_menu_handle = customer.current_company.metafields.upng.menu_cliente | strip
-                  assign custom_menu = linklists[custom_menu_handle]
-                  if custom_menu != blank
-                    assign sidebar_menu_to_use = custom_menu
-                  else
-                    assign custom_menu_handle_downcase = custom_menu_handle | downcase
-                    for linklist in linklists
-                      assign current_handle_downcase = linklist.handle | downcase
-                      if current_handle_downcase == custom_menu_handle_downcase
-                        assign sidebar_menu_to_use = linklist
-                        break
-                      endif
-                    endfor
-                  endif
-                endif
-              -%}
-
               {%- for link in sidebar_menu_to_use.links -%}
                 {%- assign link_title_downcase = link.title | downcase -%}
                 <li>
