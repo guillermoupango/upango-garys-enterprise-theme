@@ -52,7 +52,7 @@
                 | image_url: width: 50
                 | image_tag: class: 'variant-table__image', height: null, loading: 'lazy', alt: variant.title
               }}
-            {% else %}
+            {% elsif product.featured_image %}
               {{
                 product.featured_image
                 | image_url: width: 50
