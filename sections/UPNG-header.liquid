@@ -332,7 +332,26 @@
 
     {%- liquid
       assign menu_to_use = section.settings.menu
+      assign sidebar_menu_to_use = section.settings.sidebar_menu
     -%}
+
+    {%- if sidebar_menu_to_use != blank -%}
+    {% comment %} BOTON MENU HAMBURGUESA - Mobile {% endcomment %}
+    <div class="sidebar-menu-trigger">
+      <button
+        type="button"
+        class="sidebar-menu-trigger__button"
+        aria-controls="sidebar-menu"
+        aria-expanded="false"
+        aria-label="{{ 'general.icon_labels.menu' | t }}"
+      >
+        <span class="sidebar-menu-trigger__icon" aria-hidden="true">
+          {% render 'icon', icon: 'upng-hamburger', height: 28, width: 28 %}
+        </span>
+        <span class="visually-hidden">{{ 'sections.header.sidebar_menu' | t }}</span>
+      </button>
+    </div>
+    {%- endif -%}
 
     {%- if menu_to_use != blank -%}
       {%- assign total_promo_count = 0 -%}
@@ -348,24 +367,6 @@
         | replace: ' ,', ','
         | split: ','
       -%}
-
-        {% comment %} BOTON MENU HAMBURGUESA - Mobile {% endcomment %}
-
-        <div class="sidebar-menu-trigger">
-          <button
-            type="button"
-            class="sidebar-menu-trigger__button"
-            aria-controls="sidebar-menu"
-            aria-expanded="false"
-            aria-label="{{ 'general.icon_labels.menu' | t }}"
-          >
-            <span class="sidebar-menu-trigger__icon" aria-hidden="true">
-              {% render 'icon', icon: 'upng-hamburger', height: 28, width: 28 %}
-            </span>
-            <span class="visually-hidden">{{ 'sections.header.sidebar_menu' | t }}</span>
-          </button>
-        </div>
-
       <main-menu
         class="main-menu{% if section.settings.mobile_menu_position == "burger-left" %} main-menu--left-mob{% endif %}"
         data-menu-sensitivity="200"
@@ -1059,12 +1060,11 @@
         </div>
 
         {% comment %} Contenido de Navegación - Reutiliza la lógica del menú existente {% endcomment %}
+        {%- if sidebar_menu_to_use != blank -%}
         <div class="sidebar-menu__content">
           <nav aria-label="{{ 'accessibility.sidebar_navigation' | t }}">
             <ul class="sidebar-nav">
               {%- liquid
-                assign sidebar_menu_to_use = section.settings.sidebar_menu
-
                 if customer and customer.current_company.metafields.upng.menu_cliente != blank
                   assign custom_menu_handle = customer.current_company.metafields.upng.menu_cliente | strip
                   assign custom_menu = linklists[custom_menu_handle]
@@ -1306,12 +1306,12 @@
               {%- endfor -%}
             </ul>
           </nav>
-
           {% comment %} Footer del Sidebar - Área para enlaces adicionales {% endcomment %}
           <div class="sidebar-menu__footer">
             {% comment %} anidar aqui selector de idioma {% endcomment %}
           </div>
         </div>
+        {%- endif -%}
       </aside>
     </sidebar-menu>
   </header>
