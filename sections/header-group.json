@@ -136,7 +136,7 @@
         "minimise_search_mobile": false,
         "minimise_search_desktop": false,
         "sidebar_menu": "main-menu",
-        "menu": "main-menu",
+        "menu": "menu-barcelo",
         "menu_center": true,
         "repeat_links": false,
         "menu_featured_link": "Outlet",
