@@ -256,6 +256,7 @@
         "media-1": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Group_5.jpg",
             "link_url": "shopify://products/pantalon-unisex-goma-cordon-exterior-microfibra",
             "columns": 1,
             "rows": 1,
@@ -274,6 +275,7 @@
         "media-2": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Group_4.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -292,6 +294,7 @@
         "media_aqqach": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_22.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -310,6 +313,7 @@
         "media-3": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_166.jpg",
             "link_url": "",
             "columns": 2,
             "rows": 1,
@@ -328,6 +332,7 @@
         "media_4QdLTT": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_160.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -346,6 +351,7 @@
         "media_pLnheQ": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_161.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -364,6 +370,7 @@
         "media_T3G6b4": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_162.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
@@ -382,6 +389,7 @@
         "media_EKRnAC": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_163.jpg",
             "link_url": "",
             "columns": 1,
             "rows": 1,
