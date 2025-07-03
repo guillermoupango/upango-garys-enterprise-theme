@@ -169,13 +169,13 @@
         "collection-3": {
           "type": "collection",
           "settings": {
-            "collection": "comercio-1"
+            "collection": "comercio"
           }
         },
         "collection-4": {
           "type": "collection",
           "settings": {
-            "collection": "doctores-1"
+            "collection": "doctores"
           }
         },
         "collection-5": {
