@@ -18,66 +18,24 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "contact_form_9AEYV9": {
-      "type": "contact-form",
+    "1751526984f15b137e": {
+      "type": "apps",
       "blocks": {
-        "name_7LqcPT": {
-          "type": "name",
-          "settings": {
-            "required": true,
-            "half_width": true
-          }
-        },
-        "email_H6tecH": {
-          "type": "email",
-          "settings": {
-            "required": true,
-            "half_width": true
-          }
-        },
-        "phone_mrpJqn": {
-          "type": "phone",
-          "settings": {
-            "required": false,
-            "half_width": true
-          }
-        },
-        "dropdown_keRadP": {
-          "type": "dropdown",
-          "settings": {
-            "title": "Dropdown",
-            "options": "Option 1\nOption 2\nOption 3",
-            "half_width": true
-          }
-        },
-        "body_G9tUzJ": {
-          "type": "body",
-          "settings": {
-            "required": true,
-            "half_width": false
-          }
+        "upango_gc_garys_upng_draft_orders_details_eDCc6C": {
+          "type": "shopify://apps/upango-gc-garys/blocks/upng-draft_orders_details/4d3891c8-6bcb-4ff9-aed0-86b970728f37",
+          "settings": {}
         }
       },
       "block_order": [
-        "name_7LqcPT",
-        "email_H6tecH",
-        "phone_mrpJqn",
-        "dropdown_keRadP",
-        "body_G9tUzJ"
+        "upango_gc_garys_upng_draft_orders_details_eDCc6C"
       ],
-      "name": "Contact form",
       "settings": {
-        "heading": "Contact form",
-        "heading_align": "text-center",
-        "image_position": "top",
-        "color_scheme": "none",
-        "full_width": true,
-        "button_style": "btn btn--primary"
+        "full_width": false
       }
     }
   },
   "order": [
     "main",
-    "contact_form_9AEYV9"
+    "1751526984f15b137e"
   ]
 }
