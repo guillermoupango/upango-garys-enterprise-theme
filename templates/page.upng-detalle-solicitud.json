@@ -9,6 +9,27 @@
  */
 {
   "sections": {
+    "17515272001b5e1c3c": {
+      "type": "apps",
+      "blocks": {
+        "upango_b2b_garys_upng_back_page_8NMG4R": {
+          "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+          "settings": {
+            "display_type": "button",
+            "back_page_text": "Volver",
+            "parent_page": "",
+            "back_page_styles": "text-decoration: none; color: #000; display: inline-flex; align-items: center;",
+            "breadcrumbs_styles": "font-size: 14px; color: #666;"
+          }
+        }
+      },
+      "block_order": [
+        "upango_b2b_garys_upng_back_page_8NMG4R"
+      ],
+      "settings": {
+        "full_width": false
+      }
+    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -35,6 +56,7 @@
     }
   },
   "order": [
+    "17515272001b5e1c3c",
     "main",
     "1751526984f15b137e"
   ]
