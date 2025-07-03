@@ -15,9 +15,11 @@
         "upango_b2b_garys_upng_back_page_pQEKEL": {
           "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
+            "display_type": "button",
             "back_page_text": "Volver",
-            "back_page_page": "mi-cuenta",
-            "back_page_styles": "text-decoration: none; color: #000;"
+            "parent_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;",
+            "breadcrumbs_styles": "font-size: 14px; color: #666;"
           }
         }
       },
