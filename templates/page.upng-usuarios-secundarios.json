@@ -17,7 +17,7 @@
           "settings": {
             "display_type": "button",
             "back_page_text": "Volver",
-            "parent_page": "",
+            "parent_page": "mi-cuenta",
             "back_page_styles": "text-decoration: none; color: #000;",
             "breadcrumbs_styles": "font-size: 14px; color: #666;"
           }
