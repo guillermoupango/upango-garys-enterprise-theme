@@ -310,7 +310,7 @@
               {% render 'product-inventory', product: product, current_variant: current_variant, block: block %}
             {%- endif -%}
 
-          {%- when 'buy-buttons' -%}
+                    {%- when 'buy-buttons' -%}
             <div class="product-info__block{% unless allow_order %} cart-restricted{% endunless %}" {{ block.shopify_attributes }}>
               <product-form>
                 {%- form 'product', product,
@@ -376,15 +376,6 @@
                           </span>
                         </button>
                       {%- endif -%}
-
-                      {% comment %} Agregar Boton 'Donde Comprar' a clientes NO b2b {% endcomment %}
-                      <a href="{{settings.where_to_buy_page.url }}"
-                        {% if customer.b2b? %} style="display: none" {% endif %}
-                        class="btn btn--tertiary mt-2 w-full">
-                        <span class="quick-add-btn-text block pointer-events-none">
-                          {{- 'custom.customer.where_to_buy' | t -}}
-                        </span>
-                      </a>
                   
                     </div>
                   </div>
@@ -401,6 +392,34 @@
                 {% render 'pickup-availability', current_variant: current_variant %}
               {%- endif -%}
             </div>
+
+            {% comment %} Agregar Botón 'Donde Comprar' FUERA del div con cart-restricted {% endcomment %}
+            {%- liquid
+              assign show_where_to_buy = false
+              
+              if customer == null
+                assign show_where_to_buy = true
+              else
+
+                if customer.b2b? == false
+                  assign permit_requests = customer.metafields.upng-permission.permitirSolicitudes
+                  if permit_requests == true
+                    assign show_where_to_buy = true
+                  endif
+                endif
+              endif
+            -%}
+            
+            {%- if show_where_to_buy -%}
+              <div class="product-info__block" {{ block.shopify_attributes }}>
+                <a href="{{settings.where_to_buy_page.url }}"
+                  class="btn btn--tertiary mt-2 w-full">
+                  <span class="quick-add-btn-text block pointer-events-none">
+                    {{- 'custom.customer.where_to_buy' | t -}}
+                  </span>
+                </a>
+              </div>
+            {%- endif -%}
 
             {% comment %} NUEVO: Mensaje alternativo cuando no se permite ordenar {% endcomment %}
             {%- unless allow_order -%}
