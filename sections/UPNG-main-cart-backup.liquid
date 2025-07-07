@@ -117,16 +117,14 @@
               {%- endfor -%}
             </ul>
           {%- endif -%}
-
-          {% unless customer.metafields.upng-permission.verPrecios == false %}
-            {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-            <div class="flex justify-between items-center mt-6">
-              <h3 class="mb-0 h6">{{ 'cart.summary.subtotal' | t }}:</h3>
-              <p class="mb-0 h6">{%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}</p>
-            </div>
-            {%- endif -%}
-          {% endunless %}
-
+          {% if customer.b2b? -%}
+          {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+          <div class="flex justify-between items-center mt-6">
+            <h3 class="mb-0 h6">{{ 'cart.summary.subtotal' | t }}:</h3>
+            <p class="mb-0 h6">{%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}</p>
+          </div>
+          {%- endif -%}
+          {%- endif -%}
           {%- if section.settings.cart_terms_page != blank -%}
             <cart-terms class="block mt-6">
               <input type="checkbox" class="checkbox js-cart-terms-checkbox" id="cart-terms" form="cart">

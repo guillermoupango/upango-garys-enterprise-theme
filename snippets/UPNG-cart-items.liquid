@@ -53,16 +53,18 @@
       <thead class="visually-hidden">
         <tr>
           <th colspan="2">{{ 'cart.items.product' | t }}</th>
-           {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+          {% if customer.b2b? -%}
+           {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
           <th>{{ 'cart.items.price' | t }}</th>
-            {% else %}
            {%- endif -%}
+            {%- endif -%}
           <th>{{ 'cart.items.quantity' | t }}</th>
         </tr>
       </thead>
       <tbody>
         {%- for item in cart.items -%}
-          {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+          {% if customer.b2b? -%}
+          {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
           {%- liquid
             if item.variant.compare_at_price > item.variant.price
               assign variant_price_reduced = true
@@ -70,7 +72,7 @@
               assign variant_price_reduced = false
             endif
           -%}
-          {% else %}
+          {%- endif -%}
           {%- endif -%}
           <tr
             class="cart-item grid gap-x-6"
@@ -114,7 +116,8 @@
               {%- endif -%}
 
               <div class="cart-item__info">
-                {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+                {% if customer.b2b? -%}
+                {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
                 {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
                   <dl class="m-0">
 
@@ -147,6 +150,7 @@
                   <strong class="price__current">
                     {%- render 'price-as-money', price: item.original_price, show_money_with_currency: false -%}
                   </strong>
+                {%- endif -%}
                 {%- endif -%}
 
                 {%- if item.unit_price_measurement -%}
@@ -309,7 +313,8 @@
               <div class="text-theme-light text-sm mb-2 md:hidden">
                 {{ 'cart.items.total' | t }}
               </div>
-              {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+              {% if customer.b2b? -%}
+              {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
               {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
                 <dl class="m-0 flex md:block">
                   <dt class="visually-hidden">
@@ -344,7 +349,7 @@
                   {%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}
                 </strong>
               {%- endif -%}
-              {% else %}
+              {%- endif -%}
               {%- endif -%}
             </td>
           </tr>
@@ -352,13 +357,12 @@
       </tbody>
     </table>
   {%- endif -%}
-  
-  {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+  {% if customer.b2b? -%}
+  {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
   <p class="visually-hidden" id="cart-live-region-text" role="status" aria-live="polite">
     {{ 'cart.summary.subtotal' | t }}:
     {%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}
   </p>
-  {% else %}
   {%- endif -%}
   <p class="visually-hidden" id="cart-line-item-status" role="status" aria-live="polite" aria-hidden="true">
     {{- 'accessibility.loading' | t -}}
@@ -374,4 +378,5 @@
     <p> {{ 'custom.customer.not_allowed' | t }} </p>
     <a class="btn btn--secondary" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
   </div>
+{% endif %}
 {% endif %}

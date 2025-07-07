@@ -12,7 +12,7 @@
   assign stock_disponible = variant.metafields.upng.stock_disponible
   assign id_erp = variant.metafields.upng.id_erp
 -%}
-
+{% if customer.b2b?-%}
 {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verStock %}
 
   <div class="text-xs text-start product-inventory__status js-stock-indicator"
@@ -27,5 +27,8 @@
   </div>
 
 {% else %}
+  <div class="product-inventory__status" hidden></div>
+  {% endif %}
+  {% else %}
   <div class="product-inventory__status" hidden></div>
 {% endif %}

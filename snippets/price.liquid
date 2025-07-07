@@ -21,8 +21,8 @@
   assign price = variant.price | default: 1999
 -%}
 
-
-{% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+{% if customer.b2b? -%}
+{% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
 <div class="price{%- if compare_at_price > price %} price--on-sale{% endif -%}
                  {%- if available == false %} price--sold-out{% endif -%}{% if class %} {{ class }}{% endif %} upng-price-wrapper--pvd">
   <div class="price__default">
@@ -43,5 +43,5 @@
     <strong class="price__current">{{ 'products.variant.non_existent' | t }}</strong>
   </div>
 </div>
-{% else %}
+{% endif %}
 {% endif %}

@@ -9,7 +9,7 @@
 
 {%- liquid
   assign can_order = true
-  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+  if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
     assign can_order = true
   else
     assign can_order = false
@@ -174,14 +174,15 @@
               {% endif %}
             </div>
             <div class="flex justify-end items-center gap-theme">
-              {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+                {% if customer.b2b? -%}
+              {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
               <div class="upng-price-wrapper--pvd">
                 <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
                 <span class="variant-table__subtotal-value"
                   ><strong>{{ 0 | money }}</strong></span
                 >
               </div>
-            {% else %}
+              {% endif %}
               {% endif %}
               <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
                 <span class="variant-table__total-items-value"><strong>0</strong></span>

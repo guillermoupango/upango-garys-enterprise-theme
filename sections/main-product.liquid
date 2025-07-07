@@ -39,12 +39,22 @@
 
   # NUEVA VARIABLE: Verificar permisos de pedidos del cliente
 
-  assign allow_order = true
-  if customer or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
-    assign allow_order = true
-  else
-    assign allow_order = false
+  assign allow_order = false
+  
+  # Verificar si el cliente está logueado
+  if customer
+    # Verificar si el cliente es B2B
+    if customer.b2b?
+      assign allow_order = true
+    # Verificar tags específicos
+    elsif customer.tags contains 'agente' or customer.tags contains 'main_contact'
+      assign allow_order = true
+    # Verificar metafield de permisos (usando corchetes para manejar el guión)
+    elsif customer.metafields['upng-permission']['allowOrder'] == true
+      assign allow_order = true
+    endif
   endif
+  
 
 
   assign current_variant = product.selected_or_first_available_variant
@@ -359,7 +369,7 @@
 
                       {% comment %} Reemplazo de Boton de Tema por 'Quick Add' {% endcomment %}
                       {% comment %} MODIFICADO: Agregar condición para ocultar botón de Quick Add {% endcomment %}
-                      {%- if allow_order -%}
+                      {%- if allow_order == true -%}
                         <button type="button"
                                 {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
                                 class="btn btn--primary w-full js-quick-add"
@@ -402,10 +412,6 @@
               else
 
                 if customer.b2b? == false
-                  assign permit_requests = customer.metafields.upng-permission.permitirSolicitudes
-                  if permit_requests == true
-                    assign show_where_to_buy = true
-                  endif
                 endif
               endif
             -%}

@@ -25,11 +25,6 @@
   if section.settings.cart_terms_page != blank and section.settings.show_checkout_button
     assign show_terms_and_conditons = true
   endif
-
-  assign can_see_prices = false
-  if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true
-    assign can_see_prices = true
-  endif
 -%}
 
 <link rel="stylesheet" href="{{ 'cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -127,10 +122,7 @@
           {%- for discount in cart.cart_level_discount_applications -%}
             <li class="mt-2">
               <div class="discount text-sm inline-flex items-center" dir="auto">
-                {% render 'icon-tags' %} {{ discount.title | escape_once }}
-                {%- if can_see_prices -%}
-                  (-{{ discount.total_allocated_amount | money }})
-                {%- endif -%}
+                {% render 'icon-tags' %} {{ discount.title | escape_once }} (-{{ discount.total_allocated_amount | money }})
               </div>
             </li>
           {%- endfor -%}
@@ -148,19 +140,20 @@
         {%- endif -%}
 
         {%- if section.settings.show_checkout_button -%}
-          {%- if can_see_prices -%}
-            <button type="submit" class="btn btn--primary btn--icon-with-text w-full checkout-button" name="checkout" form="cart-drawer-form"{% if cart == empty %} disabled{% endif %}>
-              {{ icon }}{{ 'cart.summary.checkout' | t }} - {% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}
-            </button>
-          {%- else -%}
+           {% if customer.b2b? -%}
+          {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+          <button type="submit" class="btn btn--primary btn--icon-with-text w-full checkout-button" name="checkout" form="cart-drawer-form"{% if cart == empty %} disabled{% endif %}>
+            {{ icon }}{{ 'cart.summary.checkout' | t }} - {% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}
+          </button>
+          {%- endif -%}
           {%- endif -%}
         {%- else -%}
-          {%- if can_see_prices -%}
-            <a class="btn btn--primary btn--icon-with-text w-full" href="{{ routes.cart_url }}"{% if settings.preload_links %} data-no-instant{% endif %}>
-              {{ icon }}{{ 'cart.general.view_cart' | t }} - {% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}
-            </a>
-          {%- else -%}
-
+           {% if customer.b2b? -%}
+          {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+          <a class="btn btn--primary btn--icon-with-text w-full" href="{{ routes.cart_url }}"{% if settings.preload_links %} data-no-instant{% endif %}>
+            {{ icon }}{{ 'cart.general.view_cart' | t }} - {% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}
+          </a>
+          {%- endif -%}
           {%- endif -%}
         {%- endif -%}
 
@@ -199,7 +192,7 @@
       {%- endif -%}
 
       <form class="form" id="cart-drawer-form" action="{{ routes.cart_url }}" method="post">
-        {% render 'cart-items', is_drawer: true, can_see_prices: can_see_prices %}
+        {% render 'cart-items', is_drawer: true %}
       </form>
     </div>
 
@@ -215,8 +208,7 @@
                 products_list: section.settings.promoted_products_list,
                 heading: section.settings.promoted_products_heading,
                 layout: section.settings.promoted_products_layout,
-                grid_classes: promoted_product_grid_classes,
-                can_see_prices: can_see_prices
+                grid_classes: promoted_product_grid_classes
           -%}
         {%- endif -%}
       {%- endif -%}
@@ -233,8 +225,7 @@
             products_to_show: settings.recommendations_to_show,
             heading: settings.recommendations_heading,
             layout: settings.recommendations_layout,
-            grid_classes: recommendations_grid_classes,
-            can_see_prices: can_see_prices
+            grid_classes: recommendations_grid_classes
       -%}
     {%- endif -%}
 
