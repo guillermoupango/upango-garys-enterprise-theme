@@ -16,6 +16,13 @@
   else
     assign section_id = section.id
   endif
+  
+  assign can_see_prices = false
+  if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact'
+    assign can_see_prices = true
+  elsif customer.metafields.upng-permission.verPrecios == true
+    assign can_see_prices = true
+  endif
 -%}
 
 <cart-items id="cart-items" data-section="{{ section_id }}" data-empty="{% if cart == empty %}true{% else %}false{% endif %}">
@@ -44,23 +51,23 @@
       <thead class="visually-hidden">
         <tr>
           <th colspan="2">{{ 'cart.items.product' | t }}</th>
-          {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-          <th>{{ 'cart.items.price' | t }}</th>
+          {%- if can_see_prices -%}
+            <th>{{ 'cart.items.price' | t }}</th>
           {%- endif -%}
           <th>{{ 'cart.items.quantity' | t }}</th>
         </tr>
       </thead>
       <tbody>
         {%- for item in cart.items -%}
-          {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-          {%- liquid
-            if item.variant.compare_at_price > item.variant.price
-              assign variant_price_reduced = true
-            else
-              assign variant_price_reduced = false
-            endif
-          -%}
-        {%- endif -%}
+          {%- if can_see_prices -%}
+            {%- liquid
+              if item.variant.compare_at_price > item.variant.price
+                assign variant_price_reduced = true
+              else
+                assign variant_price_reduced = false
+              endif
+            -%}
+          {%- endif -%}
           <tr class="cart-item grid gap-x-6" id="cart-item-{{ item.index | plus: 1 }}" data-product-id="{{ item.product_id }}" data-variant-id="{{ item.variant_id }}">
             <td class="cart-item__image">
               <a href="{{ item.url }}" class="block {% if settings.blend_product_images %} image-blend{% endif %}">
@@ -94,45 +101,45 @@
               {%- endif -%}
 
               <div class="cart-item__info">
-                {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-                {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
-                  <dl class="m-0">
-                    <dt class="visually-hidden">
-                      {{- 'products.product.price.sale_price' | t -}}
-                    </dt>
-                    <dd class="price__current inline m-0 font-bold">
-                      {%- render 'price-as-money', price: item.final_price, show_money_with_currency: false -%}
-                    </dd>
-                    <dt class="visually-hidden">
-                      {{- 'products.product.price.regular_price' | t -}}
-                    </dt>
-                    <dd class="inline m-0">
-                      {%- if variant_price_reduced -%}
-                        <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.variant.compare_at_price, show_money_with_currency: false -%}</s>
-                      {%- else -%}
-                        <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.original_price, show_money_with_currency: false -%}</s>
-                      {%- endif -%}
-                    </dd>
-                  </dl>
-                {%- else -%}
-                  <strong class="price__current">
-                    {%- render 'price-as-money', price: item.original_price, show_money_with_currency: false -%}
-                  </strong>
-                {%- endif -%}
+                {%- if can_see_prices -%}
+                  {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
+                    <dl class="m-0">
+                      <dt class="visually-hidden">
+                        {{- 'products.product.price.sale_price' | t -}}
+                      </dt>
+                      <dd class="price__current inline m-0 font-bold">
+                        {%- render 'price-as-money', price: item.final_price, show_money_with_currency: false -%}
+                      </dd>
+                      <dt class="visually-hidden">
+                        {{- 'products.product.price.regular_price' | t -}}
+                      </dt>
+                      <dd class="inline m-0">
+                        {%- if variant_price_reduced -%}
+                          <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.variant.compare_at_price, show_money_with_currency: false -%}</s>
+                        {%- else -%}
+                          <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.original_price, show_money_with_currency: false -%}</s>
+                        {%- endif -%}
+                      </dd>
+                    </dl>
+                  {%- else -%}
+                    <strong class="price__current">
+                      {%- render 'price-as-money', price: item.original_price, show_money_with_currency: false -%}
+                    </strong>
+                  {%- endif -%}
 
-                {%- if item.unit_price_measurement -%}
-                  <div class="unit-price">
-                    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                    <span class="unit-price__price">{%- render 'price-as-money', price: item.unit_price, show_money_with_currency: false -%}</span>
-                    <span class="unit-price__separator">{{ 'products.product.price.unit_price_separator' | t }}</span>
-                    <span class="unit-price__unit">
-                      {%- if item.unit_price_measurement.reference_value != 1 -%}
-                        {{- item.unit_price_measurement.reference_value -}}
-                      {%- endif -%}
-                      {{ item.unit_price_measurement.reference_unit }}
-                    </span>
-                  </div>
-                {%- endif -%}
+                  {%- if item.unit_price_measurement -%}
+                    <div class="unit-price">
+                      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                      <span class="unit-price__price">{%- render 'price-as-money', price: item.unit_price, show_money_with_currency: false -%}</span>
+                      <span class="unit-price__separator">{{ 'products.product.price.unit_price_separator' | t }}</span>
+                      <span class="unit-price__unit">
+                        {%- if item.unit_price_measurement.reference_value != 1 -%}
+                          {{- item.unit_price_measurement.reference_value -}}
+                        {%- endif -%}
+                        {{ item.unit_price_measurement.reference_unit }}
+                      </span>
+                    </div>
+                  {%- endif -%}
                 {%- endif -%}
 
                 {%- if item.product.template_suffix contains 'preorder' -%}
@@ -214,36 +221,37 @@
               <div class="text-theme-light text-sm mb-2 md:hidden">
                 {{ 'cart.items.total' | t }}
               </div>
-              {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-              {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
-                <dl class="m-0 flex md:block">
-                  <dt class="visually-hidden">
-                    {{- 'products.product.price.sale_price' | t -}}
-                  </dt>
-                  <dd class="price__current m-0 font-bold">
-                    {%- render 'price-as-money', price: item.final_line_price, show_money_with_currency: false -%}
-                  </dd>
-                  <dt class="visually-hidden">
-                    {{- 'products.product.price.regular_price' | t -}}
-                  </dt>
-                  <dd class="m-0">
-                    {%- if variant_price_reduced -%}
-                      <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">
-                        {%- liquid
-                          assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity
-                          render 'price-as-money', price: compare_at_total_price, show_money_with_currency: false
-                        -%}
-                      </s>
-                    {%- else -%}
-                      <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}</s>
-                    {%- endif -%}
-                  </dd>
-                </dl>
+              {%- if can_see_prices -%}
+                {%- if variant_price_reduced or item.original_line_price != item.final_line_price -%}
+                  <dl class="m-0 flex md:block">
+                    <dt class="visually-hidden">
+                      {{- 'products.product.price.sale_price' | t -}}
+                    </dt>
+                    <dd class="price__current m-0 font-bold">
+                      {%- render 'price-as-money', price: item.final_line_price, show_money_with_currency: false -%}
+                    </dd>
+                    <dt class="visually-hidden">
+                      {{- 'products.product.price.regular_price' | t -}}
+                    </dt>
+                    <dd class="m-0">
+                      {%- if variant_price_reduced -%}
+                        <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">
+                          {%- liquid
+                            assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity
+                            render 'price-as-money', price: compare_at_total_price, show_money_with_currency: false
+                          -%}
+                        </s>
+                      {%- else -%}
+                        <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">{%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}</s>
+                      {%- endif -%}
+                    </dd>
+                  </dl>
+                {%- else -%}
+                  <strong class="price__current">
+                    {%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}
+                  </strong>
+                {%- endif -%}
               {%- else -%}
-                <strong class="price__current">
-                  {%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}
-                </strong>
-              {%- endif -%}
               {%- endif -%}
             </td>
           </tr>
@@ -252,10 +260,10 @@
     </table>
   {%- endif -%}
 
-  {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-  <p class="visually-hidden" id="cart-live-region-text" role="status" aria-live="polite">
-    {{ 'cart.summary.subtotal' | t }}: {%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}
-  </p>
+  {%- if can_see_prices -%}
+    <p class="visually-hidden" id="cart-live-region-text" role="status" aria-live="polite">
+      {{ 'cart.summary.subtotal' | t }}: {%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}
+    </p>
   {%- endif -%}
   <p class="visually-hidden" id="cart-line-item-status" role="status" aria-live="polite" aria-hidden="true">
     {{- 'accessibility.loading' | t -}}

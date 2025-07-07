@@ -9,6 +9,14 @@
       endunless
     endfor
   endfor
+
+  comment
+    Definimos la variable para verificar si el usuario tiene permisos para ver precios
+  endcomment
+  assign user_can_see_prices = false
+  if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true
+    assign user_can_see_prices = true
+  endif
 -%}
 
 <div class="account-nav">
@@ -66,7 +74,10 @@
         <tr>
           <th colspan="3">{{ 'customer.order.product' | t }}</th>
           <th class="text-center">{{ 'customer.order.quantity' | t }}</th>
-          <th class="text-end">{{ 'customer.order.total' | t }}</th>
+          {%- if user_can_see_prices -%}
+            <th class="text-end">{{ 'customer.order.total' | t }}</th>
+          {%- else -%}
+          {%- endif -%}
         </tr>
         </thead>
         <tbody>
@@ -103,50 +114,51 @@
                 <p class="text-sm">{{ 'customer.order.sku' | t }}: {{ line_item.sku }}</p>
               {%- endif -%}
 
-              {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
-                <dl>
-                  {%- if line_item.original_price != line_item.final_price -%}
-                    <dt>
-                      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-                    </dt>
-                    <dd class="inline m-0 font-bold">
-                      {{ line_item.final_price | money }}
-                    </dd>
-                    <dt>
-                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                    </dt>
-                    <dd class="inline m-0">
-                      <s>{{ line_item.original_price | money }}</s>
-                    </dd>
-                  {%- else -%}
-                    <dt>
-                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                    </dt>
-                    <dd class="inline m-0 font-bold">
-                      {{ line_item.original_price | money }}
-                    </dd>
-                  {%- endif -%}
+              {%- if user_can_see_prices -%}
+                {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
+                  <dl>
+                    {%- if line_item.original_price != line_item.final_price -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                      </dt>
+                      <dd class="inline m-0 font-bold">
+                        {{ line_item.final_price | money }}
+                      </dd>
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                      </dt>
+                      <dd class="inline m-0">
+                        <s>{{ line_item.original_price | money }}</s>
+                      </dd>
+                    {%- else -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                      </dt>
+                      <dd class="inline m-0 font-bold">
+                        {{ line_item.original_price | money }}
+                      </dd>
+                    {%- endif -%}
 
-                  {%- if line_item.unit_price_measurement -%}
-                            {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-                    <dt>
-                      <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                    </dt>
-                    <dd class="unit-price">
-                      <span class="unit-price__price">{{ line_item.unit_price | money }}</span>
-                      <span class="unit-price__separator">{{ 'products.product.price.unit_price_separator' | t }}</span>
-                      <span class="unit-price__unit">
-                          {%- if line_item.unit_price_measurement.reference_value != 1 -%}
-                            {{- line_item.unit_price_measurement.reference_value -}}
-                          {%- endif -%}
-                        {{ line_item.unit_price_measurement.reference_unit }}
-                        </span>
-                    </dd>
-                  {%- endif -%}
-                  {%- endif -%}
-                </dl>
+                    {%- if line_item.unit_price_measurement -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                      </dt>
+                      <dd class="unit-price">
+                        <span class="unit-price__price">{{ line_item.unit_price | money }}</span>
+                        <span class="unit-price__separator">{{ 'products.product.price.unit_price_separator' | t }}</span>
+                        <span class="unit-price__unit">
+                            {%- if line_item.unit_price_measurement.reference_value != 1 -%}
+                              {{- line_item.unit_price_measurement.reference_value -}}
+                            {%- endif -%}
+                          {{ line_item.unit_price_measurement.reference_unit }}
+                          </span>
+                      </dd>
+                    {%- endif -%}
+                  </dl>
+                {%- else -%}
+                  <span>{{ line_item.final_price | money }}</span>
+                {%- endif -%}
               {%- else -%}
-                <span>{{ line_item.final_price | money }}</span>
               {%- endif -%}
 
               {%- assign property_size = line_item.properties | size -%}
@@ -185,7 +197,7 @@
                 </div>
               {%- endunless -%}
 
-              {%- if line_item.line_level_discount_allocations != blank -%}
+              {%- if line_item.line_level_discount_allocations != blank and user_can_see_prices -%}
                 <ul class="order__discounts mt-3" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                   {%- for discount_allocation in line_item.line_level_discount_allocations -%}
                     <li class="mt-2">
@@ -219,88 +231,99 @@
             <td class="order-detail__qty text-center" data-label="{{ 'customer.order.quantity' | t }}:">
               {{ line_item.quantity }}
             </td>
-            <td class="order-detail__price price text-end" data-label="{{ 'customer.order.total' | t }}:">
-              {%- if line_item.original_line_price != line_item.final_line_price -%}
-                <dl>
-                  <dt>
-                    <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-                  </dt>
-                  <dd class="m-0 font-bold">
-                    {{ line_item.final_line_price | money }}
-                  </dd>
-                  <dt>
-                    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                  </dt>
-                  <dd class="m-0">
-                    <s>{{ line_item.original_line_price | money }}</s>
-                  </dd>
-                </dl>
-              {%- else -%}
-                <strong>{{- line_item.original_line_price | money -}}</strong>
-              {%- endif -%}
-            </td>
+            {%- if user_can_see_prices -%}
+              <td class="order-detail__price price text-end" data-label="{{ 'customer.order.total' | t }}:">
+                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                  <dl>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                    </dt>
+                    <dd class="m-0 font-bold">
+                      {{ line_item.final_line_price | money }}
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                    </dt>
+                    <dd class="m-0">
+                      <s>{{ line_item.original_line_price | money }}</s>
+                    </dd>
+                  </dl>
+                {%- else -%}
+                  <strong>{{- line_item.original_line_price | money -}}</strong>
+                {%- endif -%}
+              </td>
+            {%- else -%}
+            {%- endif -%}
           </tr>
         {%- endfor -%}
         </tbody>
         <tfoot>
-        {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
-        <tr>
-          <td colspan="2"></td>
-          <td colspan="2">{{ 'customer.order.subtotal' | t }}:</td>
-          <td class="text-end" data-label="{{ 'customer.order.subtotal' | t }}">
-            {{ order.line_items_subtotal_price | money }}
-          </td>
-        </tr>
-        {%- endif -%}
-        {%- if order.cart_level_discount_applications != blank -%}
-          {%- for discount_application in order.cart_level_discount_applications -%}
+        {%- if user_can_see_prices -%}
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">{{ 'customer.order.subtotal' | t }}:</td>
+            <td class="text-end" data-label="{{ 'customer.order.subtotal' | t }}">
+              {{ order.line_items_subtotal_price | money }}
+            </td>
+          </tr>
+          
+          {%- if order.cart_level_discount_applications != blank -%}
+            {%- for discount_application in order.cart_level_discount_applications -%}
+              <tr>
+                <td colspan="2"></td>
+                <td colspan="2">{{ 'customer.order.discount' | t }} ({{ discount_application.title }}):</td>
+                <td class="text-end" data-label="{{ 'customer.order.discount' | t }}">
+                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                </td>
+              </tr>
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- for shipping_method in order.shipping_methods -%}
             <tr>
               <td colspan="2"></td>
-              <td colspan="2">{{ 'customer.order.discount' | t }} ({{ discount_application.title }}):</td>
-              <td class="text-end" data-label="{{ 'customer.order.discount' | t }}">
-                <span>-{{ discount_application.total_allocated_amount | money }}</span>
+              <td colspan="2">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</td>
+              <td class="text-end" data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
+                {{ shipping_method.price | money }}
               </td>
             </tr>
           {%- endfor -%}
+
+          {%- for tax_line in order.tax_lines -%}
+            <tr>
+              <td colspan="2"></td>
+              <td colspan="2">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</td>
+              <td class="text-end" data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
+                {{ tax_line.price | money }}
+              </td>
+            </tr>
+          {%- endfor -%}
+
+          {%- if order.total_duties -%}
+            <tr>
+              <td colspan="2"></td>
+              <td colspan="2">{{ 'customer.order.total_duties' | t }}:</td>
+              <td class="text-end" data-label="{{ 'customer.order.total_duties' | t }}">
+                {{ order.total_duties | money }}
+              </td>
+            </tr>
+          {%- endif -%}
+
+          <tr class="order-detail__total-row">
+            <td colspan="2"></td>
+            <td colspan="2"><strong class="uppercase">{{ 'customer.order.total' | t }}:</strong></td>
+            <td class="text-end" data-label="{{ 'customer.order.total' | t }}">
+              <strong>{{ order.total_price | money_with_currency }}</strong>
+            </td>
+          </tr>
+        {%- else -%}
+          <tr>
+            <td colspan="4" class="text-center p-6">
+              <div class="p-4 bg-gray-100 rounded">
+              </div>
+            </td>
+          </tr>
         {%- endif -%}
-
-        {%- for shipping_method in order.shipping_methods -%}
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</td>
-            <td class="text-end" data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
-              {{ shipping_method.price | money }}
-            </td>
-          </tr>
-        {%- endfor -%}
-
-        {%- for tax_line in order.tax_lines -%}
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%):</td>
-            <td class="text-end" data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
-              {{ tax_line.price | money }}
-            </td>
-          </tr>
-        {%- endfor -%}
-
-        {%- if order.total_duties -%}
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">{{ 'customer.order.total_duties' | t }}:</td>
-            <td class="text-end" data-label="{{ 'customer.order.total_duties' | t }}">
-              {{ order.total_duties | money }}
-            </td>
-          </tr>
-        {%- endif -%}
-
-        <tr class="order-detail__total-row">
-          <td colspan="2"></td>
-          <td colspan="2"><strong class="uppercase">{{ 'customer.order.total' | t }}:</strong></td>
-          <td class="text-end" data-label="{{ 'customer.order.total' | t }}">
-            <strong>{{ order.total_price | money_with_currency }}</strong>
-          </td>
-        </tr>
         </tfoot>
       </table>
     </div>

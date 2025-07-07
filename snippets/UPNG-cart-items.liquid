@@ -55,6 +55,7 @@
           <th colspan="2">{{ 'cart.items.product' | t }}</th>
            {% if customer.b2b? or customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
           <th>{{ 'cart.items.price' | t }}</th>
+            {% else %}
            {%- endif -%}
           <th>{{ 'cart.items.quantity' | t }}</th>
         </tr>
@@ -69,6 +70,7 @@
               assign variant_price_reduced = false
             endif
           -%}
+          {% else %}
           {%- endif -%}
           <tr
             class="cart-item grid gap-x-6"
@@ -342,6 +344,7 @@
                   {%- render 'price-as-money', price: item.original_line_price, show_money_with_currency: false -%}
                 </strong>
               {%- endif -%}
+              {% else %}
               {%- endif -%}
             </td>
           </tr>
@@ -355,6 +358,7 @@
     {{ 'cart.summary.subtotal' | t }}:
     {%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}
   </p>
+  {% else %}
   {%- endif -%}
   <p class="visually-hidden" id="cart-line-item-status" role="status" aria-live="polite" aria-hidden="true">
     {{- 'accessibility.loading' | t -}}
