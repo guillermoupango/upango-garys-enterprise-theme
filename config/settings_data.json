@@ -490,6 +490,11 @@
         "settings": {
           "cart_bubble_selector": ".cart-count-bubble span"
         }
+      },
+      "3970769715982306836": {
+        "type": "shopify://apps/upango-gc-garys/blocks/upng-checkout_blocker/4d3891c8-6bcb-4ff9-aed0-86b970728f37",
+        "disabled": false,
+        "settings": {}
       }
     }
   }
