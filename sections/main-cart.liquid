@@ -166,7 +166,7 @@
           {%- endif -%}
 
           <div class="mt-6">
-            <button class="btn btn--primary btn--icon-with-text w-full checkout-button" name="checkout">
+          <button class="btn btn--primary btn--icon-with-text w-full checkout-button" name="checkout"{% if customer.metafields['upng-permission']['permitirSolicitudes'] %} onclick="upng_checkount_blocker()" type="button"{% else %}{% endif %}>
               {%- if settings.cart_icon == 'bag' -%}
                 {%- render 'icon-bag' -%}
               {%- elsif settings.cart_icon == 'basket' -%}
@@ -174,7 +174,11 @@
               {%- else -%}
                 {%- render 'icon-cart' -%}
               {%- endif -%}
-              {{- 'cart.summary.checkout' | t -}}
+              {% if customer.metafields['upng-permission']['permitirSolicitudes'] %}
+                {{- 'upango.cart.make_request' | t -}}
+              {% else %}
+                {{- 'cart.summary.checkout' | t -}}
+              {% endif %}
             </button>
             <a href="#" class="js-vaciar-carrito link block text-center text-error-text w-full mt-3 text-sm">
               {{ 'custom.cart.clear' | t }}

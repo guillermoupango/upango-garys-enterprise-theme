@@ -626,6 +626,9 @@
   "upango":{
     "customer": {
       "log_out": "LOG OUT"
+    },
+    "cart": {
+      "make_request": "Send order request"
     }
   },
   "moodboard": {
