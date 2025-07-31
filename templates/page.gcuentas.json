@@ -18,66 +18,62 @@
         "div_over_column_text_color_web": "#ffffff"
       }
     },
-    "contact_form_9AEYV9": {
-      "type": "contact-form",
+    "image_banner_tQVBRK": {
+      "type": "image-banner",
       "blocks": {
-        "name_7LqcPT": {
-          "type": "name",
+        "heading_iEXRxT": {
+          "type": "heading",
           "settings": {
-            "required": true,
-            "half_width": true
+            "heading": "Image banner",
+            "heading_size": "h1",
+            "heading_h1": false
           }
         },
-        "email_H6tecH": {
-          "type": "email",
+        "text_RR7hNL": {
+          "type": "text",
           "settings": {
-            "required": true,
-            "half_width": true
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enlarge_text": true
           }
         },
-        "phone_mrpJqn": {
-          "type": "phone",
+        "button_Rr4p6e": {
+          "type": "button",
           "settings": {
-            "required": false,
-            "half_width": true
-          }
-        },
-        "dropdown_keRadP": {
-          "type": "dropdown",
-          "settings": {
-            "title": "Dropdown",
-            "options": "Option 1\nOption 2\nOption 3",
-            "half_width": true
-          }
-        },
-        "body_G9tUzJ": {
-          "type": "body",
-          "settings": {
-            "required": true,
-            "half_width": false
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
           }
         }
       },
       "block_order": [
-        "name_7LqcPT",
-        "email_H6tecH",
-        "phone_mrpJqn",
-        "dropdown_keRadP",
-        "body_G9tUzJ"
+        "heading_iEXRxT",
+        "text_RR7hNL",
+        "button_Rr4p6e"
       ],
-      "name": "Contact form",
+      "name": "Image banner",
       "settings": {
-        "heading": "Contact form",
-        "heading_align": "text-center",
-        "image_position": "top",
-        "color_scheme": "none",
+        "url": "",
+        "height_mode": "auto",
+        "fixed_height_desktop": 600,
+        "fixed_height_mobile": 350,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": false,
+        "mobile_stacked": false,
+        "color_scheme": "white",
         "full_width": true,
-        "button_style": "btn btn--primary"
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 40,
+        "prevent_animation": false
       }
     }
   },
   "order": [
     "main",
-    "contact_form_9AEYV9"
+    "image_banner_tQVBRK"
   ]
 }
