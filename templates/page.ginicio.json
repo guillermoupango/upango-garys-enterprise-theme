@@ -23,8 +23,8 @@
     "custom_liquid_tCJriW": {
       "type": "custom-liquid",
       "custom_css": [
-        "{background: url(https://cdn.shopify.com/s/files/1/0641/7229/4300/files/conocenos_2000.jpg?v=1752492059) no-repeat center; background-size: cover; min-height: 30vh;}",
-        "h2 {color: #fff;}"
+        "{background: url(https://cdn.shopify.com/s/files/1/0594/6336/8806/files/bfe6299856875398d1e206cd79828c5e.jpg?v=1751527340) no-repeat center; background-size: cover; min-height: 30vh;}",
+        "h2 {color: #;}"
       ],
       "name": "Custom HTML/Liquid",
       "settings": {
