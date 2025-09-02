@@ -716,6 +716,17 @@
         "color_scheme": "white",
         "transparent_content_color": "#ffffff"
       }
+    },
+    "custom_liquid_7CzY7D": {
+      "type": "custom-liquid",
+      "name": "Custom HTML/Liquid",
+      "settings": {
+        "custom_liquid": "Es cliente B2B: {{ customer.b2b? }}",
+        "section_height": "default",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
     }
   },
   "order": [
@@ -726,6 +737,7 @@
     "shoppable-image",
     "media-grid",
     "media_grid_jtjwh8",
-    "media_grid_yjyC3x"
+    "media_grid_yjyC3x",
+    "custom_liquid_7CzY7D"
   ]
 }
