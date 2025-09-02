@@ -721,7 +721,7 @@
       "type": "custom-liquid",
       "name": "Custom HTML/Liquid",
       "settings": {
-        "custom_liquid": "Es cliente B2B: {{ customer.b2b? }}",
+        "custom_liquid": "Es cliente B2B: {{ customer.b2b? }}<br>\nCompany: {{customer.current_company.name}}",
         "section_height": "default",
         "full_width": false,
         "dividers": "none",
