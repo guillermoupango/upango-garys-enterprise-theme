@@ -337,6 +337,7 @@ if (!customElements.get('quick-add-drawer')) {
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation" style="vertical-align: middle"><path d="m9.693 4.5 7.5 7.5-7.5 7.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>              </a>
             </div>
           </div>
+          <!-- Opcion doble para mobile -->
           <div class="quick-add-info__details md:hidden"></div>
         </div>
         <div class="product-options">

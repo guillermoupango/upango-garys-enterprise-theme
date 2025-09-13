@@ -42,9 +42,9 @@ if (!customElements.get('cart-items')) {
       }
 
       // Add event listeners for property changes
-      this.querySelectorAll('textarea[id^="item-properties-"]').forEach((textarea) => {
+      /* this.querySelectorAll('textarea[id^="item-properties-"]').forEach((textarea) => {
         textarea.addEventListener('blur', debounce(this.handlePropertyChange.bind(this), 300));
-      });
+      }); */
     }
 
     /**
@@ -142,7 +142,7 @@ if (!customElements.get('cart-items')) {
      * Handles changes to the customization textarea
      * @param {object} evt - Event object
      */
-    handlePropertyChange(evt) {
+    /* handlePropertyChange(evt) {
       const textareaId = evt.target.id;
       if (!textareaId) return;
       
@@ -169,13 +169,13 @@ if (!customElements.get('cart-items')) {
           evt.target.dataset.initialValue = currentValue;
         }
       }
-    }
+    } */
 
     /**
      * Handles changes to the customization checkbox
      * @param {object} evt - Event object
      */
-    handleCustomizeToggle(evt) {
+/*     handleCustomizeToggle(evt) {
       const checkboxId = evt.target.id;
       if (!checkboxId) return;
 
@@ -193,7 +193,7 @@ if (!customElements.get('cart-items')) {
         // If unchecked, remove the customization property
         this.updateProperties(lineIndex, { customization: '' });
       }
-    }
+    } */
 
     /**
  * Updates the properties of a line item.
@@ -268,13 +268,13 @@ if (!customElements.get('cart-items')) {
         });
 
         // Re-add event listeners since we've replaced the content
-        setTimeout(() => {
+        /*setTimeout(() => {
           this.querySelectorAll('textarea[id^="item-properties-"]').forEach((textarea) => {
             // Guardamos el valor actualizado para comparaciones futuras
             textarea.dataset.initialValue = textarea.value.trim();
             textarea.addEventListener('blur', this.handlePropertyChange.bind(this));
           });
-        }, 0);
+        }, 0); */
 
         // Dispatch an event to notify that properties have been updated
         this.dispatchEvent(new CustomEvent('on:line-item:properties-updated', {

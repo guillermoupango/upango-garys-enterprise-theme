@@ -15,6 +15,10 @@
       "label_placeholder": "Comentario al Dpto. de Ventas de Uniformes Gary's",
       "delivery_placeholder": "Comentario que aparece en el Albarán",
       "checkbox": "Personalizar este producto",
+      "customization_title": "Personalizar Producto",
+      "customization_save": "Guardar Personalización",
+      "customization_remove": "Eliminar Personalización",
+      "customization_edit": "Editar Personalización",
       "placeholder": "Indica la personalización que desees sobre este producto",
       "label": "Personalizacion",
       "clear": "Vaciar carrito"
@@ -28,7 +32,7 @@
       "variant-name": "Nombre variante",
       "size": "Talla",
       "stock": "Stock",
-      "next-arrival_html": "Prox.<br>llegada",
+      "next-arrival_html": "Prox.<br>Entrada",
       "notify-me": "Avísame",
       "discounted-price_html": "Precio<br>con DTO.",
       "quantity": "Cantidad",
@@ -50,7 +54,7 @@
     },
     "availability": {
       "available": "Unidades Disponibles",
-      "next-arrival": "Sin stock, próxima llegada",
+      "next-arrival": "Sin stock, próxima entrada",
       "outlet": "OUTLET, últimas unidades",
       "not-available": "No Disponible"
     },

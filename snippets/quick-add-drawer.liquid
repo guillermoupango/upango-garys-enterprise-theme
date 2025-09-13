@@ -19,10 +19,10 @@
     {% render 'icon-close' %}
   </button>
   <div class="drawer__content quick-add__content flex-auto{% if settings.quick_add_sticky_buttons == false %} shrink-0{% endif %} relative">
-    <button type="button" class="drawer__close-btn quick-add__close-btn--mob js-close-drawer md:hidden">
+{% comment %}     <button type="button" class="drawer__close-btn quick-add__close-btn--mob js-close-drawer md:hidden">
       <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
       {% render 'icon-close' %}
-    </button>
+    </button> {% endcomment %}
     <div class="js-product-details quick-add__product-details"></div>
   </div>
   <footer class="drawer__footer quick-add__footer hidden">

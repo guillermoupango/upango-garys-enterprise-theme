@@ -7,13 +7,70 @@
   endif
 -%}
 
+<link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
+
+{%- if customization_modal == true%}
+    <modal-customization
+      class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center"
+      id="modal-{{ item.variant_id }}"
+    >
+      <div
+        class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion"
+        role="dialog"
+        aria-label=""
+        aria-modal="true"
+        tabindex="-1"
+      >
+      <button type="button" class="modal__close-btn absolute js-close-modal">
+        {% render 'icon-close' %}
+        <span class="visually-hidden">{{ 'custom.cart.customization_title' | t }}</span>
+      </button>
+
+        <div class="modal__content flex-auto h-full rte">
+          <h2 class="text-body-large">{{- 'custom.cart.label' | t -}}</h2>
+          <p class="text-body-small product-name">{{ item.title }}</p>
+
+          <div class="pb-4">
+            <label class="visually-hidden" for="item-properties-{{ item.index | plus: 1 }}">
+              {{- 'custom.cart.label' | t -}}
+            </label>
+            <textarea
+              class="input w-full"
+              id="item-properties-{{ item.index | plus: 1 }}"
+              name="properties[customization]"
+              placeholder="{{ 'custom.cart.placeholder' | t }}"
+            >{% if item.properties.customization %}{{ item.properties.customization }}{% endif %}</textarea>
+          </div>
+
+          <div class="flex gap-3 justify-end">
+            <button class="btn btn--sm btn--secondary js-remove-customization">
+              {{ 'custom.cart.customization_remove' | t }}
+            </button>
+            <button class="btn btn--sm btn--primary js-save-customization">
+              {{ 'custom.cart.customization_save' | t }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </modal-customization>
+  {%- endif -%}
+
 {%- if popups.size > 0 or show_size_chart -%}
-  <link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
 
   {%- if popups.size > 0 -%}
     {%- for block in popups -%}
-      <modal-dialog class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center" id="modal-{{ block.id }}" {{ block.shopify_attributes }}>
-        <div class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion" role="dialog" aria-label="{{ block.settings.link_text }}" aria-modal="true" tabindex="-1">
+      <modal-dialog
+        class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center"
+        id="modal-{{ block.id }}"
+        {{ block.shopify_attributes }}
+      >
+        <div
+          class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion"
+          role="dialog"
+          aria-label="{{ block.settings.link_text }}"
+          aria-modal="true"
+          tabindex="-1"
+        >
           <button type="button" class="modal__close-btn absolute js-close-modal">
             {% render 'icon-close' %}
             <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
@@ -31,8 +88,17 @@
   {%- endif -%}
 
   {%- if show_size_chart -%}
-    <modal-dialog class="modal invisible fixed top-0 left-0 w-full h-full flex items-center justify-center" id="size-chart">
-      <div class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion" role="dialog" aria-label="{{ pages[size_chart.settings.size_chart_page].title }}" aria-modal="true" tabindex="-1">
+    <modal-dialog
+      class="modal invisible fixed top-0 left-0 w-full h-full flex items-center justify-center"
+      id="size-chart"
+    >
+      <div
+        class="modal__window relative bg-theme-bg text-theme-text text-start overflow-hidden has-motion"
+        role="dialog"
+        aria-label="{{ pages[size_chart.settings.size_chart_page].title }}"
+        aria-modal="true"
+        tabindex="-1"
+      >
         <button type="button" class="modal__close-btn absolute js-close-modal">
           {% render 'icon-close' %}
           <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>

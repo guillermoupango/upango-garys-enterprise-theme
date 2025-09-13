@@ -6,6 +6,8 @@
   {% render 'cart-items', is_drawer: true %}
 {%- endcomment -%}
 
+<script src="{{ 'modal-customization.js' | asset_url }}" async></script>
+
 {%- if cart != empty -%}
   <script src="{{ 'cart-items.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
@@ -243,46 +245,22 @@
                     {%- endfor -%}
                   </ul>
                 {%- endif -%}
-                <div class="cart-item__customize mt-1">
-                  <details-disclosure class="block">
-                    <details
-                      id="details-{{ item.index | plus: 1 }}"
-                      class="disclosure disclosure--row"
-                      {% if item.properties.customization %}
-                        open
-                      {% endif %}
-                    >
-                      <summary>
-                        <label class="flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            name="customize-{{ item.index | plus: 1 }}"
-                            id="customize-{{ item.index | plus: 1 }}"
-                            class=""
-                            {% if item.properties.customization %}
-                              checked
-                            {% endif %}
-                            onclick="document.getElementById('details-{{ item.index | plus: 1 }}').open = this.checked"
-                          >
-                          <span class="text-sm bold">{{ 'custom.cart.checkbox' | t }}</span>
-                        </label>
-                      </summary>
-                      <div class="disclosure__panel has-motion">
-                        <div class="disclosure__content">
-                          <label class="visually-hidden" for="item-properties-{{ item.index | plus: 1 }}">
-                            {{- 'custom.cart.label' | t -}}
-                          </label>
-                          <textarea
-                            class="input w-full"
-                            id="item-properties-{{ item.index | plus: 1 }}"
-                            name="properties[customization]"
-                            placeholder="{{ 'custom.cart.placeholder' | t }}"
-                          >{% if item.properties.customization %}{{ item.properties.customization }}{% endif %}</textarea>
-                        </div>
-                      </div>
-                    </details>
-                  </details-disclosure>
-                </div>
+
+                {%- render 'product-popups', customization_modal: true, item: item -%}
+
+                <modal-opener class="no-js-hidden" data-modal="modal-{{ item.variant_id }}">
+
+                  <!--{{ item.properties.customization.value }}-->
+                  <!--{{ item | json }}-->
+                  <button class="link text-sm" aria-haspopup="dialog">
+                    {% if item.properties.customization == blank %}
+                      {{ 'custom.cart.checkbox' | t }}
+                    {% else %}
+                      {{ 'custom.cart.customization_edit' | t }}
+                    {% endif %}
+                  </button>
+                </modal-opener>
+
               </div>
             </td>
 

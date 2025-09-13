@@ -112,6 +112,12 @@
   else
     assign allow_order = false
   endif
+
+  assign current_collection = collection.handle
+  assign is_outlet = false
+  if current_collection == 'outlet'
+    assign is_outlet = true
+  endif
     
 -%}
 
@@ -128,9 +134,18 @@
 
     <div class="card__media{% if show_hover_image %} has-hover-image{% endif %} relative">
       {%- if show_slideshow -%}
+        {% liquid
+          assign slideshow_url = ''
+          if is_outlet
+            assign slideshow_url = product_url
+          else
+            assign slideshow_url = product_url
+          endif
+        %}
+
         {%- render 'product-card-image-slider',
           product: product,
-          product_url: product_url,
+          product_url: slideshow_url,
           attrs: 'disable-mobile="true"',
           image_ratio: image_ratio,
           image_blend: settings.blend_product_images,
@@ -138,8 +153,10 @@
           image_class: class,
           image_quality: image_quality
         -%}
+
       {%- else -%}
-        <a href="{{ product_url }}" aria-label="{{ product.title | escape }}" class="media block relative{% if settings.blend_product_images %} image-blend{% endif %} js-prod-link" style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;" tabindex="-1">
+        {% comment %}  {% endcomment %}
+        <a href="{% if is_outlet %} {{current_variant.url}} {% else %} {{product_url}} {% endif %}" aria-label="{{ product.title | escape }}" class="media block relative{% if settings.blend_product_images %} image-blend{% endif %} js-prod-link" style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;" tabindex="-1">
           {%- if product.featured_media -%}
             {%- capture attributes %}data-media-id="{{ product.featured_media.id }}"{% endcapture -%}
             {% render 'image',
@@ -215,10 +232,17 @@
             </p>
           {%- endif -%}
 
+          {% comment %} Quitar Link de Titulo de  producto
+
           <p class="card__title {% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
             <a href="{{ product_url }}" class="card-link text-current js-prod-link">
               {{- product.title | escape -}}
             </a>
+          </p>
+          {% endcomment %}
+
+          <p class="card__title {% if settings.show_dividers %} mb-1{% else %} mt-1 mb-0{% endif %}">
+            {{- product.title | escape -}}
           </p>
 
           {%- if settings.card_show_subtitle and product.metafields.descriptors.subtitle != blank -%}
@@ -267,17 +291,40 @@
                     {%- capture option_id %}{{ section.id }}-{{ product.id }}-{{ option.name | handle }}{% endcapture -%}
                     {%- assign variant_key = 'option' | append: option.position -%}
 
+                    {%- assign first_enabled_checked = false -%} {% comment %}  {% endcomment %}
+
                     {%- for value in option.values limit: 50 -%}
                       {%- liquid
                         assign variant_value = product.variants | where: variant_key, value | first
                         if option.selected_value == value
                           assign selected_color = value
                         endif
+                        
+                        # Verificar si el color tiene variantes descatalogadas (outlet)
+                        assign color_sin_outlet = true
+                        assign color_variants = product.variants | where: variant_key, value
+                        for variant in color_variants
+                          if variant.metafields.upng.descatalogado == true
+                            assign color_sin_outlet = false
+                            break
+                          endif
+                        endfor
                       -%}
-                      <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}" value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"{% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}{% if option.selected_value == value and settings.card_hover_action == 'slideshow' %} checked{% endif %}>
+                      {% comment %}  {% endcomment %}
+                      <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}"
+                        value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"
+                        {% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}
+                        {% if is_outlet and color_sin_outlet %} disabled{% endif %}
+                        {% if color_sin_outlet == false and first_enabled_checked == false %} checked{% assign first_enabled_checked = true %}{% endif %}
+                      >
                       {%- if is_native_swatch -%}
                         {%- if value.swatch.image -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch>
+                          <label {% if forloop.index > swatch_limit %} hidden{% endif %}
+                            class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.card_swatch_shape }}
+                            {% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}
+                            {% if is_outlet and color_sin_outlet %} disabled-swatch{% endif %}" {% comment %}  {% endcomment %}
+                            for="{{ option_id }}-opt-{{ forloop.index0 }}" data-swatch
+                          >
                             <span class="visually-hidden js-value">{{ value }}</span>
                             {%- if settings.card_swatch_shape == 'natural' -%}
                               <div class="opt-label__native-media media">
@@ -293,15 +340,26 @@
                           </label>
 
                         {%- elsif value.swatch.color -%}
-                          <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
+                          <label {% if forloop.index > swatch_limit %} hidden{% endif %}
+                            class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.card_swatch_shape }}
+                            {% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}
+                            {% if is_outlet and color_sin_outlet %} disabled-swatch{% endif %}" {% comment %}  {% endcomment %}
                                  data-swatch="{{ value | replace: '"', '' | downcase }}"
                                  for="{{ option_id }}-opt-{{ forloop.index0 }}"
-                                 style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;">
+                                 style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;"
+                                >
                             <span class="visually-hidden js-value">{{ value }}</span>
                           </label>
                         {%- endif -%}
                       {%- else -%}
-                        <label{% if forloop.index > swatch_limit %} hidden{% endif %} class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}{% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}" title="{{ value | replace: '"', '`' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}" for="{{ option_id }}-opt-{{ forloop.index0 }}">
+                        <label {% if forloop.index > swatch_limit %} hidden{% endif %}
+                          class="opt-label opt-label--swatch relative swatch-shape--{{ settings.card_swatch_shape }}
+                          {% if settings.card_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}
+                          {% if settings.card_colors_style == 'variant-images' and variant_value.featured_media %} swatch--variant-image{% endif %}
+                          {% if is_outlet and color_sin_outlet %} disabled-swatch{% endif %}" {% comment %}  {% endcomment %}
+                          title="{{ value | replace: '"', '`' }}" data-swatch="{% if settings.card_colors_style != 'variant-images' or variant_value.featured_media == blank %}{{ value | replace: '"', '' | downcase }}{% endif %}"
+                          for="{{ option_id }}-opt-{{ forloop.index0 }}"
+                          >
                           {%- if settings.card_colors_style == 'variant-images' and variant_value.featured_media -%}
                             {%- if settings.card_swatch_shape == "natural" -%}
                               <img loading="lazy" class="bg-theme-bg" src="{{ variant_value.featured_media.preview_image | image_url: width: swatch_size }}" height="{{ swatch_size | divided_by: variant_value.featured_media.preview_image.aspect_ratio | round }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
@@ -319,7 +377,7 @@
                           -%}
                           <img loading="lazy" class="img-fit bg-theme-bg" src="{{ image_to_render | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}" height="{{ swatch_size }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
 
-                            <pre>{{ image_to_render | json }}</pre>
+                            {% comment %} <pre>{{ image_to_render | json }}</pre> {% endcomment %}
 
                           {%- endif -%}
                           <span class="visually-hidden">{{ value }}</span>
