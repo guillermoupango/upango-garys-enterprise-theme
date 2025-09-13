@@ -17,10 +17,10 @@
         <th scope="col" class="variant-table__header visually-hidden">{{ 'custom.variant-table.variant-name' | t }}</th>
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.size' | t }}</th>
         {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verStock %}
-          <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
+          <th scope="col" class="variant-table__header" id="header_cell--stock">{{ 'custom.variant-table.stock' | t }}</th>
         {% endif %}
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
+        <th scope="col" class="variant-table__header" id="header_cell--date">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
+        <th scope="col" class="variant-table__header" id="header_cell--notify">{{ 'custom.variant-table.notify-me' | t }}</th>
         <th scope="col" class="variant-table__header">
           <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
         </th>
@@ -36,10 +36,22 @@
         {% liquid
           # Metacampos de variante para validaciones de Input
 
+          # Determinar si variante descatalogado / Fallback: vacio = false
           assign descatalogado = variant.metafields.upng.descatalogado.value
-          # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
           if variant.metafields.upng.descatalogado.value == blank
            assign descatalogado = false
+          endif
+
+          # Determinar si variante privado / Fallback: vacio = false
+          assign variante_privada = variant.metafields.upng.privado
+          if variant.metafields.upng.privado == blank
+           assign variante_privada = false
+          endif
+          
+          # mostrar 'Avisame' cuando stock <= 0 y NO esté descatalogada la variante
+          assign show_avisame = false
+          if variant.inventory_quantity <= 0 and descatalogado == false
+            assign show_avisame = true
           endif
 
         %}
@@ -60,9 +72,7 @@
               }}
             {% endif %}
           </td>
-          <!-- Oculto - logica de mostrar / ocultar filas -->
           <td class="variant-table__cell visually-hidden">{{ variant.option1 }}</td>
-          <!-- Oculto - logica de mostrar / ocultar filas -->
           <td class="variant-table__cell variant-table__cell--size">{{ variant.option2 }}</td>
           {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verStock %}
             <td class="variant-table__cell variant-table__cell--stock">
@@ -72,10 +82,10 @@
           <td class="variant-table__cell variant-table__cell--date">
             {% render 'UPNG-date-indicator', variant: variant %}
           </td>
+          <!--{{ show_avisame }}-->
           <td class="variant-table__cell variant-table__cell--status">
-            {% if variant.available %}
-            {% else %}
-              <button class="variant-table__button" variant-id="{{ variant.id }}">
+            {%  if show_avisame %}
+               <button class="variant-table__button" variant-id="{{ variant.id }}">
                 {% render 'icon', icon: 'upng-avisame', height: 24, width: 24, class: 'variant-table__icon' %}
               </button>
             {% endif %}
@@ -166,7 +176,7 @@
       <tfoot>
         <tr class="variant-table__last-row">
           <td colspan="100%">
-            <div class="flex justify-between">
+            <div class="flex justify-between variant-table__total-container">
               <div class="flex justify-start items-center gap-theme">
                 {% if can_order %}
                   <button
@@ -175,12 +185,12 @@
                     aria-label="{{- 'cart.items.remove' | t -}}"
                   >
                     {% render 'icon-trash' %}
-                    {{ 'custom.variant-table.clear-all' | t }}
+                    <span>{{ 'custom.variant-table.clear-all' | t }}</span>
                   </button>
                   <div class="variant-table__loader is-loading hidden"></div>
     
                   <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
-                    class="btn btn--secondary variant-table__view-cart-button js-prod-link">
+                    class="btn btn--secondary btn--sm variant-table__view-cart-button js-prod-link">
                     {{ 'custom.variant-table.view-cart' | t }}
                   </a>
                 {% else %}

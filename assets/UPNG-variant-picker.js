@@ -460,9 +460,11 @@ if (!customElements.get('upng-variant-picker')) {
 
     /**
      * Updates the url with the selected variant id.
+     * Desconectado por Utilidad de Outlets
      * @param {object} evt - Event object.
      */
     updateUrl(evt) {
+      return
       if (!evt || evt.type !== 'change' || this.dataset.updateUrl === 'false') return;
       window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.variant.id}`);
     }
@@ -629,7 +631,6 @@ if (!customElements.get('upng-variant-picker')) {
       }
     }
 
-    // Nuevo método para filtrar tabla
     filterTableBySelectedVariant() {
 
       // No hacer nada si la tabla no está cargada o estamos en vista compacta
@@ -657,6 +658,38 @@ if (!customElements.get('upng-variant-picker')) {
       this.variantRows.forEach(row => {
         const rowColor = row.querySelector('td:nth-child(2)').textContent.trim();
         const shouldShow = rowColor === selectedColor;
+        row.style.display = shouldShow ? '' : 'none';
+      });
+
+      // Aplicar filtro adicional por contexto outlet
+      this.filterOutletVariants();
+    }
+
+    filterOutletVariants() {
+      // No hacer nada si la tabla no está cargada o estamos en vista compacta
+      if (!this._state.isTableLoaded || this._state.isQuickAddContext) return;
+      if (!this.variantRows || !this.variantRows.length) return;
+
+      // Detectar si estamos en contexto outlet
+      const path = window.location.pathname;
+      const collectionsMatch = path.match(/\/collections\/([^\/]+)/);
+      const isOutlet = collectionsMatch ? collectionsMatch[1] === 'outlet' : false;
+
+      // Solo aplicar filtro si estamos en contexto outlet
+      if (!isOutlet) return;
+
+      // Filtrar filas visibles por estado de descatalogado
+      this.variantRows.forEach(row => {
+        // Solo procesar filas que ya están visibles
+        if (row.style.display === 'none') return;
+
+        const stockIndicator = row.querySelector('.js-stock-indicator');
+        if (!stockIndicator) return;
+
+        const isDescatalogado = stockIndicator.dataset.descatalogado === 'true';
+        
+        // En contexto outlet, mostrar solo variantes descatalogadas
+        const shouldShow = isDescatalogado;
         row.style.display = shouldShow ? '' : 'none';
       });
     }

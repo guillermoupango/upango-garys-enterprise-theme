@@ -30,10 +30,22 @@
 {%- endcomment -%}
 
 <link rel="stylesheet" href="{{ 'UPNG-variant-picker.css' | asset_url }}">
+<script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
+  # Selección de Variante
   if section.settings.select_first_variant or product.variants.size == 1 or product.selected_variant
     assign variant_is_selected = true
+  endif
+
+  # Actualizar URL
+  assign update_url = update_url | default: false, allow_false: true
+
+  # Capturar collection 'outlet'
+  assign current_collection = collection.handle
+  assign is_outlet = false
+  if current_collection == 'outlet'
+    assign is_outlet = true
   endif
 %}
 
@@ -41,13 +53,11 @@
   <link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
 {%- endif -%}
 
-<script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
-
 {%- if block.settings.selector_style == 'dropdown' -%}
   <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-{%- assign update_url = update_url | default: false, allow_false: true -%}
+{% comment %} Desde liquid: {{ is_outlet }} {% endcomment %}
 
 <upng-variant-picker
   {% if context %}
@@ -64,6 +74,7 @@
   {% endif %}
 >
   {%- for option in product.options_with_values -%}
+    <!--{{ forloop.index }}: {{ option | json }}-->
     {%- capture option_id %}{{ section.id }}-{{ option.name | handle }}{% endcapture -%}
     {%- liquid
       assign is_color_selector = false
@@ -175,6 +186,19 @@
         {%- endif -%}
         <div class="option-selector__btns flex flex-wrap{% if is_variant_image_style %} items-start{% endif %}">
           {%- for value in option.values -%}
+            {% comment %} Recorrer TODAS las variantes, buscar el value y capturar metafields {% endcomment %}
+            {% assign color_sin_outlet = true %}
+
+            {%- for variant in product.variants -%}
+              {%- if variant.options[option_index0] == value -%}
+                <!-- Variante ID: {{ variant.title }} | Descatalogado: {{ variant.metafields.upng.descatalogado }} -->
+                {% if variant.metafields.upng.descatalogado == true %}
+                  {% assign color_sin_outlet = false %}
+                  {% break %}
+                {%  endif %}
+              {%- endif -%}
+            {%- endfor -%}
+
             {%- assign value_index0 = forloop.index0 -%}
             <input
               type="radio"
@@ -182,9 +206,7 @@
               name="{{ option_id }}-option"
               id="{{ option_id }}-opt-{{ value_index0 }}"
               value="{{ value | escape }}"
-              {% if variant_is_selected and option.selected_value == value %}
-                checked
-              {% endif %}
+              {% if variant_is_selected and option.selected_value == value %}checked{% endif %}
             >
 
             {%- if is_variant_image_style -%}
@@ -196,6 +218,7 @@
                       data-swatch="{{ value | replace: '"', '' | downcase }}"
                     {% endif %}
                     for="{{ option_id }}-opt-{{ value_index0 }}"
+                    {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} {% comment %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
                   >
                     <span class="visually-hidden js-value">{{- value | escape -}}</span>
                     <div class="opt-label__media media h-full w-full{% if settings.variant_picker_color_style == 'variant-images' and variant.featured_media == blank %} absolute top-0 left-0{% else %} relative{% endif %}">
@@ -239,6 +262,7 @@
                 class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
                 for="{{ option_id }}-opt-{{ value_index0 }}"
                 data-swatch
+                {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} {% comment %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span class="visually-hidden js-value">{{ value }}</span>
                 {%- if settings.variant_picker_swatch_shape == 'natural' -%}
@@ -262,7 +286,7 @@
                 class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
                 data-swatch="{{ value | replace: '"', '' | downcase }}"
                 for="{{ option_id }}-opt-{{ value_index0 }}"
-                style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;"
+                style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none; {% if is_outlet and color_sin_outlet %}display: none;{% endif %}" {% comment %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span class="visually-hidden js-value">{{ value }}</span>
               </label>
@@ -274,6 +298,7 @@
                   data-swatch="{{ value | replace: '"', '' | downcase }}"
                 {% endif %}
                 for="{{ option_id }}-opt-{{ value_index0 }}"
+                {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} {% comment %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span
                   {% if is_color_selector and is_swatch_style %}
@@ -329,7 +354,7 @@
 </upng-variant-picker>
 
 {% if customer.b2b? %}
-<div class="flex justify-center gap-3 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
+<div class="flex justify-center gap-2 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
   <div class="text-xs product-inventory__status" data-inventory-level="normal">{{- 'custom.availability.available' | t -}}</div>
   <div class="text-xs product-inventory__status" data-inventory-level="backordered">{{- 'custom.availability.next-arrival' | t -}}</div>
   <div class="text-xs product-inventory__status" data-inventory-level="low">{{- 'custom.availability.outlet' | t -}}</div>

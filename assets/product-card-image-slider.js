@@ -1,6 +1,11 @@
 /* global CarouselSlider */
 
+  const path = window.location.pathname;
+  const collectionsMatch = path.match(/\/collections\/([^\/]+)/);
+  const isOutlet = collectionsMatch ? collectionsMatch[1] === 'outlet' : false;
+
 if (!customElements.get('product-card-image-slider')) {
+  
   customElements.whenDefined('carousel-slider').then(() => {
     class ProductCardImageSlider extends CarouselSlider {
       constructor() {
@@ -11,8 +16,7 @@ if (!customElements.get('product-card-image-slider')) {
 
         if (this.productCard) {
           this.productCard.addEventListener('change', this.handleSwatchChange.bind(this));
-        }
-      }
+        }      }
 
       init() {
         super.init();
@@ -54,6 +58,49 @@ if (!customElements.get('product-card-image-slider')) {
         
         // Force a check of button states
         this.setButtonStates();
+
+        // Nuevo: Usar el Helper para actualizar los enlaces con la variante
+        this.updateLinksWithVariant();
+      }
+
+      /**
+       * Helper
+       * Actualiza los enlaces de productos con el parámetro de variante cuando se está en la colección outlet
+       */
+      updateLinksWithVariant() {
+        // Early return if not in outlet collection
+        if (!isOutlet) {
+          return;
+        }
+
+        // Find the checked input (selected variant)
+        const checkedInput = this.productCard?.querySelector('.card__swatches .opt-btn:checked');
+        
+        if (!checkedInput) {
+          console.warn('ProductCardImageSlider: No checked variant found in outlet product');
+          return;
+        }
+
+        // Get the variant ID from the checked input
+        const variantId = checkedInput.dataset.variantId;
+        
+        if (!variantId) {
+          console.warn('ProductCardImageSlider: No variant ID found in checked input');
+          return;
+        }
+
+        // Find all links within this product card slider
+        const productLinks = this.querySelectorAll('a[href]');
+        
+        productLinks.forEach(link => {
+          const currentHref = link.getAttribute('href');
+          
+          if (currentHref) {
+            // Add the variant parameter (URLs are clean at initialization)
+            const newHref = `${currentHref}?variant=${variantId}`;
+            link.setAttribute('href', newHref);
+          }
+        });
       }
 
       /**

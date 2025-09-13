@@ -7,8 +7,6 @@
 
 {% comment %} 
 
-CAMBIO:
-
   Si upng.key_fecha_proxima_llegada='date
   mostrar el valor de upng.fecha_proxima_llegada
 
@@ -18,27 +16,11 @@ CAMBIO:
   Si ninguno de los anteriores
   No mostrar nada
 
-
 {% endcomment %}
 
 {%- liquid
-    # Variable Global correspondiente a 2 días en segundos
-    assign adicion_en_segundos = 172800
-    
-    # Fechas formateadas en timestamp Unix
-    assign timestamp_fecha_actual = "now" | date: '%s'
-    assign timestamp_fecha_proxima_llegada = variant.metafields.upng.fecha_proxima_llegada | date: '%s'
-    assign timestamp_fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%s'
-    
-    #Logica anteriro, ya no se usa
-    assign fecha_disponibilidad = variant.metafields.upng.fecha_disponibilidad | date: '%d-%m-%Y'
-    assign fecha_disponibilidad_mas_adicion = timestamp_fecha_disponibilidad | plus: adicion_en_segundos
-    assign mostrar_disponibilidad_con_adicion = fecha_disponibilidad_mas_adicion | date: '%d-%m-%Y'
-    assign stock_upango = variant.metafields.upng.stock_disponible
-
-    # NUEVO CAMBIO
     assign key_fecha = variant.metafields.upng.key_fecha_proxima_llegada
-    assign fecha_mostrar = variant.metafields.upng.fecha_proxima_llegada
+    assign fecha_mostrar = variant.metafields.upng.fecha_proxima_llegada | date: "%d/%m/%Y"
   -%}
 
   {% if key_fecha == 'ask' %}
