@@ -169,7 +169,7 @@
 
 .pvd-container > span,
 .pvp-container {
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .pvd-container > span {
@@ -177,7 +177,7 @@
 }
 
 .pvp-label {
-  padding: 0 6px;
+  padding: 0 4px 0 6px;
 }
 
 /* tabs collapsibles detalles de producto */
@@ -203,6 +203,10 @@ details-disclosure .disclosure .disclosure__title svg {
   touch-action: pan-x;
   /* Permite desplazamiento en móviles */
   border-collapse: collapse;
+}
+
+.size-chart thead {
+   background-color: rgb(245, 245, 245);
 }
 
 .size-chart th,

@@ -122,6 +122,8 @@
   <script src="{{ 'product-model.js' | asset_url }}" defer></script>
 {%- endif -%}
 
+{%- render 'product-popups', product_clear: true -%}
+
 <div class="container">
   <div class="product js-product" data-section="{{ section.id }}">
     <div id="product-media" class="product-media product-media--{{ section.settings.media_layout }}">
@@ -357,7 +359,10 @@
                       <input type="hidden" name="quantity" value="1">
                     {%- endif -%}
 
-                    <div class="product-info__add-button">
+                    <div class="product-info__add-button flex flex-col justify-center">
+
+                      <div class="quick_add-separator mt-1 mb-3"> {{- 'customer.login.alternate_provider_separator' | t -}}</div>
+
                       {%- capture add_to_cart_text -%}
                         {%- if product.template_suffix contains 'preorder' -%}
                           {{- 'products.product.preorder' | t -}}
@@ -371,7 +376,7 @@
                       {%- if allow_order == true -%}
                         <button type="button"
                                 {% if customer.b2b? %} {% else %} style="display: none" {% endif %}
-                                class="btn btn--primary w-full js-quick-add"
+                                class="btn btn--sm btn--secondary btn--tertiary w-auto js-quick-add"
                                 aria-haspopup="dialog"
                                 data-product-url="{{ product.url }}"
                                 data-product-default-variant="{{ product.has_only_default_variant }}"

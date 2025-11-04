@@ -37,6 +37,8 @@
       "discounted-price_html": "Discount",
       "quantity": "Quantity",
       "clear-all": "Clear All",
+      "clear-all_confirmation": "Yes, Clear All",
+      "keep": "No, Keep",
       "view-cart": "View Cart",
       "subtotal": "Subtotal",
       "total-items": "Total Items",
@@ -45,7 +47,11 @@
       "available-text": "available now",
       "backorder-text": "available in +2 days",
       "remaining-text": "Remaining",
-      "ask-text": "please ask"
+      "ask-text": "please ask",
+      "clear_title": "Are you sure you want to remove it?",
+      "clear_confirmation": "This product and all its variants will be removed from your cart. If you change your mind, you'll need to add it again.",
+      "add_to_cart": "ADD TO CART",
+      "update_cart": "UPDATE CART"
     },
     "stock-indicator": {
       "not-available": "Not available",

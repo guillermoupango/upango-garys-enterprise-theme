@@ -74,7 +74,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   white-space: nowrap;
   letter-spacing: -0.01em;
   text-align: center;
-  padding-bottom: 3rem !important;
+  padding-bottom: 1rem !important;
   opacity: 0.7;
   line-height: 1;
 }
@@ -94,6 +94,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   position: absolute;
   top: 30px;
   left: 0;
+  z-index: 3;
 }
 
 .variant-table__cell--size {
@@ -141,7 +142,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 .variant-table__cell--quantity a {
-  opacity: 0.7;
+  opacity: 0.8;
   padding: 7px;
 }
 
@@ -216,7 +217,7 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   height: 1px;
   background-color: rgba(var(--text-color) / 0.15);
   position: absolute;
-  bottom: 64px;
+  top: 0;
   left: 0;
 }
 
@@ -250,10 +251,6 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 }
 
 @media (max-width: 480px) {
-
-  .variant-table thead tr::after {
-  top: 34px;
-}
 
   .variant-table-container {
     padding-top: 1rem;
@@ -402,37 +399,47 @@ upng-variant-picker .option-selector {
   bottom: -3px;
 }
 
+.drawer__content upng-variant-picker .option-selector__btns {
+  max-height: 36px;
+  overflow-y: hidden;
+  overflow-x: visible;
+}
+
 upng-variant-picker .option-selector legend {
   position: absolute;
   bottom: 0;
-  margin-bottom: -24px !important;
+  margin-bottom: -26px !important;
+  font-size: 0.83em;
 }
 
 .quick-add-drawer .drawer__content {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .quick-add__product-details .variant-table {
   min-height: auto;
 }
 
-.quick-add__product-details .variant-table tbody {
-  height: 312px;
+/* .quick-add__product-details .variant-table tbody {
+  height: 412px;
   min-height: auto;
   display: block;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: auto;
+  width: 76vw;
 }
+ */
 
 .quick-add__product-details .variant-table tr {
-  display: table;
-  width: 100%;
   table-layout: fixed;
+  min-width: 100%;
 }
 
 .quick-add__product-details .variant-table thead {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 3;
+  background-color: rgba(var(--drawer-bg-color));
 }
 
 .quick-add__product-details .variant-table tfoot {
@@ -473,4 +480,22 @@ upng-variant-picker .option-selector legend {
   text-align: center;
   line-height: 1;
   margin-top: 4px;
+}
+
+.quick_add-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: rgb(var(--text-color));
+  gap: 2rem; 
+}
+
+.quick_add-separator::before,
+.quick_add-separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(var(--text-color) / .15);
 }

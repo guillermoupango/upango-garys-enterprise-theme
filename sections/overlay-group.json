@@ -34,7 +34,7 @@
         "media_promotion_visibility": "always",
         "link_url": "",
         "media_promotion_min_height": 150,
-        "content": "<p>Promotion text<\/p>",
+        "content": "<p>Promotion text</p>",
         "text_type_scale": "1em",
         "text_width": 400,
         "text_alignment": "justify-center items-center text-center",

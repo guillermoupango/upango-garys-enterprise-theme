@@ -1,0 +1,20 @@
+{%- comment -%}
+ Renderiza precio de variante directamente
+  Parameters:
+  - variant {Object} - Product variant.
+
+  Uso:
+  {% render 'upng-variant-price', variant: variant %}
+{%- endcomment -%}
+
+
+<div class="price upng-price-wrapper--pvd">
+{% if can_see_prices %}
+  <div class="price__default">
+    <strong class="price__current">{{ variant.price | money_with_currency }}</strong>
+  </div>
+  <div class="unit-price relative" hidden="">
+    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+  </div>
+{% endif %}
+</div>

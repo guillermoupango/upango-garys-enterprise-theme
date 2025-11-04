@@ -407,32 +407,38 @@
 
 /* Logica para mostrar y ocultar los precios PVD */
 
-
 function togglePvdPrices() {
   const toggleButton = document.getElementById('togglePvdButton');
   
-  // Verificamos que el botón existe
   if (!toggleButton) return;
   
   const isPvdVisible = toggleButton.checked;
-  localStorage.setItem('pvdVisible', isPvdVisible.toString());
+  sessionStorage.setItem('pvdVisible', isPvdVisible.toString());
 
+   // Mostrar/ocultar precios PVD
   document.querySelectorAll('.upng-price-wrapper--pvd').forEach(item => {
     item.style.display = isPvdVisible ? 'block' : 'none';
   });
+
+  // Agregar/quitar clase strong a precios PVR
+  document.querySelectorAll('.upng-price-pvr').forEach(item => {
+    if (isPvdVisible) {
+      item.classList.remove('upng-price-pvr--strong');
+    } else {
+      item.classList.add('upng-price-pvr--strong');
+    }
+  });
+  
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('togglePvdButton');
   
-  // Verificamos que el botón existe
   if (!toggleButton) return;
   
-  // Recuperamos el estado, convertimos explícitamente a booleano
-  const isPvdVisible = localStorage.getItem('pvdVisible') === 'true';
+  // Por defecto ON, mantiene estado durante la sesión (hasta cerrar pestaña)
+  const isPvdVisible = sessionStorage.getItem('pvdVisible') !== 'false';
   toggleButton.checked = isPvdVisible;
   
-  // Reutilizamos la función para actualizar la UI
   togglePvdPrices();
-  
 });

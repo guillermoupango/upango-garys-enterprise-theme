@@ -115,7 +115,7 @@ if (!customElements.get('media-gallery')) {
 
       // Intentar obtener el código de color de la variante seleccionada
       let colorCode = this.getColorCodeFromVariant(evt.detail.variant);
-      console.log(colorCode);
+      //console.log(colorCode);
       
 
       // Si encontramos un código de color...
@@ -304,6 +304,9 @@ if (!customElements.get('media-gallery')) {
           // Verificar si tiene el atributo data-image-name
           if (!item.dataset.imageName) return;
 
+          // Omitir el video del producto de la agrupación por color
+          if (item.dataset.mediaId === 'product-video') return;
+
           // Extraer el código de color del nombre de la imagen
           const colorCode = this.extractColorCode(item.dataset.imageName);
           // Si no se pudo extraer un código de color, omitir este elemento
@@ -418,11 +421,22 @@ if (!customElements.get('media-gallery')) {
       if (selectedGroup) {
         if (this.currentGroup !== selectedGroup) {
           this.currentGroup = selectedGroup;
+          
+          // Modificación: mantener el video siempre visible
           this.viewerItems.forEach((item) => {
+            // No ocultar el video del producto
+            if (item.dataset.mediaType === 'video' && item.dataset.mediaId === 'product-video') {
+              return; // Saltar este elemento, mantenerlo visible
+            }
             item.style.display = 'none';
             item.classList.remove('media-viewer__item--single');
           });
+          
           this.thumbsItems.forEach((item) => {
+            // No ocultar el thumbnail del video del producto
+            if (item.dataset.mediaId === 'product-video') {
+              return; // Saltar este elemento, mantenerlo visible
+            }
             item.style.display = 'none';
           });
 
@@ -588,7 +602,25 @@ if (!customElements.get('media-gallery')) {
     handleThumbClick(evt) {
       const thumb = evt.target.closest('[data-image-name]');
       if (!thumb) return;
-    
+
+      // Manejo específico para el video del producto
+      if (thumb.dataset.mediaId === 'product-video') {
+        const videoItem = this.querySelector('[data-media-id="product-video"]');
+        if (videoItem) {
+          this.customSetActiveMedia(videoItem);
+          
+          // Reproducir específicamente el video del producto
+          const videoElement = videoItem.querySelector('video');
+          if (videoElement) {
+            videoElement.currentTime = 0; // Reiniciar desde el inicio
+            videoElement.play().catch(e => {
+              console.log('Error reproduciendo video:', e);
+            });
+          }
+          return;
+        }
+      }
+          
       // Intentar encontrar por data-image-name
       let itemToShow = this.querySelector(`[data-image-name="${thumb.dataset.imageName}"]`);
       
@@ -634,6 +666,24 @@ if (!customElements.get('media-gallery')) {
     customSetActiveMedia(mediaItem, scrollToItem = true) {
       if (mediaItem === this.currentItem) return;
       window.pauseAllMedia(this);
+
+      // Pausar específicamente el video del producto si existe
+      const productVideo = this.querySelector('[data-media-id="product-video"] video');
+      if (productVideo) {
+        productVideo.pause();
+      }
+
+      // Si el nuevo elemento es el video, reproducirlo
+      if (mediaItem.dataset.mediaId === 'product-video') {
+        const videoElement = mediaItem.querySelector('video');
+        if (videoElement) {
+          videoElement.play().catch(e => {
+            // Manejo silencioso del error de autoplay
+            console.log('Autoplay prevented:', e);
+          });
+        }
+      }
+
       this.currentItem = mediaItem;
       this.currentIndex = this.visibleItems.indexOf(this.currentItem);
 

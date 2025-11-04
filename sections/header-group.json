@@ -24,7 +24,6 @@
       "block_order": [
         "announcement-1"
       ],
-      "disabled": true,
       "settings": {
         "link1": "",
         "link1_label": "",
@@ -124,12 +123,12 @@
         "columns_chpK8x",
         "columns_xqEqR9"
       ],
-      "disabled": true,
       "settings": {
         "enable_sticky": true,
         "mobile_menu_position": "burger-left",
         "logo_text": "",
         "logo_type_scale": "2",
+        "logo": "{{ shop.brand.logo }}",
         "logo_width": 240,
         "logo_h1": false,
         "logo_center": true,
@@ -154,53 +153,10 @@
         "text_color": "#070707",
         "accent_color": "#ee4646"
       }
-    },
-    "promo-strip": {
-      "type": "promo-strip",
-      "blocks": {
-        "heading-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Announce a promotion",
-            "heading_size": "h6",
-            "show_on_mobile": true,
-            "show_on_desktop": true
-          }
-        },
-        "text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share something special with your customers.</p>",
-            "enlarge_text": false,
-            "show_on_mobile": true,
-            "show_on_desktop": true
-          }
-        },
-        "discount-2": {
-          "type": "discount",
-          "settings": {
-            "discount_code": "DISCOUNTCODE"
-          }
-        }
-      },
-      "block_order": [
-        "heading-0",
-        "text-1",
-        "discount-2"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_height": "xsmall",
-        "color_scheme": "1",
-        "full_width": true,
-        "dividers": "border-top",
-        "prevent_animation": false
-      }
     }
   },
   "order": [
     "announcement",
-    "header",
-    "promo-strip"
+    "header"
   ]
 }

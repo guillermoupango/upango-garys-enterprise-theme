@@ -1,13 +1,16 @@
 .modal {
   visibility: hidden;
   z-index: 30;
-  transition: visibility 0s 0.4s, background-color 0.3s ease 0.1s;
+  /* Cierre instantáneo */
+  transition: visibility 0s 0.15s;
   background-color: rgba(var(--modal-overlay-color)/0);
 }
+
 .modal[open], [open]:not(.is-closing) .modal {
   visibility: visible;
   transition-delay: 0s;
   background-color: rgba(var(--modal-overlay-color)/var(--modal-overlay-opacity));
+  z-index: 30;
 }
 
 .modal__window {
@@ -17,16 +20,20 @@
   max-height: calc(100dvh - var(--gutter) * 2);
   margin: var(--gutter);
   overflow: auto;
-  transform: scale(0.8);
-  transition: transform 0.15s ease-in 0s, opacity 0.15s 0s;
-  border-radius: var(--modal-border-radius);
+  transform: scale(0.95);
   opacity: 0;
+  /* Cierre muy rápido: 0.15s */
+  transition: transform 0.15s ease-in, opacity 0.15s ease-in;
+  border-radius: var(--modal-border-radius);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
+
 [open]:not(.is-closing) .modal__window {
   transform: scale(1);
-  transition: transform 0.15s ease-out 0.1s, opacity 0.15s 0.1s;
   opacity: 1;
+  /* Apertura suave: 0.3s */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.3s ease-out;
 }
 
 .modal__close-btn {
@@ -54,6 +61,7 @@
     min-width: 480px;
   }
 }
+
 @media (max-width: 768.98px) {
   .modal .rte table {
     width: auto;
@@ -61,11 +69,9 @@
     margin-left: calc(var(--gutter) * -1);
   }
 }
+
 @media (min-width: 769px) {
   .modal__content {
     padding: 64px calc(10 * var(--space-unit)) calc(10 * var(--space-unit));
   }
-}
-.modal {
-  transition: visibility 0s 0.4s, background-color 0.3s ease 0.1s;
 }

@@ -1,7 +1,15 @@
 {%- comment -%}theme-check-disable NestedSnippet{%- endcomment -%}
 {{ 'cart-items.css' | asset_url | stylesheet_tag }}
 
-{%- if cart != empty -%}
+{% liquid
+        # Determinar permiso para ordenar
+      assign can_order = false
+      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+        assign can_order = true
+      endif
+%}
+
+{%- if cart != empty and can_order -%}
   <link rel="stylesheet" id="cart-summary-css" href="{{ 'cart-summary.css' | asset_url }}">
 {%- endif -%}
 
@@ -18,7 +26,7 @@
   >
     <div class="cart__items">
       {%- if section.settings.show_page_title -%}
-        <h1 class="h2 mb-10{% if cart != empty %} {{ section.settings.heading_align }}{% else %} text-center{% endif %} js-cart-title">
+        <h1 class="h2 mb-10{% if cart != empty and can_order %} {{ section.settings.heading_align }}{% else %} text-center{% endif %} js-cart-title">
           {{ 'cart.general.title' | t }}
         </h1>
       {%- endif -%}
@@ -61,9 +69,9 @@
       {%- endif -%}
     </div>
 
-    {%- if cart != empty -%}
+    {%- if cart != empty and can_order -%}
       <div class="cart__summary p-6 md:p-8" id="cart-summary" data-section="{{ section.id }}">
-        {%- if cart != empty -%}
+        {%- if cart != empty and can_order -%}
           <h2 class="h5">{{ 'cart.summary.title' | t }}</h2>
 
           {%- if section.settings.show_order_note -%}
@@ -101,6 +109,7 @@
                         rows="4"
                         placeholder="{{ 'custom.cart.label_placeholder' | t }}"
                       >{{ cart.note }}</textarea>
+                      
                       <label class="visually-hidden" for="delivery-note">{{ 'custom.cart.delivery' | t }}</label>
                       <textarea
                         class="input w-full"
@@ -108,8 +117,7 @@
                         name="attributes[delivery-note]"
                         rows="4"
                         placeholder="{{ 'custom.cart.delivery_placeholder' | t }}"
-                        value="{{ cart.attributes.delivery-note }}"
-                      ></textarea>
+                      >{{ cart.attributes['delivery-note'] }}</textarea>
                     </cart-note>
                   </div>
                 </div>

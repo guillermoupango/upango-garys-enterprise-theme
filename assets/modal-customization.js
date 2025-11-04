@@ -91,7 +91,6 @@ class ModalCustomization extends HTMLElement {
     // Botón Guardar: activo solo si hay cambios
     this.saveBtn.disabled = !hasChanged;
 
-    // Botón Remover: lógica más compleja
     if (!hasInitialValue && !hasCurrentValue) {
       // No hay valor inicial ni actual: oculto y deshabilitado
       this.removeBtn.style.display = "none";

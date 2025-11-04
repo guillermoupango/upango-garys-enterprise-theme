@@ -310,11 +310,11 @@
                           endif
                         endfor
                       -%}
-                      {% comment %}  {% endcomment %}
+                      {% comment %} Ocultar input si: contexto oulet y color No tiene {% endcomment %}
                       <input type="radio" class="opt-btn visually-hidden js-option" name="{{ option_id }}-option" id="{{ option_id }}-opt-{{ forloop.index0 }}"
                         value="{{ value | escape }}" data-variant-id="{{ variant_value.id }}"
                         {% if variant_value.featured_media %} data-media-id="{{ variant_value.featured_media.id }}"{% endif %}
-                        {% if is_outlet and color_sin_outlet %} disabled{% endif %}
+                        {% if is_outlet and color_sin_outlet %} style="display: none;"{% endif %}
                         {% if color_sin_outlet == false and first_enabled_checked == false %} checked{% assign first_enabled_checked = true %}{% endif %}
                       >
                       {%- if is_native_swatch -%}
@@ -375,9 +375,22 @@
                               assign image_to_render = variant_value.metafields.upng.icono_color.value
                             endif
                           -%}
-                          <img loading="lazy" class="img-fit bg-theme-bg" src="{{ image_to_render | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}" height="{{ swatch_size }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/>
+                          <!--image_to_render: {{ image_to_render }}, variant_value.metafields.upng.icono_color: {{ variant_value.metafields.upng.icono_color }}-->
+                          {% comment %} <img loading="lazy" class="img-fit bg-theme-bg" src="{{ image_to_render | image_url: width: swatch_size, height: swatch_size, crop: 'center' }}" height="{{ swatch_size }}" width="{{ swatch_size }}" alt="{{ variant_value.featured_media.preview_image.alt | escape }}"/> {% endcomment %}
+                          {% comment %} <img loading="lazy" class="img-fit bg-theme-bg" src="{{ image_to_render }}"/> {% endcomment %}
+                          <img 
+                            loading="lazy"
+                            decoding="async"
+                            class="img-fit bg-theme-bg" 
+                            src="{{ image_to_render }}?width=48"
+                            srcset="{{ image_to_render }}?width=48 1x, {{ image_to_render }}?width=96 2x"
+                            sizes="48px"
+                            alt=""
+                            width="{{ swatch_size }}"
+                            height="{{ swatch_size }}"
+                          />
 
-                            {% comment %} <pre>{{ image_to_render | json }}</pre> {% endcomment %}
+                          {% comment %} Pendiente: Alt vacío {% endcomment %}
 
                           {%- endif -%}
                           <span class="visually-hidden">{{ value }}</span>

@@ -25,7 +25,7 @@
     },
     "price": {
       "pvp": "PVR desde",
-      "pvd": "Desde"
+      "pvd": "PVD desde"
     },
     "variant-table": {
       "color": "Color",
@@ -37,6 +37,8 @@
       "discounted-price_html": "Precio<br>con DTO.",
       "quantity": "Cantidad",
       "clear-all": "Borrar Todo",
+      "clear-all_confirmation": "Si, Borrar Todo",
+      "keep": "No, Mantener",
       "view-cart": "Ver Cesta",
       "subtotal": "Subtotal",
       "total-items": "Total Items",
@@ -46,6 +48,10 @@
       "backorder-text": "uds. disp. +2 días",
       "remaining-text": "Resto",
       "ask-text": "consultar",
+      "clear_title": "¿Seguro que quieres eliminarlo?",
+      "clear_confirmation": "Este producto y todas sus variantes desaparecerán del carrito. Si cambias de idea, tendrás que volver a agregarlo.",
+      "add_to_cart": "AGREGAR AL CARRITO",
+      "update_cart": "ACTUALIZAR CARRITO"
     },
     "stock-indicator": {
       "not-available": "No disponible",

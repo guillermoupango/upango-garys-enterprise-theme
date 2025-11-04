@@ -3492,6 +3492,7 @@ details-disclosure + details-disclosure .disclosure--row {
   padding-inline-end: 0.5rem;
   font-size: 1em;
   white-space: nowrap;
+  margin-top: -6px;
 }
 
 .price__was {
@@ -4350,14 +4351,19 @@ label[data-swatch]:hover,
   box-shadow: 0 0 0 2px rgb(var(--swatch-border-color-default));
 }
 
-input:checked + .opt-label--swatch,
+/* input:checked + .opt-label--swatch,
 input:checked + .filter__label[data-swatch]::before {
   border: 2px solid rgba(var(--bg-color));
   box-shadow: 0 0 0 2px rgb(var(--swatch-border-color-active));
+} */
+
+input:checked + .opt-label--swatch,
+input:checked + .filter__label[data-swatch]::before {
+  border: 2px solid rgba(var(--info-text-color));
 }
 
 label[data-swatch]::before {
-  content: "";
+  /*content: "";*/
   display: block;
   width: 100%;
   height: 100%;
@@ -5612,14 +5618,19 @@ body > .os-scrollbar {
   font-weight: 500;
 }
 
-.product-info__block .product-info__add-button button{
+/* .product-info__block .product-info__add-button button{
   background: none;
   background-color: rgb(var(--text-color));
   border: none;
 }
 .product-info__block .product-info__add-button button:hover{
   background-color: black;
-}
+} */
+
+.product-info__block .product-info__add-button button{
+  margin: 0 auto;
+  width: max-content;
+} 
 
 [data-inventory-level=none] {
   color: rgb(var(--no-stock-text-color));
@@ -5812,6 +5823,7 @@ modal-customization .js-remove-customization {
 /* Selector de variantes deshabilitado (Caso Outlet) */
 
 .disabled-swatch {
+  display: none !important;
   pointer-events: none;
   cursor: not-allowed;
 }
@@ -5828,10 +5840,26 @@ modal-customization .js-remove-customization {
 }
 
 @media (max-width: 480px) {
-  .variant-table__view-cart-button {
-    display: none;
-  }
   .product-inventory__status{
   line-height: 1;
   }
+}
+
+.btn--icon.btn--sm {
+  line-height: 1.5;
+}
+
+/* Boton Agregar/Actualizar al carrito */
+.js-actualizar-carrito, .js-actualizar-carrito-rapido{
+  border: black;
+  outline: black;
+  background: black;
+}
+
+.opener_inactive{
+  cursor: none;
+  z-index: -1;
+  filter: grayscale(1);
+  opacity: .5;
+  pointer-events: none;
 }

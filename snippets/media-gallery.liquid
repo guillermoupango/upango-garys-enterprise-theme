@@ -89,6 +89,26 @@
 
   <div class="media-gallery__viewer relative">
     <ul class="media-viewer flex" id="gallery-viewer" role="list" tabindex="0">
+
+      {%- comment -%} Video del producto (si existe) {%- endcomment -%}
+      {%- if product.metafields.upng.video_producto.value != blank -%}
+        <li class="media-viewer__item media-viewer__item--video" 
+            data-media-id="product-video" 
+            data-media-type="video"
+            data-image-name="product-video">
+          <div class="media-viewer__video-container">
+            <video 
+              src="{{ product.metafields.upng.video_producto.value }}"
+              controls 
+              autoplay 
+              muted 
+              loop
+              style="width: 100%; height: 100%; object-fit: cover;">
+            </video>
+          </div>
+        </li>
+      {%- endif -%}
+
     {%- for media in product.media -%}
         {%- liquid
           assign lazy_load = true
@@ -109,6 +129,7 @@
           # REFACTOR PARA ASIGNAR NOMBRE DE IMAGEN ASOCIADA A MEDIA
           assign image_filename = media.src | split: '/' | last
         -%}
+        
         <li class="media-viewer__item{% if media.id == featured_media.id or select_first_image %} is-current-variant{% endif %}
           {% if section.settings.hide_variants and variant_images contains media.src %} media-viewer__item--variant{% endif %}
            {% if section.settings.media_layout == 'stacked' and media.id == featured_media.id %}{% if underline_active and section.settings.enable_media_grouping == false %} is-active{% endif %}{% endif %}
@@ -226,8 +247,37 @@
 
   {%- if media_count > 1 and section.settings.media_thumbs != 'never' and featured_product == false -%}
     {%- unless section.settings.media_layout == 'stacked' and section.settings.media_thumbs == 'desktop' -%}
-      <div class="media-gallery__thumbs{% if section.settings.media_thumbs == 'desktop' %} hidden md:block{% endif %}{% if section.settings.media_layout == 'stacked' %} md:hidden{% endif %} no-js-hidden">
+      {% comment %} ORIGINAL
+       <div class="media-gallery__thumbs{% if section.settings.media_thumbs == 'desktop' %} hidden md:block{% endif %}{% if section.settings.media_layout == 'stacked' %} md:hidden{% endif %} no-js-hidden">
+      {% endcomment %}
+
+       {% comment %} Mostrar Siempre barra de thumbnails {% endcomment %}
+      <div class="media-gallery__thumbs{% if section.settings.media_layout == 'stacked' %} md:hidden{% endif %} no-js-hidden">
         <ul class="media-thumbs relative flex" role="list">
+          
+          {%- comment -%} Thumbnail del video del producto (si existe) {%- endcomment -%}
+          {%- if product.metafields.upng.video_producto.value != blank -%}
+            <li class="media-thumbs__item media-thumbs__item--video" 
+                data-media-id="product-video"
+                data-image-name="product-video">
+              <button class="media-thumbs__btn media relative w-full{% if settings.blend_product_images %} image-blend{% endif %}"
+                      aria-controls="gallery-viewer"
+                      {% if section.settings.thumb_ratio != 'natural' %} style="padding-top: {{ 1 | divided_by: thumb_ratio | times: 100 }}%;"{% endif %}>
+                <span class="visually-hidden">{{ 'products.product.media.load_video' | t: index: 1 }}</span>
+                
+                <span class="media-thumbs__badge absolute flex items-center justify-center pointer-events-none">
+                  {%- render 'icon-video' -%}
+                </span>
+                
+                <video 
+                  src="{{ product.metafields.upng.video_producto.value }}"
+                  muted
+                  style="width: 100%; height: 100%; object-fit: cover;">
+                </video>
+              </button>
+            </li>
+          {%- endif -%}
+
           {%- for media in product.media -%}
             {%- liquid
               capture thumb_index
