@@ -321,6 +321,7 @@
     }
   },
   "current": {
+    "bg_color": "#ffffff",
     "heading_color": "#000000",
     "text_color": "#2a2b2a",
     "link_color": "#2a2b2a",
@@ -338,10 +339,10 @@
     "color_scheme_2_bg_grad": "",
     "color_scheme_2_heading": "#ffffff",
     "color_scheme_2_btn_bg": "#00bfb3",
-    "color_scheme_3_bg": "#ff580d",
-    "color_scheme_3_bg_grad": "linear-gradient(46deg, rgba(234, 73, 0, 1) 8%, rgba(234, 73, 0, 1) 32%, rgba(255, 88, 13, 0.88) 92%)",
-    "color_scheme_3_heading": "#ffffff",
-    "color_scheme_3_text": "#ffffff",
+    "color_scheme_3_bg": "#ffffff",
+    "color_scheme_3_bg_grad": "linear-gradient(46deg, rgba(255, 255, 255, 1) 8%, rgba(255, 255, 255, 1) 99%, rgba(255, 88, 13, 0.88) 100%)",
+    "color_scheme_3_heading": "#0085ca",
+    "color_scheme_3_text": "#0085ca",
     "color_scheme_3_btn_bg": "#2a2b2a",
     "panel_bg_color": "#f4f4f4",
     "panel_heading_color": "#2a2b2a",
@@ -364,7 +365,7 @@
     "slider_button_style": "btn--primary",
     "drawer_border_radius": 16,
     "overlay_border_radius": 0,
-    "disclosure_toggle": "plus",
+    "disclosure_toggle": "arrow",
     "show_breadcrumbs_collection": true,
     "show_breadcrumbs_collection_list": true,
     "show_breadcrumbs_article": true,
@@ -410,8 +411,9 @@
     "custom_label_text_color": "#ffffff",
     "variant_picker_color_style": "upng-variant-images",
     "variant_picker_swatch_shape": "circle",
-    "variant_picker_swatch_size": 40,
+    "variant_picker_swatch_size": 36,
     "card_colors_style": "upng-variant-images",
+    "card_swatch_size": 22,
     "social_youtube_url": "https://youtube.com/user/shopify",
     "social_instagram_url": "https://instagram.com/shopify",
     "social_pinterest_url": "https://pinterest.com/shopify",
@@ -426,7 +428,7 @@
     "cart_icon": "bag",
     "cart_type": "page",
     "show_recommendations": true,
-    "recommendations_heading": "You may also like...",
+    "recommendations_heading": "También te puede interesar...",
     "recommendations_to_show": 5,
     "recommendations_layout": "list",
     "cart_shaking": true,
@@ -452,24 +454,12 @@
         "disabled": false,
         "settings": {}
       },
-      "4192575423207874272": {
-        "type": "shopify://apps/upango-b2b-garys/blocks/upng-account-replacer/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
-        "disabled": false,
-        "settings": {
-          "account_settings_url": "pages/mi-cuenta"
-        }
-      },
       "13396536547038335341": {
         "type": "shopify://apps/upango-b2b-garys/blocks/upng-re-remove/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
         "disabled": false,
         "settings": {
           "cart_bubble_selector": ".cart-count-bubble span"
         }
-      },
-      "3970769715982306836": {
-        "type": "shopify://apps/upango-gc-garys/blocks/upng-checkout_blocker/4d3891c8-6bcb-4ff9-aed0-86b970728f37",
-        "disabled": false,
-        "settings": {}
       },
       "11305800767581204822": {
         "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-header-script/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
@@ -502,6 +492,13 @@
           "upng_dejar_de_avisar_existing_button": ".variant-table__button.btn-avisame-activo",
           "upng_avisame_avisame": "",
           "upng_avisame_noavisame": "Deja de avisarme"
+        }
+      },
+      "4192575423207874272": {
+        "type": "shopify://apps/upango-b2b-garys/blocks/upng-account-replacer/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+        "disabled": false,
+        "settings": {
+          "account_settings_url": "mi-cuenta"
         }
       }
     }

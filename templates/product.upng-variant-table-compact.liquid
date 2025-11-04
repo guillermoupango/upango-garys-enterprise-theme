@@ -1,4 +1,8 @@
+{% comment %} ESTA TABLA YA NO SE USA, Compra Rapida se construye por JS {% endcomment %}
+
 {% layout none %}
+
+{% comment %} ESTA TABLA YA NO SE USA, Compra Rapida se construye por JS {% endcomment %}
 
 {% assign option1_name = product.options_with_values[0].name %}
 
@@ -7,6 +11,7 @@
 {% assign option2_values = product.options_with_values[1].values %}
 
 {%- liquid
+  # DESARROLLO MOVIDO AL COMPONENTE PADRE *quick-add-drawer.liquid*
   assign can_order = true
   if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].allowOrder == true
     assign can_order = true
@@ -14,6 +19,8 @@
     assign can_order = false
   endif
 -%}
+
+{% comment %} ESTA TABLA YA NO SE USA, Compra Rapida se construye por JS {% endcomment %}
 
 <table class="variant-table">
   <thead>
@@ -35,14 +42,17 @@
             break
           endif
         endfor
+
+        # capturar imagen de variante de metacampo
+          assign image_file  = first_variant_of_color.metafields.upng.galeria_imagenes.value | first
       -%}
 
       <tr class="variant-table__row">
         {% comment %} Primera celda con imagen del color {% endcomment %}
         <td class="variant-table__cell variant-table__color">
-          {% if first_variant_of_color.featured_image != blank %}
+          {% if image_file %}
             {{
-              first_variant_of_color.featured_image
+              image_file
               | image_url: width: 64
               | image_tag:
                 class: 'variant-table__image',
@@ -109,6 +119,7 @@
           -%}
 
           <td class="variant-table__cell variant-table__cell--quantity">
+       
 <!--
 Descatalogada:{{ descatalogado }} Privada:{{variante_privada}} -->
             {% comment %}

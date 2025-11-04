@@ -694,5 +694,23 @@
     "telefonoOpcional": "Telefono",
     "politicaPrivacidad1": "Ho letto e accetto l' ",
     "politicaPrivacidad2": "politica sulla riservatezza"
+  },
+  "shopify": {
+    "checkout": {
+      "local_pickup": {
+        "location_information_next": {
+          "one": "C'è %{count} Filiale con azioni vicino a te",
+          "other": "C'è %{count} filiali con azioni vicino a te",
+          "many": "C'è %{count} filiali con azioni vicino a te"
+        }
+      },
+      "one": {
+        "errors": {
+          "merchandise": {
+            "signature_mismatch": "La firma della merce promozionale non corrisponde alla linea {{stable_id}}."
+          }
+        }
+      }
+    }
   }
 }

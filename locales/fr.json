@@ -36,7 +36,7 @@
       "label": "Pagination",
       "next": "Suivant",
       "previous": "Précédent",
-      "position": "Page {{ current_page }} \/ {{ total_pages }}",
+      "position": "Page {{ current_page }} / {{ total_pages }}",
       "position_results": "Affichage {{ visible_results }} sur {{ total_results }}",
       "show_more": "Afficher plus"
     },
@@ -121,9 +121,9 @@
       "pickup_availability": {
         "check_other_stores": "Vérifier la disponibilité dans d’autres boutiques",
         "pick_up_available": "Service de retrait disponible",
-        "pick_up_available_at_html": "Service de retrait disponible à <strong>{{ location_name }}<\/strong>",
+        "pick_up_available_at_html": "Service de retrait disponible à <strong>{{ location_name }}</strong>",
         "pick_up_unavailable": "Service de retrait actuellement indisponible",
-        "pick_up_unavailable_at_html": "Service de retrait actuellement indisponible à <strong>{{ location_name }}<\/strong>",
+        "pick_up_unavailable_at_html": "Service de retrait actuellement indisponible à <strong>{{ location_name }}</strong>",
         "refresh": "Actualiser",
         "unavailable": "Impossible de charger la disponibilité pour le Service de retrait",
         "view_store_info": "Voir les informations de la boutique"
@@ -135,14 +135,14 @@
         "regular_price": "Prix habituel",
         "sale_price": "Prix soldé",
         "unit_price": "Prix unitaire",
-        "unit_price_separator": " \/ "
+        "unit_price_separator": " / "
       },
       "product_variants": "Variantes de produit",
       "qty": "Qté",
       "rating": "Note",
       "reviews": "Avis",
       "sale": "Solde",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Frais de livraison<\/a> calculés lors du paiement.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Frais de livraison</a> calculés lors du paiement.",
       "size_chart": "Guide des tailles",
       "sku": "SKU :",
       "sold_out": "Épuisé",
@@ -235,7 +235,7 @@
     },
     "footer": {
       "payment_methods": "Moyens de paiement acceptés",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
       "back_to_top": "Retour en haut"
     },
     "collection": {
@@ -292,7 +292,7 @@
         "powered_by": "Cette boutique est propulsée par"
       },
       "login_form": {
-        "admin_link_html": "Vous êtes propriétaire de cette boutique ? <a href=\"\/admin\">Connectez-vous ici<\/a>",
+        "admin_link_html": "Vous êtes propriétaire de cette boutique ? <a href=\"/admin\">Connectez-vous ici</a>",
         "error": "Mot de passe incorrect",
         "heading": "Entrer dans la boutique avec un mot de passe",
         "password_label": "Mot de passe",
@@ -372,11 +372,11 @@
       "backorder": "Le produit est en rupture de stock et sera expédié dès qu’il sera de retour en stock.",
       "view_cart": "Voir le panier",
       "free_shipping": "Votre commande est éligible à la livraison gratuite !",
-      "free_shipping_deficit_html": "Dépensez <strong>{{ amount }}<\/strong> de plus pour <strong>la livraison gratuite<\/strong> !",
+      "free_shipping_deficit_html": "Dépensez <strong>{{ amount }}</strong> de plus pour <strong>la livraison gratuite</strong> !",
       "taxes_and_shipping_at_checkout": "Taxes, réductions et frais d’expédition calculés à l’étape du paiement.",
-      "taxes_and_shipping_at_checkout_html": "Taxes, réductions et <a href=\"{{ link }}\">frais d’expédition<\/a> calculés à l’étape du paiement.",
+      "taxes_and_shipping_at_checkout_html": "Taxes, réductions et <a href=\"{{ link }}\">frais d’expédition</a> calculés à l’étape du paiement.",
       "taxes_included_shipping_at_checkout": "Taxe incluse, frais d’expédition et réductions calculés à l’étape du paiement.",
-      "taxes_included_shipping_at_checkout_html": "Taxe incluse. <a href=\"{{ link }}\">Frais d’expédition<\/a> et réductions calculés à l’étape du paiement.",
+      "taxes_included_shipping_at_checkout_html": "Taxe incluse. <a href=\"{{ link }}\">Frais d’expédition</a> et réductions calculés à l’étape du paiement.",
       "error": "Une erreur s’est produite lors de la mise à jour de votre panier. Veuillez réessayer."
     },
     "items": {
@@ -411,7 +411,7 @@
       "continue_shopping": "Continuer les achats"
     },
     "terms": {
-      "agreement_html": "J’accepte les <a href=\"{{ terms_url }}\" target=\"_blank\">conditions générales de vente et la politique de remboursement<\/a>",
+      "agreement_html": "J’accepte les <a href=\"{{ terms_url }}\" target=\"_blank\">conditions générales de vente et la politique de remboursement</a>",
       "confirmation": "Vous devez accepter les termes et conditions avant de continuer."
     }
   },
@@ -561,5 +561,156 @@
       "sku": "SKU",
       "description": "Une description du produit, comprenant des détails tels que la qualité de construction, les matériaux utilisés et les raisons d’acheter."
     }
+  },
+  "shopify": {
+    "checkout": {
+      "local_pickup": {
+        "location_information_next": {
+          "one": "Il y a %{count} Branche avec des stocks près de chez vous",
+          "other": "Il y a %{count} succursales avec des stocks près de chez vous",
+          "many": "Il y a %{count} succursales avec des stocks près de chez vous"
+        }
+      },
+      "one": {
+        "errors": {
+          "merchandise": {
+            "signature_mismatch": "La signature de la marchandise promotionnelle ne correspond pas à la ligne {{stable_id}}."
+          }
+        }
+      }
+    }
+  },
+  "custom": {
+    "cart": {
+      "info": "Vous pouvez faire n'importe quel commentaire sur votre commande ou nous fournir des informations que vous considérez comme importantes.",
+      "delivery": "Commentaires à la livraison Albaran",
+      "label_placeholder": "Commentaire aux ventes des uniformes de Gary",
+      "delivery_placeholder": "Commentaire qui apparaît dans Albarán",
+      "checkbox": "Personnaliser ce produit",
+      "placeholder": "Indique la personnalisation que vous souhaitez sur ce produit",
+      "label": "Personnalisation",
+      "clear": "Chariot vide"
+    },
+    "price": {
+      "pvp": "PVR de",
+      "pvd": "Depuis"
+    },
+    "variant-table": {
+      "color": "Couleur",
+      "variant-name": "Nom variant",
+      "size": "Taille",
+      "stock": "Action",
+      "next-arrival_html": "Prox.<br>arrivée",
+      "notify-me": "Fais-moi savoir",
+      "discounted-price_html": "Prix<br>Avec DTO.",
+      "quantity": "Montant",
+      "clear-all": "Supprimer tout",
+      "view-cart": "Voir le panier",
+      "subtotal": "Total",
+      "total-items": "Total des articles",
+      "request-access": "Demander l'inscription",
+      "quantity-for": "Quantité pour %{title}",
+      "available-text": "Toi. Disp. immédiat",
+      "backorder-text": "Toi. Disp. +2 jours",
+      "remaining-text": "Repos",
+      "ask-text": "consulter"
+    },
+    "stock-indicator": {
+      "not-available": "Pas disponible",
+      "last-units": "Dernières unités",
+      "notify": "Consulter"
+    },
+    "availability": {
+      "available": "Unités disponibles",
+      "next-arrival": "Pas de stock, prochaine arrivée",
+      "outlet": "Sortie, dernière unités",
+      "not-available": "Pas disponible"
+    },
+    "catalog": {
+      "download": "Télécharger le catalogue",
+      "products": "Voir les produits de",
+      "visualizer": "Visualiseur de catalogue",
+      "actions": "Actions de catalogue",
+      "iframe_error": "Ce navigateur ne prend pas en charge le catalogue. Veuillez essayer à partir d'un autre navigateur."
+    },
+    "menu": {
+      "got_to": "Va"
+    },
+    "customer": {
+      "not_allowed": "Pas autorisé",
+      "where_to_buy": "Où acheter"
+    }
+  },
+  "upango": {
+    "customer": {
+      "log_out": "SORTIR"
+    }
+  },
+  "moodboard": {
+    "tipografias": "Types d'Oswald et Roboto",
+    "logoGarys": "Logo Garys",
+    "testInteractivo": "Test interactif",
+    "experienciaPersonalizada": "Profitez d'une expérience personnalisée",
+    "descripcionMoodboard": "En quelques minutes, vous pouvez concevoir un humeur unique et visualiser le style idéal pour les uniformes de votre équipe.",
+    "comenzar": "Commencer",
+    "graciasPorTest": "Merci d'avoir effectué le test interactif",
+    "preferenciasRegistradas": "Vos préférences ont été enregistrées, avec ces informations, notre équipe peut avoir une proposition plus efficace pour vous.",
+    "volverInicio": "Retour au début",
+    "colorCorporativoPregunta": "Quelle est la couleur de l'entreprise principale et le secondaire (si s'appliquer)?",
+    "coloresCorporativosPrincipales": "1. Couleurs d'entreprise principales",
+    "seleccionColor": "Sélectionnez une couleur, entrez le numéro hexadécimal ou pantone. Vous pouvez sélectionner plusieurs options",
+    "anadirColor": "+ Ajouter une autre couleur",
+    "coloresCorporativosSecundarios": "2. Couleurs d'entreprise secondaires",
+    "imagenProyectar": "Quelle image souhaitez-vous projeter à travers les uniformes?",
+    "seleccionMultiple": "Vous pouvez sélectionner plusieurs options",
+    "preferenciaMateriales": "Avez-vous une préférence sur les matériaux?",
+    "codigoHexadecimalPantone": "Code hexadécimal ou pantone",
+    "estiloProfesional": "PROFESSIONNEL",
+    "estiloElegante": "Élégant",
+    "estiloModerno": "Moderne",
+    "uniformeEstaciones": "Les employés auront-ils besoin d'une uniformité différente pour différentes stations de l'année?",
+    "invierno": "Hiver",
+    "naturales": "Naturel",
+    "entretiempo": "Entremopo",
+    "verano": "Été",
+    "tecnicos": "Techniciens",
+    "sostenibles": "Durable",
+    "estiloMarca": "Comment décrivent-ils le style général de votre marque?",
+    "minimalista": "Minimaliste",
+    "llamativo": "frappant",
+    "corporativo": "corporatif",
+    "departamentosUniformes": "Quels domaines ou départements ont besoin d'uniformes?",
+    "recepcion": "RÉCEPTION",
+    "porteroBotones": "Gardien / boutons de but",
+    "responsableSala": "Responsable de la chambre",
+    "camareroInterior": "Serveur intérieur",
+    "camareroTerraza": "Serveur en terrasse",
+    "jefeCocina": "CUISINIER",
+    "personalCocina": "Salon de cuisine",
+    "friegaplatos": "Friegaplatos",
+    "spa": "SPA",
+    "gobernanta": "GOUVERNANTE",
+    "camareraPiso": "Serveuse au sol",
+    "valetDePiso": "Valet de sol",
+    "mantenimiento": "ENTRETIEN",
+    "lavanderia": "LESSIVE",
+    "theCorner": "Le coin",
+    "preferenciasEstilo": "Lesquelles de ces options sont les mieux alignées sur vos préférences?",
+    "economica": "Économique",
+    "intermedia": "Intermédiaire",
+    "exclusiva": "Exclusif",
+    "siguiente": "Suivant",
+    "colorObligatorio": "Il est obligatoire de sélectionner ou d'entrer le numéro hexadécimal ou pantone.",
+    "colorObligatorioOP": "Entrez ou choisissez une couleur hexadécimale ou pantone pour continuer.",
+    "opcionObligatoria": "Sélectionnez une option pour continuer.",
+    "contactoObligatorio": "Complétez les données de contact et acceptez la politique de confidentialité pour continuer.",
+    "datosContacto": "Dernière étape",
+    "rellenaLosDatos": "Laissez-nous vos données pour vous envoyer votre proposition personnalisée",
+    "nombreEmpresa": "Nom de l'entreprise",
+    "nombreDeContacto": "Nom de contact",
+    "correoElectronico": "E-mail",
+    "telefonoOpcional": "Téléphone",
+    "politicaPrivacidad1": "J'ai lu et accepté le ",
+    "politicaPrivacidad2": "politique de confidentialité"
   }
 }

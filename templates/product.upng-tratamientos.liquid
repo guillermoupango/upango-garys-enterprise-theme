@@ -1,7 +1,7 @@
 {% layout none %}
 
 {% assign current_variant = product.selected_variant %}
-{% assign tratamiento_reference = current_variant.metafields.upng.ref-tratamiento.value %}
+{% assign tratamiento_reference = current_variant.metafields.upng.ref_tratamiento.value %}
 
 {% if tratamiento_reference != blank %}
   <div class="tratamiento-icons pr-6">
@@ -15,7 +15,5 @@
     {% endfor %}
   </div>
 {% else %}
-{% comment %}   <div class="tratamiento-icons--empty">
-    <!-- Contenido a mostrar cuando no hay tratamientos definidos -->
-  </div> {% endcomment %}
+    <!-- No tratamientos definidos -->
 {% endif %}

@@ -10,7 +10,7 @@
 {
   "general": {
     "localization": {
-      "country_label": "País\/Região",
+      "country_label": "País/Região",
       "countries_error": "Erro ao obter os países. Tente de novo.",
       "language_label": "Idioma",
       "update": "Atualizar"
@@ -36,7 +36,7 @@
       "label": "Paginação",
       "next": "Seguinte",
       "previous": "Anterior",
-      "position": "Página {{ current_page }} \/ {{ total_pages }}",
+      "position": "Página {{ current_page }} / {{ total_pages }}",
       "position_results": "Mostrando {{ visible_results }} de {{ total_results }}",
       "show_more": "Mostrar mais"
     },
@@ -121,9 +121,9 @@
       "pickup_availability": {
         "check_other_stores": "Verificar a disponibilidade noutras lojas",
         "pick_up_available": "Recolha disponível",
-        "pick_up_available_at_html": "Recolha disponível em <strong>{{ location_name }}<\/strong>",
+        "pick_up_available_at_html": "Recolha disponível em <strong>{{ location_name }}</strong>",
         "pick_up_unavailable": "Recolha indisponível neste momento",
-        "pick_up_unavailable_at_html": "Recolha indisponível neste momento em <strong>{{ location_name }}<\/strong>",
+        "pick_up_unavailable_at_html": "Recolha indisponível neste momento em <strong>{{ location_name }}</strong>",
         "refresh": "Repor",
         "unavailable": "Não foi possível carregar a disponibilidade de recolha",
         "view_store_info": "Ver informações da loja"
@@ -135,14 +135,14 @@
         "regular_price": "Preço normal",
         "sale_price": "Preço de venda",
         "unit_price": "Preço unitário",
-        "unit_price_separator": " \/ "
+        "unit_price_separator": " / "
       },
       "product_variants": "Variantes do produto",
       "qty": "Qtd.",
       "rating": "Avaliação",
       "reviews": "Avaliações",
       "sale": "Promoção",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Os custos de envio<\/a> são calculados aquando da finalização da compra.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Os custos de envio</a> são calculados aquando da finalização da compra.",
       "size_chart": "Guia de tamanhos",
       "sku": "SKU:",
       "sold_out": "Esgotado",
@@ -235,7 +235,7 @@
     },
     "footer": {
       "payment_methods": "Métodos de pagamento aceites",
-      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}<\/a>.",
+      "copyright_html": "&copy; {{ year }} <a href=\"{{ shop_url }}\">{{ shop_name }}</a>.",
       "back_to_top": "Regressar ao início"
     },
     "collection": {
@@ -292,7 +292,7 @@
         "powered_by": "Esta loja será suportada pela tecnologia da"
       },
       "login_form": {
-        "admin_link_html": "É o proprietário da loja? <a href=\"\/admin\">Inicie sessão aqui<\/a>",
+        "admin_link_html": "É o proprietário da loja? <a href=\"/admin\">Inicie sessão aqui</a>",
         "error": "Palavra-passe incorreta",
         "heading": "Entrar na loja usando a palavra-passe",
         "password_label": "Palavra-passe",
@@ -372,11 +372,11 @@
       "backorder": "O produto está esgotado e será enviado assim que estiver de novo em estoque.",
       "view_cart": "Ver carrinho",
       "free_shipping": "O seu pedido é elegível para entrega grátis!",
-      "free_shipping_deficit_html": "Gaste mais <strong>{{ amount }}<\/strong> para beneficiar da <strong>entrega grátis<\/strong>!",
+      "free_shipping_deficit_html": "Gaste mais <strong>{{ amount }}</strong> para beneficiar da <strong>entrega grátis</strong>!",
       "taxes_and_shipping_at_checkout": "Impostos, descontos e envio calculados na finalização da compra.",
-      "taxes_and_shipping_at_checkout_html": "Impostos, descontos e <a href=\"{{ link }}\">envio<\/a> calculados na finalização da compra.",
+      "taxes_and_shipping_at_checkout_html": "Impostos, descontos e <a href=\"{{ link }}\">envio</a> calculados na finalização da compra.",
       "taxes_included_shipping_at_checkout": "Imposto incluído, envio e descontos calculados na finalização da compra.",
-      "taxes_included_shipping_at_checkout_html": "Imposto incluído. <a href=\"{{ link }}\">Envio<\/a> e descontos calculados na finalização da compra.",
+      "taxes_included_shipping_at_checkout_html": "Imposto incluído. <a href=\"{{ link }}\">Envio</a> e descontos calculados na finalização da compra.",
       "error": "Ocorreu um erro ao atualizar o seu carrinho. Tente de novo."
     },
     "items": {
@@ -411,7 +411,7 @@
       "continue_shopping": "Continuar a comprar"
     },
     "terms": {
-      "agreement_html": "Concordo com os <a href=\"{{ terms_url }}\" target=\"_blank\">termos e com a política de reembolso<\/a>",
+      "agreement_html": "Concordo com os <a href=\"{{ terms_url }}\" target=\"_blank\">termos e com a política de reembolso</a>",
       "confirmation": "Tem de concordar com os termos e condições antes de continuar."
     }
   },
@@ -561,5 +561,122 @@
       "sku": "SKU1234",
       "description": "Uma descrição do produto, incluindo detalhes como a qualidade de construção, os materiais usados ​​e os motivos da compra."
     }
+  },
+  "shopify": {
+    "checkout": {
+      "shipping_errors": {
+        "unavailable_addresses_only_countries": "Seu pedido só pode ser enviado para {{countriesList}}. Para continuar, adicione um novo endereço."
+      },
+      "local_pickup": {
+        "location_information_next": {
+          "one": "Há %{count} Ramificação com ações perto de você",
+          "other": "Há %{count} ramos com ações perto de você",
+          "many": "Há %{count} ramos com ações perto de você"
+        }
+      },
+      "one": {
+        "errors": {
+          "merchandise": {
+            "signature_mismatch": "A assinatura da mercadoria promocional não corresponde à linha {{stable_id}}."
+          }
+        }
+      },
+      "order_review_requirement": {
+        "checkout_to_draft": "A filial da empresa está configurada para enviar todos os pedidos para revisar como rascunhos.",
+        "missing_address": "Não há endereço de entrega disponível: a gerência da filial da empresa está faltando e o uso de endereços de uso único foi desativado."
+      }
+    }
+  },
+  "custom": {
+    "cart": {
+      "info": "Você pode fazer qualquer comentário sobre seu pedido ou fornecer informações que considera importantes.",
+      "delivery": "Comentários para a entrega albaran",
+      "label_placeholder": "Comentário às vendas de vendas de uniformes de Gary",
+      "delivery_placeholder": "Comentário que aparece em Albarán",
+      "checkbox": "Personalize este produto",
+      "placeholder": "Indica a personalização que você deseja sobre este produto",
+      "label": "Personalização",
+      "clear": "Carrinho vazio"
+    },
+    "price": {
+      "pvp": "Pvr de",
+      "pvd": "De"
+    },
+    "variant-table": {
+      "color": "Cor",
+      "variant-name": "Nome variante",
+      "size": "Tamanho",
+      "stock": "Estoque",
+      "next-arrival_html": "Prox.<br>chegada",
+      "notify-me": "Avise",
+      "discounted-price_html": "Preço<br>Com dto.",
+      "quantity": "Quantia",
+      "clear-all": "Exclua tudo",
+      "view-cart": "Veja cesto",
+      "subtotal": "Subtotal",
+      "total-items": "Total de itens",
+      "request-access": "Solicitar registro",
+      "quantity-for": "Quantidade para %{title}",
+      "available-text": "Você. Disp. imediato",
+      "backorder-text": "Você. Disp. +2 dias",
+      "remaining-text": "Descansar",
+      "ask-text": "consultar"
+    },
+    "stock-indicator": {
+      "not-available": "Não disponível",
+      "last-units": "Últimas unidades",
+      "notify": "Consultar"
+    },
+    "availability": {
+      "available": "Unidades disponíveis",
+      "next-arrival": "Sem estoque, a próxima chegada",
+      "outlet": "Saída, Últimas unidades",
+      "not-available": "Não disponível"
+    },
+    "catalog": {
+      "download": "Baixar catálogo",
+      "products": "Veja os produtos de",
+      "visualizer": "Visualizador de catálogo",
+      "actions": "Ações do catálogo",
+      "iframe_error": "Este navegador não suporta o catálogo. Por favor, tente de outro navegador."
+    },
+    "menu": {
+      "got_to": "Vai"
+    },
+    "customer": {
+      "not_allowed": "Não é permitido",
+      "where_to_buy": "Onde comprar"
+    }
+  },
+  "moodboard": {
+    "camareroInterior": "Garçom interno",
+    "camareroTerraza": "Garçom de terraço",
+    "jefeCocina": "Chef",
+    "personalCocina": "Funcionários da cozinha",
+    "friegaplatos": "Friegoplatos",
+    "spa": "Spa",
+    "gobernanta": "GOVERNANTA",
+    "camareraPiso": "Garçonete do chão",
+    "valetDePiso": "Manobrista do chão",
+    "mantenimiento": "MANUTENÇÃO",
+    "lavanderia": "LAVANDERIA",
+    "theCorner": "A esquina",
+    "preferenciasEstilo": "Qual dessas opções está melhor alinhada com suas preferências?",
+    "economica": "Econômico",
+    "intermedia": "Intermediário",
+    "exclusiva": "Exclusivo",
+    "siguiente": "Seguindo",
+    "colorObligatorio": "É obrigatório que você selecione ou insira o número hexadecimal ou pantone.",
+    "colorObligatorioOP": "Digite ou escolha uma cor hexadecimal ou pantone para continuar.",
+    "opcionObligatoria": "Selecione uma opção para continuar.",
+    "contactoObligatorio": "Preencha os dados de contato e aceite a política de privacidade para continuar.",
+    "datosContacto": "Último passo",
+    "rellenaLosDatos": "Deixe -nos seus dados para enviar sua proposta personalizada",
+    "nombreEmpresa": "nome da empresa",
+    "nombreDeContacto": "Nome do contato",
+    "correoElectronico": "E-mail",
+    "telefonoOpcional": "Telefone",
+    "politicaPrivacidad1": "Eu li e aceito o ",
+    "politicaPrivacidad2": "política de Privacidade"
   }
 }
