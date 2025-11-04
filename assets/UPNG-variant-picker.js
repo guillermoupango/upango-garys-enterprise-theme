@@ -103,8 +103,8 @@ if (!customElements.get("upng-variant-picker")) {
      * @returns {Promise<Object|null>} Objeto con product y variants, o null si falla
      */
     async fetchAllVariantsData() {
-      const DOMAIN = "garys-b2b.myshopify.com";
-      const STOREFRONT_ACCESS_TOKEN = "ae05ed674ab74ac804572517ed1258ff";
+      const DOMAIN = "garys-b2benterprise.myshopify.com";
+      const STOREFRONT_ACCESS_TOKEN = "a12948ac9a26fdb704467b281c0d3217";
       const productUrl = this.dataset.url;
       const PRODUCT_HANDLE = productUrl.replace("/products/", "");
 

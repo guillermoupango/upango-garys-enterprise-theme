@@ -1,7 +1,7 @@
 /* global SideDrawer */
 
-const DOMAIN = "garys-b2b.myshopify.com";
-const STOREFRONT_ACCESS_TOKEN = "ae05ed674ab74ac804572517ed1258ff";
+const DOMAIN = "garys-b2benterprise.myshopify.com";
+const STOREFRONT_ACCESS_TOKEN = "a12948ac9a26fdb704467b281c0d3217";
 
 if (!customElements.get("quick-add-drawer")) {
   class QuickAddDrawer extends SideDrawer {
