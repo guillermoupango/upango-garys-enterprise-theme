@@ -15,6 +15,36 @@
   ],
   "company": [
     {
+      "key": "codigo_agente_asignado",
+      "namespace": "upng",
+      "name": "Código Agente Asignado",
+      "description": "Grupo del agente asignado",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "agents_carts",
+      "namespace": "upng",
+      "name": "Carrito del agente",
+      "description": "Carrito de agentes",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "codigo_agente_asignado2",
+      "namespace": "upng",
+      "name": "Código de agente jefe",
+      "description": "Código del segundo agente",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
       "key": "tarifa",
       "namespace": "upng",
       "name": "Tarifa",
@@ -55,47 +85,128 @@
       }
     },
     {
-      "key": "codigo_agente_asignado",
-      "namespace": "upng",
-      "name": "Código Agente Asignado",
-      "description": "Grupo del agente asignado",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "codigo_agente_asignado2",
-      "namespace": "upng",
-      "name": "Código de agente jefe",
-      "description": "Código del segundo agente",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "agents_carts",
-      "namespace": "upng",
-      "name": "Carrito del agente",
-      "description": "Carrito de agentes",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
       "key": "menu_cliente",
       "namespace": "upng",
       "name": "Menu Cliente",
-      "description": "Menú cliente",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "descuento_1",
+      "namespace": "upng",
+      "name": "Descuento 1",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "descuento_2",
+      "namespace": "upng",
+      "name": "Descuento 2",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "descuento_3",
+      "namespace": "upng",
+      "name": "Descuento 3",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "descuento_4",
+      "namespace": "upng",
+      "name": "Descuento 4",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "pago_por_adelantado",
+      "namespace": "upng",
+      "name": "Pago por adelantado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "forma_de_pago",
+      "namespace": "upng",
+      "name": "Forma de pago habitual",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "forma_de_entrega",
+      "namespace": "upng",
+      "name": "Forma de entrega",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "albaran_valorado_defecto",
+      "namespace": "upng",
+      "name": "Albarán valorado defecto",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "forma_entrega_habitual",
+      "namespace": "upng",
+      "name": "Forma entrega habitual",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "politica_de_envio",
+      "namespace": "upango",
+      "name": "Política de envío",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    }
+  ],
+  "company_location": [
+    {
+      "key": "forma_entrega_habitual",
+      "namespace": "upng",
+      "name": "Forma de entrega habitual",
+      "description": "",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
       }
     }
   ],
-  "company_location": [],
   "location": [
     {
       "key": "forma_entrega_habitual",
@@ -156,7 +267,7 @@
       "key": "grupo_clientes",
       "namespace": "upng",
       "name": "Grupo Clientes",
-      "description": "Para indicar el grupo de clientes que queremos que tenga acceso a la página",
+      "description": "Sólo los clientes que tengan la tag indicada en este campo verán esta página en el menú de mi cuenta. Se pueden poner diferentes valores separados por comas",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
@@ -170,6 +281,16 @@
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
+      }
+    },
+    {
+      "key": "iframe_catalogo",
+      "namespace": "upng",
+      "name": "iframe_catalogo",
+      "description": "URL del catalogo a mostrar dentro del <iframe>",
+      "type": {
+        "name": "url",
+        "category": "URL"
       }
     },
     {
@@ -191,97 +312,47 @@
         "name": "collection_reference",
         "category": "REFERENCE"
       }
-    },
-    {
-      "key": "iframe_catalogo",
-      "namespace": "upng",
-      "name": "iframe_catalogo",
-      "description": "URL del catalogo a mostrar dentro del <iframe>",
-      "type": {
-        "name": "url",
-        "category": "URL"
-      }
     }
   ],
   "product": [
     {
-      "key": "composicion",
-      "namespace": "upng",
-      "name": "Composición",
-      "description": "",
+      "key": "queries",
+      "namespace": "shopify--discovery--product_search_boost",
+      "name": "Buscar impulsos de productos",
+      "description": "Lista de consultas de búsqueda que posicionan mejor un producto en los resultados",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "related_products",
+      "namespace": "shopify--discovery--product_recommendation",
+      "name": "Productos relacionados",
+      "description": "Lista de productos relacionados",
+      "type": {
+        "name": "list.product_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "related_products_display",
+      "namespace": "shopify--discovery--product_recommendation",
+      "name": "Configuración de productos relacionados",
+      "description": "Determina cómo se muestran los productos relacionados junto con las recomendaciones de productos algorítmicas.",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
       }
     },
     {
-      "key": "tabla_de_medidas",
-      "namespace": "upng",
-      "name": "Tabla de medidas",
-      "description": "",
+      "key": "complementary_products",
+      "namespace": "shopify--discovery--product_recommendation",
+      "name": "Productos complementarios",
+      "description": "Lista de productos complementarios",
       "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "privado",
-      "namespace": "upng",
-      "name": "Privado",
-      "description": "",
-      "type": {
-        "name": "boolean",
-        "category": "TRUE_FALSE"
-      }
-    },
-    {
-      "key": "esquema",
-      "namespace": "upng",
-      "name": "Esquema",
-      "description": "",
-      "type": {
-        "name": "file_reference",
+        "name": "list.product_reference",
         "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "volumen",
-      "namespace": "upng",
-      "name": "Volumen",
-      "description": "",
-      "type": {
-        "name": "number_decimal",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "packaging",
-      "namespace": "upng",
-      "name": "Packaging",
-      "description": "",
-      "type": {
-        "name": "multi_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "color-pattern",
-      "namespace": "shopify",
-      "name": "Color",
-      "description": "Define el patrón o color primario, como las rayas o el azul.",
-      "type": {
-        "name": "list.metaobject_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "label",
-      "namespace": "theme",
-      "name": "theme.label",
-      "description": "Custom Label",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
       }
     },
     {
@@ -305,19 +376,9 @@
       }
     },
     {
-      "key": "gamas",
+      "key": "codigo_modelo",
       "namespace": "upng",
-      "name": "Gamas colores",
-      "description": "",
-      "type": {
-        "name": "list.single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "estilo_forma",
-      "namespace": "upng",
-      "name": "Estilo/Forma",
+      "name": "Código de modelo",
       "description": "",
       "type": {
         "name": "single_line_text_field",
@@ -331,6 +392,76 @@
       "description": "",
       "type": {
         "name": "rich_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "gamas",
+      "namespace": "upng",
+      "name": "Gamas colores",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "pvp",
+      "namespace": "upng",
+      "name": "PVP",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "nuevo",
+      "namespace": "upng",
+      "name": "Nuevo",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "descatalogado",
+      "namespace": "upng",
+      "name": "Descatalogado",
+      "description": "Alguna de sus variantes esta descatalogada. Usada para la colección de OUTLET",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "privado",
+      "namespace": "upng",
+      "name": "Privado",
+      "description": "Todas sus variantes son privadas",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "composicion",
+      "namespace": "upng",
+      "name": "Composición",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "estilo_forma",
+      "namespace": "upng",
+      "name": "Estilo/Forma",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
         "category": "TEXT"
       }
     },
@@ -385,104 +516,32 @@
       }
     },
     {
-      "key": "codigo_modelo",
+      "key": "tabla_de_medidas",
       "namespace": "upng",
-      "name": "Código de modelo",
+      "name": "Tabla de medidas",
       "description": "",
+      "type": {
+        "name": "multi_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "label",
+      "namespace": "theme",
+      "name": "theme.label",
+      "description": "Custom Label",
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
       }
     },
     {
-      "key": "croquis",
+      "key": "packaging",
       "namespace": "upng",
-      "name": "Croquis",
+      "name": "Packaging",
       "description": "",
       "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "nuevo",
-      "namespace": "upng",
-      "name": "Nuevo",
-      "description": "",
-      "type": {
-        "name": "boolean",
-        "category": "TRUE_FALSE"
-      }
-    },
-    {
-      "key": "descatalogado",
-      "namespace": "upng",
-      "name": "Descatalogado",
-      "description": "",
-      "type": {
-        "name": "boolean",
-        "category": "TRUE_FALSE"
-      }
-    },
-    {
-      "key": "pvp",
-      "namespace": "upng",
-      "name": "PVP",
-      "description": "",
-      "type": {
-        "name": "number_decimal",
-        "category": "NUMBER"
-      }
-    },
-    {
-      "key": "certificados",
-      "namespace": "upng",
-      "name": "Certificados",
-      "description": "",
-      "type": {
-        "name": "list.file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "external_id",
-      "namespace": "custom",
-      "name": "External ID",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
-      "key": "video",
-      "namespace": "upng",
-      "name": "Video",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    }
-  ],
-  "variant": [
-    {
-      "key": "icono_color",
-      "namespace": "upng",
-      "name": "Icono color",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
-      "key": "id_erp",
-      "namespace": "upng",
-      "name": "Id ERP",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
+        "name": "multi_line_text_field",
         "category": "TEXT"
       }
     },
@@ -497,33 +556,105 @@
       }
     },
     {
-      "key": "fecha_proxima_llegada",
+      "key": "video",
       "namespace": "upng",
-      "name": "Fecha próxima llegada",
+      "name": "Video",
       "description": "",
       "type": {
-        "name": "date",
-        "category": "DATE_TIME"
+        "name": "file_reference",
+        "category": "REFERENCE"
       }
     },
     {
-      "key": "stock_disponible",
-      "namespace": "upng",
-      "name": "Stock disponible",
+      "key": "external_id",
+      "namespace": "custom",
+      "name": "External ID",
       "description": "",
       "type": {
-        "name": "number_integer",
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "certificados",
+      "namespace": "upng",
+      "name": "Certificados",
+      "description": "",
+      "type": {
+        "name": "list.file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "color-pattern",
+      "namespace": "shopify",
+      "name": "Color",
+      "description": "Define el patrón o color primario, como las rayas o el azul.",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "por_articulo",
+      "namespace": "upng",
+      "name": "Por artículo",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "por_profesion",
+      "namespace": "upng",
+      "name": "Por profesión",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "por_coleccion",
+      "namespace": "upng",
+      "name": "Por colección",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "por_publicidad",
+      "namespace": "upng",
+      "name": "Por publicidad",
+      "description": "",
+      "type": {
+        "name": "list.single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
+  "variant": [
+    {
+      "key": "pvp",
+      "namespace": "upng",
+      "name": "PVP",
+      "description": "",
+      "type": {
+        "name": "number_decimal",
         "category": "NUMBER"
       }
     },
     {
-      "key": "descatalogado",
+      "key": "tratamiento",
       "namespace": "upng",
-      "name": "Descatalogado",
+      "name": "Tratamiento",
       "description": "",
       "type": {
-        "name": "boolean",
-        "category": "TRUE_FALSE"
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     },
     {
@@ -537,13 +668,73 @@
       }
     },
     {
-      "key": "pvp",
+      "key": "descatalogado",
       "namespace": "upng",
-      "name": "PVP",
+      "name": "Descatalogado",
+      "description": "",
+      "type": {
+        "name": "boolean",
+        "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "stock_disponible",
+      "namespace": "upng",
+      "name": "Stock disponible",
+      "description": "",
+      "type": {
+        "name": "number_integer",
+        "category": "NUMBER"
+      }
+    },
+    {
+      "key": "fecha_proxima_llegada",
+      "namespace": "upng",
+      "name": "Fecha próxima llegada",
+      "description": "",
+      "type": {
+        "name": "date",
+        "category": "DATE_TIME"
+      }
+    },
+    {
+      "key": "id_erp",
+      "namespace": "upng",
+      "name": "Id ERP",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "icono_color",
+      "namespace": "upng",
+      "name": "Icono color",
+      "description": "",
+      "type": {
+        "name": "file_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "volumen",
+      "namespace": "upng",
+      "name": "Volumen",
       "description": "",
       "type": {
         "name": "number_decimal",
         "category": "NUMBER"
+      }
+    },
+    {
+      "key": "key_fecha_proxima_llegada",
+      "namespace": "upng",
+      "name": "Key Fecha Próxima llegada",
+      "description": "",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     },
     {
@@ -557,13 +748,13 @@
       }
     },
     {
-      "key": "key_fecha_proxima_llegada",
+      "key": "privado",
       "namespace": "upng",
-      "name": "Key Fecha Próxima llegada",
+      "name": "Privado",
       "description": "",
       "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
+        "name": "boolean",
+        "category": "TRUE_FALSE"
       }
     }
   ],

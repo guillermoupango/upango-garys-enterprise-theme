@@ -20,7 +20,7 @@
           <th scope="col" class="variant-table__header">{{ 'custom.variant-table.stock' | t }}</th>
         {% endif %}
         <th scope="col" class="variant-table__header">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
-        <th scope="col" class="variant-table__header">{{ 'custom.variant-table.notify-me' | t }}</th>
+        <th scope="col" class="variant-table__header" id="header_cell--notify">{{ 'custom.variant-table.notify-me' | t }}</th>
         <th scope="col" class="variant-table__header">
           <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
         </th>
@@ -40,6 +40,11 @@
           # Fallback: por si el metacampo esta vacío, asuma que el producto NO está descatalogado
           if variant.metafields.upng.descatalogado.value == blank
            assign descatalogado = false
+          endif
+
+          assign show_avisame = false
+          if variant.inventory_quantity <= 0 and descatalogado == false
+            assign show_avisame = true
           endif
 
         %}
@@ -73,9 +78,8 @@
             {% render 'UPNG-date-indicator', variant: variant %}
           </td>
           <td class="variant-table__cell variant-table__cell--status">
-            {% if variant.available %}
-            {% else %}
-              <button class="variant-table__button" variant-id="{{ variant.id }}">
+            {% if show_avisame %}
+              <button class="variant-table__button" variant-id="{{ variant.id }}" tabindex="-1">
                 {% render 'icon', icon: 'upng-avisame', height: 24, width: 24, class: 'variant-table__icon' %}
               </button>
             {% endif %}
