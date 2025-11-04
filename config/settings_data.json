@@ -459,31 +459,6 @@
           "account_settings_url": "pages/mi-cuenta"
         }
       },
-      "14109312680435548432": {
-        "type": "shopify://apps/upango-avisame-garys/blocks/upng-avisame/e9868cab-06a7-4b7d-8b75-8ba9ef886422",
-        "disabled": false,
-        "settings": {
-          "upng_avisame_target": "",
-          "upng_avisame_existing_button": ".variant-table__button"
-        }
-      },
-      "11305800767581204822": {
-        "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-header-script/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
-        "disabled": false,
-        "settings": {
-          "company_text": "Trabajando con:",
-          "link_cambiar_cliente": "pages/agentes",
-          "agents_selector": ".announcement__col--left",
-          "content_position_in_container": "replace",
-          "show_customer_agent": true,
-          "tel_image": "shopify://shop_images/agente-icon.svg",
-          "email_image": "shopify://shop_images/correo-icon.svg",
-          "name_text": "",
-          "agent_name_text": "Su agente:",
-          "tel_text": "",
-          "email_text": ""
-        }
-      },
       "13396536547038335341": {
         "type": "shopify://apps/upango-b2b-garys/blocks/upng-re-remove/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
         "disabled": false,
@@ -495,6 +470,39 @@
         "type": "shopify://apps/upango-gc-garys/blocks/upng-checkout_blocker/4d3891c8-6bcb-4ff9-aed0-86b970728f37",
         "disabled": false,
         "settings": {}
+      },
+      "11305800767581204822": {
+        "type": "shopify://apps/upango-agentes-garys/blocks/upng-agent-header-script/dbf5a64c-b94a-4ad1-87f4-a6abefe16b15",
+        "disabled": false,
+        "settings": {
+          "agents_selector": ".announcement__col--left",
+          "content_position_in_container": "replace",
+          "company_text": "Trabajando con:",
+          "change_company_location_text": "Cambiar",
+          "change_customer_text": "Cambiar cliente",
+          "agent_page_handle": "agentes",
+          "show_customer_agent": true,
+          "name_text": "Hola,",
+          "agent_name_text": "Su agente:",
+          "tel_text": "Teléfono:",
+          "email_text": "Email:",
+          "tel_image": "shopify://shop_images/agente-icon.svg",
+          "email_image": "shopify://shop_images/correo-icon.svg",
+          "show_customer_without_agent_info": false,
+          "name_text_customer_without_agent": "Hola,",
+          "company_text_customer_without_agent": "Trabajando con"
+        }
+      },
+      "14109312680435548432": {
+        "type": "shopify://apps/upango-avisame-garys/blocks/upng-avisame/e9868cab-06a7-4b7d-8b75-8ba9ef886422",
+        "disabled": false,
+        "settings": {
+          "upng_avisame_target": ".variant-table__button",
+          "upng_avisame_existing_button": ".variant-table__button",
+          "upng_dejar_de_avisar_existing_button": ".variant-table__button.btn-avisame-activo",
+          "upng_avisame_avisame": "",
+          "upng_avisame_noavisame": "Deja de avisarme"
+        }
       }
     }
   }

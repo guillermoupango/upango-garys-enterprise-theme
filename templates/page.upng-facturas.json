@@ -15,11 +15,9 @@
         "upango_b2b_garys_upng_back_page_pQEKEL": {
           "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
-            "display_type": "button",
             "back_page_text": "Volver",
-            "parent_page": "mi-cuenta",
-            "back_page_styles": "text-decoration: none; color: #000;",
-            "breadcrumbs_styles": "font-size: 14px; color: #666;"
+            "back_page_page": "mi-cuenta",
+            "back_page_styles": "text-decoration: none; color: #000;"
           }
         }
       },
@@ -48,6 +46,7 @@
             "facturas_table_headers": "Fecha,Factura,Documento origen,Fecha vencimiento, Estado,Base,IVA,Total",
             "lineas_table_headers": "Producto,ID Producto,Estado,Unidades,Precio Ud,Base imponible,Dto,IVA,Importe Total",
             "facturas_filtros": "",
+            "facturas_estados": "PENDIENTE,PENDIENTE;SERVIDO,SERVIDO",
             "label_tipo": "default",
             "filtros_column": 3,
             "enlace_lineas_modal": "no_mostrar_lineas",
@@ -57,7 +56,9 @@
             "mostrar_pedido_web": true,
             "mostrar_pedido_cliente": true,
             "mostrar_fecha_desde": true,
-            "mostrar_fecha_hasta": true
+            "mostrar_fecha_hasta": true,
+            "mostrar_estado": true,
+            "pagina_347": ""
           }
         }
       },

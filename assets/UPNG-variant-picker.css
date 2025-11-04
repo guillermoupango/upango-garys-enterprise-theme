@@ -111,19 +111,8 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
 
 .variant-table__cell--date, .btn-avisame-activo {
   font-size: 13px;
-  letter-spacing: -0.02em;
-}
-
-#header_cell--notify{
- width: 92px;
-}
-
-.btn-avisame-activo {
-  text-decoration: underline;
-}
-
-.btn-avisame-activo:hover {
-  color: rgb(var(--no-stock-backordered-text-color));
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .variant-table__cell--stock {
@@ -201,7 +190,29 @@ upng-variant-picker fieldset.option-selector:nth-of-type(2) {
   color: #868686;
 }
 
+.variant-table__button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
 .variant-table__button:hover .icon--upng-avisame {
+  color: rgb(var(--btn-alt-text-color));
+}
+
+
+.btn-avisame-activo {
+  text-decoration: underline;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  max-width: 92px;
+  white-space: normal;
+  text-align: center;
+}
+.btn-avisame-activo:hover {
   color: rgb(var(--btn-alt-text-color));
 }
 

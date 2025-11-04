@@ -135,7 +135,7 @@
           "settings": {
             "icon": "star",
             "heading": "Croquis y Características",
-            "text": "<div class=\"flex justify-between items-start\">\n{% assign croquis = product.metafields.upng.croquis %}\n<p>{{ product.metafields.upng.caracteristicas | metafield_tag }}</p>\n{% if croquis %}\n{{ croquis | image_url: height: 230 | image_tag: widht: null, loading: 'lazy', alt: tratamiento.tipo }}\n{% endif %}\n</div>"
+            "text": "<div class=\"flex justify-between items-start\">\n{% assign croquis_list = product.metafields.upng.croquis.value %}\n<p>{{ product.metafields.upng.caracteristicas | metafield_tag }}</p>\n{% if croquis_list != blank and croquis_list.size > 0 %}\n  {% assign first_url = croquis_list.first %}\n  <img src=\"{{ first_url }}\" loading=\"lazy\" alt=\"{{ product.title }}\" style=\"height:230px;width:auto;\" />\n{% endif %}\n</div>"
           }
         },
         "question_wCC3Df": {
