@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ 'UPNG-variant-picker.css' | asset_url }}">
+
 <quick-add-drawer class="drawer quick-add-drawer{% if settings.quick_add_sticky_buttons %} overflow-hidden{% endif %} fixed top-0 right-0 flex flex-col w-full has-motion js-product" data-name="quickbuy" role="dialog" tabindex="-1" aria-labelledby="quick-add-heading" aria-modal="true" aria-hidden="true">
   <header class="drawer__header quick-add__header hidden md:flex justify-between items-center relative" style="display: none;">
     <button type="button" class="drawer__back-btn js-open-cart-drawer has-ltr-icon" hidden>
@@ -19,11 +21,40 @@
     {% render 'icon-close' %}
   </button>
   <div class="drawer__content quick-add__content flex-auto{% if settings.quick_add_sticky_buttons == false %} shrink-0{% endif %} relative">
+    {% comment %}
     <button type="button" class="drawer__close-btn quick-add__close-btn--mob js-close-drawer md:hidden">
       <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
       {% render 'icon-close' %}
     </button>
-    <div class="js-product-details quick-add__product-details"></div>
+    {% endcomment %}
+    
+    {%- liquid
+      # DESARROLLO 'CAN ORDER' MOVIDO AQUI
+      # Determinar si el cliente puede ordenar
+      assign can_order = false
+      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].allowOrder == true
+        assign can_order = true
+      endif
+
+      # Determinar si puede ver precios
+      assign can_see_prices = false
+      if customer.b2b? and customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verPrecios == true
+        assign can_see_prices = true
+      endif
+
+      # Determinar si puede ver stock
+      assign can_see_stock = false
+      if customer.b2b? and customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verStock == true
+        assign can_see_stock = true
+      endif
+    -%}
+    <div class="js-product-details quick-add__product-details"
+      data-name="compra-rapida" 
+      data-can-order="{{ can_order }}"
+      data-is-b2b="{{ customer.b2b? }}"
+      data-can-see-prices="{{ can_see_prices }}"
+      data-can-see-stock="{{ can_see_stock }}"
+    ></div>
   </div>
   <footer class="drawer__footer quick-add__footer hidden">
     <div class="alert quick-add__alert absolute left-0 right-0 bg-success-bg text-success-text js-added-to-cart" role="alert" hidden data-visible-for="2000">

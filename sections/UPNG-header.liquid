@@ -57,15 +57,18 @@
       {% endif %}
       }
 
-        /* Estilos iniciales para prevenir flash de contenido */
-
         .upng-price-wrapper--pvd {
-          display: none;
+          display: block;
         }
 
-    /*     .upng-price:nth-child(1) {
-          display: none;
-        } */
+        .upng-price-pvr--strong{
+          font-size: 28px;
+          font-weight: 700;
+        }
+
+        .quick-add-drawer .upng-price-pvr--strong{
+          font-size: 20px;
+        }
 
         /* Toggle Switch Styles */
         .pvd-toggle-wrapper {
@@ -133,6 +136,7 @@
         input:checked + .pvd-toggle-slider:before {
           transform: translateX(26px);
         }
+
 {%- endstyle -%}
 
 <store-header
@@ -202,22 +206,6 @@
           id="search-bar"
         {% endif %}
       >
-        {% comment %} BOTON MENU HAMBURGUESA - Desktop {% endcomment %}
-{% comment %} 
-        <div class="sidebar-menu-trigger">
-          <button
-            type="button"
-            class="sidebar-menu-trigger__button"
-            aria-controls="sidebar-menu"
-            aria-expanded="false"
-            aria-label="{{ 'general.icon_labels.menu' | t }}"
-          >
-            <span class="sidebar-menu-trigger__icon" aria-hidden="true">
-              {% render 'icon', icon: 'upng-hamburger', height: 28, width: 28 %}
-            </span>
-            <span class="visually-hidden">{{ 'sections.header.sidebar_menu' | t }}</span>
-          </button>
-        </div> {% endcomment %}
 
         {%- if section.settings.logo_center and section.settings.minimise_search_desktop -%}
           <a
@@ -281,7 +269,16 @@
         {%- endif -%}
       {%- endif -%}
 
+      {% liquid
+        # Determinar permiso para ordenar
+      assign can_order = false
+      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+        assign can_order = true
+      endif
+%}
+
       {% if customer.b2b? %}
+        {% if can_order %}
         <a
           class="header__icon{% if settings.cart_shaking and cart != empty %} header__icon--cart-shake has-motion{% endif %} relative text-current"
           id="cart-icon"
@@ -315,6 +312,7 @@
             {%- endif -%}
           </div>
         </a>
+        {% endif %}
 
         <div class="pvd-toggle-wrapper">
           <label class="pvd-toggle-switch">

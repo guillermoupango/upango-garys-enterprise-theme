@@ -1,9 +1,11 @@
+
+
 {%- comment -%}
   ***** UPANGO *****
 
     VARIANT PICKER BASADO EN ORIGINAL DE TEMA ENTERPRISE:
-    - Integra una tabla de variantes con imágenes en la que cada fila será una variante option1-option2 (Ejemplo Color - Talla)
-    - Esta tabla Funcionará como ** Listado de Pedidos Rápidos **
+    - Integra una tabla de variantes con imÃ¡genes en la que cada fila serÃ¡ una variante option1-option2 (Ejemplo Color - Talla)
+    - Esta tabla FuncionarÃ¡ como ** Listado de Pedidos RÃ¡pidos **
     - Opcion de Custom Swatch para mostrar 'Icono personalizado' para cada variante desde Metacampo
 
     INTEGRA LAS FUNCIONES DE:
@@ -30,10 +32,22 @@
 {%- endcomment -%}
 
 <link rel="stylesheet" href="{{ 'UPNG-variant-picker.css' | asset_url }}">
+<script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
+  # Selección de Variante
   if section.settings.select_first_variant or product.variants.size == 1 or product.selected_variant
     assign variant_is_selected = true
+  endif
+
+  # Actualizar URL
+  assign update_url = update_url | default: false, allow_false: true
+
+  # Capturar collection 'outlet'
+  assign current_collection = collection.handle
+  assign is_outlet = false
+  if current_collection == 'outlet'
+    assign is_outlet = true
   endif
 %}
 
@@ -41,13 +55,11 @@
   <link rel="stylesheet" href="{{ 'modal.css' | asset_url }}">
 {%- endif -%}
 
-<script src="{{ 'UPNG-variant-picker.js' | asset_url }}" defer="defer"></script>
-
 {%- if block.settings.selector_style == 'dropdown' -%}
   <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-{%- assign update_url = update_url | default: false, allow_false: true -%}
+{% comment %} Desde liquid: {{ is_outlet }} {% endcomment %}
 
 <upng-variant-picker
   {% if context %}
@@ -64,6 +76,8 @@
   {% endif %}
 >
   {%- for option in product.options_with_values -%}
+
+
     {%- capture option_id %}{{ section.id }}-{{ option.name | handle }}{% endcapture -%}
     {%- liquid
       assign is_color_selector = false
@@ -72,7 +86,7 @@
       assign is_variant_image_style = false
       assign show_size_chart = false
 
-      # Nueva Opccion para Variantes con Imagenes Custom
+      # Nueva Opcion para Variantes con Imagenes Custom
 
       if settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'variant-images'
         assign is_color_selector = true
@@ -175,30 +189,44 @@
         {%- endif -%}
         <div class="option-selector__btns flex flex-wrap{% if is_variant_image_style %} items-start{% endif %}">
           {%- for value in option.values -%}
+            
+            {% comment %}
+             
+            Recorrer TODAS las variantes, buscar el value y capturar metafields
+            {% assign color_sin_outlet = true %}
+
+                <!-- Variante TItulo: {{ value.variant.title }} | Descatalogado: {{ value.variant.metafields.upng.descatalogado }} -->
+                <!--Value: {{ value.variant | json }} -->
+                {% if value.variant.metafields.upng.descatalogado == true %}
+                  {% assign color_sin_outlet = false %}
+                  {% break %}
+                {%  endif %}
+
+            {% endcomment %}
+
             {%- assign value_index0 = forloop.index0 -%}
             <input
+              data-firstvariant="{{ value.variant.id }}"
               type="radio"
               class="opt-btn visually-hidden focus-label js-option"
               name="{{ option_id }}-option"
               id="{{ option_id }}-opt-{{ value_index0 }}"
               value="{{ value | escape }}"
-              {% if variant_is_selected and option.selected_value == value %}
-                checked
-              {% endif %}
+              {% if variant_is_selected and option.selected_value == value %}checked{% endif %}
             >
 
             {%- if is_variant_image_style -%}
-              {%- for variant in product.variants -%}
-                {%- if variant.options[option_index0] == value -%}
+              
                   <label
-                    class="opt-label opt-label--swatch opt-label--image relative swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.variant_picker_color_style == 'variant-images' and variant.featured_media %} swatch--variant-image{% endif %}"
-                    {% if variant.featured_media == blank %}
+                    class="opt-label opt-label--swatch opt-label--image relative swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}{% if settings.variant_picker_color_style == 'variant-images' and value.variant.featured_media %} swatch--variant-image{% endif %}"
+                    {% if value.variant.featured_media == blank %}
                       data-swatch="{{ value | replace: '"', '' | downcase }}"
                     {% endif %}
                     for="{{ option_id }}-opt-{{ value_index0 }}"
+                    {% comment %} {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
                   >
                     <span class="visually-hidden js-value">{{- value | escape -}}</span>
-                    <div class="opt-label__media media h-full w-full{% if settings.variant_picker_color_style == 'variant-images' and variant.featured_media == blank %} absolute top-0 left-0{% else %} relative{% endif %}">
+                    <div class="opt-label__media media h-full w-full{% if settings.variant_picker_color_style == 'variant-images' and value.variant.featured_media == blank %} absolute top-0 left-0{% else %} relative{% endif %}">
                       {%- liquid
                         if settings.variant_picker_swatch_shape == 'natural'
                           assign class = 'bg-theme-bg'
@@ -212,23 +240,21 @@
                       -%}
                       {%- liquid
                         # Renderizado condicional de la Imagen de la Variante Custom / o por Defecto del Tema (featured_media)
-                        assign image_to_render = variant.featured_media
-                        if settings.variant_picker_color_style == 'upng-variant-images' and variant.metafields.upng.icono_color != blank
-                          assign image_to_render = variant.metafields.upng.icono_color
+                        assign image_to_render = value.variant.featured_media
+                        if settings.variant_picker_color_style == 'upng-variant-images' and value.variant.metafields.upng.icono_color != blank
+                          assign image_to_render = value.variant.metafields.upng.icono_color.value
                         endif
                       -%}
-                      {% render 'image',
+                      <img src="{{image_to_render}}" class="{{class}}" loading="eager" />
+                      {% comment %} {% render 'image',
                         image: image_to_render,
                         src_width: swatch_size,
                         lazy_load: false,
                         class: class,
                         disable_focal_point: true
-                      %}
+                      %} {% endcomment %}
                     </div>
                   </label>
-                  {%- break -%}
-                {%- endif -%}
-              {%- endfor -%}
 
             {%- elsif settings.variant_picker_color_style == 'native' and value.swatch.image -%}
               {%- liquid
@@ -239,6 +265,7 @@
                 class="opt-label opt-label--swatch btn relative swatch--native swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
                 for="{{ option_id }}-opt-{{ value_index0 }}"
                 data-swatch
+                {% comment %} {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span class="visually-hidden js-value">{{ value }}</span>
                 {%- if settings.variant_picker_swatch_shape == 'natural' -%}
@@ -262,7 +289,7 @@
                 class="opt-label opt-label--swatch btn relative swatch-shape--{{ settings.variant_picker_swatch_shape }}{% if settings.variant_picker_swatch_shape != "circle" %} swatch-shape--not-circle{% endif %}"
                 data-swatch="{{ value | replace: '"', '' | downcase }}"
                 for="{{ option_id }}-opt-{{ value_index0 }}"
-                style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none;"
+                style="--swatch-color: rgb({{ value.swatch.color.rgb }});--swatch-image: none; "{% comment %} {% if is_outlet and color_sin_outlet %}display: none;{% endif %}"  Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span class="visually-hidden js-value">{{ value }}</span>
               </label>
@@ -274,6 +301,7 @@
                   data-swatch="{{ value | replace: '"', '' | downcase }}"
                 {% endif %}
                 for="{{ option_id }}-opt-{{ value_index0 }}"
+                {% comment %} {% if is_outlet and color_sin_outlet %} style="display: none"{% endif %} Si es contexto oulet, y color No tiene, Oculta {% endcomment %}
               >
                 <span
                   {% if is_color_selector and is_swatch_style %}
@@ -288,6 +316,8 @@
         </div>
       </fieldset>
     {%- endif -%}
+    {% comment %} No generar segundo fieldset {% endcomment %}
+    {% break %}
   {%- endfor -%}
   <script type="application/json">
     {
@@ -326,10 +356,109 @@
       }
     }
   </script>
+
+  {%- comment -%}
+    Tabla de variantes - thead y tfoot estáticos, tbody dinámico
+  {%- endcomment -%}
+  {% if customer.b2b? %}
+    {%- liquid
+      assign can_order = true
+      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+        assign can_order = true
+      else
+        assign can_order = false
+      endif
+      
+      assign can_see_prices = true
+      if can_order and customer.metafields.upng-permission.verPrecios == true
+        assign can_see_prices = true
+      else
+        assign can_see_prices = false
+      endif
+    -%}
+
+    <table class="variant-table">
+      <thead>
+        <tr>
+          <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.color' | t }}</th>
+          <th scope="col" class="variant-table__header visually-hidden">{{ 'custom.variant-table.variant-name' | t }}</th>
+          <th scope="col" class="variant-table__header">{{ 'custom.variant-table.size' | t }}</th>
+          {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields['upng-permission'].verStock %}
+            <th scope="col" class="variant-table__header" id="header_cell--stock">{{ 'custom.variant-table.stock' | t }}</th>
+          {% endif %}
+          <th scope="col" class="variant-table__header" id="header_cell--date">{{ 'custom.variant-table.next-arrival_html' | t }}</th>
+          <th scope="col" class="variant-table__header" id="header_cell--notify">{{ 'custom.variant-table.notify-me' | t }}</th>
+          <th scope="col" class="variant-table__header">
+            {% if can_see_prices %}
+              <span class="upng-price-wrapper--pvd">{{ 'custom.variant-table.discounted-price_html' | t }}</span>
+            {% endif %}
+          </th>
+          {% if can_order %}
+            <th scope="col" class="variant-table__header table-header-left">{{ 'custom.variant-table.quantity' | t }}</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {%- comment -%}
+          Este tbody será reemplazado dinámicamente por JavaScript
+        {%- endcomment -%}
+      </tbody>
+      <tfoot>
+        <tr class="">
+          <td colspan="100%">
+            <div class="mt-2 mb-2">
+              <button class="btn btn--primary btn--lg w-full js-actualizar-carrito" disabled>{{ 'custom.variant-table.add_to_cart' | t }}</button>
+            </div>
+          </td>
+        </tr>
+        <tr class="variant-table__last-row">
+          <td colspan="100%">
+            <div class="flex justify-between variant-table__total-container">
+              <div class="flex justify-start items-center gap-theme">
+                {% if can_order %}
+                  <modal-opener class="no-js-hidden opener_inactive" id="clear_modal_opener" data-modal="modal-{{- product.id -}}-clear">
+                    <button class="btn btn--sm btn--icon text-current tap-target text-error-text" aria-haspopup="dialog">
+                      {% render 'icon-trash' %}
+                      <span>{{ 'custom.variant-table.clear-all' | t }}</span>
+                    </button>
+                  </modal-opener>
+                  <div class="variant-table__loader is-loading hidden"></div>
+    
+                  <a href="{{ routes.cart_url }}" aria-label="{{ 'custom.variant-table.view-cart' | t }}"
+                    class="btn btn--secondary btn--sm variant-table__view-cart-button js-prod-link">
+                    {{ 'custom.variant-table.view-cart' | t }}
+                  </a>
+                {% else %}
+                {% endif %}
+              </div>
+              <div class="flex justify-end items-center gap-theme">
+                {% if customer.b2b? -%}
+                {% if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.verPrecios == true %}
+                <div class="upng-price-wrapper--pvd">
+                  <span class="variant-table__total">{{ 'custom.variant-table.subtotal' | t }}:</span>
+                  <span class="variant-table__subtotal-value"
+                    ><strong>{{ 0 | money }}</strong></span
+                  >
+                </div>
+                {% endif %} 
+                {% endif %} 
+                <div class="flex flex-col items-start" style="width: fit-content; padding-right: 3rem;">
+                  <span class="variant-table__total-items-value"><strong>0</strong></span>
+                  <span class="variant-table__total">{{ 'custom.variant-table.total-items' | t }}</span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  {% else %}
+    <a class="btn btn--secondary w-full mt-8" href="{{settings.signup_page.url }}">{{ 'custom.variant-table.request-access' | t }}</a>
+  {% endif %}
 </upng-variant-picker>
 
 {% if customer.b2b? %}
-<div class="flex justify-center gap-3 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
+<div class="flex justify-center gap-2 pt-2 pb-2" style="background-color: rgb(245, 245, 245);">
   <div class="text-xs product-inventory__status" data-inventory-level="normal">{{- 'custom.availability.available' | t -}}</div>
   <div class="text-xs product-inventory__status" data-inventory-level="backordered">{{- 'custom.availability.next-arrival' | t -}}</div>
   <div class="text-xs product-inventory__status" data-inventory-level="low">{{- 'custom.availability.outlet' | t -}}</div>
@@ -349,7 +478,7 @@
     </label>
     <div class="select relative">
       <select class="select w-full" id="variants-{{ section.id }}" name="id" form="{{ product_form_id }}">
-        {%- for variant in product.variants -%}
+        {% comment %} {%- for variant in product.variants -%}
           <option
             value="{{ variant.id }}"
             {% if variant == current_variant %}
@@ -363,7 +492,7 @@
             {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
             - {{ variant.price | money | strip_html }}
           </option>
-        {%- endfor -%}
+        {%- endfor -%} {% endcomment %}
       </select>
     </div>
   </div>

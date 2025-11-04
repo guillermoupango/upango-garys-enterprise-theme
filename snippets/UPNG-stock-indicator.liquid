@@ -8,7 +8,8 @@
 
 
 {%- liquid
-  assign stock_shopify = variant.inventory_quantity
+  # Asegurar que stockShopify nunca sea menor a 0
+  assign stock_shopify = variant.inventory_quantity | at_least: 0
   assign stock_disponible = variant.metafields.upng.stock_disponible
   assign id_erp = variant.metafields.upng.id_erp
 -%}

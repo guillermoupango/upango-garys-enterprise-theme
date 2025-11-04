@@ -38,7 +38,7 @@
     {% if product.metafields.upng.pvp %}
       <div class="pvp-container flex" >
         <span class="upng-price-wrapper--pvd pvp-label">{{ 'custom.price.pvp' | t }}</span>
-        <span class="">{{ product.metafields.upng.pvp | times: 100 | money }}</span>
+        <span class="upng-price-pvr">{{ product.metafields.upng.pvp | times: 100 | money }}</span>
       </div>
     {% endif %}
     <s class="price__was{% if settings.superscript_decimals %} price__was--supercents{% endif %}">

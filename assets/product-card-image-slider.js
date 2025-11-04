@@ -1,6 +1,11 @@
 /* global CarouselSlider */
 
+  const path = window.location.pathname;
+  const collectionsMatch = path.match(/\/collections\/([^\/]+)/);
+  const isOutlet = collectionsMatch ? collectionsMatch[1] === 'outlet' : false;
+
 if (!customElements.get('product-card-image-slider')) {
+  
   customElements.whenDefined('carousel-slider').then(() => {
     class ProductCardImageSlider extends CarouselSlider {
       constructor() {
@@ -8,6 +13,7 @@ if (!customElements.get('product-card-image-slider')) {
         this.productCard = this.closest('product-card');
         this.productCardSwatches = this.productCard ? this.productCard.querySelectorAll('.card__swatches .opt-btn') : null;
         this.slides = this.querySelectorAll('.slider__item');
+        this.colorGroupingEnabled = this.hasAttribute('data-color-grouping-enabled') || true; // Habilitado por defecto
 
         if (this.productCard) {
           this.productCard.addEventListener('change', this.handleSwatchChange.bind(this));
@@ -41,7 +47,20 @@ if (!customElements.get('product-card-image-slider')) {
             });
           }
 
-          if (activeSwatchSlide) this.handleSwatchChange(null, activeSwatchSlide.dataset.mediaId);
+          // Implementar agrupamiento por color
+          if (this.colorGroupingEnabled) {
+            // PENDIENTE: Al inicializar no hay ninguna chequeada
+            const checkedSwatch = this.productCard.querySelector('.card__swatches .opt-btn:checked');
+            if (checkedSwatch) {
+              const colorCode = this.getColorCodeFromSwatch(checkedSwatch.value);
+              
+              if (colorCode) {
+                this.setActiveColorGroup(colorCode);
+              }
+            }
+          } else if (activeSwatchSlide) {
+            this.handleSwatchChange(null, activeSwatchSlide.dataset.mediaId);
+          }
         } else {
           // Show the current slider item
           const activeSlide = this.querySelector('.slider__item[aria-current]');
@@ -54,6 +73,180 @@ if (!customElements.get('product-card-image-slider')) {
         
         // Force a check of button states
         this.setButtonStates();
+
+        // Nuevo: Usar el Helper para actualizar los enlaces con la variante
+        this.updateLinksWithVariant();
+      }
+
+      /**
+       * Extrae el código de color de un nombre de imagen.
+       * @param {string} imageName - Nombre de la imagen (ej: BOP597-08-XS.jpg, BOP597-23-XS-1.jpg)
+       * @returns {string|null} - El código de color o null si no se encuentra
+       */
+      extractColorCode(imageName) {
+        if (!imageName) return null;
+        
+        // Extraer solo el nombre del archivo sin extensión
+        const fileName = imageName.split('/').pop().split('.')[0];
+        
+        // Buscar el patrón MODELO-CODIGO donde CODIGO son dígitos
+        const matches = fileName.match(/^[^-]+-(\d+)/);
+        return matches ? matches[1] : null;
+      }
+
+      /**
+       * Obtiene el código de color de un valor de swatch.
+       * @param {string} swatchValue - Valor del swatch (ej: "23 - INDIGO", "08 - NEW ROYAL")
+       * @returns {string|null} - Código de color o null si no se encuentra
+       */
+      getColorCodeFromSwatch(swatchValue) {
+        if (!swatchValue) return null;
+        
+        // El código está al inicio seguido de " - "
+        const matches = swatchValue.match(/^(\d+)\s*-/);
+        return matches ? matches[1] : null;
+      }
+
+      /**
+       * Crea un mapa de agrupamiento por códigos de color
+       * @returns {object} - Objeto con grupos de imágenes por código de color
+       */
+      getColorGroupMap() {
+        if (!this.colorGroupMap) {
+          this.colorGroupMap = {
+            groups: {}
+          };
+
+          // Iterar por cada slide para agrupar por código de color
+          this.slides.forEach((slide) => {
+            const mediaId = slide.dataset.mediaId;
+            if (!mediaId) return;
+
+            // Buscar imagen dentro del slide para obtener el src
+            const img = slide.querySelector('img');
+            if (!img) return;
+
+            const imageSrc = img.getAttribute('src') || img.getAttribute('data-src');
+            if (!imageSrc) return;
+
+            // Extraer el código de color del nombre de la imagen
+            const colorCode = this.extractColorCode(imageSrc);
+            if (!colorCode) return; // Ignorar imágenes que no cumplan el patrón
+
+            // Crear el grupo para este código de color si no existe
+            if (!this.colorGroupMap.groups[colorCode]) {
+              this.colorGroupMap.groups[colorCode] = {
+                name: colorCode,
+                slides: []
+              };
+            }
+
+            // Añadir el slide al grupo correspondiente
+            this.colorGroupMap.groups[colorCode].slides.push(slide);
+          });
+
+          // Método helper para encontrar el grupo de un slide
+          this.colorGroupMap.groupFromSlide = (slide) => {
+            if (!slide) return null;
+
+            const img = slide.querySelector('img');
+            if (!img) return null;
+
+            const imageSrc = img.getAttribute('src') || img.getAttribute('data-src');
+            if (!imageSrc) return null;
+
+            const slideColorCode = this.extractColorCode(imageSrc);
+            if (!slideColorCode || !this.colorGroupMap.groups[slideColorCode]) {
+              return null;
+            }
+
+            return this.colorGroupMap.groups[slideColorCode];
+          };
+        }
+
+        return this.colorGroupMap;
+      }
+
+      /**
+       * Establece el grupo de color activo y oculta el resto
+       * @param {string} colorCode - Código de color a mostrar
+       */
+      setActiveColorGroup(colorCode) {
+        const colorGroupMap = this.getColorGroupMap();
+        const selectedGroup = colorGroupMap.groups[colorCode];
+
+        if (selectedGroup) {
+          // Ocultar todas las slides
+          this.slides.forEach((slide) => {
+            slide.style.display = 'none';
+            slide.removeAttribute('hidden'); // Limpiar hidden anterior
+          });
+
+          // Mostrar solo las slides del grupo seleccionado
+          selectedGroup.slides.forEach((slide) => {
+            slide.style.display = '';
+          });
+
+          // Actualizar el estado de los botones
+          this.setButtonStates();
+
+          // Navegar a la primera imagen del grupo
+          if (selectedGroup.slides.length > 0) {
+            const firstSlide = selectedGroup.slides[0];
+            
+            // Remover aria-current de todas las slides
+            this.slides.forEach(slide => slide.removeAttribute('aria-current'));
+            
+            // Establecer la primera del grupo como actual
+            firstSlide.setAttribute('aria-current', 'true');
+            
+            // Desplazar a la primera imagen del grupo
+            const left = firstSlide.offsetLeft;
+            this.slider.scrollTo({ left, behavior: 'instant' });
+          }
+
+          this.currentColorGroup = selectedGroup;
+        }
+      }
+
+      /**
+       * Helper
+       * Actualiza los enlaces de productos con el parámetro de variante cuando se está en la colección outlet
+       */
+      updateLinksWithVariant() {
+        // Early return if not in outlet collection
+        if (!isOutlet) {
+          return;
+        }
+
+        // Find the checked input (selected variant)
+        const checkedInput = this.productCard?.querySelector('.card__swatches .opt-btn:checked');
+        
+        if (!checkedInput) {
+          console.warn('ProductCardImageSlider: No checked variant found in outlet product');
+          return;
+        }
+
+        // Get the variant ID from the checked input
+        const variantId = checkedInput.dataset.variantId;
+        
+        if (!variantId) {
+          console.warn('ProductCardImageSlider: No variant ID found in checked input');
+          return;
+        }
+
+        // Find all links within this product card slider
+        const productLinks = this.querySelectorAll('a[href]');
+        
+        productLinks.forEach(link => {
+          const currentHref = link.getAttribute('href');
+          
+          if (currentHref) {
+            // Add the variant parameter (URLs are clean at initialization)
+            const newHref = `${currentHref}?variant=${variantId}`;
+            link.setAttribute('href', newHref);
+          }
+        });
       }
 
       /**
@@ -61,6 +254,11 @@ if (!customElements.get('product-card-image-slider')) {
        * @param {string} mediaId - The media ID to match against the slides.
        */
       updateSlideVisibility(mediaId) {
+        // Si el agrupamiento por color está habilitado, no usar la lógica antigua
+        if (this.colorGroupingEnabled) {
+          return;
+        }
+
         let hideSlide = true;
         let foundMediaId = false;
         this.slides.forEach((slide) => {
@@ -83,6 +281,19 @@ if (!customElements.get('product-card-image-slider')) {
        * @param {string} mediaId - The media ID to match against the slides.
        */
       handleSwatchChange(evt, mediaId) {
+        if (this.colorGroupingEnabled) {
+          // Nueva lógica de agrupamiento por color
+          const swatchValue = evt?.target?.value;
+          if (swatchValue) {
+            const colorCode = this.getColorCodeFromSwatch(swatchValue);
+            if (colorCode) {
+              this.setActiveColorGroup(colorCode);
+              return;
+            }
+          }
+        }
+
+        // Lógica original como fallback
         const swatchMediaId = evt?.target?.dataset?.mediaId || mediaId;
         if (swatchMediaId) {
           this.updateSlideVisibility(swatchMediaId);
@@ -116,7 +327,14 @@ if (!customElements.get('product-card-image-slider')) {
         }
 
         const currentSlideIndex = Math.round(this.slider.scrollLeft / this.slideSpan) + 1;
-        const visibleSlideCount = Array.from(this.slides).filter((slide) => slide.hidden !== true).length;
+        
+        // Si el agrupamiento por color está habilitado, contar solo slides visibles
+        let visibleSlideCount;
+        if (this.colorGroupingEnabled && this.currentColorGroup) {
+          visibleSlideCount = this.currentColorGroup.slides.length;
+        } else {
+          visibleSlideCount = Array.from(this.slides).filter((slide) => slide.hidden !== true).length;
+        }
 
         this.prevBtn.disabled = currentSlideIndex === 1
           || (this.getSlideVisibility(this.slides[0]) && this.slider.scrollLeft === 0);

@@ -462,7 +462,8 @@ class ModalOpener extends HTMLElement {
     const button = this.querySelector('button');
     if (!button) return;
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
       const modal = document.getElementById(this.dataset.modal);
       if (modal) modal.open(button);
     });

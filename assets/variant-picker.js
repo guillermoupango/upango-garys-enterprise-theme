@@ -11,6 +11,8 @@
  * - onlyXLeft
  */
 
+
+
 if (!customElements.get('variant-picker')) {
   class VariantPicker extends HTMLElement {
     constructor() {
@@ -23,6 +25,10 @@ if (!customElements.get('variant-picker')) {
       this.selectedOptions = this.getSelectedOptions();
       this.preSelection = !this.variant && this.selectedOptions.find((o) => o === null) === null;
 
+      // Variables para los datos de GraphQL
+      this.graphqlData = null;
+      this.isLoadingGraphQL = false;
+      
       this.addEventListener('change', this.handleVariantChange.bind(this));
 
       // Defer these to allow for quick-add modal to full initialize
@@ -30,6 +36,193 @@ if (!customElements.get('variant-picker')) {
         this.updateAvailability();
         this.updateAddToCartButton();
       });
+    }
+
+    /**
+     * Se ejecuta cuando el elemento se conecta al DOM
+     * Aquí iniciamos el fetch de datos de GraphQL
+     */
+    async connectedCallback() {
+      console.log('🔍 connectedCallback ejecutado');
+      // Obtener el handle del producto
+      const productHandle = this.getProductHandle();
+      console.log('🔍 Product handle obtenido:', productHandle);
+      
+      if (productHandle) {
+        console.log(`🚀 Iniciando fetch de variantes para: ${productHandle}`);
+        try {
+          this.isLoadingGraphQL = true;
+          this.graphqlData = await this.fetchAllVariants(productHandle);
+          console.log('✅ Datos de GraphQL obtenidos:', this.graphqlData);
+          
+          // Una vez que tenemos los datos, podemos generar la tabla de variantes
+          //await this.generateVariantTable();
+          
+        } catch (error) {
+          console.error('❌ Error al obtener datos de GraphQL:', error);
+        } finally {
+          this.isLoadingGraphQL = false;
+        }
+      }
+    }
+
+    /**
+     * Obtiene el handle del producto desde los datos o desde la URL
+     * @returns {string|null}
+     */
+    getProductHandle() {
+      // Opción 1: Desde los datos del producto
+      if (this.data?.product?.handle) {
+        return this.data.product.handle;
+      }
+      
+      // Opción 2: Desde la URL actual
+      const pathSegments = window.location.pathname.split('/');
+      const productIndex = pathSegments.indexOf('products');
+      if (productIndex !== -1 && pathSegments[productIndex + 1]) {
+        return pathSegments[productIndex + 1];
+      }
+      
+      // Opción 3: Desde un atributo data del elemento
+      if (this.dataset.productHandle) {
+        return this.dataset.productHandle;
+      }
+      
+      return null;
+    }
+
+    /**
+     * Obtiene todas las variantes de un producto específico con GraphQL
+     * @param {string} productHandle - Handle del producto
+     * @returns {Promise<Object>}
+     */
+    async fetchAllVariants(productHandle) {
+      try {
+        let hasNextPage = true;
+        let cursor = null;
+        let allVariants = [];
+        let productData = null;
+
+        // Verificar que tenemos las constantes necesarias
+        if (typeof DOMAIN === 'undefined' || typeof STOREFRONT_ACCESS_TOKEN === 'undefined') {
+          throw new Error('DOMAIN y STOREFRONT_ACCESS_TOKEN deben estar definidos');
+        }
+
+        while (hasNextPage) {
+          const query = `
+            query getProductVariants($handle: String!, $cursor: String) {
+              product(handle: $handle) {
+                id
+                title
+                handle
+                featuredImage {
+                  url
+                  altText
+                }
+                options {
+                  id
+                  name
+                  values
+                }
+                variants(first: 100, after: $cursor) {
+                  pageInfo {
+                    hasNextPage
+                  }
+                  edges {
+                    cursor
+                    node {
+                      id
+                      title
+                      price {
+                        amount
+                        currencyCode
+                      }
+                      inventoryQuantity
+                      inventoryManagement
+                      selectedOptions {
+                        name
+                        value
+                      }
+                      image {
+                        url
+                        altText
+                      }
+                      galeriaImagenes: metafield(namespace: "upng", key: "galeria_imagenes") {
+                        value
+                      }
+                      descatalogado: metafield(namespace: "upng", key: "descatalogado") {
+                        value
+                      }
+                      privado: metafield(namespace: "upng", key: "privado") {
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          `;
+
+          const variables = {
+            handle: productHandle,
+            cursor
+          };
+
+          const response = await fetch(`https://${DOMAIN}/api/2024-07/graphql.json`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
+            },
+            body: JSON.stringify({ query, variables }),
+          });
+
+          const result = await response.json();
+
+          // Verificar si hay errores en la respuesta
+          if (result.errors) {
+            console.error('❌ Error en GraphQL:', result.errors);
+            throw new Error('Error en la consulta GraphQL');
+          }
+
+          const product = result.data?.product;
+          if (!product) {
+            throw new Error(`Producto con handle "${productHandle}" no encontrado`);
+          }
+
+          // Guardar datos del producto en la primera iteración
+          if (!productData) {
+            productData = {
+              id: product.id,
+              title: product.title,
+              handle: product.handle,
+              featuredImage: product.featuredImage,
+              options: product.options
+            };
+          }
+
+          const edges = product.variants?.edges || [];
+          
+          // Agregar variantes al array
+          edges.forEach(edge => {
+            allVariants.push(edge.node);
+          });
+
+          hasNextPage = product.variants?.pageInfo?.hasNextPage || false;
+          cursor = edges.length > 0 ? edges[edges.length - 1].cursor : null;
+        }
+
+        console.log(`✅ Obtenidas ${allVariants.length} variantes para el producto: ${productData.title}`);
+        
+        return {
+          product: productData,
+          variants: allVariants
+        };
+
+      } catch (error) {
+        console.error('❌ Error fatal en fetchAllVariants:', error);
+        throw error;
+      }
     }
 
     /**
