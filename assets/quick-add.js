@@ -500,7 +500,8 @@ if (!customElements.get("quick-add-drawer")) {
         return '<div class="product-inventory__status" hidden></div>';
       }
 
-      const stockShopify = variant.quantityAvailable || 0;
+      // Asegurar que stockShopify nunca sea menor a 0
+      const stockShopify = Math.max(0, variant.quantityAvailable || 0);
       const stockDisponible = variant.stockDisponible?.value || "";
       const idErp = variant.idErp?.value || "";
 
@@ -767,7 +768,7 @@ if (!customElements.get("quick-add-drawer")) {
                      data-variant-id="${variantId}" 
                      data-inventory-quantity="${stock}"
                      data-variant-title="${currentVariant.title}" 
-                     id="${variantId}"
+                     name="variant-${variantId}"
                      style="${inputDisabledStyles}"
                      aria-label="Cantidad para ${currentVariant.title}">
               <button type="button" 
@@ -1234,7 +1235,7 @@ if (!customElements.get("quick-add-drawer")) {
 
       // Determinar el nivel de inventario (para estilos CSS)
       if (descatalogado) {
-        if (stockShopify == 0) {
+        if (stockShopify === 0) {
           // Estilo en ROJO de No Disponible
           indicator.dataset.inventoryLevel = "very_low";
         } else {

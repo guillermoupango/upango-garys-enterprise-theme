@@ -1977,7 +1977,10 @@ if (!customElements.get("upng-variant-picker")) {
       const stockShopify = parseInt(indicator.dataset.stockShopify) || 0;
       const stockDisponible = parseInt(indicator.dataset.stockDisponible) || 0;
       const descatalogado = indicator.dataset.descatalogado === "true";
-      const id_erp = indicator.dataset.idErp;
+      const id_erp = indicator.dataset.id_erp;
+
+      console.log(id_erp);
+      
 
       const availableText = window.translations?.availableText || "Disponibles";
       const backorderText = window.translations?.backorderText || "en 2 días";
