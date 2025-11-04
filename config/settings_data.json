@@ -459,14 +459,6 @@
           "account_settings_url": "pages/mi-cuenta"
         }
       },
-      "14109312680435548432": {
-        "type": "shopify://apps/upango-avisame-garys/blocks/upng-avisame/e9868cab-06a7-4b7d-8b75-8ba9ef886422",
-        "disabled": false,
-        "settings": {
-          "upng_avisame_target": "",
-          "upng_avisame_existing_button": ".variant-table__button"
-        }
-      },
       "13396536547038335341": {
         "type": "shopify://apps/upango-b2b-garys/blocks/upng-re-remove/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
         "disabled": false,
@@ -499,6 +491,17 @@
           "show_customer_without_agent_info": false,
           "name_text_customer_without_agent": "Hola,",
           "company_text_customer_without_agent": "Trabajando con"
+        }
+      },
+      "14109312680435548432": {
+        "type": "shopify://apps/upango-avisame-garys/blocks/upng-avisame/e9868cab-06a7-4b7d-8b75-8ba9ef886422",
+        "disabled": false,
+        "settings": {
+          "upng_avisame_target": ".variant-table__button",
+          "upng_avisame_existing_button": ".variant-table__button",
+          "upng_dejar_de_avisar_existing_button": ".variant-table__button.btn-avisame-activo",
+          "upng_avisame_avisame": "",
+          "upng_avisame_noavisame": "Deja de avisarme"
         }
       }
     }
