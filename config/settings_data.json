@@ -452,13 +452,6 @@
         "disabled": false,
         "settings": {}
       },
-      "4192575423207874272": {
-        "type": "shopify://apps/upango-b2b-garys/blocks/upng-account-replacer/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
-        "disabled": false,
-        "settings": {
-          "account_settings_url": "pages/mi-cuenta"
-        }
-      },
       "13396536547038335341": {
         "type": "shopify://apps/upango-b2b-garys/blocks/upng-re-remove/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
         "disabled": false,
@@ -502,6 +495,13 @@
           "upng_dejar_de_avisar_existing_button": ".variant-table__button.btn-avisame-activo",
           "upng_avisame_avisame": "",
           "upng_avisame_noavisame": "Deja de avisarme"
+        }
+      },
+      "4192575423207874272": {
+        "type": "shopify://apps/upango-b2b-garys/blocks/upng-account-replacer/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
+        "disabled": false,
+        "settings": {
+          "account_settings_url": "mi-cuenta"
         }
       }
     }
