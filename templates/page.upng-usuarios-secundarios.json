@@ -55,7 +55,7 @@
         "upango_usuarios_sec_garys_upng_usuarios_secundarios_KyjiXT": {
           "type": "shopify://apps/upango-usuarios-sec-garys/blocks/upng-usuarios-secundarios/08f3adaf-a308-4345-9273-08b043f4c4f4",
           "settings": {
-            "is_b2b": "false",
+            "is_b2b": "true",
             "custom_fields": ""
           }
         }
