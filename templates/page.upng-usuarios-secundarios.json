@@ -15,9 +15,21 @@
         "upango_b2b_garys_upng_back_page_GHpGBV": {
           "type": "shopify://apps/upango-b2b-garys/blocks/upng-back-page/20fd86e1-42cb-49ba-afd2-8a930d4b4166",
           "settings": {
+            "display_type": "button",
+            "parent_page": "mi-cuenta",
             "back_page_text": "Volver",
-            "back_page_page": "mi-cuenta",
-            "back_page_styles": "text-decoration: none; color: #000;"
+            "button_text_color": "#000000",
+            "button_font_size": 16,
+            "icon_size": 20,
+            "button_icon_color": "#000000",
+            "icon_spacing": 8,
+            "breadcrumbs_color": "#000000",
+            "breadcrumbs_font_size": 14,
+            "breadcrumbs_separator": ">",
+            "separator_size": 16,
+            "breadcrumbs_separator_spacing": 8,
+            "separator_font_size": 14,
+            "separator_color": "#000000"
           }
         }
       },
@@ -43,7 +55,6 @@
         "upango_usuarios_sec_garys_upng_usuarios_secundarios_KyjiXT": {
           "type": "shopify://apps/upango-usuarios-sec-garys/blocks/upng-usuarios-secundarios/08f3adaf-a308-4345-9273-08b043f4c4f4",
           "settings": {
-            "enable_permissions": "true",
             "is_b2b": "false",
             "custom_fields": ""
           }
