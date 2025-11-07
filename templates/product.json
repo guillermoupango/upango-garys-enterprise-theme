@@ -296,7 +296,6 @@
         ".media-with-text {--media-width: 60%; margin: 0; max-width: 100%;}"
       ],
       "settings": {
-        "image": "shopify://shop_images/Rectangle_8_c08fb2c9-64b7-4d23-967e-2098827764ed.jpg",
         "video_external": "",
         "video_description": "",
         "video_autoplay": false,
@@ -311,11 +310,25 @@
     },
     "custom_liquid_ximcwY": {
       "type": "custom-liquid",
+      "disabled": true,
       "custom_css": [
         ".product-tags {display: flex; flex-wrap: wrap; gap: 1rem;}"
       ],
       "settings": {
         "custom_liquid": "{% if product.tags.size > 0 %}\n  <div class=\"product-tags\">\n    {% for tag in product.tags %}\n      <button class=\"btn btn--secondary\">{{ tag }}</button>\n    {% endfor %}\n  </div>\n{% endif %}",
+        "section_height": "default",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "upng_tags_producto_fBbYEQ": {
+      "type": "UPNG-tags-producto",
+      "custom_css": [
+        ".product-tags {display: flex; flex-wrap: wrap; gap: 1rem;}"
+      ],
+      "name": "UPNG Tags del producto",
+      "settings": {
         "section_height": "default",
         "full_width": false,
         "dividers": "none",
@@ -333,6 +346,7 @@
     "174240140262d6ac42",
     "recommendations",
     "media_with_text_AV36i6",
-    "custom_liquid_ximcwY"
+    "custom_liquid_ximcwY",
+    "upng_tags_producto_fBbYEQ"
   ]
 }
