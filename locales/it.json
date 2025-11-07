@@ -218,6 +218,12 @@
         "boolean_false": "No",
         "file_download": "Scarica"
       }
+    },
+    "etiquetas": {
+      "por_articulo": "Per Articolo",
+      "por_publicidad": "Per Pubblicità",
+      "por_profesion": "Per Professione",
+      "por_coleccion": "Per Collezione"
     }
   },
   "sections": {
