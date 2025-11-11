@@ -16,6 +16,7 @@ if (!customElements.get("quick-add-drawer")) {
       this.cartDrawer = document.querySelector("cart-drawer");
       this.fetch = null;
       this.fetchedUrls = [];
+      this.companyId = this.dataset.companyId;
 
       // NUEVO: Estado interno
       this._state = {
@@ -84,7 +85,7 @@ if (!customElements.get("quick-add-drawer")) {
       }
     }
 
-    /**
+   /**
      * Obtiene todas las variantes de un producto específico usando GraphQL
      * @param {string} productHandle - Handle del producto en Shopify
      * @returns {Promise<Object>} Objeto con datos del producto y sus variantes
@@ -92,6 +93,11 @@ if (!customElements.get("quick-add-drawer")) {
      */
     async fetchAllVariants(productHandle) {
       try {
+        const companyLocationId = this.companyId;
+        const productId = this.productId;
+        console.log('Company Location ID:', companyLocationId);
+        console.log('Product ID:', productId);
+
         let hasNextPage = true;
         let cursor = null;
         let allVariants = [];
@@ -105,6 +111,11 @@ if (!customElements.get("quick-add-drawer")) {
           throw new Error(
             "DOMAIN y STOREFRONT_ACCESS_TOKEN deben estar definidos"
           );
+        }
+
+        // Verificar que tenemos companyLocationId
+        if (!companyLocationId) {
+          console.warn("companyLocationId no está definido, se usarán precios regulares");
         }
 
         while (hasNextPage) {
@@ -179,7 +190,7 @@ if (!customElements.get("quick-add-drawer")) {
           };
 
           const response = await fetch(
-            `https://${DOMAIN}/api/2024-07/graphql.json`,
+            `https://${DOMAIN}/api/2025-07/graphql.json`,
             {
               method: "POST",
               headers: {
@@ -191,6 +202,8 @@ if (!customElements.get("quick-add-drawer")) {
           );
 
           const result = await response.json();
+          console.log(result);
+          
 
           // Verificar si hay errores en la respuesta
           if (result.errors) {
@@ -219,7 +232,7 @@ if (!customElements.get("quick-add-drawer")) {
 
           const edges = product.variants?.edges || [];
 
-          // Agregar variantes al array
+          // Agregar variantes al array, mapeando contextualPricing a price
           edges.forEach((edge) => {
             allVariants.push(edge.node);
           });
@@ -865,10 +878,10 @@ if (!customElements.get("quick-add-drawer")) {
           </div>
         </div>
         <div class="variant-table__indicadores flex items-center">
-          <div class="text-xs product-inventory__status" data-inventory-level="normal">Unidades Disponibles</div>
-          <div class="text-xs product-inventory__status" data-inventory-level="backordered">Sin stock, próxima entrada</div>
-          <div class="text-xs product-inventory__status" data-inventory-level="low">OUTLET, últimas unidades</div>
-          <div class="text-xs product-inventory__status" data-inventory-level="very_low">No Disponible</div>
+          <div class="text-xs product-inventory__status" data-inventory-level="normal">${theme.strings.availability.available}</div>
+          <div class="text-xs product-inventory__status" data-inventory-level="backordered">${theme.strings.availability.next_arrival}</div>
+          <div class="text-xs product-inventory__status" data-inventory-level="low">${theme.strings.availability.outlet}</div>
+          <div class="text-xs product-inventory__status" data-inventory-level="very_low">${theme.strings.availability.not_available}</div>
         </div>
       </div>
     
@@ -1474,6 +1487,9 @@ if (!customElements.get("quick-add-drawer")) {
 
       // Nuevo producto
       this.productUrl = opener.dataset.productUrl;
+      this.productId = opener.dataset.productId;
+      //console.log(`ID PRODUCTO OPENER: ${this.productId}`);
+      
       const handle = this.productUrl.split("/products/")[1].split("?")[0];
       
       // Aplicar estilos de carga

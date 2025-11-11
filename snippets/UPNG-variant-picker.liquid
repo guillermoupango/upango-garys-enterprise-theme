@@ -84,6 +84,7 @@
       assign is_swatch_style = false
       assign is_native_swatch_style = false
       assign is_variant_image_style = false
+      assign is_upng_variant_image_style = false
       assign show_size_chart = false
 
       # Nueva Opcion para Variantes con Imagenes Custom
@@ -92,14 +93,18 @@
         assign is_color_selector = true
         assign is_variant_image_style = true
         assign option_index0 = forloop.index0
-      elsif settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'upng-variant-images'
+        
+      elsif forloop.index == 1 and settings.variant_picker_color_style == 'upng-variant-images'
+        # Simplificado: primera opción siempre es color, sin validar nombres
         assign is_color_selector = true
         assign is_variant_image_style = true
         assign is_upng_variant_image_style = true
         assign option_index0 = forloop.index0
+        
       elsif settings.swatch_option_name contains option.name and settings.variant_picker_color_style == 'swatches'
         assign is_color_selector = true
         assign is_swatch_style = true
+        
       elsif settings.variant_picker_color_style == 'native'
         assign native_swatch_options = option.values | where: 'swatch'
         if native_swatch_options.size > 0
@@ -361,21 +366,23 @@
     Tabla de variantes - thead y tfoot estáticos, tbody dinámico
   {%- endcomment -%}
   {% if customer.b2b? %}
-    {%- liquid
+  {%- liquid
+    # Determinar permiso para ordenar
+    assign can_order = false
+    if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
       assign can_order = true
-      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
-        assign can_order = true
-      else
-        assign can_order = false
-      endif
-      
+    endif
+    
+    # Determinar permiso para ver precios
+    assign can_see_prices = false
+    # Si tiene tag agente o main_contact, puede ver precios directamente
+    if customer.tags contains 'agente' or customer.tags contains 'main_contact'
       assign can_see_prices = true
-      if can_order and customer.metafields.upng-permission.verPrecios == true
-        assign can_see_prices = true
-      else
-        assign can_see_prices = false
-      endif
-    -%}
+    # Si no tiene esas tags, verificar can_order y metafield verPrecios
+    elsif can_order and customer.metafields.upng-permission.verPrecios == true
+      assign can_see_prices = true
+    endif
+  -%}
 
     <table class="variant-table">
       <thead>

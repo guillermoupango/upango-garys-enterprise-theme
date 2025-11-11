@@ -533,6 +533,7 @@
                         class="btn btn--primary w-full js-quick-add"
                         aria-haspopup="dialog"
                         data-product-url="{{ product_url }}"
+                        data-product-id="{{ product.id }}"
                         data-product-default-variant="{{ product.has_only_default_variant }}"
                         {% if selected_color %}data-selected-color="{{ selected_color }}"{% endif %}>
                   <span class="quick-add-btn-icon block pointer-events-none">

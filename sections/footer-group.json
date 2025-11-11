@@ -20,7 +20,7 @@
             "image": "shopify://shop_images/garys-inv_1.png",
             "image_width": 150,
             "heading": "",
-            "text": "<p>Share store details, promotions, or brand content with your customers.</p>",
+            "text": "<p>Co-creating happier workplaces</p>",
             "button_label": "",
             "button_link": "",
             "enable_follow_on_shop": false,
@@ -44,6 +44,7 @@
         },
         "newsletter": {
           "type": "newsletter",
+          "disabled": true,
           "settings": {
             "heading": "Newsletter",
             "text": "<p>Únete para estar al tanto de nuestras ofertas y novedades. </p>",

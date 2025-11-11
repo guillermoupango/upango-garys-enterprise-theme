@@ -416,7 +416,6 @@ if (!customElements.get("upng-variant-picker")) {
 
       this.updateAddToCartButton();
       this.updateAvailability();
-      this.updatePrice();
       this.updateWeight();
       this.updateBarcode();
       this.updateBackorderText();
@@ -706,7 +705,7 @@ if (!customElements.get("upng-variant-picker")) {
       if (!this.price) return;
 
       // Buscar el elemento donde se mostrará el precio
-      const priceCurrentEl = this.price.querySelector(".price__current");
+      const priceCurrentEl = this.price.querySelector(".pvd-container > .price__current");      
       if (!priceCurrentEl) return;
 
       // Buscar el tbody de la tabla
@@ -1040,6 +1039,7 @@ if (!customElements.get("upng-variant-picker")) {
         this._fetchControllers.table = null;
         this.enableColorSelectors();
       }
+      await this.updatePrice();
     }
 
     /**

@@ -447,6 +447,12 @@
           button_one: '{{ 'general.quick_navigation_panel.show_products_one' | t: quantity: '[quantity]' }}',
           button_other: '{{ 'general.quick_navigation_panel.show_products_other' | t: quantity: '[quantity]' }}',
         },
+        availability: {
+          available: '{{- 'custom.availability.available' | t -}}',
+          next_arrival: '{{- 'custom.availability.next-arrival' | t -}}',
+          outlet: '{{- 'custom.availability.outlet' | t -}}',
+          not_available: '{{- 'custom.availability.not-available' | t -}}',
+        },
       },
       scripts: {
         cartItems: '{{ "cart-items.js" | asset_url }}',

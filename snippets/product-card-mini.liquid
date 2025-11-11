@@ -115,6 +115,7 @@
               class="btn btn--secondary btn--sm js-quick-add no-js-hidden"
               aria-haspopup="dialog"
               data-product-url="{{ product.url }}"
+              data-product-id="{{ product.id }}"
             >
               {% if product.has_only_default_variant and product_not_for_sale == false %}
                 {{- 'products.product.add_to_cart' | t -}}

@@ -1,0 +1,13 @@
+{%- comment -%}
+  Parameters:
+  - key_etiqueta {String} - Key for the metafield.
+
+  Usage:
+  {% render 'UPNG-tag-producto-por-metacampo', key_etiqueta: 'por_articulo' %}
+  %}
+{%- endcomment -%}
+
+{%- assign traduccion = 'products.etiquetas.' | append: key_etiqueta -%}
+{%- for metafield_option in product.metafields.upng[key_etiqueta].value -%}
+    <button class="btn btn--secondary">{{ traduccion | t }}/{{ metafield_option }}</button>
+{%- endfor -%}
