@@ -100,7 +100,7 @@
           "type": "media",
           "settings": {
             "image": "shopify://shop_images/texturas_Mesa_de_trabajo_1.png",
-            "link_url": "shopify://collections/barco-stock",
+            "link_url": "https://garys-b2b.myshopify.com/apps/upango_exportador_catalogo/download_excel_catalogue",
             "columns": 1,
             "rows": 1,
             "subheading": "",

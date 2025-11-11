@@ -289,6 +289,12 @@
         "boolean_false": "No",
         "file_download": "Descargar"
       }
+    },
+    "etiquetas": {
+      "por_articulo": "Por Artículo",
+      "por_publicidad": "Por Publicidad",
+      "por_profesion": "Por Profesión",
+      "por_coleccion": "Por Colección"
     }
   },
   "sections": {

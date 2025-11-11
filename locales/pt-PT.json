@@ -218,6 +218,12 @@
         "boolean_false": "Não",
         "file_download": "Transferir"
       }
+    },
+    "etiquetas": {
+      "por_articulo": "Por Artigo",
+      "por_publicidad": "Por Publicidade",
+      "por_profesion": "Por profissão",
+      "por_coleccion": "Por Coleção"
     }
   },
   "sections": {
