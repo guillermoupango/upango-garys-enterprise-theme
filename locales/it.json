@@ -601,7 +601,9 @@
       "available-text": "unità disponibili immediatamente",
       "backorder-text": "unità disponibili +2 giorni",
       "remaining-text": "Riposo",
-      "ask-text": "consultare"
+      "ask-text": "consultare",
+      "add_to_cart": "AGGIUNGI ALL'ORDINE",
+      "update_cart": "AGGIUNGI ALL'ORDINE"
     },
     "stock-indicator": {
       "not-available": "Non disponibile",

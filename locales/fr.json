@@ -619,7 +619,9 @@
       "available-text": "Toi. Disp. immédiat",
       "backorder-text": "Toi. Disp. +2 jours",
       "remaining-text": "Repos",
-      "ask-text": "consulter"
+      "ask-text": "consulter",
+      "add_to_cart": "AJOUTER À LA COMMANDE",
+      "update_cart": "AJOUTER À LA COMMANDE"
     },
     "stock-indicator": {
       "not-available": "Pas disponible",

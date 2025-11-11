@@ -626,7 +626,9 @@
       "available-text": "Você. Disp. imediato",
       "backorder-text": "Você. Disp. +2 dias",
       "remaining-text": "Descansar",
-      "ask-text": "consultar"
+      "ask-text": "consultar",
+      "add_to_cart": "ADICIONAR À ENCOMENDA",
+      "update_cart": "ADICIONAR À ENCOMENDA"
     },
     "stock-indicator": {
       "not-available": "Não disponível",
