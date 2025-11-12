@@ -1569,9 +1569,9 @@ if (!customElements.get("upng-variant-picker")) {
       });
 
       if (hasItemsInCart) {
-        this.addToCartBtn.textContent = theme.strings.variantTable.cartUpdate || "UPDATE CART";
+        this.addToCartBtn.innerHTML = theme.strings.variantTable.cartUpdate || "UPDATE CART";
       } else {
-        this.addToCartBtn.textContent = theme.strings.variantTable.cartAdd || "ADD TO CART";
+        this.addToCartBtn.innerHTML = theme.strings.variantTable.cartAdd || "ADD TO CART";
       }
 
       this.addToCartBtn.disabled = !hasPending;
