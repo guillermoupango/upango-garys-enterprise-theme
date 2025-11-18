@@ -648,16 +648,6 @@
       }
     },
     {
-      "key": "tratamiento",
-      "namespace": "upng",
-      "name": "Tratamiento",
-      "description": "",
-      "type": {
-        "name": "single_line_text_field",
-        "category": "TEXT"
-      }
-    },
-    {
       "key": "ref-tratamiento",
       "namespace": "upng",
       "name": "ref-tratamiento",
@@ -708,16 +698,6 @@
       }
     },
     {
-      "key": "icono_color",
-      "namespace": "upng",
-      "name": "Icono color",
-      "description": "",
-      "type": {
-        "name": "file_reference",
-        "category": "REFERENCE"
-      }
-    },
-    {
       "key": "volumen",
       "namespace": "upng",
       "name": "Volumen",
@@ -755,6 +735,26 @@
       "type": {
         "name": "boolean",
         "category": "TRUE_FALSE"
+      }
+    },
+    {
+      "key": "icono_color",
+      "namespace": "upng",
+      "name": "Icono Color",
+      "description": "",
+      "type": {
+        "name": "list.url",
+        "category": "URL"
+      }
+    },
+    {
+      "key": "ref_tratamiento",
+      "namespace": "upng",
+      "name": "Ref Tratamiento",
+      "description": "",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
       }
     }
   ],

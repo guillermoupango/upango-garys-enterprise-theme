@@ -1,8 +1,3 @@
-/* global SideDrawer */
-
-const DOMAIN = "garys-b2benterprise.myshopify.com";
-const STOREFRONT_ACCESS_TOKEN = "a12948ac9a26fdb704467b281c0d3217";
-
 if (!customElements.get("quick-add-drawer")) {
   class QuickAddDrawer extends SideDrawer {
     constructor() {
@@ -85,170 +80,45 @@ if (!customElements.get("quick-add-drawer")) {
       }
     }
 
-   /**
-     * Obtiene todas las variantes de un producto específico usando GraphQL
-     * @param {string} productHandle - Handle del producto en Shopify
-     * @returns {Promise<Object>} Objeto con datos del producto y sus variantes
-     * @throws {Error} Si hay errores en la consulta o el producto no existe
+    /**
+     * Obtiene todas las variantes de un producto usando el Admin API
+     * Normaliza automáticamente contextualPricing.price → price para compatibilidad
+     * @param {string} productHandle - Handle del producto (ej: "gorra-unisex-rejilla")
+     * @returns {Promise<{product: Object, variants: Array}>} Producto con variantes y precios contextuales B2B
+     * @throws {Error} Si la petición al endpoint falla
      */
-    async fetchAllVariants(productHandle) {
-      try {
-        const companyLocationId = this.companyId;
-        const productId = this.productId;
-        console.log('Company Location ID:', companyLocationId);
-        console.log('Product ID:', productId);
+    async fetchAllVariantsNew(productHandle) {
+      const companyLocationIdGid = String(this.companyId).startsWith('gid://')
+        ? this.companyId
+        : `gid://shopify/CompanyLocation/${this.companyId}`;
 
-        let hasNextPage = true;
-        let cursor = null;
-        let allVariants = [];
-        let productData = null;
+      const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root)
+        ? window.Shopify.routes.root.replace(/\/$/, "")
+        : "";
+      const proxyUrl = `${root}/apps/upango-b2b/fetchAllVariants`;
 
-        // Verificar que tenemos las constantes necesarias
-        if (
-          typeof DOMAIN === "undefined" ||
-          typeof STOREFRONT_ACCESS_TOKEN === "undefined"
-        ) {
-          throw new Error(
-            "DOMAIN y STOREFRONT_ACCESS_TOKEN deben estar definidos"
-          );
-        }
+      const res = await fetch(proxyUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          handle: productHandle,
+          companyLocationId: companyLocationIdGid,
+        }),
+      });
+      if (!res.ok) throw new Error('fetchAllVariants failed');
+      const data = await res.json();
 
-        // Verificar que tenemos companyLocationId
-        if (!companyLocationId) {
-          console.warn("companyLocationId no está definido, se usarán precios regulares");
-        }
-
-        while (hasNextPage) {
-          const query = `
-            query getProductVariants($handle: String!, $cursor: String) {
-              product(handle: $handle) {
-                id
-                title
-                handle
-                media(first: 250) {
-                  edges {
-                    node {
-                      mediaContentType
-                      ...on MediaImage {
-                        image {
-                          url
-                          altText
-                        }
-                      }
-                    }
-                  }
-                }
-                options {
-                  id
-                  name
-                  values
-                }
-                variants(first: 100, after: $cursor) {
-                  pageInfo {
-                    hasNextPage
-                  }
-                  edges {
-                    cursor
-                    node {
-                      id
-                      title
-                      availableForSale
-                      quantityAvailable
-                      price {
-                        amount
-                        currencyCode
-                      }
-                      selectedOptions {
-                        name
-                        value
-                      }
-                      descatalogado: metafield(namespace: "upng", key: "descatalogado") {
-                        value
-                      }
-                      privado: metafield(namespace: "upng", key: "privado") {
-                        value
-                      }
-                      stockDisponible: metafield(namespace: "upng", key: "stock_disponible") {
-                        value
-                      }
-                      idErp: metafield(namespace: "upng", key: "id_erp") {
-                        value
-                      }
-                      icono: metafield(namespace: "upng", key: "icono_color") {
-                        value
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          `;
-
-          const variables = {
-            handle: productHandle,
-            cursor,
-          };
-
-          const response = await fetch(
-            `https://${DOMAIN}/api/2025-07/graphql.json`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
-              },
-              body: JSON.stringify({ query, variables }),
-            }
-          );
-
-          const result = await response.json();
-          console.log(result);
-          
-
-          // Verificar si hay errores en la respuesta
-          if (result.errors) {
-            console.error("Error en GraphQL:", result.errors);
-            throw new Error("Error en la consulta GraphQL");
+      // Mapear contextualPricing.price a price
+      if (data.variants && Array.isArray(data.variants)) {
+        data.variants = data.variants.map((variant) => {
+          if (variant.contextualPricing?.price) {
+            variant.price = variant.contextualPricing.price;
           }
-
-          const product = result.data?.product;
-          if (!product) {
-            throw new Error(
-              `Producto con handle "${productHandle}" no encontrado`
-            );
-          }
-
-          // Guardar datos del producto en la primera iteración
-          if (!productData) {
-            productData = {
-              id: product.id,
-              title: product.title,
-              handle: product.handle,
-              featuredImage: product.featuredImage,
-              options: product.options,
-              media: product.media,
-            };
-          }
-
-          const edges = product.variants?.edges || [];
-
-          // Agregar variantes al array, mapeando contextualPricing a price
-          edges.forEach((edge) => {
-            allVariants.push(edge.node);
-          });
-
-          hasNextPage = product.variants?.pageInfo?.hasNextPage || false;
-          cursor = edges.length > 0 ? edges[edges.length - 1].cursor : null;
-        }
-
-        return {
-          product: productData,
-          variants: allVariants,
-        };
-      } catch (error) {
-        console.error("Error fatal en fetchAllVariants:", error);
-        throw error;
+          return variant;
+        });
       }
+
+      return data;
     }
 
     /**
@@ -640,12 +510,12 @@ if (!customElements.get("quick-add-drawer")) {
         <tr class="variant-table__row">
           <th class="variant-table__header variant-table__color">${option1Name}</th>
           ${option2Values
-            .map(
-              (size) => `
+          .map(
+            (size) => `
             <th class="variant-table__header header-talla">${size}</th>
           `
-            )
-            .join("")}
+          )
+          .join("")}
         </tr>
       </thead>
       <tbody>
@@ -716,8 +586,8 @@ if (!customElements.get("quick-add-drawer")) {
               height="24"
             />
             <p class="variant-table__color-name text-left text-xs mt-1 mb-1">${this.extractColorCode(
-              color
-            )}</p>
+          color
+        )}</p>
             </div>
           </td>
         `;
@@ -794,10 +664,10 @@ if (!customElements.get("quick-add-drawer")) {
             </div>
             ${this.buildPriceHTML(currentVariant, canSeePrices)}
             ${this.buildStockIndicator(
-              currentVariant,
-              descatalogado,
-              canSeeStock
-            )}           
+                currentVariant,
+                descatalogado,
+                canSeeStock
+              )}           
           `;
             }
 
@@ -824,7 +694,7 @@ if (!customElements.get("quick-add-drawer")) {
             <div class="quick_add-control flex justify-between mb-2 gap-2 h-full">
               <div class="flex justify-start items-center gap-theme pl-6">
   `;
-// PENDIENTE: TRADUCCIONES DE INDICADORES
+      // PENDIENTE: TRADUCCIONES DE INDICADORES
       if (canOrder) {
         tableHTML += `
                 <div class="variant-table__loader is-loading hidden"></div>
@@ -1489,16 +1359,16 @@ if (!customElements.get("quick-add-drawer")) {
       this.productUrl = opener.dataset.productUrl;
       this.productId = opener.dataset.productId;
       //console.log(`ID PRODUCTO OPENER: ${this.productId}`);
-      
+
       const handle = this.productUrl.split("/products/")[1].split("?")[0];
-      
+
       // Aplicar estilos de carga
       const prevCursor = document.body.style.cursor || "auto";
       document.body.style.cursor = "wait";
       this.classList.add("is-loading");
       this.content.classList.add("drawer__content--out");
       this.footer.classList.add("drawer__footer--out");
-      
+
       // Timeout de seguridad (80s máximo)
       const safetyTimeout = setTimeout(() => {
         document.body.style.cursor = prevCursor;
@@ -1510,14 +1380,14 @@ if (!customElements.get("quick-add-drawer")) {
       try {
         // Fetch paralelo
         const [variants, response] = await Promise.all([
-          this.fetchAllVariants(handle).catch(() => null),
-          this.fetch?.url === this.productUrl 
-            ? this.fetch.promise 
+          this.fetchAllVariantsNew(handle).catch(() => null),
+          this.fetch?.url === this.productUrl
+            ? this.fetch.promise
             : (this.fetch = { url: this.productUrl, promise: fetch(this.productUrl) }).promise
         ]);
 
         this.variantsData = variants;
-        
+
         if (!response?.ok) {
           throw new Error(`Fetch failed: ${response?.status || 'No response'}`);
         }
@@ -1526,11 +1396,11 @@ if (!customElements.get("quick-add-drawer")) {
         const tmpl = document.createElement("template");
         tmpl.innerHTML = await response.text();
         this.productEl = tmpl.content.querySelector(".cc-main-product .js-product");
-        
+
         this.content.innerHTML = "";
         super.open(opener);
         this.renderProduct(opener);
-        
+
         // Listeners
         if (!this._listenersAdded) {
           document.addEventListener("on:cart:add", this.boundHandleCartAdd);
@@ -1543,7 +1413,7 @@ if (!customElements.get("quick-add-drawer")) {
         this.content.innerHTML = `<div class="drawer__error">Error al cargar el producto.</div>`;
         super.open(opener);
         this.fetch = null;
-        
+
       } finally {
         clearTimeout(safetyTimeout);
         document.body.style.cursor = prevCursor;
@@ -1655,11 +1525,9 @@ if (!customElements.get("quick-add-drawer")) {
       const aspectRatio = img.width / img.height;
 
       container.innerHTML = `
-        <img src="${src}&width=${width}" srcset="${src}&width=${width}, ${src}&width=${
-        width * 2
-      } 2x" width="${width * 2}" height="${(width * 2) / aspectRatio}" alt="${
-        img.alt
-      }">
+        <img src="${src}&width=${width}" srcset="${src}&width=${width}, ${src}&width=${width * 2
+        } 2x" width="${width * 2}" height="${(width * 2) / aspectRatio}" alt="${img.alt
+        }">
       `;
     }
 
@@ -1673,12 +1541,13 @@ if (!customElements.get("quick-add-drawer")) {
       if (weightElem && weightElem.length > 0) {
         weightElem = `<div class="product-info__weight text-sm mt-2">${weightElem}</div>`;
       }
+          
+      //PENDIENTE: reemplazar ${this.getElementHtml(".product-price")} y armar muestra de precio de producto
 
       this.content.innerHTML = `
         <div class="quick-add-info grid mb-8">
-          <div class="quick-add-info__media${
-            theme.settings.blendProductImages ? " image-blend" : ""
-          }"></div>
+          <div class="quick-add-info__media${theme.settings.blendProductImages ? " image-blend" : ""
+        }"></div>
           <div class="quick-add-info__details">
             <div class="product-vendor-sku mb-2 text-sm">
               ${this.getElementHtml(".product-vendor-sku")}
@@ -1808,7 +1677,7 @@ if (!customElements.get("quick-add-drawer")) {
 
       // NUEVOS: Agregar al carrito y Borrar producto
       this.initAddToCartButton();
-      this. initClearConfirmation();
+      this.initClearConfirmation();
 
       // Cargar estado inicial del carrito
       await this.syncTableWithCart();
@@ -2083,7 +1952,7 @@ if (!customElements.get("quick-add-drawer")) {
       } finally {
         this._state.isUpdating = false;
         this.disableTableLoader();
-        this.hideClearConfirmation({ preventDefault: () => {} });
+        this.hideClearConfirmation({ preventDefault: () => { } });
       }
     }
 
@@ -2093,7 +1962,7 @@ if (!customElements.get("quick-add-drawer")) {
      */
     updateClearButtonState(cartItems) {  // ✅ recibir parámetro
       if (!this.clearAllBtn) return;
-      
+
       if (!this.variantsData || !this.variantsData.variants) {
         console.warn("variantsData no disponible aún");
         return;
@@ -2239,22 +2108,22 @@ if (!customElements.get("quick-add-drawer")) {
      */
     async fetchTratamientos(variantId) {
       return
- /*      let url = this.productUrl;
-      const tratamientosModal = document.querySelector(".tratamientos-modal");
-      try {
-        // Hacer petición AJAX para obtener los tratamientos
-        const response = await fetch(
-          `${url}?variant=${variantId}&view=upng-tratamientos`
-        );
-        if (!response.ok) throw new Error("Error loading treatment data");
-
-        const html = await response.text();
-
-        // Actualizar el contenedor con el HTML recibido
-        tratamientosModal.innerHTML = html;
-      } catch (error) {
-        console.error("Error actualizando iconos de tratamiento:", error);
-      } */
+      /*      let url = this.productUrl;
+           const tratamientosModal = document.querySelector(".tratamientos-modal");
+           try {
+             // Hacer petición AJAX para obtener los tratamientos
+             const response = await fetch(
+               `${url}?variant=${variantId}&view=upng-tratamientos`
+             );
+             if (!response.ok) throw new Error("Error loading treatment data");
+     
+             const html = await response.text();
+     
+             // Actualizar el contenedor con el HTML recibido
+             tratamientosModal.innerHTML = html;
+           } catch (error) {
+             console.error("Error actualizando iconos de tratamiento:", error);
+           } */
     }
 
     /**
