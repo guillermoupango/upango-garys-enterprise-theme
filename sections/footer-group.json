@@ -58,6 +58,7 @@
         "link-list-2",
         "newsletter"
       ],
+      "disabled": true,
       "settings": {
         "show_back_to_top": false,
         "show_payment_icons": false,
