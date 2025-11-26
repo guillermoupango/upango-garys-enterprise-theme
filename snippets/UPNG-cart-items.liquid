@@ -11,7 +11,7 @@
 {% liquid
         # Determinar permiso para ordenar
       assign can_order = false
-      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true
+      if customer.tags contains 'agente' or customer.tags contains 'main_contact' or customer.role == 'main_contact' or customer.metafields.upng-permission.allowOrder == true or customer.metafields.upng-permission.permitirSolicitudes == true
         assign can_order = true
       endif
 %}
