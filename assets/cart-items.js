@@ -75,6 +75,7 @@ if (!customElements.get('cart-items')) {
       }
       
       try {
+        await upng_waitForWebsocket();
         // Fetch a vaciar el carrito
         const response = await fetch('/cart/clear.js', {
           method: 'POST',
@@ -252,6 +253,7 @@ if (!customElements.get('cart-items')) {
         const variantId = Number(lineItem.dataset.variantId);
 
         // Send the request to update properties
+        await upng_waitForWebsocket();
         const response = await fetch(theme.routes.cartChange, this.fetchRequestOpts);
         const data = await response.json();
 
@@ -362,6 +364,7 @@ if (!customElements.get('cart-items')) {
 
         const variantId = Number(lineItem.dataset.variantId);
         const oldTotalQuantity = this.currentTotalItemCount;
+        await upng_waitForWebsocket();
         const response = await fetch(theme.routes.cartChange, this.fetchRequestOpts);
         const data = await response.json();
 
