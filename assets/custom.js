@@ -442,3 +442,154 @@ document.addEventListener('DOMContentLoaded', () => {
   
   togglePvdPrices();
 });
+
+function updateCartIcon() {
+  const mode = getSincronizadorCarritosMode();
+  if(!mode) return;
+  const location_icon = document.getElementById("upng_location_cart_icon");
+  const default_icon = document.querySelector("#cart-icon svg");
+  if(mode == "LOCATION" && location_icon) {
+    location_icon.style.display = "block";
+    if(default_icon) default_icon.style.display = "none";
+    return;
+  }
+  if(mode == "CUSTOMER") {
+    if(location_icon) location_icon.style.display = "none";
+    if(default_icon) default_icon.style.display = "block";
+  }
+}
+
+function upng_safeJsonParse(data) {
+  try {
+    const result = JSON.parse(data);
+    return result;
+  } catch(error) {
+    console.error("Failed to parse json data, ", error);
+    return;
+  }
+}
+
+async function updateCartIconBubble() {
+  try {
+    const response = await fetch('/?sections=cart-icon-bubble');
+    const data = await response.json();
+    
+    if (data['cart-icon-bubble']) {
+      const cartIconBubbleElement = document.querySelector('.header__cart-count');
+      if (cartIconBubbleElement) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data['cart-icon-bubble'];
+        const newCartIconBubble = tempDiv.querySelector('.header__cart-count');
+        
+        if (newCartIconBubble) {
+          cartIconBubbleElement.innerHTML = newCartIconBubble.innerHTML;
+        } else {
+          cartIconBubbleElement.remove();
+        }
+      } else if (data['cart-icon-bubble'].includes('header__cart-count')) {
+        const cartIcon = document.querySelector('#cart-icon');
+        if (cartIcon) {
+          cartIcon.insertAdjacentHTML('beforeend', data['cart-icon-bubble']);
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error updating cart icon bubble:', error);
+  }
+}
+
+function getSincronizadorCarritosMode() {
+  const sincronizador_item = localStorage.getItem("upng-sincronizador-mode");
+  if(!sincronizador_item) return;
+  const parsed_sincronizador = upng_safeJsonParse(sincronizador_item);
+  if(!parsed_sincronizador) return;
+  return parsed_sincronizador.mode;
+}
+
+function change_cart_sincronizador_span() {
+  const sync_status_span = document.getElementById("upng-sync-cart-status");
+  if(!sync_status_span) return;
+  const sincronizador_type = getSincronizadorCarritosMode();
+  if(!sincronizador_type) return;
+  switch (sincronizador_type) {
+    case "CUSTOMER":
+      sync_status_span.textContent = upng_locales.sincronizador_personal;
+      break;
+    case "LOCATION":
+      sync_status_span.textContent = upng_locales.sincronizador_shared;
+      break;
+    default:
+      break;
+  }
+}
+
+function upng_sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var upng_ws_sincronizador_open = false;
+const switch_sincronizador_mode_btn = document.getElementById("upng_switch_sincronizador_mode_btn");
+
+if(switch_sincronizador_mode_btn) {
+  switch_sincronizador_mode_btn.disabled = true;
+  switch_sincronizador_mode_btn.classList.add("is-loading");
+}
+
+document.addEventListener("sincronizador_open_ws", () => {
+  upng_ws_sincronizador_open = true;
+  if(switch_sincronizador_mode_btn) {
+    switch_sincronizador_mode_btn.classList.add("is-success");
+    setTimeout(() => {
+      switch_sincronizador_mode_btn.disabled = false;
+      switch_sincronizador_mode_btn.classList.remove("is-loading");
+      switch_sincronizador_mode_btn.classList.remove("is-success");
+    }, 1500);
+  }
+});
+
+async function upng_waitForWebsocket() {
+  if(upng_ws_sincronizador_open) {
+    return true;
+  } else {
+    console.log("Waiting for websocket connection...");
+    return new Promise(resolve => {
+      const now = new Date();
+      const check = setInterval(() => {
+        const elapsed = new Date() - now;
+        console.log(`Waiting for websocket connection... ${elapsed}ms`);
+        if(elapsed > 7500) {
+          clearInterval(check);
+          resolve(false);
+        }
+        if(upng_ws_sincronizador_open == true) {
+          clearInterval(check);
+          resolve(true);
+        }
+      }, 300);
+    })
+  }
+}
+
+document.addEventListener("sincronizador_create_session", (e) => {
+  console.log("Cart sync session updated");
+  console.log(e);
+  change_cart_sincronizador_span();
+  updateCartIcon();
+})
+
+document.addEventListener("sincronizador_update", (e) => {
+  console.log("Message from carts sync arrived");
+  console.log(e);
+  // This means that the cart has been updated by another device.
+  // We need to tell the theme to update the cart.
+  updateCartIconBubble();
+  document.dispatchEvent(
+    new CustomEvent('dispatch:cart-drawer:refresh', {
+      bubbles: true,
+    })
+  );
+  const cart_items_elem = document.querySelectorAll('cart-items');
+  cart_items_elem.forEach((elem) => {
+    if(typeof elem.refresh === 'function') elem.refresh();
+  });
+});

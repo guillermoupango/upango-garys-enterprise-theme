@@ -850,7 +850,7 @@ if (!customElements.get("quick-add-drawer")) {
         for (const [variantId, newQuantity] of Object.entries(changes)) {
           updates[variantId] = newQuantity;
         }
-
+        await upng_waitForWebsocket();
         // Llamar a la API con todos los cambios
         const response = await fetch("/cart/update.js", {
           method: "POST",
@@ -1907,7 +1907,7 @@ if (!customElements.get("quick-add-drawer")) {
         });
 
         if (Object.keys(updates).length === 0) return;
-
+        await upng_waitForWebsocket();
         // Actualizar carrito
         const response = await fetch("/cart/update.js", {
           method: "POST",

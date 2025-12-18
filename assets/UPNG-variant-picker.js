@@ -1597,7 +1597,7 @@ if (!customElements.get("upng-variant-picker")) {
         for (const [variantId, newQuantity] of Object.entries(changes)) {
           updates[variantId] = newQuantity;
         }
-
+        await upng_waitForWebsocket();
         const response = await fetch("/cart/update.js", {
           method: "POST",
           headers: {
@@ -1836,7 +1836,7 @@ if (!customElements.get("upng-variant-picker")) {
         });
 
         if (Object.keys(updates).length === 0) return;
-
+        await upng_waitForWebsocket();
         const response = await fetch("/cart/update.js", {
           method: "POST",
           headers: {
